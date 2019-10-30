@@ -1,9 +1,12 @@
 import sys
-import os
-import shutil
+if sys.version_info.major != 3:
+    print("please use python3")
 
 sys.path.insert(0,'../')
+import os
+import shutil
 import unittest
+
 import user_manager
 
 class TestUserManager(unittest.TestCase):
