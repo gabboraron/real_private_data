@@ -15,6 +15,8 @@ from redirector_request_handler_factory import RedirectorRequestHandlerFactory
 from rpc_request_handler_factory import RPCRequestHandlerFactory
 from web_request_handler_factory import WebRequestHandlerFactory
 from rpc_request_ws_handler_factory import RPCRequestWSHandlerFactory
+from rpc_wrapper_factory import RPCWrapperFactory
+from rpc_wrapper import RPCWrapper
 
 # generate csr, and key:
 #
@@ -35,11 +37,9 @@ web_root = "/home/somla/working/real_private_data/client/web"
 
 
 my_methods = methods.Methods()
+rpc_wrapper = RPCWrapper()
 
-
-@my_methods.add
-async def ping():
-    return str({"alma":"majom", "dinnye":{"dinnze","majom"}})
+RPCWrapperFactory(rpc_wrapper, my_methods)
 
 
 
@@ -48,9 +48,9 @@ redirecterApplication = tornado.web.Application([
 ])
 
 application = tornado.web.Application([
-    (r'/rpc', RPCRequestHandlerFactory(my_methods) ),
-    (r'/ws_rpc', RPCRequestWSHandlerFactory(my_methods) ),
-    (r"/(.*)", tornado.web.StaticFileHandler, { "path": web_root }),
+    (r'/rpc',    RPCRequestHandlerFactory(   my_methods)),
+    (r'/ws_rpc', RPCRequestWSHandlerFactory( my_methods)),
+    (r"/(.*)", tornado.web.StaticFileHandler, { "path": web_root, "default_filename": "index.html" }),
 ])
 
 
