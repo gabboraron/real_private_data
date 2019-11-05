@@ -5,17 +5,17 @@ BigInt.ToJSonTypes = {
 }
 Object.freeze(BigInt.ToJSonTypes);
 
-BigInt.TOJSonType = BigInt.TOJSonType || BigInt.ToJSonTypes.TO_NUMBER;
+BigInt.ToJSonType = BigInt.ToJSonType || BigInt.ToJSonTypes.TO_NUMBER;
 
 switch(BigInt.ToJSonType)
 {
-    case BigInt.ToJSonType === BigInt.ToJSonTypes.TO_STRING:
+    case BigInt.ToJSonTypes.TO_STRING:
         BigInt.prototype.toJSON = function()
         {
             return this.toString();
         }
         break;
-    case BigInt.ToJSonType === BigInt.ToJSonTypes.TO_STRING_WITH_N:
+    case BigInt.ToJSonTypes.TO_STRING_WITH_N:
         BigInt.prototype.toJSON = function()
         {
             return this.toString() + "n";
@@ -33,5 +33,5 @@ switch(BigInt.ToJSonType)
         }
         break;
     default:
-        console.log("Not known BigInt.ToJSonType:" + BigInt.TOJSonType );
+        console.error("Not known BigInt.ToJSonType:" + BigInt.TOJSonType );
 } // end of switch(BigInt.ToJSonType)
