@@ -19,7 +19,7 @@ class SHA256Salty extends IHash {
     }
     
     array = function(str /* :string */) {
-        return this.postSalt(sha256.array(this.#preSalt(str)));
+        return this.#postSalt(sha256.array(this.#preSalt(str)));
     }
 
     #preSalt = function(str /* :string */) {
