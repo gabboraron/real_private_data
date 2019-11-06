@@ -1,3 +1,48 @@
+class IEncryptor {
+    
+    encrypt = function(data /* :string */) /* -> string */ {
+        console.error("The IEncryptor.encrypt method is not overrided");
+    }
+
+    descript = function(data /* :string */) /* -> string */ {
+        console.error("The IEncryptor.encrypt method is not overrided");
+    }    
+}
+
+class AESEncryptor extends IEncryptor {
+    constructor()
+    {
+        super();
+    }
+    encrypt = function(data /* :string */) {
+        console.log("encrypt");
+    }
+
+    descript = function(data /* :string */) {
+        console.log("descript");
+    }
+};
+
+class SecretFile {
+    #encryptedName;
+    #encryptedText;
+    #encryptor;
+    constructor() {
+
+    }
+    setEncryptor = function(key) {
+        //this.#key = key;
+    }
+    encrypt = function() {
+        
+    }
+    descript = function() {
+
+    }
+};
+class RealPriateData{
+
+}
 
 // jrpc POST example
 
