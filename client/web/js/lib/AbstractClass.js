@@ -1,42 +1,58 @@
-// https://stackoverflow.com/questions/29480569/does-ecmascript-6-have-a-convention-for-abstract-classes
-
-// TODO: Check at least the number of paramethers
-class AbstractClass {
-    constructor(abstractMethods /* :string[] */ ) {
-        if(new.target === AbstractClass || this.__proto__.__proto__.constructor === AbstractClass)
-            throw new TypeError("Cannot construct "+ this.constructor.name + " class instances directly");
-        let exceptions = [];
-        for(let method of abstractMethods) {
-            if("function" !== typeof(this[method]))
-                exceptions.push(method);
-        }
-        if(0 !== exceptions.length)
-            throw new TypeError("Must override the following methods: " + exceptions.join(", "));
-    }
-};
-
 /**
- * Example:
+ * Usage:
  * 
- * class MyAbstractClass extends AbstractClass {
- *  constructor(){
- *      super([
+ * class MyAbstractClass1 extends AbstractClass {
+ *      static abstractMethods = [
  *          "myMethod1", // (x:string, y:string): string
- *          "myMethod2" // (y:string, z:string): string
- *          ])
+ *          "myMethod2" // (y:string, z:string): string 
+ *      ]
  * }
+ *
+ * class MyAbstractClass2 extends MyAbstractClass1 {
+ *      static abstractMethods = [
+ *          "myMethod3", // (x:string, y:string): string
+ *          "myMethod4" // (y:string, z:string): string 
+ *      ]
  * }
  * 
- * class MyClass extends MyAbstractClass {
+ * class MyClass extends MyAbstractClass2 {
  *      myMethod1(x, y){return "alma"}
  * }
  * 
  * new MyClass()
  * 
- *   Uncaught TypeError: Must override the following methods: myMethod2
- *   at new AbstractClass (<anonymous>:12:19)
- *   at new MyAbstractClass (<anonymous>:39:11)
- *   at new MyClass (<anonymous>:46:6)
- *   at <anonymous>:50:6
+ * AbstractClass.js:23 Uncaught TypeError: Must override the following methods: MyAbstractClass1.myMethod2, MyAbstractClass2.myMethod3, MyAbstractClass2.myMethod4
+ *    at new AbstractClass (AbstractClass.js:23)
+ *    at new MyAbstractClass1 (AbstractClass.js:28)
+ *    at new MyAbstractClass2 (AbstractClass.js:35)
+ *    at new MyClass (AbstractClass.js:42)
+ *    at AbstractClass.js:46
  *
  */
+
+// https://stackoverflow.com/questions/29480569/does-ecmascript-6-have-a-convention-for-abstract-classes
+
+// TODO: Check at least the number of paramethers
+class AbstractClass {
+    constructor() {
+        if(new.target === AbstractClass || this.__proto__.__proto__.constructor === AbstractClass)
+            throw new TypeError("Cannot construct "+ this.constructor.name + " class instances directly");
+        let exceptions = {};
+        let currProto = this;
+        while(currProto.constructor !== AbstractClass ) {
+            for(let method of (currProto.constructor.abstractMethods || [])) {
+                if("function" !== typeof(this[method]))
+                    exceptions[method] = currProto.constructor.name;
+            }
+            currProto = currProto.__proto__;
+        }
+        if(0 !== Object.keys(exceptions).length) {
+            let exceptionsArray = [];
+            for(let method in exceptions) {
+                exceptionsArray.push( exceptions[method] + "." + method);
+            }
+            exceptionsArray.sort();
+            throw new TypeError("Must override the following methods: " + exceptionsArray.join(", "));
+        }
+    }
+};
