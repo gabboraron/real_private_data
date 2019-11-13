@@ -1,3 +1,5 @@
+'use strict';
+
 BigInt.ToJSonTypes = {
     "TO_NUMBER": "TO_NUMBER",
     "TO_STRING": "TO_STRING",

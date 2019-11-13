@@ -33,6 +33,8 @@
 // https://stackoverflow.com/questions/29480569/does-ecmascript-6-have-a-convention-for-abstract-classes
 
 // TODO: Check at least the number of paramethers
+
+'use strict';
 class AbstractClass {
     constructor() {
         if(new.target === AbstractClass || this.__proto__.__proto__.constructor === AbstractClass)
