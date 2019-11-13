@@ -1,5 +1,5 @@
 'use strict';
-globalVariables = {
+let globalVariables = {
     "releaseMode":"debug"
 }
 class ISecretFile extends AbstractClass {
@@ -44,7 +44,7 @@ class ServerApi {
     constructor() {
         console.warn("TODO: Implement");
     }
-    
+
 }
 
 class POSTApi {
