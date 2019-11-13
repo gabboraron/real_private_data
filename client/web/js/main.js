@@ -1,45 +1,56 @@
-class IEncryptor {
-    
-    encrypt = function(data /* :string */) /* -> string */ {
-        console.error("The IEncryptor.encrypt method is not overrided");
-    }
-
-    descript = function(data /* :string */) /* -> string */ {
-        console.error("The IEncryptor.encrypt method is not overrided");
-    }    
+'use strict';
+globalVariables = {
+    "releaseMode":"debug"
+}
+class ISecretFile extends AbstractClass {
+    static abstractMethods = [
+        "toJson" //()
+    ]
 }
 
-class AESEncryptor extends IEncryptor {
-    constructor()
-    {
-        super();
-    }
-    encrypt = function(data /* :string */) {
-        console.log("encrypt");
-    }
-
-    descript = function(data /* :string */) {
-        console.log("descript");
-    }
-};
-
-class SecretFile {
+class SecretFile extends ISecretFile{
     #encryptedName;
-    #encryptedText;
-    #encryptor;
-    constructor() {
+    #encryptedContent;
+    #contentEncryptor;
+    #nameEncryptor;
+
+    constructor(encryptor) {
+        this.setEncryptor(encryptor, nameEncryptor);
+    }
+    setContentEncryptor(contentEncryptor, nameEncryptor) {
+        isInheritedFrom(contentEncryptor, IEncryptor);
+        isInheritedFrom(nameEncryptor, IEncryptor);
+        this.#contentEncryptor = contentEncryptor;
+        this.#nameEncryptor = nameEncryptor;
+    }
+    setNameEncryptor(nameEncryptor) {
 
     }
-    setEncryptor = function(key) {
-        //this.#key = key;
-    }
-    encrypt = function() {
-        
-    }
-    descript = function() {
+    encrypt() {
 
+    }
+    descript() {
+
+    }
+    toJson() {
+        return {
+            "name": Uint8Array2String(this.#encryptedName),
+            "content": Uint8Array2String(this.#encryptedContent)
+        }
     }
 };
+
+class ServerApi {
+    constructor() {
+        console.warn("TODO: Implement");
+    }
+    
+}
+
+class POSTApi {
+
+}
+
 class RealPriateData{
 
 }
@@ -136,3 +147,15 @@ socket.onopen = function(){
     ]);
     */
 };
+
+var text = "almafa";
+var passhare = "dinnye";
+var textBytes = aesjs.utils.utf8.toBytes(text);
+
+var key = (new SHA256Salty2()).array(passhare);
+var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+var encryptedBytes = aesCtr.encrypt(textBytes);
+
+var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+var decryptedBytes = aesCtr.decrypt(encryptedBytes);
+var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
