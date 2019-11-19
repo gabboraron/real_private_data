@@ -40,21 +40,13 @@ class SecretFile extends ISecretFile{
     }
 };
 
-class ServerApi {
-    constructor() {
-        console.warn("TODO: Implement");
-    }
 
-}
 
-class POSTApi {
 
-}
 
-class RealPriateData{
 
-}
 
+function jrpcPostExample(){
 // jrpc POST example
 
 var jrpc = new simple_jsonrpc();
@@ -91,13 +83,13 @@ jrpc.call('view.getTitle').then(function (result) {
     document.getElementsByClassName('title')[0].innerHTML = result;
 });
 */
-
+}
+function jprcWSExample(){
 var ws_protociol = "https:" == window.location.protocol? "wss":"ws"
 var ws_url = ws_protociol +"://" + window.location.host + "/ws_rpc"
+//var ws_url = "wss://localhost:9876/ws_rpc"
 
 var jrpc_ws = new simple_jsonrpc();
-var ws_url = ws_protociol +"://" + window.location.host + "/ws_rpc"
-
 var socket = new WebSocket(ws_url);
 //var socket = new WebSocket("wss://localhost:8443/ws_rpc");
 //var socket = new WebSocket("ws://localhost:8081/ws_rpc");
@@ -127,7 +119,7 @@ socket.onclose = function(event) {
 //usage
 //after connect
 socket.onopen = function(){
-    jrpc.call('ping').then(function (result) {
+    jrpc_ws.call('ping').then(function (result) {
         console.log(result);
     });
     /*
@@ -146,7 +138,9 @@ socket.onopen = function(){
         {call:{method: "create", params: {item: {foo: "bar"}, rewrite: true}}}
     ]);
     */
+   
 };
+} // end of jprcWSExample
 
 var text = "almafa";
 var passhare = "dinnye";
@@ -159,3 +153,15 @@ var encryptedBytes = aesCtr.encrypt(textBytes);
 var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
 var decryptedBytes = aesCtr.decrypt(encryptedBytes);
 var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+
+async function testSimpleJsonRpcPOSTClient() {
+    var postClient = new SimpleJsonRpcPOSTClient();
+    var res = await postClient.call("ping");
+    console.log(res);
+}
+
+async function testSimpleJsonRpcWSClient() {
+    var wsClient = new SimpleJsonRpcPOSTClient();
+    var res = await wsClient.call("ping");
+    console.log(res);
+}
