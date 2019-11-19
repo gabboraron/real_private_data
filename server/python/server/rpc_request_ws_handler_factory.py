@@ -16,7 +16,7 @@ def RPCRequestWSHandlerFactory( my_methods = methods.global_methods ):
             response = await dispatch(request, my_methods )
             print(response)
             if response.wanted:
-                self.write(str(response))
+                self.write_message(str(response))
 
         
         def on_close(self):
