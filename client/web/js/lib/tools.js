@@ -47,3 +47,19 @@ function byteStr2Uint8Array(bytesStr /* :striing as Array[00..ff] */) {
         resBytes.push(hexByteChar2Number( bytesStr.substr(i, 2)));
     return Uint8Array.from(resBytes);
 }
+
+function addAuthArgs(args, userHash, passhare) {
+    if(args === undefined)
+        args = [];
+    if(Array === args.__proto__.constructor) {
+        return [userHash, passhare].concat(args);
+    }
+    else if(Object === args.__proto__.constructor) {
+        // Hack for copy object, I don't want to return the passhares
+        let o = JSON.parse(JSON.stringify(args));
+        o.__userHash__ = userHash;
+        o.__pashare__ = passhare;
+        return o;
+    }
+    throw "The args must be Array or Object";
+}

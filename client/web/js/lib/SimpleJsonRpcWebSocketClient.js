@@ -53,20 +53,8 @@ class SimpleJsonRpcWebSocketClient extends IClient {
 
     } // end of constructor(...)
     
-    _prepare_args(args) {
-        if(Array === x.__proto__.constructor) {
-            return [this.#userHash, this.#passhare].concat(args);
-        }
-        else if(Object === x.__proto__.constructor){
-            // Hack for copy object, I don't want to return the passhares
-            let o = JSON.parse(JSON.stringify(args));
-            o.__userHash__ = this.#userHash;
-            o.__pashare__ = this.#passhare;
-            return o;
-        }
-        throw "The args must be Array or Object"
-    }
     async call(func, args) {
+        args = addAuthArgs(args, this.#userHash, this.#passhare);
         return this.jrpc.call(func, args);
     } // end of call(func, args)
 } // end of SimpleJsonRpcWebSocketClient

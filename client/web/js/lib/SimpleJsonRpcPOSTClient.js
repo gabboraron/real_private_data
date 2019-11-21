@@ -41,6 +41,7 @@ class SimpleJsonRpcPOSTClient extends IClient {
     } // end constructor(...)
     
     async call(func, args) {
+        args = addAuthArgs(args, this.#userHash, this.#passhare);
         return this.jrpc.call(func, args);
     } // end of call(func, args)
-} // end of class SimpleJsonRpcPOST
+} // end of class SimpleJsonRpcPOSTClient

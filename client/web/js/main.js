@@ -155,13 +155,27 @@ var decryptedBytes = aesCtr.decrypt(encryptedBytes);
 var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
 
 async function testSimpleJsonRpcPOSTClient() {
-    var postClient = new SimpleJsonRpcPOSTClient();
+    var postClient = new SimpleJsonRpcPOSTClient("username", "password");
     var res = await postClient.call("ping");
+    console.log(res);
+
+    var wsClient = new SimpleJsonRpcPOSTClient("username1", "password1");
+    var res = await wsClient.call("ping");
     console.log(res);
 }
 
 async function testSimpleJsonRpcWSClient() {
-    var wsClient = new SimpleJsonRpcPOSTClient();
-    var res = await wsClient.call("ping");
-    console.log(res);
+    // TODO: add ready state
+    // Hack setTimeout
+    var wsClient = new SimpleJsonRpcWebSocketClient("username", "password");
+    setTimeout(async() => {
+        var res = await wsClient.call("ping");
+        console.log(res);
+    }, 500);
+    
+    var wsClientBad = new SimpleJsonRpcWebSocketClient("username1", "password1");
+    setTimeout(async() => {
+        var res = await wsClientBad.call("ping");
+        console.log(res);
+    }, 500);
 }

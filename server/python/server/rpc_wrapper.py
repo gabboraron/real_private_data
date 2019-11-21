@@ -1,4 +1,4 @@
-from rpc_wrapper_factory import web_method
+from web_method import web_method
 
 class RPCWrapper:
 
@@ -8,15 +8,20 @@ class RPCWrapper:
 
     
     @web_method("ping")
-    async def ping(self):
+    def ping(self):
         return "pong"
     
 
     @web_method("replay")
-    async def replay(self, message):
+    def replay(self, message):
         return self.test + message
     
 
     @web_method(name = "add")
-    async def add_other_name(self, x: int, y: int) -> int:
+    def add_other_name(self, x: int, y: int) -> int:
         return x + y
+
+    @web_method("login")
+    def login(self, userhash, passhare) -> bool:
+        #TODO implement it
+        return userhash == "username" and passhare == "password"

@@ -36,11 +36,7 @@ key_file = "/home/somla/working/real_private_data/server/ssl/httpscertificate/ne
 web_root = "/home/somla/working/real_private_data/client/web"
 
 
-my_methods = methods.Methods()
 rpc_wrapper = RPCWrapper()
-
-RPCWrapperFactory(rpc_wrapper, my_methods)
-
 
 
 redirecterApplication = tornado.web.Application([
@@ -48,8 +44,8 @@ redirecterApplication = tornado.web.Application([
 ])
 
 application = tornado.web.Application([
-    (r'/rpc',    RPCRequestHandlerFactory(   my_methods)),
-    (r'/ws_rpc', RPCRequestWSHandlerFactory( my_methods)),
+    (r'/rpc',    RPCRequestHandlerFactory(   rpc_wrapper)),
+    (r'/ws_rpc', RPCRequestWSHandlerFactory( rpc_wrapper)),
     (r"/(.*)", tornado.web.StaticFileHandler, { "path": web_root, "default_filename": "index.html" }),
 ])
 
