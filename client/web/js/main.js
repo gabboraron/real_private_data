@@ -176,24 +176,32 @@ async function testSimpleJsonRpcPOSTClientService() {
     }
 }
 
-async function testSimpleJsonRpcWSClient() {
-    // TODO: add ready state
-    // Hack setTimeout
-    var wsClient = new SimpleJsonRpcWebSocketClient("username", "password");
-    setTimeout(async() => {
-        var res = await wsClient.call("ping");
+
+async function testSimpleJsonRpcWSClientService() {
+    console.log("Test SimpleJsonRpcWebSocketClientService connection");
+    let postClient = new SimpleJsonRpcWebSocketClientService("username", "password");
+    try {
+        let c = await postClient.start();
+        console.log(c);
+        let res = await postClient.call("ping");
         console.log(res);
-    }, 500);
-    
-    var wsClientBad = new SimpleJsonRpcWebSocketClient("username1", "password1");
-    setTimeout(async() => {
-        var res = await wsClientBad.call("ping");
-        console.log(res);
-    }, 500);
+    } catch(e){
+        console.error(e);
+    }
+    var postClientError = new SimpleJsonRpcWebSocketClientService("username1", "password1");
+    try {
+        console.log("Test SimpleJsonRpcWebSocketClientService connection with bad password");
+        let c = await postClientError.start();
+        console.log(c);
+    } catch(e)
+    {
+        console.error(e);
+    }
 }
 
 async function main(){
     await testSimpleJsonRpcPOSTClientService();
+    await testSimpleJsonRpcWSClientService();
 }
 
 main().then(() =>{

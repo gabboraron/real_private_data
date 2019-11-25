@@ -62,8 +62,11 @@ class SimpleJsonRpcPOSTClientService extends IClient {
                 })
         });
     } // end of start(userHash, passhare)
+    async logout() {
+        this.#userHash = undefined;
+        this.#passhare = undefined;
+    }
     async start(userHash, passhare) {
-        // TODO: Implement
         try {
             return await this.startAsync(userHash, passhare);;
         } catch(e) {
@@ -72,10 +75,12 @@ class SimpleJsonRpcPOSTClientService extends IClient {
     }
 
     async stopAsyc(){
+        await this.logout();
         return new Promise((resolve) =>{ resolve(true) });
     }
 
     async stop() {
+        await this.logout();
         return true;
     }
 
