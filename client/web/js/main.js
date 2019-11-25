@@ -154,14 +154,26 @@ var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
 var decryptedBytes = aesCtr.decrypt(encryptedBytes);
 var decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
 
-async function testSimpleJsonRpcPOSTClient() {
-    var postClient = new SimpleJsonRpcPOSTClient("username", "password");
-    var res = await postClient.call("ping");
-    console.log(res);
-
-    var wsClient = new SimpleJsonRpcPOSTClient("username1", "password1");
-    var res = await wsClient.call("ping");
-    console.log(res);
+async function testSimpleJsonRpcPOSTClientService() {
+    console.log("Test SimpleJsonRpcPOSTClient connection");
+    let postClient = new SimpleJsonRpcPOSTClientService("username", "password");
+    try {
+        let c = await postClient.start();
+        console.log(c);
+        let res = await postClient.call("ping");
+        console.log(res);
+    } catch(e){
+        console.error(e);
+    }
+    var postClientError = new SimpleJsonRpcPOSTClientService("username1", "password1");
+    try {
+        console.log("Test SimpleJsonRpcPOSTClientService connection with bad password");
+        let c = await postClientError.start();
+        console.log(c);
+    } catch(e)
+    {
+        console.error(e);
+    }
 }
 
 async function testSimpleJsonRpcWSClient() {
@@ -179,3 +191,11 @@ async function testSimpleJsonRpcWSClient() {
         console.log(res);
     }, 500);
 }
+
+async function main(){
+    await testSimpleJsonRpcPOSTClientService();
+}
+
+main().then(() =>{
+    console.log("main is finished")
+})
