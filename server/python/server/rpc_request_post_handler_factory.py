@@ -5,13 +5,13 @@ if sys.version_info.major != 3:
 from jsonrpcserver import methods, async_dispatch as dispatch
 import tornado.web
 
-from rpc_wrapper import RPCWrapper
-from rpc_wrapper_factory import RPCWrapperFactory
+from rpc_wrapper.rpc_wrapper import RPCWrapper
+from .rpc_wrapper_factory import RPCWrapperFactory
 
-def RPCRequestHandlerFactory( rpc_wrapper: RPCWrapper ):
+def RPCRequestPOSTHandlerFactory( rpc_wrapper: RPCWrapper ):
     my_methods = RPCWrapperFactory(rpc_wrapper, methods.Methods())
     
-    class RPCRequestHandler(tornado.web.RequestHandler):
+    class RPCRequestPOSTHandler(tornado.web.RequestHandler):
         async def post(self):
             request = self.request.body.decode()
             response = await dispatch(request, my_methods )
@@ -20,4 +20,4 @@ def RPCRequestHandlerFactory( rpc_wrapper: RPCWrapper ):
                 self.write(str(response))
 
 
-    return RPCRequestHandler
+    return RPCRequestPOSTHandler

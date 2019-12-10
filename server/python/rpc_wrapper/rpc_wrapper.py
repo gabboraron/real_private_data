@@ -1,4 +1,4 @@
-from web_method import web_method
+from .web_method import web_method
 
 class RPCWrapper:
 

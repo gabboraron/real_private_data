@@ -11,12 +11,12 @@ import tornado.web
 import ssl
 from jsonrpcserver import methods, async_dispatch as dispatch
 
-from redirector_request_handler_factory import RedirectorRequestHandlerFactory
-from rpc_request_handler_factory import RPCRequestHandlerFactory
-from web_request_handler_factory import WebRequestHandlerFactory
-from rpc_request_ws_handler_factory import RPCRequestWSHandlerFactory
-from rpc_wrapper_factory import RPCWrapperFactory
-from rpc_wrapper import RPCWrapper
+from server.redirector_request_handler_factory import RedirectorRequestHandlerFactory
+from server.rpc_request_post_handler_factory import RPCRequestPOSTHandlerFactory
+from server.web_request_handler_factory import WebRequestHandlerFactory
+from server.rpc_request_ws_handler_factory import RPCRequestWSHandlerFactory
+from server.rpc_wrapper_factory import RPCWrapperFactory
+from rpc_wrapper.rpc_wrapper import RPCWrapper
 
 # generate csr, and key:
 #
@@ -44,7 +44,7 @@ redirecterApplication = tornado.web.Application([
 ])
 
 application = tornado.web.Application([
-    (r'/rpc',    RPCRequestHandlerFactory(   rpc_wrapper)),
+    (r'/rpc',    RPCRequestPOSTHandlerFactory(   rpc_wrapper)),
     (r'/ws_rpc', RPCRequestWSHandlerFactory( rpc_wrapper)),
     (r"/(.*)", tornado.web.StaticFileHandler, { "path": web_root, "default_filename": "index.html" }),
 ])
