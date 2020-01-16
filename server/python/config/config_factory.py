@@ -2,13 +2,7 @@ import argparse
 import json
 from .the_config import TheConfig
 from .arg import Arg
-
-def ConfigIter() -> Arg:
-    for prop in TheConfig.__dict__:
-        if isinstance(TheConfig.__dict__[prop], Arg):
-            TheConfig.__dict__[prop].name = prop
-            yield TheConfig.__dict__[prop]
-    raise StopIteration
+from .tools import ConfigIter
 
 def boolean_arg(s):
     if s.lower() in {"true","false"}:

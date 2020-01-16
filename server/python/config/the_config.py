@@ -4,8 +4,9 @@ from .config_base import ConfigBase
 class TheConfig(ConfigBase):
     configFile:StrArg = StrArg(help="Config json file default: config.json", default_value="config.json")
 
-    debug:BoolArg      = BoolArg(help="debugmode default false", default_value=False)
+    debug:BoolArg      = BoolArg(help="debugmode default false", default_value=False, is_public=True)
     open_port:IntArg   = IntArg(help="Open port", default_value = 8080)
+    debug_open_port:IntArg = IntArg(help="debug port", default_value = 8081)
     secure_port:IntArg = IntArg(help="Secure port", default_value = 8443)
     host:StrArg        = StrArg(help="host", default_value = "localhost")
     crt_file:StrArg    = StrArg(help="crt_file", is_optional=False)

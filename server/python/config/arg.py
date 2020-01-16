@@ -7,16 +7,19 @@ class Arg(Generic[T]):
     help:str = ""
     default_value:T
     is_optional:bool = True
-    
+    is_public:bool = False
+
     def __init__(self,
         help:str = "",
         default_value:T = None,
-        is_optional:bool = True
+        is_optional:bool = True,
+        is_public:bool = False
         ):
         self.value = default_value
         self.help = help
         self.default_value = default_value
         self.is_optional = is_optional
+        self.is_public = is_public
 
 
     def __get__(self, instance, owner, prepare = False):
