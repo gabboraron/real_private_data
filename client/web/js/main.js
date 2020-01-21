@@ -1,7 +1,4 @@
 'use strict';
-let globalVariables = {
-    "releaseMode":"debug"
-}
 class ISecretFile extends AbstractClass {
     static abstractMethods = [
         "toJson" //()

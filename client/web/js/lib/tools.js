@@ -2,7 +2,7 @@
 
 //TODO: Better name
 function isInheritedFrom(variable, ancestor) {
-    if(globalVariables["releaseMode"] !== "debug")
+    if(!theConfig.debug)
         return true;
     let t = variable;
     while( null !== t && "undefined" !== t.__proto__ && ancestor !== t.constructor)
