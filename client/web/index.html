@@ -1,8 +1,11 @@
 <html>
     <head>
-        <title>Hello</title>
+        <title>Real Priate Data</title>
+
+        <link rel="stylesheet" type="text/css" href="style.css">
+
         <script src="config.js"></script>
-        
+        <script src="js/lib/logger/Logger.js"></script>
         <!-- Third party libs -->
         
         <script src="js/lib/thirdparty/simple-jsonrpc-js/simple-jsonrpc-js.js"></script>
@@ -26,11 +29,19 @@
         <script src="js/lib/IClient.js"></script>
         <script src="js/lib/SimpleJsonRpcPOSTClientService.js"></script>
         <script src="js/lib/SimpleJsonRpcWebSocketClientService.js"></script>
+        <script src="js/components/pageloader/pageloader.js"></script>
         <script src="js/main.js"></script>
     </head>
 
     <body>
-        Hello
+        <h1 id="titleH1">Real Private Data</h1>
+        <div id="bodyDiv">
+            Page loading, please wait
+        </div>
+        <div id="messageDiv">
+
+        </div>
+        <div id="footer"></div>
     </body>
 
 </html>

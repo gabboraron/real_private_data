@@ -197,10 +197,12 @@ async function testSimpleJsonRpcWSClientService() {
 }
 
 async function main(){
+    await thePageLoader.loadPage("login",undefined, true);
     await testSimpleJsonRpcPOSTClientService();
     await testSimpleJsonRpcWSClientService();
 }
-
-main().then(() =>{
-    console.log("main is finished")
-})
+window.addEventListener("load", () => {
+    main().then(() =>{
+        console.log("main is finished");
+    });
+});
