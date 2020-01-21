@@ -10,6 +10,16 @@ if(!console.debug){
 
 class Logger
 {
+    /**
+    * @param {boolean} [overrideConsole=false]  
+    * If it's true override console.log, console.error, ... 
+    * @param {boolean} [debugging=false]
+    * If it's true Logger.debug is working
+    * @param {HTMLElement} [messageDiv=document.getElementById("messageDiv")]
+    * Log div html element
+    * @param {function} [newStr=defStrFunction]
+    * function which is create newStr
+    */
     constructor(
         overrideConsole /** = false */, 
         debugging, /** = false */
@@ -158,4 +168,5 @@ class Logger
 
 window.addEventListener("load",function(){
     window.theLogger = new Logger(true, theConfig.debug);
+    new Logger()
 });
