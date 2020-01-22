@@ -165,8 +165,3 @@ class Logger
     }
      
 }
-
-window.addEventListener("load",function(){
-    window.theLogger = new Logger(true, theConfig.debug);
-    new Logger()
-});
