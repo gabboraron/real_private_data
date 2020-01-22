@@ -4,7 +4,7 @@ class HtmlDownloaderService {
     htmlFileList = {
         "login":"login.html",
         "main":"main.html",
-        "window":"window.html"
+        "MyWindow":"MyWindow.html"
     };
     constructor(rootDir){
         this.rootDir = rootDir || "/html"
