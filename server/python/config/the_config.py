@@ -1,4 +1,4 @@
-from .arg import *
+from .arg import BoolArg, StrArg, IntArg, FloatArg
 from .config_base import ConfigBase
 
 class TheConfig(ConfigBase):
@@ -12,3 +12,7 @@ class TheConfig(ConfigBase):
     crt_file:StrArg    = StrArg(help="crt_file", is_optional=False)
     key_file:StrArg    = StrArg(help="key_file", is_optional=False)
     web_root:StrArg    = StrArg(help="web root", is_optional=False)
+    data_dir:StrArg    = StrArg(help="Data dir")
+    test_dir:StrArg    = StrArg(help="Dir for test", default_value="/var/tmp/real_private_data")
+
+    defaultRpcClient   = StrArg(help="Default Rpc call" is_public=True, "SimpleJsonRpcWebSocketClientService")
