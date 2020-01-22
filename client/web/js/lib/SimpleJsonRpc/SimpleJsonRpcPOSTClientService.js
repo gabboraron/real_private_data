@@ -6,18 +6,12 @@ class SimpleJsonRpcPOSTClientService extends IRPCClient {
     #passhare;
     
     constructor(
-          userHash
-        , passhare
-        , mySimple_jsonrpc = simple_jsonrpc
+          mySimple_jsonrpc = simple_jsonrpc
         , myXMLHttpRequest = XMLHttpRequest
         ) {
         super();
         let self = this;
 
-        isInheritedFrom(userHash,String);
-        isInheritedFrom(passhare,String);
-        this.#userHash = userHash;
-        this.#passhare = passhare;
         this.simple_jsonrpc = mySimple_jsonrpc;
         this.XMLHttpRequest = myXMLHttpRequest;
 

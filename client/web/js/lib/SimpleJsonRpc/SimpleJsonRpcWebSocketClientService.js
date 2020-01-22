@@ -6,21 +6,15 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
     #passhare;
     
     constructor(
-          userHash
-        , passhare
-        , ws_url
+          ws_url
         , mySimple_jsonrpc = simple_jsonrpc
         , myWebSocket = WebSocket
         ) {
         super();
         let self = this;
-        isInheritedFrom(userHash, String);
-        isInheritedFrom(passhare, String);
         if(undefined !== ws_url)
             isInheritedFrom(ws_url, String);
         
-        this.#userHash = userHash;
-        this.#passhare = passhare;
         this.simple_jsonrpc = mySimple_jsonrpc;
         this.WebSocket = myWebSocket;
         
