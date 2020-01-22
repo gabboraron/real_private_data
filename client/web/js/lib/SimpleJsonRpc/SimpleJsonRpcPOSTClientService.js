@@ -1,4 +1,4 @@
-class SimpleJsonRpcPOSTClientService extends IClient {
+class SimpleJsonRpcPOSTClientService extends IRPCClient {
     simple_jsonrpc;
     jrpc;
     XMLHttpRequest;

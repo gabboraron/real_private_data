@@ -1,4 +1,4 @@
-class SimpleJsonRpcWebSocketClientService extends IClient {
+class SimpleJsonRpcWebSocketClientService extends IRPCClient {
     simple_jsonrpc;
     WebSocket;
     jrpc;

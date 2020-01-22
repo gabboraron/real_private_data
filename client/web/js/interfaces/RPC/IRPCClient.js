@@ -1,4 +1,4 @@
-class IClient extends AbstractClass {
+class IRPCClient extends AbstractClass {
     static abstractMethods = [
         "call" //(func, args) -> Promise
         //,"authentication", //(userHash:string, userPassword:string)
