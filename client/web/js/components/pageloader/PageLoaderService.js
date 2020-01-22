@@ -1,20 +1,28 @@
 'use strict';
 
+/**
+ * @requires theConfig
+ * @requires theHtmlDownloaderService
+ */
 class PageLoaderService {
-    pagesLocation = {
-        "login":"login.html"
-    }
     pages = {
         "login":"login"
     }
-    constructor(rootLocation){
-        this.rootLocation = rootLocation || "/html";
+    constructor(){
         this.pageTitle    = theConfig.pageTitle || "Real private data";
         this.title        = this.pageTitle;
         this.subTitle     = undefined;
         this.titlePostfix = undefined;
     }
 
+    start() {
+        return true;
+    }
+    
+    stop() {
+        return true;
+    }
+    
     getTitle(){
         return this.title;
     }
@@ -65,35 +73,20 @@ class PageLoaderService {
             body = bodyTags[0].innerHTML;
         }
         toLocation.innerHTML = body;
+        return toLocation;
     }
 
-    async loadPage(page, toLocation /** =  document.getElementById("bodyDiv") */, modifyTitle /** = false */) {
+    loadPage(page, toLocation /** =  document.getElementById("bodyDiv") */, modifyTitle /** = false */) {
         toLocation = toLocation || document.getElementById("bodyDiv");
-        let self = this;
-        return new Promise((resolve, reject) => {
-            if( !this.pagesLocation[page] ){
-                reject("Page Doesen't found in list: " + page);
-                return false;
-            }
-            let xhttp = new XMLHttpRequest();
-            xhttp.onload = function() {
-                    let el = document.createElement( 'html' );
-                    el.innerHTML = this.responseText;
-                    window.d = el;
-                    if(modifyTitle) {
-                        let title = self.setTitleFromHtml(el);
-                        console.debug(title);
-                    }
-                    self.setBody(el, toLocation);
-                    resolve(true);
-            };
-            xhttp.onerror = () => reject(xhr.statusText);
-            let pageLocation = this.rootLocation + "/" + this.pagesLocation[page];
-            xhttp.open("GET", pageLocation, true);
-            console.debug(pageLocation +" loading...")
-            xhttp.send();
-        });
+
+        let el = theHtmlDownloaderService.getHtml(page);
+        if(modifyTitle) {
+            let title = this.setTitleFromHtml(el);
+            console.debug(title);
+        }
+        return this.setBody(el, toLocation);
+        
     }
 };
 
-thePageLoader = new PageLoaderService();
+window.thePageLoader = new PageLoaderService();
