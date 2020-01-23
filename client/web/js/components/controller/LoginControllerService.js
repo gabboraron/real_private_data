@@ -55,19 +55,19 @@ class LoginControllerService extends ControllerServiceBase {
     createRadios() {
         let rpcNames = theRpcClients.getNames();
         for(let i in rpcNames) {
-            let rpcName = rpcNames[i];
-            let radioDiv = document.createElement("div");
-            let radio = document.createElement("input");
-            let radioSpan = document.createElement("span");
+            let rpcName         = rpcNames[i];
+            let radioDiv        = document.createElement("div");
+            let radio           = document.createElement("input");
+            let radioSpan       = document.createElement("span");
+            radioSpan.innerText = rpcName;
             radio.setAttribute("type", "radio");
             radio.setAttribute("name", "RPCClientNameRadio");
             radio.setAttribute("value", rpcName);
+            radioDiv.appendChild(radio);
+            radioDiv.appendChild(radioSpan);
             if(rpcName === this.defaultRpcClient) {
                 radio.checked = true;
             }
-            radioSpan.innerText = rpcName;
-            radioDiv.appendChild(radio);
-            radioDiv.appendChild(radioSpan);
             this.getItem(this.htmlItems.loginRpcClientForm).appendChild(radioDiv);            
         }
     }
