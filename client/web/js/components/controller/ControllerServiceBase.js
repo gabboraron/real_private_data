@@ -44,7 +44,7 @@ class ControllerServiceBase {
         let events = [];
         for(let i = 0; i < elements.length; ++i) {
             let element = elements[i];
-            let f = (e) => { func.call(self, elementName, e, this ); };
+            let f = (e) => { return func.call(self, elementName, e, this ); };
             let event = {
                 "element":   element,
                 "func":       f,

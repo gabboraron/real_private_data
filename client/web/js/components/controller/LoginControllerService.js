@@ -19,6 +19,7 @@ class LoginControllerService extends ControllerServiceBase {
         super.start(body);
         this.createRadios();
         this.addEventListener( this.htmlItems.loginButton, "click", this.login);
+        this.addEventListener(this.htmlItems.loginRpcClientForm, "submit", this.login);
     }
 
     stop() {
@@ -29,7 +30,9 @@ class LoginControllerService extends ControllerServiceBase {
         this.getItem(this.htmlItems.loginMessage).innerText = msg;
     }
     
-    async login(){
+    async login(elementName, e, t){
+        if(e.preventDefault)
+            e.preventDefault();
         this.message("Login...");
         console.log("Login...");
         
@@ -43,9 +46,11 @@ class LoginControllerService extends ControllerServiceBase {
             this.stop();
             thePageLoader.loadPage("main", undefined, true);
         } else {
+            this.getItem(this.htmlItems.loginPassword).value = "";
             this.message(result.error.message);
             console.log("code", result.error.code, "message", result.error.message);
         }
+        return false;
     }
     createRadios() {
         let rpcNames = theRpcClients.getNames();
