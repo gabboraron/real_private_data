@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 async function testSimpleJsonRpcPOSTClientService() {
     console.log("Test SimpleJsonRpcPOSTClient connection");
     let postClient = new SimpleJsonRpcPOSTClientService();

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 class SimpleJsonRpcPOSTClientService extends IRPCClient {
     simple_jsonrpc;
     jrpc;

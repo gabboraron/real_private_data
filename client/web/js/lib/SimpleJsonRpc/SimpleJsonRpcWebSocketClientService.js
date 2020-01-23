@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 class SimpleJsonRpcWebSocketClientService extends IRPCClient {
     simple_jsonrpc;
     WebSocket;

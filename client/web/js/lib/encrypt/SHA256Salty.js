@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 class SHA256Salty extends IHash {
     #saltSentence;
     #sha256;
