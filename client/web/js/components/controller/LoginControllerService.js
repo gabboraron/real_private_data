@@ -8,11 +8,12 @@ class LoginControllerService extends ControllerServiceBase {
     }
 
     htmlItems = {
-        "loginUsername":"loginUsername",
-        "loginPassword":"loginPassword",
-        "loginButton":"loginButton",
-        "loginMessage":"loginMessage",
-        "loginRpcClientForm":"loginRpcClientForm"
+        "loginUsername"        : "loginUsername",
+        "loginPassword"        : "loginPassword",
+        "loginButton"          : "loginButton",
+        "loginMessage"         : "loginMessage",
+        "loginRpcClientForm"   : "loginRpcClientForm",
+        "loginRpcClientRadios" : "loginRpcClientRadios"
     }
 
     start(body) {
@@ -68,12 +69,12 @@ class LoginControllerService extends ControllerServiceBase {
             if(rpcName === this.defaultRpcClient) {
                 radio.checked = true;
             }
-            this.getItem(this.htmlItems.loginRpcClientForm).appendChild(radioDiv);            
+            this.getItem(this.htmlItems.loginRpcClientRadios).appendChild(radioDiv);            
         }
     }
 
     checkSelectedRadio(){
-        let listOfRadio = this.getItem(this.htmlItems.loginRpcClientForm).getElementsByTagName("input");
+        let listOfRadio = this.getItem(this.htmlItems.loginRpcClientRadios).getElementsByTagName("input");
         for(let i in listOfRadio) {
             let radio = listOfRadio[i];
             if(radio.checked)
