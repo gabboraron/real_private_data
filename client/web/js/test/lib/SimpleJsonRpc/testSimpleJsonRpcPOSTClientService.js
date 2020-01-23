@@ -1,7 +1,8 @@
 'use strict'
 async function testSimpleJsonRpcPOSTClientService() {
     console.log("Test SimpleJsonRpcPOSTClient connection");
-    let postClient = new SimpleJsonRpcPOSTClientService("username", "password");
+    let postClient = new SimpleJsonRpcPOSTClientService();
+    postClient.start("username","password");
     try {
         let c = await postClient.start();
         console.log(c);
@@ -10,7 +11,8 @@ async function testSimpleJsonRpcPOSTClientService() {
     } catch(e){
         console.error(e);
     }
-    var postClientError = new SimpleJsonRpcPOSTClientService("username1", "password1");
+    var postClientError = new SimpleJsonRpcPOSTClientService();
+    postClientError.start("username1", "password1");
     try {
         console.log("Test SimpleJsonRpcPOSTClientService connection with bad password");
         let c = await postClientError.start();
