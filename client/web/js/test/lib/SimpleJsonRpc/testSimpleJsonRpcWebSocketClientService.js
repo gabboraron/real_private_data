@@ -1,3 +1,4 @@
+'use strict'
 async function testSimpleJsonRpcWSClientService() {
     console.log("Test SimpleJsonRpcWebSocketClientService connection");
     let wsClient = new SimpleJsonRpcWebSocketClientService("username", "password");

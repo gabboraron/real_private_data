@@ -1,3 +1,5 @@
+'use strict'
+
 class MainControllerService extends ControllerServiceBase {
     constructor() {
         super();
