@@ -2,9 +2,11 @@
 
 class HtmlDownloaderService {
     htmlFileList = {
-        "login":"login.html",
-        "main":"main.html",
-        "MyWindow":"MyWindow.html"
+        "login"            : "login.html",
+        "main"             : "main.html",
+        "MyWindow"         : "MyWindow.html",
+        "chgPassword"      : "chgPassword.html",
+        "createUser"       : "createUser.html"
     };
     constructor(rootDir){
         this.rootDir = rootDir || "/html"

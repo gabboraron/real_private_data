@@ -4,12 +4,11 @@ async function main(){
     window.theHtmlDownloaderService = new HtmlDownloaderService();
     await theHtmlDownloaderService.start();
     
-    let loggerWindow = new MyWindow(document.getElementById("messageDiv"));
+    let loggerWindow = new MyWindow(document.getElementById("logDiv"));
     loggerWindow.setTitle("Logging");
     window.theLogger = new Logger(true, theConfig.debug, loggerWindow.windowBody);
+    thePageLoader.loadPage("login",undefined, true);
     
-    window.lc = new LoginControllerService();
-    lc.start();
     //window.x = new MyWindow(document.getElementById("bodyDiv"));
 }
 window.addEventListener("load", () => {

@@ -15,7 +15,7 @@ class Logger
     * If it's true override console.log, console.error, ... 
     * @param {boolean} [debugging=false]
     * If it's true Logger.debug is working
-    * @param {HTMLElement} [messageDiv=document.getElementById("messageDiv")]
+    * @param {HTMLElement} [logDiv=document.getElementById("logDiv")]
     * Log div html element
     * @param {function} [newStr=defStrFunction]
     * function which is create newStr
@@ -23,12 +23,12 @@ class Logger
     constructor(
         overrideConsole /** = false */, 
         debugging, /** = false */
-        messageDiv, /** = document.getElementById("messageDiv") */
+        logDiv, /** = document.getElementById("logDiv") */
         nowStr /** = a default function */
     ) {
         
         this.debugging =  debugging || false;
-        this.messageDiv = messageDiv || document.getElementById("messageDiv");
+        this.logDiv = logDiv || document.getElementById("logDiv");
         this.logs = [];
 
         this.nowStr = nowStr || function(now /** = Date */) {
@@ -75,7 +75,7 @@ class Logger
             //TODO: print e.trace somehow
             logRowDiv.innerText += " " + args[i];
         }
-        this.messageDiv.appendChild(logRowDiv);
+        this.logDiv.appendChild(logRowDiv);
     }
 
     _write(loggerName, args){
@@ -99,7 +99,7 @@ class Logger
      
     clear() {
         this.console.clear();
-        this.messageDiv.innerHTML = "";
+        this.logDiv.innerHTML = "";
         this.logs = [];
     }
      
@@ -134,7 +134,7 @@ class Logger
     log() {
         this._write("log", arguments);
     }
-     
+    
     table() {
         //TODO:Implement
         //Displays tabular data as a table
@@ -163,5 +163,5 @@ class Logger
         if(this.debugging)
             this._write("debug", arguments);
     }
-     
+    
 }

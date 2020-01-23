@@ -6,13 +6,20 @@
  */
 class PageLoaderService {
     pages = {
-        "login":"login"
+        "login":"login",
+        "main":"main"
     }
+
     constructor(){
         this.pageTitle    = theConfig.pageTitle || "Real private data";
         this.title        = this.pageTitle;
         this.subTitle     = undefined;
         this.titlePostfix = undefined;
+
+        this.controllers = {
+            "login" : new LoginControllerService(),
+            "main"  : new MainControllerService()
+        }
     }
 
     start() {
@@ -84,7 +91,9 @@ class PageLoaderService {
             let title = this.setTitleFromHtml(el);
             console.debug(title);
         }
-        return this.setBody(el, toLocation);
+        let body = this.setBody(el, toLocation);
+        this.controllers[page].start(body);
+        return body;
         
     }
 };
