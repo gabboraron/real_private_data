@@ -15,4 +15,4 @@ class TheConfig(ConfigBase):
     data_dir:StrArg    = StrArg(help="Data dir")
     test_dir:StrArg    = StrArg(help="Dir for test", default_value="/var/tmp/real_private_data")
 
-    defaultRpcClient   = StrArg(help="Default Rpc call" is_public=True, "SimpleJsonRpcWebSocketClientService")
+    defaultRpcClient   = StrArg(help="Default Rpc call", is_public=True, default_value="SimpleJsonRpcWebSocketClientService")
