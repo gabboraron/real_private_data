@@ -1,13 +1,8 @@
 "use strict";
 
 class HtmlDownloaderService {
-    htmlFileList = {
-        "login"            : "login.html",
-        "main"             : "main.html",
-        "MyWindow"         : "MyWindow.html",
-        "chgPassword"      : "chgPassword.html",
-        "createUser"       : "createUser.html"
-    };
+    htmlFileDict = window.htmlFileDict;
+
     constructor(rootDir){
         this.rootDir = rootDir || "/html"
         this.htmlDict = {};
@@ -21,7 +16,7 @@ class HtmlDownloaderService {
                 resolve(true);
             };
             xhttp.onerror = () => reject(xhr.statusText);
-            let path = self.rootDir + "/" + self.htmlFileList[htmlName];
+            let path = self.rootDir + "/" + self.htmlFileDict[htmlName];
             console.debug(path + " loading...")
             xhttp.open("GET", path, true);
             xhttp.send();
@@ -32,7 +27,7 @@ class HtmlDownloaderService {
         if(this.ready)
             return true;
         let promises = [];
-        for(let htmlName in this.htmlFileList){
+        for(let htmlName in this.htmlFileDict){
             promises.push(this.download(htmlName));
         }
         return Promise.all(promises).then(() => {self.ready = true;});
