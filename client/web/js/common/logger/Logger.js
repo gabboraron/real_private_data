@@ -1,13 +1,13 @@
-'use strict'
+'use strict';
 
-// From: https://stackoverflow.com/questions/21876461/difference-between-console-log-and-console-debug
-if(!console.debug){
+(function(){
+    // From: https://stackoverflow.com/questions/21876461/difference-between-console-log-and-console-debug
+    let ___log = console.log;
     console.debug = function() {
         if(!console.debugging) return;
-        console.log.apply(this, arguments);
+        ___log.apply(this, arguments);
     };
-}
-
+})();
 class Logger
 {
     /**
@@ -28,6 +28,8 @@ class Logger
     ) {
         
         this.debugging =  debugging || false;
+        if(typeof(console.debugging) === "undefined")
+            console.debugging = this.debugging;
         this.logDiv = logDiv || document.getElementById("logDiv");
         this.logs = [];
 
@@ -48,12 +50,12 @@ class Logger
         }
 
         this.console = {
-            "debug" : console.debug,
-            "warn"  : console.warn,
-            "clear" : console.clear,
-            "log"   : console.log,
-            "info"  : console.info,
-            "error" : console.error
+            "debug"     : console.debug,
+            "warn"      : console.warn,
+            "clear"     : console.clear,
+            "log"       : console.log,
+            "info"      : console.info,
+            "error"     : console.error,
         }
         if(overrideConsole)
             this.overrideConsole();
