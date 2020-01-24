@@ -1,17 +1,18 @@
-from typing import TypeVar, Generic
+#from typing import TypeVar as _TypeVar, Generic as _Generic
+import typing
 
-T = TypeVar('T', bool, int, str, float)
+_T = typing.TypeVar('_T', bool, int, str, float)
 
-class Arg(Generic[T]):
-    value:T
+class Arg(typing.Generic[_T]):
+    value:_T
     help:str = ""
-    default_value:T
+    default_value:_T
     is_optional:bool = True
     is_public:bool = False
 
     def __init__(self,
         help:str = "",
-        default_value:T = None,
+        default_value:_T = None,
         is_optional:bool = True,
         is_public:bool = False
         ):
