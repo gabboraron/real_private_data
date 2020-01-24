@@ -3,3 +3,4 @@
 .vscode/
 client/web/sandbox/**
 client/web/generated/**
+sandbox/**
