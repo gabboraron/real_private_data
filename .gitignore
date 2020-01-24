@@ -1,4 +1,5 @@
 
 **/__pycache__/
 .vscode/
-client/web/config.js
+client/web/sandbox/**
+client/web/generated/**

@@ -10,7 +10,7 @@ global htmlDir, filePath
 projectDir = getprojectdir()
 webdir   = projectDir.joinpath("client/web")
 htmlDir  = webdir.joinpath("html/")
-filePath = webdir.joinpath("generated/htmlFileDict.js")
+filePath = webdir.joinpath("js/htmlFileDict.js")
 
 def getHtmls():
     htmls = os.listdir( htmlDir )

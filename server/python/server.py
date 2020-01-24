@@ -37,7 +37,7 @@ redirecterApplication = tornado.web.Application([
 application = tornado.web.Application([
     (r'/rpc',    RPCRequestPOSTHandlerFactory(   rpc_wrapper)),
     (r'/ws_rpc', RPCRequestWSHandlerFactory( rpc_wrapper)),
-    (r'/config.js', ConfigRequestHandler ),
+    (r'/generated/config.js', ConfigRequestHandler ),
     (r"/(.*)", tornado.web.StaticFileHandler, { "path": theConfig.web_root, "default_filename": "index.html" }),
 ])
 
@@ -58,8 +58,9 @@ if __name__ == '__main__':
         http_server2.listen(8081)
         print("Debug HTTP Server starting... http://%s:%d/"%(theConfig.host, theConfig.debug_open_port))
 
-        print("Save config.js to {}".format(theConfig.web_root + "/config.js"))
-        configToJs( theConfig.web_root + "/config.js" )
+        config_path = theConfig.web_root + "/generated/config.js"
+        print("Save config.js to {}".format(config_path))
+        configToJs( config_path )
 
     tornado.ioloop.IOLoop.instance().start()
 
