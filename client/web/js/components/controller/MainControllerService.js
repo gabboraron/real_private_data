@@ -7,14 +7,14 @@ class MainControllerService extends ControllerServiceBase {
     htmlItems = {
         "changePasswordLink" : "changePasswordLink",
         "createUserLink"     : "createUserLink",
-        "logoutLink"         : "logoutLink"
+        "createFileLink"     : "createFileLink"
     }
 
     start(body) {
         super.start(body);
         this.addEventListener(this.htmlItems.changePasswordLink, "click", this.openPage);
         this.addEventListener(this.htmlItems.createUserLink, "click", this.openPage);
-        this.addEventListener(this.htmlItems.logoutLink, "click", this.logout);
+        this.addEventListener(this.htmlItems.createFileLink, "click", this.openPage);
     }
     
     stop(){
@@ -23,9 +23,22 @@ class MainControllerService extends ControllerServiceBase {
     }
     
     openPage(elementName, e, t){
-        e.preventDefault()
-        console.debug(elementName);
-        return false;
+        e.preventDefault();
+        
+        switch(elementName){
+            case this.htmlItems.createUserLink:
+                this.stop();
+                thePageLoader.loadPage("createUser", undefined, true);
+                break;
+            case this.htmlItems.changePasswordLink:
+                this.stop();
+                thePageLoader.loadPage("chgPassword", undefined, true);
+                break;
+            case this.htmlItems.createFileLink:
+                this.stop();
+                thePageLoader.loadPage("txtFile", undefined, true);
+                break;
+        }
     }
     logout(elementName, e, t) {
         console.debug("TODO: implement");

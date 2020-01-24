@@ -6,9 +6,12 @@
  */
 class PageLoaderService {
     pages = {
-        "login":"login",
-        "main":"main"
-    }
+        "login"       : "login",
+        "main"        : "main",
+        "chgPassword" : "chgPassword",
+        "createUser"  : "createUser",
+        "txtFile"     : "txtFile"
+    };
 
     constructor(){
         this.pageTitle    = theConfig.pageTitle || "Real private data";
@@ -17,8 +20,11 @@ class PageLoaderService {
         this.titlePostfix = undefined;
 
         this.controllers = {
-            "login" : new LoginControllerService(),
-            "main"  : new MainControllerService()
+            "login"       : new LoginControllerService(),
+            "main"        : new MainControllerService(),
+            "chgPassword" : new ChgPasswordControllerService(),
+            "createUser"  : new CreateUserControllerService(),
+            "txtFile"     : new TxtFileControllerService()
         }
     }
 
