@@ -19,7 +19,6 @@ class TxtFileControllerService extends ControllerServiceBase {
     
     back(elementName, e, t) {
         this.stop();
-        e.preventDefault();
         thePageLoader.loadPage("main", undefined, true)
     }
 }

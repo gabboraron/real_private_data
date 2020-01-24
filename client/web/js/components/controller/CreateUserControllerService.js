@@ -26,12 +26,10 @@ class CreateUserControllerService extends ControllerServiceBase {
     }
     
     createUser(elementName, e, t) {
-        e.preventDefault();
-
+        
     }
     back(elementName, e, t) {
         this.stop();
-        e.preventDefault();
         thePageLoader.loadPage("main", undefined, true)
     }
 

@@ -32,8 +32,6 @@ class LoginControllerService extends ControllerServiceBase {
     }
     
     async login(elementName, e, t){
-        if(e.preventDefault)
-            e.preventDefault();
         this.message("Login...");
         console.log("Login...");
         

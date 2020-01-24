@@ -44,7 +44,12 @@ class ControllerServiceBase {
         let events = [];
         for(let i = 0; i < elements.length; ++i) {
             let element = elements[i];
-            let f = (e) => { return func.call(self, elementName, e, this ); };
+            let f = (e) => { 
+                let ret = func.call(self, elementName, e, this );
+                if( typeof(e.preventDefault) === "function" && !e.disablePreventDefault)
+                    e.preventDefault();
+                return ret; 
+            };
             let event = {
                 "element":   element,
                 "func":       f,

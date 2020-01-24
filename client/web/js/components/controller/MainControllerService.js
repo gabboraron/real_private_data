@@ -23,8 +23,6 @@ class MainControllerService extends ControllerServiceBase {
     }
     
     openPage(elementName, e, t){
-        e.preventDefault();
-        
         switch(elementName){
             case this.htmlItems.createUserLink:
                 this.stop();
