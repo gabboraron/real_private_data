@@ -2,6 +2,7 @@
 
 class UserManagerServiceMock extends IUserManagerService { 
     constructor() {
+        super();
         this.__username  = null;
         this.__loginHash = null;
         this.__dirHash   = null;
@@ -22,28 +23,17 @@ class UserManagerServiceMock extends IUserManagerService {
      * @param {string} plainUsername 
      * @param {string} plainPassword 
      */
-    async login(plainUsername, plainPassword, rpcClientService) {
+    async login(plainUsername, plainPassword, rpcClientServiceName) {
         if(this.__logedIn){
-            let error = { 
-                "data":undefined, 
-                "error":{
-                    "code": 9,
-                    "message":"You are already loged in"
-                }
-            }
-            console.warn(error);
-            return error;
+            return Promise.reject(new ErrorObject(ErrorTypeEnum.ALREADY_LOGEDIN));
         }
         if( plainUsername === "bad" && plainPassword === "bad" ) {
-            return { 
-                "data":undefined, 
-                "error":{
-                    "code": 2, 
-                    "message":"Bad username and/or password"
-                }
-            };
+            return Promise.reject(new ErrorObject(ErrorTypeEnum.BAD_USERNAME_PASSWORD));
         }
-        console.log("Loged in");
+        // let rpcClient = theRpcClients.getClientByName(rpcName);
+        this.__username  = plainUsername;
+        this.__loginHash = plainPassword;
+        this.__dirHash   = plainPassword;
         this.__logedIn = true;
         return true;
     }
@@ -56,7 +46,6 @@ class UserManagerServiceMock extends IUserManagerService {
         this.__logedIn   = false;
         this.__rpcClient.stop();
         this.__rpcClient = undefined;
-        
     }
 
     /**
