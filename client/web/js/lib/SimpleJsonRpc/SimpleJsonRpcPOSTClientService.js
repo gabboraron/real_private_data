@@ -33,54 +33,39 @@ class SimpleJsonRpcPOSTClientService extends IRPCClient {
             xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
             xhr.send(_msg);
         };
-    } // end constructor(...)
-    async startAsync(userHash, passhare) {
-        let self = this;
-        if(undefined !== userHash) {
-            isInheritedFrom(userHash, String);
-            this.#userHash = userHash;
-        }
-        if(undefined !== passhare) {
-            isInheritedFrom(passhare, String);
-            this.#passhare = passhare;
-        }
-        
-        return new Promise( (resolve, reject) =>{
-            self.jrpc.call("login", [self.#userHash, self.#passhare, self.#userHash, self.#passhare])
-                .then((data) => {
-                    if(data.data)
-                        resolve(data);
-                    else
-                        reject(data);
-                }).catch((reason) =>{
-                    reject(reason);
-                })
-        });
-    } // end of start(userHash, passhare)
-    async logout() {
-        this.#userHash = undefined;
-        this.#passhare = undefined;
-    }
+    } // end of constructor(...)
+    
     async start(userHash, passhare) {
-        try {
-            return await this.startAsync(userHash, passhare);;
-        } catch(e) {
-            return e;
-        }
-    }
-
-    async stopAsyc(){
-        await this.logout();
-        return new Promise((resolve) =>{ resolve(true) });
-    }
+        isInheritedFrom(userHash, String);
+        isInheritedFrom(passhare, String);
+        this.#userHash = userHash;
+        this.#passhare = passhare;
+        
+        return this.call("login", [this.#userHash, this.#passhare]);
+    } // end of start(userHash, passhare)
 
     async stop() {
         await this.logout();
         return true;
     }
 
+    async logout() {
+        this.#userHash = undefined;
+        this.#passhare = undefined;
+    }
+    
     async call(func, args) {
         args = addAuthArgs(args, this.#userHash, this.#passhare);
-        return this.jrpc.call(func, args);
+        return new Promise( (resolve, reject) => {
+            this.jrpc.call(func, args).then((d) =>{
+                if(!d.error) {
+                    resolve(d.data);
+                } else {
+                    reject( ErrorObject.fromDict(d.error) );
+                }
+            }).catch( (e) => {
+                reject(new ErrorObject(ErrorTypeEnum.LOCAL_CALL_ERROR, e.toString()));
+            });
+        });
     } // end of call(func, args)
 } // end of class SimpleJsonRpcPOSTClientService
