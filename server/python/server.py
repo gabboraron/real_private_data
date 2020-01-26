@@ -16,9 +16,11 @@ from server.redirector_request_handler_factory import RedirectorRequestHandlerFa
 from server.rpc_request_post_handler_factory import RPCRequestPOSTHandlerFactory
 from server.web_request_handler_factory import WebRequestHandlerFactory
 from server.rpc_request_ws_handler_factory import RPCRequestWSHandlerFactory
-from server.config_request_handler import ConfigRequestHandler
+from server.data_request_handler import DataRequestHandler
 from server.rpc_wrapper_factory import RPCWrapperFactory
 from rpc_wrapper.rpc_wrapper import RPCWrapper
+
+from js_generator.js_generator import JsGenerator
 
 # generate csr, and key:
 #
@@ -37,7 +39,7 @@ redirecterApplication = tornado.web.Application([
 application = tornado.web.Application([
     (r'/rpc',    RPCRequestPOSTHandlerFactory(   rpc_wrapper)),
     (r'/ws_rpc', RPCRequestWSHandlerFactory( rpc_wrapper)),
-    (r'/generated/config.js', ConfigRequestHandler ),
+    (r'/generated/data.js', DataRequestHandler ),
     (r"/(.*)", tornado.web.StaticFileHandler, { "path": theConfig.web_root, "default_filename": "index.html" }),
 ])
 
@@ -58,9 +60,10 @@ if __name__ == '__main__':
         http_server2.listen(8081)
         print("Debug HTTP Server starting... http://%s:%d/"%(theConfig.host, theConfig.debug_open_port))
 
-        config_path = theConfig.web_root + "/generated/config.js"
-        print("Save config.js to {}".format(config_path))
-        configToJs( config_path )
+        data_path = theConfig.web_root + "/generated/data.js"
+        print("Save data.js to {}".format(data_path))
+        with open(data_path,"w") as f:
+            f.write(JsGenerator())
 
     tornado.ioloop.IOLoop.instance().start()
 

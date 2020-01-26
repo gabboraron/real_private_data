@@ -12,7 +12,6 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
         , myWebSocket = WebSocket
         ) {
         super();
-        let self = this;
         if(undefined !== ws_url)
             isInheritedFrom(ws_url, String);
         
@@ -23,20 +22,57 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
         this.ws_url = ws_url || this.ws_protociol +"://" + window.location.host + "/ws_rpc"
     } // end of constructor(...)
     
+    async start(userHash, passhare) {
+        try {
+            await this.jrpcInit()
+        } catch(e){
+            return Promise.reject(e);    
+        }
+        isInheritedFrom(userHash, String);
+        isInheritedFrom(passhare, String);
+        this.#userHash = userHash;
+        this.#passhare = passhare;
+        
+        return this.call("login", [this.#userHash, this.#passhare]);
+    } // end of start(userHash, passhare)
+
+    async stop() {
+        await this.logout();
+        return true;
+    }
+
     async logout() {
         this.#userHash = undefined;
         this.#passhare = undefined;
         this.socket.close();
     }
     
+    async call(func, args) {
+        args = addAuthArgs(args, this.#userHash, this.#passhare);
+        return new Promise( (resolve, reject) => {
+            this.jrpc.call(func, args).then((d) =>{
+                if(!d.error) {
+                    resolve(d.data);
+                } else {
+                    reject( ErrorObject.fromDict(d.error) );
+                }
+            }).catch( (e) => {
+                reject(new ErrorObject(ErrorTypeEnum.LOCAL_CALL_ERROR, e.toString()));
+            });
+        });
+    } // end of call(func, args)
+
     async jrpcInit() {
         let self = this;
-        return new Promise((resolve) =>{
+        return new Promise((resolve, reject) =>{
             self.jrpc = new this.simple_jsonrpc();
-            self.socket = new this.WebSocket(this.ws_url);
+            try {
+                self.socket = new this.WebSocket(this.ws_url);
+            } catch(e) {
+                reject(ErrorTypeEnum.CONNECTION_ERROR, e.toString());
+            }
             self.socket.onopen = () =>{ resolve(true)};
             self.socket.onmessage = function(event) {
-                console.log("data");
                 self.jrpc.messageHandler(event.data);
             };
     
@@ -45,62 +81,21 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
             };
     
             self.socket.onerror = function(error) {
-                console.error("Error: " + error.message);
+                let e = new ErrorObject(ErrorTypeEnum.CONNECTION_ERROR, error.message)
+                console.error(e.toString());
+                reject(e);
             };
     
             self.socket.onclose = function(event) {
                 if (event.wasClean) {
                     console.info('Connection close was clean');
                 } else {
-                    console.error('Connection suddenly close');
+                    let e = new ErrorObject(ErrorTypeEnum.CONNECTION_ERROR, 'Connection suddenly close');
+                    console.error(e.toString());
                 }
                 console.info('close code : ' + event.code + ' reason: ' + event.reason);
             };
         });
-    }
-    async startAsync(userHash, passhare) {
-        let self = this;
-        if(!await self.jrpcInit())
-            return {data: undefined, error:"Cannot connect"};
-        if(undefined !== userHash) {
-            isInheritedFrom(userHash, String);
-            this.#userHash = userHash;
-        }
-        if(undefined !== passhare) {
-            isInheritedFrom(passhare, String);
-            this.#passhare = passhare;
-        }
-        
-        return new Promise( (resolve, reject) =>{
-            self.jrpc.call("login", [self.#userHash, self.#passhare, self.#userHash, self.#passhare])
-                .then((data) => {
-                    if(data.data)
-                        resolve(data);
-                    else
-                        reject(data);
-                }).catch((reason) =>{
-                    reject(reason);
-                })
-        });
-    } // end of start(userHash, passhare)
-    async start(userHash, passhare) {
-        try {
-            return await this.startAsync(userHash, passhare);;
-        } catch(e) {
-            return e;
-        }
-    }
+    } // end of async jrpcInit()
 
-    async stopAsyc(){
-        
-        return new Promise((resolve) =>{ resolve(true) });
-    }
-
-    async stop() {
-        return true;
-    }
-    async call(func, args) {
-        args = addAuthArgs(args, this.#userHash, this.#passhare);
-        return this.jrpc.call(func, args);
-    } // end of call(func, args)
 } // end of SimpleJsonRpcWebSocketClient
