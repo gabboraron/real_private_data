@@ -1,3 +1,6 @@
+from error_object.error_object import ErrorObject
+from error_object.error_type_enum import ErrorTypeEnum
+
 def auth_wrapper(f, auth_f, isAsync = True):
     def wrapper(*args, **kwargs):
         userhash = None
@@ -11,24 +14,15 @@ def auth_wrapper(f, auth_f, isAsync = True):
             passhare = args[1]
             args = args[2:]
         else:
-            ret["error"] = {
-                "code": 1,
-                "message":"Missing username and/or password"
-                }
+            ret["error"] = ErrorObject(ErrorTypeEnum.MISSING_USERNAME_PASSWORD).toJson()
             return ret
         if not auth_f(userhash, passhare):
-            ret["error"] = {
-                "code": 2,
-                "message": "Bad username and/or password"
-                }
+            ret["error"] = ErrorObject(ErrorTypeEnum.BAD_USERNAME_PASSWORD).toJson()
             return ret
         try:
             ret["data"] = f(*args, **kwargs)
         except Exception as e:
-            ret["error"] = {
-                "code":3,
-                "message":"Function error: %s"%str(e)
-            }
+            ret["error"] = ErrorObject(ErrorTypeEnum.REMOTE_FUNCTION_ERROR, str(e)).toJson()
         return ret
     wrapper.__name__ = f.__name__
     if isAsync:

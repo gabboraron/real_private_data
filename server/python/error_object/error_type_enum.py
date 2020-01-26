@@ -1,0 +1,11 @@
+from .enum2 import Enum2
+
+class ErrorTypeEnum(Enum2):
+    #LOCAL
+    CONNECTION_ERROR = 101
+    LOCAL_CALL_ERROR = 102
+    
+    #REMOTE
+    MISSING_USERNAME_PASSWORD = 201
+    BAD_USERNAME_PASSWORD = 202
+    REMOTE_FUNCTION_ERROR = 203

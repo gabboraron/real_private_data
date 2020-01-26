@@ -39,17 +39,16 @@ class LoginControllerService extends ControllerServiceBase {
         let rpcClient = theRpcClients.getClientByName(rpcName);
         let user      = this.getItem(this.htmlItems.loginUsername).value;
         let password  = this.getItem(this.htmlItems.loginPassword).value;
-        let result    = await rpcClient.start(user, password);
-        window.result = result;
-        if(result.data){
-            this.stop();
-            thePageLoader.loadPage("main", undefined, true);
-        } else {
+        try {
+            await rpcClient.start(user, password);
+        } catch(e){
             this.getItem(this.htmlItems.loginPassword).value = "";
-            this.message(result.error.message);
-            console.log("code", result.error.code, "message", result.error.message);
+            this.message(e.msg);
+            console.log(e.toString());
+            return;
         }
-        return false;
+        this.stop();
+        thePageLoader.loadPage("main", undefined, true);
     }
     createRadios() {
         let rpcNames = theRpcClients.getNames();

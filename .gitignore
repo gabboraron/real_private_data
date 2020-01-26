@@ -1,6 +1,13 @@
 
+#Python
 **/__pycache__/
+**/*.pyc
+
 .vscode/
+
+#sandbox
 client/web/sandbox/**
-client/web/generated/**
 sandbox/**
+
+#Generated files
+client/web/generated/**

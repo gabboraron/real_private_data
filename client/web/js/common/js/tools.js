@@ -63,3 +63,27 @@ function addAuthArgs(args, userHash, passhare) {
     }
     throw "The args must be Array or Object";
 }
+
+/**
+ * 
+ * @param {Date} date 
+ * @param {boolean} [long=false] 
+ */
+function dateToString(date, long) {
+    let addNull = function(x){
+        return x<10?("0" + x.toString()):x.toString();
+    };
+    
+    let year  = date.getFullYear().toString();
+    let month = addNull(date.getMonth() + 1);
+    let day   = addNull(date.getDay());
+    
+    let hour  = addNull(date.getHours());
+    let mins  = addNull(date.getMinutes());
+    let secs  = addNull(date.getSeconds());
+    let ret = ""
+    if(long){
+        ret += year+"-"+month+"-"+day+" ";
+    }
+    return ret + hour+":"+mins+":"+secs;
+}
