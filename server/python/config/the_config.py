@@ -14,5 +14,7 @@ class TheConfig(ConfigBase):
     web_root:StrArg    = StrArg(help="web root", is_optional=False)
     data_dir:StrArg    = StrArg(help="Data dir")
     test_dir:StrArg    = StrArg(help="Dir for test", default_value="/var/tmp/real_private_data")
+    salt:StrArg        = StrArg(help="Salt", default_value="My own Salt", is_public=True)
+    server_salt:StrArg = StrArg(help="Salt", default_value="Server salt")
 
     defaultRpcClient   = StrArg(help="Default Rpc call", is_public=True, default_value="SimpleJsonRpcWebSocketClientService")
