@@ -28,10 +28,9 @@ class UserManagerService extends IUserManagerService {
             return Promise.reject(new ErrorObject(ErrorTypeEnum.ALREADY_LOGEDIN));
         }
         
-
-        this.__username  = plainUsername;
-        this.__loginHash = plainPassword;
-        this.__dirHash   = plainPassword;
+        this.__username  = this.__hash(plainUsername);
+        this.__loginHash = this.__hash(plainPassword);
+        this.__dirHash   = this.__hash(plainPassword + plainPassword);
         this.__rpcClient = theRpcClients.getClientByName(rpcName);
         await this.__rpcClient.start(this.__username, this.__loginHash);
         this.__logedIn = true;
@@ -86,5 +85,13 @@ class UserManagerService extends IUserManagerService {
 
     getDirHash() {
         console.debug("TODO:Implement");
+    }
+
+    /**
+     * 
+     * @param {string} str 
+     */
+    __hash(str){
+        return (new SHA256Salty(theConfig.salt)).string(str);
     }
 };
