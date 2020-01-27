@@ -1,9 +1,9 @@
 import time
 
 from .error_type_enum import ErrorTypeEnum
+from .error_types import ErrorTypes
 
-
-class ErrorObject():
+class ErrorObject(Exception):
     ty:ErrorTypeEnum
     data:str
     timestamp:int
@@ -19,3 +19,10 @@ class ErrorObject():
             "data": self.data,
             "timestamp":self.timestamp
         }
+    
+    def getMsg(self):
+        return ErrorTypes[self.ty].msg
+    
+    def __str__(self):
+        data = "data: {}".format(self.data) if self.data else ""
+        return "Error:{} {}".format(self.getMsg(), data)
