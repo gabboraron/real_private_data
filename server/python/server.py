@@ -21,6 +21,7 @@ from server.rpc_wrapper_factory import RPCWrapperFactory
 from rpc_wrapper.rpc_wrapper import RPCWrapper
 
 from js_generator.js_generator import JsGenerator
+from data_manager.file_manager import FileManager
 
 # generate csr, and key:
 #
@@ -29,7 +30,8 @@ from js_generator.js_generator import JsGenerator
 # openssl req -new -key private.key -out private.csr
 # openssl x509 -req -days 365 -in private.csr -signkey private.key -out private.crt
 
-rpc_wrapper = RPCWrapper()
+file_manager = FileManager()
+rpc_wrapper = RPCWrapper(file_manager)
 
 
 redirecterApplication = tornado.web.Application([

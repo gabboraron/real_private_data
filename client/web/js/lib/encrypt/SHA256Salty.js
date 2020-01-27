@@ -53,7 +53,7 @@ class SHA256Salty2 extends SHA256Salty {
         let res = "";
         for(let i = 0; i < str.length; ++i) {
             let saltChar = str[str.length -1 - i];
-            res += String.fromCharCode((str.charCodeAt(i) + i * saltChar.charCodeAt(0) ) % 256) 
+            res += String.fromCharCode((str.charCodeAt(i) + i * saltChar.charCodeAt(0) ) % 256);
             res += saltChar;
         }
         return res;

@@ -18,6 +18,9 @@ class PageLoaderService {
         this.title        = this.pageTitle;
         this.subTitle     = undefined;
         this.titlePostfix = undefined;
+        this.userName     = undefined;
+        this.logedIn      = false;
+        this.currentPage  = undefined;
 
         this.controllers = {
             "login"       : new LoginControllerService(),
@@ -92,15 +95,52 @@ class PageLoaderService {
     loadPage(page, toLocation /** =  document.getElementById("bodyDiv") */, modifyTitle /** = false */) {
         toLocation = toLocation || document.getElementById("bodyDiv");
 
+        if(this.currentPage)
+            this.currentPage.stop();
         let el = theHtmlDownloaderService.getHtml(page);
         if(modifyTitle) {
             let title = this.setTitleFromHtml(el);
             console.debug(title);
         }
         let body = this.setBody(el, toLocation);
-        this.controllers[page].start(body);
+        this.currentPage = this.controllers[page];
+        this.currentPage.start(body);
         return body;
+    }
+
+    login(userName) {
+        this.userName = userName;
+        this.logedIn = true;
+        this.__logoutSetEventListener();
+        this.__logoutSetStyle("display: inline;");
+    }
+
+    logout(e) {
+        if(typeof(e) !== "undefined" && typeof(e.preventDefault) === "function")
+            e.preventDefault();
         
+        theUserManager.logout();
+        this.userName = undefined;
+        this.logedIn = false;
+        this.loadPage("login", undefined, true);
+        this.__logoutSetStyle("display:none;");
+    }
+
+    __logoutSetStyle(style){
+        let logoutLinks = document.getElementsByClassName("logoutLink");
+        for(let i = 0; i < logoutLinks.length; ++i){
+            logoutLinks[i].style = style;
+        }
+    }
+    __logoutSetEventListener(){
+        let self = this;
+        if(this.__logoutSetEventListenerRun)
+           return;
+        this.__logoutSetEventListenerRun = true;
+        let logoutLinks = document.getElementsByClassName("logoutLink");
+        for(let i = 0; i < logoutLinks.length; ++i) {
+            logoutLinks[i].addEventListener("click", (e)=>{self.logout(e);} );
+        }
     }
 };
 

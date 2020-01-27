@@ -31,6 +31,8 @@
         <script src="js/interfaces/encrypt/IEncryptor.js"></script>
         
         <script src="js/interfaces/RPC/IRPCClient.js"></script>
+
+        <script src="js/interfaces/UserManager/IUserManagerService.js"></script>
         
         <!-- libs -->
         <script src="js/lib/ErrorObject/ErrorObject.js"></script>
@@ -56,12 +58,15 @@
 
         <script src="js/components/pageloader/HtmlDownloader.js"></script>
         <script src="js/components/pageloader/PageLoaderService.js"></script>
+
+        <script src="js/components/UserManager/UserManagerServiceMock.js"></script>
+        <script src="js/components/UserManager/UserManagerService.js"></script>
         
         <script src="js/main.js"></script>
     </head>
 
     <body>
-        <a class="logoutLink" href="#">Logout</a>
+        <a class="logoutLink" href="#" style="display: none;">Logout</a>
         <h1 id="titleH1">Real Private Data</h1>
         <div id="bodyDiv">
             Page loading, please wait

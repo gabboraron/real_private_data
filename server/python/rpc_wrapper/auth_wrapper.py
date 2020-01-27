@@ -16,11 +16,24 @@ def auth_wrapper(f, auth_f, isAsync = True):
         else:
             ret["error"] = ErrorObject(ErrorTypeEnum.MISSING_USERNAME_PASSWORD).toJson()
             return ret
-        if not auth_f(userhash, passhare):
+        auth = False
+        try:
+            auth = auth_f(userhash, passhare)
+        except ErrorObject as e:
+            ret["error"] = e.toJson()
+            return ret
+        except Exception as e:
+            ret["error"] = ErrorObject(ErrorTypeEnum.REMOTE_FUNCTION_ERROR, str(e)).toJson()
+            return ret
+
+        if not auth:
             ret["error"] = ErrorObject(ErrorTypeEnum.BAD_USERNAME_PASSWORD).toJson()
             return ret
         try:
             ret["data"] = f(*args, **kwargs)
+        except ErrorObject as e:
+            ret["error"] = e.toJson()
+            return ret
         except Exception as e:
             ret["error"] = ErrorObject(ErrorTypeEnum.REMOTE_FUNCTION_ERROR, str(e)).toJson()
         return ret
