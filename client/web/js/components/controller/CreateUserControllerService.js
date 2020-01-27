@@ -10,7 +10,7 @@ class CreateUserControllerService extends ControllerServiceBase {
         "createUserPassword"  : "createUserPassword",
         "createUserPassword2" : "createUserPassword2",
         "createUserButton"    : "createUserButton",
-        "loginMessage"        : "loginMessage",
+        "createUserMessage"   : "createUserMessage",
         "createUserForm"      : "createUserForm",
         "createUserBackLink"  : "createUserBackLink"
     }
@@ -25,12 +25,41 @@ class CreateUserControllerService extends ControllerServiceBase {
         super.stop();
     }
     
-    createUser(elementName, e, t) {
-        
+    async createUser(elementName, e, t) {
+        let username =  this.getItem(this.htmlItems.createUserUsername).value;
+        let password =  this.getItem(this.htmlItems.createUserPassword).value;
+        let password2 = this.getItem(this.htmlItems.createUserPassword2).value;
+
+        if([username, password, password2].indexOf("") !== -1) {
+            // TODO: ErrorObject
+            this.message("Error: Empty username and/or password and/or password password again");
+            return;
+        }
+        if(password !== password2) {
+            this.message("Error: password != password again");
+            this.getItem(this.htmlItems.createUserPassword).value = "";
+            this.getItem(this.htmlItems.createUserPassword2).value = "";
+            return;
+        }
+
+        try {
+            await theUserManager.createUser(username, password);
+            this.message("User created.");
+        } catch(e){
+            this.message(e.toString());
+        }
+        this.getItem(this.htmlItems.createUserForm).reset();
     }
+
     back(elementName, e, t) {
-        this.stop();
         thePageLoader.loadPage("main", undefined, true)
     }
 
+    /**
+     * 
+     * @param {string} msg 
+     */
+    message(msg) {
+        this.getItem(this.htmlItems.createUserMessage).innerText = msg;
+    }
 }

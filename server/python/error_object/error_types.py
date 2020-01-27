@@ -11,5 +11,6 @@ ErrorTypes = {
     ErrorTypeEnum.MISSING_USERNAME_PASSWORD: ErrorType(ErrorTypeEnum.MISSING_USERNAME_PASSWORD, "Missing username and/or password", ErrorLocEnum.REMOTE),
     ErrorTypeEnum.BAD_USERNAME_PASSWORD: ErrorType(ErrorTypeEnum.BAD_USERNAME_PASSWORD, "Bad username and/or password", ErrorLocEnum.REMOTE),
     ErrorTypeEnum.REMOTE_FUNCTION_ERROR: ErrorType(ErrorTypeEnum.REMOTE_FUNCTION_ERROR, "Remote function error", ErrorLocEnum.REMOTE),
-    ErrorTypeEnum.USER_REGISTRATED: ErrorType(ErrorTypeEnum.USER_REGISTRATED, "User has been already registrated", ErrorLocEnum.REMOTE)
+    ErrorTypeEnum.USER_REGISTRATED: ErrorType(ErrorTypeEnum.USER_REGISTRATED, "User has been already registrated", ErrorLocEnum.REMOTE),
+    ErrorTypeEnum.DISABLED_CREATE_USER: ErrorType(ErrorTypeEnum.DISABLED_CREATE_USER, "Disabled create new user", ErrorLocEnum.REMOTE)    
 }

@@ -53,8 +53,10 @@ class UserManagerService extends IUserManagerService {
      * @param {string} plainUsername 
      * @param {string} plainPassword 
      */
-    createUser(plainUsername, plainPassword) {
-        console.debug("TODO:Implement");
+    async createUser(plainUsername, plainPassword) {
+        let userHash = this.__hash(plainUsername);
+        let passhare = this.__hash(plainPassword);
+        return await theRpcWrapper.create_user(userHash, passhare);
     }
 
     /**
