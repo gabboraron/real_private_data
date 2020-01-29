@@ -14,6 +14,15 @@ class AESEncryptor extends IEncryptor {
         this.key = key;
         this.aesjs = myAesjs;
     }
+    
+    start(){
+
+    }
+    
+    stop(){
+        remove(this, "key");
+        remove(this, "aesjs");
+    }
 
     /**
      * 
