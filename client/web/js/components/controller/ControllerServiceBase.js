@@ -2,6 +2,14 @@
 class ControllerServiceBase {
     constructor(){
         this.events = [];
+        let currProto = this;
+        let htmlItems = {};
+        while(currProto.constructor !== ControllerServiceBase) {
+            if(currProto.constructor.htmlItems)
+                htmlItems = Object.assign({}, htmlItems, currProto.constructor.htmlItems);
+            currProto = currProto.__proto__;
+        }
+        this.htmlItems = htmlItems;
     }
 
     start(body){
