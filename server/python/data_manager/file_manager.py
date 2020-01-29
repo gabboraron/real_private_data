@@ -17,6 +17,7 @@ class FileManager:
             ):
         self.root_dir:str = root_dir
     
+    
     def list_dir(self, user_hash: str, password_hash:str):
         return os.listdir(self.__get_file_path(user_hash, password_hash))
     
@@ -31,16 +32,24 @@ class FileManager:
     def create_file_byte(self, 
         user_hash: str, 
         password_hash:str, 
-        filename: str, 
-        content: bytes
+        file_name: str, 
+        content: bytes,
+        is_new:bool = False
             ) -> bool:
+        is_exist = self.is_exist(user_hash, password_hash, file_name)
+        if is_new and is_exist:
+            raise Exception("TODO: ERROR_OBJECT File has been already exist")
+        elif not is_new and not is_exist:
+            raise Exception("TODO: ERROR_OBJECT File not exist")
+
         try:
-            with open(self.__get_file_path(user_hash, password_hash, filename), "wb") as f:
-                f.write(content)
-        except Exception:
-            return False
+            with open(self.__get_file_path(user_hash, password_hash, file_name), "wb") as f:
+                f.write(bytes(content))
+        except Exception as e:
+            raise e # TODO: error object
         return True
 
+    
     def create_user(self, user_hash, password_hash):
         if self.is_exist(user_hash, password_hash):
             raise ErrorObject(ErrorTypeEnum.USER_REGISTRATED)
@@ -49,6 +58,57 @@ class FileManager:
         return True
 
     
+    def open_file(self, user_hash, password_hash, file_name):
+        if not self.is_exist(user_hash, password_hash, file_name):
+            raise Exception("TODO: error object: File not exist")
+        with open(self.__get_file_path(user_hash, password_hash, file_name), "rb") as f:
+            ret = f.read()
+            return ret
+
+
+    #TODO: never tested
+    def rename_file(self, user_hash, password_hash, old_name, new_name):
+        if not self.is_exist(user_hash, password_hash, old_name):
+            raise Exception("TODO: some exception")
+        old_path = self.__get_file_path(user_hash, password_hash, old_name)
+        new_path = self.__get_file_path(user_hash, password_hash, new_name)
+        os.rename(old_path, new_path)
+        return True
+    
+    
+    #TODO: never tested
+    def del_file(self, user_hash, password_hash, file_name):
+        if not self.is_exist(user_hash, password_hash, file_name):
+            raise Exception("TODO: error object: File not exist")
+        os.remove(self.__get_file_path(user_hash, password_hash, file_name))
+        return True
+    
+    
+    #TODO: never tested
+    def change_password(self, old_user_hash, old_password_hash, new_user_hash, new_password_hash, files):
+        # files = [{"old":"old_name","new":"new_name"}]
+        # TODO: Transaction
+        if not self.is_exist(old_user_hash, old_password_hash):
+            raise ErrorObject(ErrorTypeEnum.BAD_USERNAME_PASSWORD)
+        if self.is_exist(new_user_hash, new_password_hash):
+            raise Exception("New user has been already exist")
+
+        old_path = self.__get_file_path(old_user_hash, old_password_hash)
+        new_path = self.__get_file_path(new_user_hash, new_password_hash)
+        old_files = [f["old"] for f in files]
+        old_files.sort()
+        curr_files = self.list_dir(old_user_hash, old_password_hash)
+        curr_files.sort()
+        if old_files != curr_files:
+            raise Exception("TODO: file list is not equal with current files")
+        
+        os.mkdir(new_path)
+        for f in files:
+            old_f = self.__get_file_path(old_user_hash, old_password_hash, f["old"])
+            new_f = self.__get_file_path(new_user_hash, new_password_hash, f["new"])
+            os.rename(old_f, new_f)
+        os.removedirs(old_path)
+
     def __get_dir_name(self, user_hash, passhare):
         return SHA256Salty(theConfig.server_salt).string(user_hash+passhare)
     
@@ -58,3 +118,4 @@ class FileManager:
         if file_name is not None:
             path += "/" + file_name
         return path
+
