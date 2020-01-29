@@ -1,6 +1,12 @@
 from error_object.error_object import ErrorObject
 from error_object.error_type_enum import ErrorTypeEnum
 
+def addorremovearg(f, kvargs, arg, value):
+    if arg in f.arg_list:
+        kvargs[arg] = value
+    elif arg in kvargs:
+        del kvargs[arg]
+
 def auth_wrapper(f, auth_f, isAsync = True):
     def wrapper(*args, **kwargs):
         userhash = None
@@ -30,6 +36,9 @@ def auth_wrapper(f, auth_f, isAsync = True):
             ret["error"] = ErrorObject(ErrorTypeEnum.BAD_USERNAME_PASSWORD).toJson()
             return ret
         try:
+            addorremovearg(f, kwargs, "__userhash__", userhash)
+            addorremovearg(f, kwargs, "__passhare__", passhare)
+            
             ret["data"] = f(*args, **kwargs)
         except ErrorObject as e:
             ret["error"] = e.toJson()
