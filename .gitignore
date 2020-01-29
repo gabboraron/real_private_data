@@ -11,3 +11,6 @@ sandbox/**
 
 #Generated files
 client/web/generated/**
+
+#Data
+data/**
