@@ -1,8 +1,15 @@
+import sys
+import os
+
 from .arg import BoolArg, StrArg, IntArg, FloatArg
 from .config_base import ConfigBase
 
+global p
+p = {
+    "file_dir": os.path.dirname(sys.argv[0])
+}
 class TheConfig(ConfigBase):
-    configFile:StrArg = StrArg(help="Config json file default: config.json", default_value="config.json")
+    configFile:StrArg = StrArg(help="Config json file default: config.json", default_value=p["file_dir"] + "/config.json")
 
     debug:BoolArg      = BoolArg(help="debugmode default false", default_value=False, is_public=True)
     open_port:IntArg   = IntArg(help="Open port", default_value = 8080)
