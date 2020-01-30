@@ -22,8 +22,11 @@ def get_classes(f_path):
         return parser.classes
 
 
-def get_classes_str(f_path):
-    classes = get_classes(f_path)
+def get_classes_str(f_paths):
+    classes = []
+    for f_path in f_paths:
+        classes += get_classes(f_path)
+    classes = set(classes)
     max_len = max([len(x) for x in classes])
     rows = ""
     for c in classes:
@@ -34,6 +37,6 @@ def get_classes_str(f_path):
     return rows[:-2]
     
 if __name__ == "__main__":
-    f_path = sys.argv[1]
-    classes_str = get_classes_str(f_path)
+    f_paths = sys.argv[1:]
+    classes_str = get_classes_str(f_paths)
     print(classes_str)
