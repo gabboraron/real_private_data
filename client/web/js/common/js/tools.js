@@ -1,14 +1,19 @@
 'use strict';
 
 //TODO: Better name
-function isInheritedFrom(variable, ancestor) {
+function isInheritedFrom(variable, ancestor, enableUndef) {
     if(!theConfig.debug)
         return true;
+    if(typeof(variable) === "undefined"){
+        if(enableUndef)
+            return true;
+        throw TypeError("undefined is not a(n) " + ancestor.name)
+    }
     let t = variable;
     while( null !== t && "undefined" !== t.__proto__ && ancestor !== t.constructor)
         t = t.__proto__;
     if( null === t || ancestor !== t.constructor)
-        throw TypeError(a.constructor.name + " is not a(n) " + ancestor.name);
+        throw TypeError(variable.constructor.name + " is not a(n) " + ancestor.name);
     return true;
 }
 
@@ -86,4 +91,16 @@ function dateToString(date, long) {
         ret += year+"-"+month+"-"+day+" ";
     }
     return ret + hour+":"+mins+":"+secs;
+}
+
+//TODO: not here, better Way
+/**
+ * 
+ * @param {*} self 
+ * @param {string} elementName 
+ */
+function remove(self, elementName){
+    if("function" === typeof(self[elementName].stop) )
+        self[elementName].stop();
+    e[elementName] = undefined;
 }
