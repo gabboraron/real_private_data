@@ -1,27 +1,24 @@
 #!/usr/bin/env python3
-import sys
-if sys.version_info.major != 3:
-    print("please use python3")
 
-import os
+import ssl
+import sys
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
-import ssl
+
 from config import theConfig
-from config.tools import configToJsString, configToJs
-from jsonrpcserver import methods, async_dispatch as dispatch
 
 from server.redirector_request_handler_factory import RedirectorRequestHandlerFactory
 from server.rpc_request_post_handler_factory import RPCRequestPOSTHandlerFactory
-from server.web_request_handler_factory import WebRequestHandlerFactory
 from server.rpc_request_ws_handler_factory import RPCRequestWSHandlerFactory
 from server.data_request_handler import DataRequestHandler
-from server.rpc_wrapper_factory import RPCWrapperFactory
 from rpc_wrapper.rpc_wrapper import RPCWrapper
 
 from js_generator.js_generator import JsGenerator
 from data_manager.file_manager import FileManager
+
+if sys.version_info.major != 3:
+    print("please use python3")
 
 # generate csr, and key:
 #

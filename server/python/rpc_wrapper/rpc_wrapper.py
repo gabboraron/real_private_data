@@ -1,9 +1,9 @@
-from .web_method import web_method
 from data_manager.file_manager import FileManager
-
 from error_object.error_object import ErrorObject
 from error_object.error_type_enum import ErrorTypeEnum
 from config import theConfig
+
+from .web_method import web_method
 
 class RPCWrapper:
 

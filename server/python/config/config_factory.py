@@ -1,7 +1,6 @@
 import argparse
 import json
 from .the_config import TheConfig
-from .arg import Arg
 from .tools import ConfigIter
 
 def boolean_arg(s):

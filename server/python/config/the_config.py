@@ -1,7 +1,8 @@
 import sys
 import os
 
-from .arg import BoolArg, StrArg, IntArg, FloatArg
+from .arg import BoolArg, StrArg, IntArg
+#, FloatArg
 from .config_base import ConfigBase
 
 global p

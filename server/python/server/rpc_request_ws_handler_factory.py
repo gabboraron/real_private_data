@@ -1,12 +1,14 @@
 import sys
-if sys.version_info.major != 3:
-    print("please use python3")
 
-from config import theConfig
 from jsonrpcserver import methods, async_dispatch as dispatch
 import tornado.websocket
+
+from config import theConfig
 from rpc_wrapper.rpc_wrapper import RPCWrapper
 from .rpc_wrapper_factory import RPCWrapperFactory
+
+if sys.version_info.major != 3:
+    print("please use python3")
 
 def RPCRequestWSHandlerFactory(rpc_wrapper: RPCWrapper):
     my_methods = RPCWrapperFactory(rpc_wrapper, methods.Methods())

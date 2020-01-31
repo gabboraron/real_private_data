@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import sys
+import os
+
 from config import theConfig
 from sha256Salty.sha256Salty import SHA256Salty
 from error_object.error_object import ErrorObject
@@ -8,8 +10,6 @@ from error_object.error_type_enum import ErrorTypeEnum
 
 if sys.version_info.major != 3:
     print("please use python3")
-
-import os
 
 class FileManager:
     def __init__(self,

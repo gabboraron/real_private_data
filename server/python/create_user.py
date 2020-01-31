@@ -2,12 +2,11 @@
 import sys
 import getpass
 from data_manager.file_manager import FileManager
+from sha256Salty.sha256Salty import SHA256Salty
+from config import theConfig
 
 if sys.version_info.major != 3:
     print("please use python3")
-
-from sha256Salty.sha256Salty import SHA256Salty
-from config import theConfig
 
 def hash(s:str):
     return SHA256Salty(theConfig.salt).string(s)

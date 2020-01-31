@@ -1,4 +1,4 @@
-from jsonrpcserver import methods, async_dispatch as dispatch
+from jsonrpcserver import methods
 from rpc_wrapper.auth_wrapper import auth_wrapper
 
 def RPCWrapperFactory(wrapper_class, my_methods = methods.global_methods):

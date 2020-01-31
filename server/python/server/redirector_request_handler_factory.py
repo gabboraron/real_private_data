@@ -1,9 +1,8 @@
 import sys
+import tornado.web
+
 if sys.version_info.major != 3:
     print("please use python3")
-
-import os
-import tornado.web
 
 def RedirectorRequestHandlerFactory(host: str, secure_port: int):
     class RedirectorRequestHandler(tornado.web.RequestHandler):
