@@ -7,13 +7,18 @@ class ErrorObject {
      * @param {int} [date=new Date()] UTC in sec 
      */
     constructor(ty, data, date) {
-        this.ty = ty;
-        this.data = data;
         if("undefined" !== typeof(date)){
             this.date = new Date(date*1000);
         } else {
             this.date = new Date();
         }
+        if(typeof(ErrorTypes[ty]) === "undefined" ) {
+            if(theConfig.debug)
+                console.error("TODO: Create error_object for " + ty)
+            return;
+        }
+        this.ty = ty;
+        this.data = data;
         this.name = ErrorTypeEnumByValue[ty]
         this.msg = ErrorTypes[ty].msg;
         this.loc = ErrorTypes[ty].loc;
