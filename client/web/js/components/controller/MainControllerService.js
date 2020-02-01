@@ -58,7 +58,10 @@ class MainControllerService extends ControllerServiceBase {
         link.innerText = f.descryptedName;
         link.class = "mainOpenFile";
         link.href = "#";
-        link.addEventListener("click", () =>{self.openFile( f.encryptedName) });
+        link.addEventListener("click", (e) =>{
+            e.preventDefault();
+            self.openFile(f.encryptedName);
+        });
         
         let linkTd = document.createElement("td");
         linkTd.appendChild(link);
