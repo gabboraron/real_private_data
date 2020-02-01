@@ -75,6 +75,11 @@ AESEncryptor.fromHexString = function(hexString, myAesjs) {
     return new AESEncryptor(byteStr2Uint8Array(hexString), myAesjs);
 }
 
+AESEncryptor.fromString = function(str, myAesjs) {
+    let hexString = theHash.string(str);
+    return new AESEncryptor(byteStr2Uint8Array(hexString), myAesjs);
+}
+
 // TODO: move to other place
 function aesTest() {
     var key1 = sha256("alma");

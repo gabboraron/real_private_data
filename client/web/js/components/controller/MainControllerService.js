@@ -15,6 +15,7 @@ class MainControllerService extends ControllerServiceBase {
         this.addEventListener(this.htmlItems.changePasswordLink, "click", this.openPage);
         this.addEventListener(this.htmlItems.createUserLink, "click", this.openPage);
         this.addEventListener(this.htmlItems.createFileLink, "click", this.openPage);
+        this.listFiles(true);
     }
     
     stop(){
@@ -38,6 +39,42 @@ class MainControllerService extends ControllerServiceBase {
                 break;
         }
     }
+
+    async listFiles(refresh = false) {
+        let files = await theDirManager.showFiles(refresh);
+        let mainTable = this.getItem("mainFilesTable");
+        for(let i = 0; i < files.length; ++i) {
+            let tr = this.createFileTr( files[i])
+            mainTable.appendChild(tr);
+        }
+        
+    }
+
+    createFileTr(f){
+        let self = this;
+        let tr = document.createElement("tr");
+        
+        let link = document.createElement("a");
+        link.innerText = f.descryptedName;
+        link.class = "mainOpenFile";
+        link.href = "#";
+        link.addEventListener("click", () =>{self.openFile( f.encryptedName) });
+        
+        let linkTd = document.createElement("td");
+        linkTd.appendChild(link);
+        tr.appendChild(linkTd);
+
+        let typeTd = document.createElement("td");
+        typeTd.innerText = f.descryptedName.match(/[.]([^.]+)$/)[1];
+        tr.appendChild(typeTd);
+        return tr;
+    }
+
+    openFile(encryptedName) {
+        let f = theDirManager.openFile(encryptedName);
+        thePageLoader.loadPage("txtFile",undefined, true, f);
+    }
+    
     logout(elementName, e, t) {
         console.debug("TODO: implement");
     }

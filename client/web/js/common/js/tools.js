@@ -100,7 +100,8 @@ function dateToString(date, long) {
  * @param {string} elementName 
  */
 function remove(self, elementName){
-    if("function" === typeof(self[elementName].stop) )
+    if("function" === typeof(self[elementName].stop) ) {
         self[elementName].stop();
-    e[elementName] = undefined;
+    }
+    self[elementName] = undefined;
 }

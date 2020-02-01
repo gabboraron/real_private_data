@@ -104,7 +104,11 @@ class PageLoaderService {
         }
         let body = this.setBody(el, toLocation);
         this.currentPage = this.controllers[page];
-        this.currentPage.start(body);
+        let remainingArgs = [];
+        for(let i = 3; i < arguments.length; ++i) {
+            remainingArgs.push(arguments[i]);
+        }
+        this.currentPage.start(body, ...remainingArgs);
         return body;
     }
 

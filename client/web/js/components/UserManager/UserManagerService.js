@@ -94,6 +94,6 @@ class UserManagerService extends IUserManagerService {
      * @param {string} str 
      */
     __hash(str){
-        return (new SHA256Salty(theConfig.salt)).string(str);
+        return theHash.string(str);
     }
 };
