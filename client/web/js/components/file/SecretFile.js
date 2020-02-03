@@ -33,7 +33,12 @@ class SecretFile //extends ISecretFile
         }
         this.__contentEncryptor = contentEncryptor;
         if(check){
-            this.descript();
+            try {
+                this.descript();
+            } catch(e) {
+                this.__contentEncryptor = undefined;
+                throw e;
+            }
         }
     }
     

@@ -48,7 +48,6 @@ class SecretFileControllerService extends ControllerServiceBase {
         filePasswordMainDiv.innerHTML = html.getElementsByTagName("body")[0].innerHTML;
         super.start(body);
         this.file.setNameEncryptor( theEncryptor.fromHexString(theUserManager.__dirHash));
-
     }
     
     
@@ -62,9 +61,8 @@ class SecretFileControllerService extends ControllerServiceBase {
             self.message(e.toString());
         });
         body = body || this.body;
-        let html = theHtmlDownloaderService.getHtml("filePassword");
-        let filePasswordMainDiv = body.getElementsByClassName("filePasswordMainDiv")[0];
-        filePasswordMainDiv.innerHTML = html.getElementsByTagName("body")[0].innerHTML;
+        this.body = body;
+        this.initFilePassword();
         super.start(body);
         if(this.isCreate) {
             this.hideOpenPassword();
@@ -76,6 +74,12 @@ class SecretFileControllerService extends ControllerServiceBase {
         this.addEventListener(this.htmlItems.fPassChangePasswordHideLink, "click", this.hideChangePassword);
         this.addEventListener(this.htmlItems.fPassChangePasswordShowLink, "click", this.showChangePassword);
         this.addEventListener(this.htmlItems.fPassLoginForm, "submit", this.openFile);
+    }
+    
+    initFilePassword() {
+        let html = theHtmlDownloaderService.getHtml("filePassword");
+        let filePasswordMainDiv = this.body.getElementsByClassName("filePasswordMainDiv")[0];
+        filePasswordMainDiv.innerHTML = html.getElementsByTagName("body")[0].innerHTML;
     }
     
     hideOpenPassword(){
@@ -128,7 +132,21 @@ class SecretFileControllerService extends ControllerServiceBase {
         console.log(msg.toString())
     }
     
-    async waitDownload() {
+     async openFile(elementName, e, t) {
+         await this.waitDownload();
+         console.debug("after download ready");
+         let password  = this.getItem(this.htmlItems.fPassLoginPasswordInput);
+         try {
+             this.file.setPassword(password.value, true);             
+         } catch(e) {
+             this.message(e.toString());
+             return;
+         }
+         this.getItem(this.htmlItems.secretFileMainDiv).style = "display: block;";
+         this.getItem(this.htmlItems.fPassLoginForm).style = "display:none;";
+     }
+
+     async waitDownload() {
         let self = this;
         if(this.downloadRedy) {
             return true;
@@ -149,21 +167,4 @@ class SecretFileControllerService extends ControllerServiceBase {
             },1000);
         }); 
     }
-
-     async openFile(elementName, e, t) {
-         await this.waitDownload();
-         console.debug("after download ready");
-         let password  = this.getItem(this.htmlItems.fPassLoginPasswordInput);
-         try {
-             this.file.setPassword(password.value, true);             
-         } catch(e) {
-             this.message(e.toString());
-             return;
-         }
-         this.getItem(this.htmlItems.secretFileMainDiv).style = "display: block;";
-         this.getItem(this.htmlItems.fPassLoginForm).style = "display:none;";
-         let descrypted = this.file.descript();
-         //this.getItem(this.htmlItems.).innerText = descrypted.modifyDate
-         this.getItem(this.htmlItems.txtPlanInput).value = descrypted.txt;
-     }
 }

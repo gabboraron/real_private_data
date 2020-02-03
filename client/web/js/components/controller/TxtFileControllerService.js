@@ -55,11 +55,16 @@ class TxtFileControllerService extends SecretFileControllerService {
             return false;
         }
         this.initFile();
+        this.getItem(this.htmlItems.secretFileMainDiv).style = "display: block;";
+        this.getItem(this.htmlItems.fPassLoginForm).style = "display:none;";
      }
 
      async openFile(elementName, e, t) {
          try {
              await super.openFile(elementName, e, t);
+             let descrypted = this.file.descript();
+             //this.getItem(this.htmlItems.).innerText = descrypted.modifyDate
+             this.getItem(this.htmlItems.txtPlanInput).value = descrypted.txt;
          } catch(e) {
              this.message(e)
          }
