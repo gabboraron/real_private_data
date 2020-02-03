@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+#FIXME: check if user can access other files somehow for example its name is "../a/b" or something like this
 import sys
 import os
 
