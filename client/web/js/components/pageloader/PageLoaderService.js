@@ -147,5 +147,3 @@ class PageLoaderService {
         }
     }
 };
-
-window.thePageLoader = new PageLoaderService();
