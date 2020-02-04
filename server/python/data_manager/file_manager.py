@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#FIXME: check if user can access other files somehow for example its name is "../a/b" or something like this
 import sys
 import os
 
@@ -95,7 +94,7 @@ class FileManager:
 
         old_path = self.__get_file_path(old_user_hash, old_password_hash)
         new_path = self.__get_file_path(new_user_hash, new_password_hash)
-        old_files = [f["old"] for f in files]
+        old_files = [self.__real_file_name(f["old"]) for f in files]
         old_files.sort()
         curr_files = self.list_dir(old_user_hash, old_password_hash)
         curr_files.sort()
@@ -114,8 +113,14 @@ class FileManager:
     
     def __get_file_path(self, user_hash: str, password_hash:str, file_name: str = None):
         user_dir = self.__get_dir_name(user_hash, password_hash)
+        # not important, __get_dir_name has to be [00-ff] string
+        user_dir = self.__real_file_name(user_dir)
         path = self.root_dir + "/" + user_dir
         if file_name is not None:
+            file_name = self.__real_file_name(file_name)
             path += "/" + file_name
         return path
 
+
+    def __real_file_name(self, file_name: str):
+        return file_name.replace("/","_slash_").replace("\\","_backslash_")
