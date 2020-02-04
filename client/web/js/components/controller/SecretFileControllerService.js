@@ -4,24 +4,6 @@ class SecretFileControllerService extends ControllerServiceBase {
         super();
     }
     
-    static htmlItems = {
-        "fPassChangePasswordShowLink" : "fPassChangePasswordShowLink",
-        "fPassTable"                  : "fPassTable",
-        "fPassLoginPasswordInput"     : "fPassLoginPasswordInput",
-        "fPassFilenameForm"           : "fPassFilenameForm",
-        "fPassOpenFileSubmit"         : "fPassOpenFileSubmit",
-        "fPassNameInput"              : "fPassNameInput",
-        "fPassChangePasswordForm"     : "fPassChangePasswordForm",
-        "fPassSaveNameButton"         : "fPassSaveNameButton",
-        "fPassNewPasswordInput"       : "fPassNewPasswordInput",
-        "fPassOldPasswordTr"          : "fPassOldPasswordTr",
-        "fPassNewPassword2Input"      : "fPassNewPassword2Input",
-        "fPassLoginForm"              : "fPassLoginForm",
-        "fPassChangePasswordHideLink" : "fPassChangePasswordHideLink",
-        "fPassOldPasswordInput"       : "fPassOldPasswordInput",
-        "fPassChangePasswordTitle"    : "fPassChangePasswordTitle",
-        "secretFileMainDiv"           : "secretFileMainDiv"
-    };
 
     start(body, file) {
         if(file) {
@@ -167,4 +149,23 @@ class SecretFileControllerService extends ControllerServiceBase {
             },1000);
         }); 
     }
-}
+};
+
+SecretFileControllerService.htmlItems = {
+    "fPassChangePasswordShowLink" : "fPassChangePasswordShowLink",
+    "fPassTable"                  : "fPassTable",
+    "fPassLoginPasswordInput"     : "fPassLoginPasswordInput",
+    "fPassFilenameForm"           : "fPassFilenameForm",
+    "fPassOpenFileSubmit"         : "fPassOpenFileSubmit",
+    "fPassNameInput"              : "fPassNameInput",
+    "fPassChangePasswordForm"     : "fPassChangePasswordForm",
+    "fPassSaveNameButton"         : "fPassSaveNameButton",
+    "fPassNewPasswordInput"       : "fPassNewPasswordInput",
+    "fPassOldPasswordTr"          : "fPassOldPasswordTr",
+    "fPassNewPassword2Input"      : "fPassNewPassword2Input",
+    "fPassLoginForm"              : "fPassLoginForm",
+    "fPassChangePasswordHideLink" : "fPassChangePasswordHideLink",
+    "fPassOldPasswordInput"       : "fPassOldPasswordInput",
+    "fPassChangePasswordTitle"    : "fPassChangePasswordTitle",
+    "secretFileMainDiv"           : "secretFileMainDiv"
+};

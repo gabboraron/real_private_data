@@ -20,7 +20,7 @@ class DirManagerService {
         let files = await theRpcWrapper.list_dir();
         let encryptor = theEncryptor.fromHexString(theUserManager.__dirHash);
         for(let i = 0; i < files.length; ++i) {
-            this.localFiles.push(FileFactory.createFileFromEncryptedName(files[i], encryptor));    
+            this.localFiles.push(theFileFactory.createFileFromEncryptedName(files[i], encryptor));    
         }
     }
 
@@ -40,7 +40,7 @@ class DirManagerService {
 
     openFile(fNameBytes) {
         let nameEncryptor = theEncryptor.fromHexString(theUserManager.__dirHash);
-        let f = FileFactory.createFileFromEncryptedNameBytes(fNameBytes, nameEncryptor);
+        let f = theFileFactory.createFileFromEncryptedNameBytes(fNameBytes, nameEncryptor);
         return f;
     }
 }

@@ -5,15 +5,15 @@ window.fileTypes = {
 }
 
 class FileFactory {
-    static types = {
+    types = {
         "txt" : TxtFile
     };
 
-    static createFile = function(type) {
+    createFile = function(type) {
         return new this.types[type]();
     }
 
-    static createFileFromEncryptedNameBytes(nameBytes, nameEncryptor) {
+    createFileFromEncryptedNameBytes(nameBytes, nameEncryptor) {
         let plainName = nameEncryptor.descryptToString(nameBytes);
         let type = plainName.match(/[.]([^.]+)$/)[1];
         let f = this.createFile(type);
@@ -22,7 +22,7 @@ class FileFactory {
         return f;  
     }
 
-    static createFileFromEncryptedName(name, nameEncryptor) {
+    createFileFromEncryptedName(name, nameEncryptor) {
         let nameBytes = byteStr2Uint8Array(name);
         return this.createFileFromEncryptedNameBytes(nameBytes, nameEncryptor);
     }

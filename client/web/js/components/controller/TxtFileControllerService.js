@@ -4,16 +4,8 @@ class TxtFileControllerService extends SecretFileControllerService {
         super();
     }
 
-    static htmlItems = {
-        "txtFileBackLink"     : "txtFileBackLink",
-        "filePasswordMainDiv" : "filePasswordMainDiv",
-        "fPassSaveButton"     : "fPassSaveButton",
-        "txtPlanInput"        : "txtPlanInput",
-        "txtEncodedInput"     : "txtEncodedInput"
-    };
-
     start(body, file) {
-        this.file = file || FileFactory.createFile("txt");
+        this.file = file || theFileFactory.createFile("txt");
         super.start(body, file);
         this.addEventListener( this.htmlItems.txtFileBackLink, "click", this.back);
     }
@@ -71,3 +63,11 @@ class TxtFileControllerService extends SecretFileControllerService {
 
      }
 }
+
+TxtFileControllerService.htmlItems = {
+    "txtFileBackLink"     : "txtFileBackLink",
+    "filePasswordMainDiv" : "filePasswordMainDiv",
+    "fPassSaveButton"     : "fPassSaveButton",
+    "txtPlanInput"        : "txtPlanInput",
+    "txtEncodedInput"     : "txtEncodedInput"
+};

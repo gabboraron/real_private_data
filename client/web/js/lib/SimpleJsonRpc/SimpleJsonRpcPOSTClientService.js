@@ -3,8 +3,8 @@ class SimpleJsonRpcPOSTClientService extends IRPCClient {
     simple_jsonrpc;
     jrpc;
     XMLHttpRequest;
-    #userHash;
-    #passhare;
+    __userHash;
+    __passhare;
     
     constructor(
           mySimple_jsonrpc = simple_jsonrpc
@@ -38,10 +38,10 @@ class SimpleJsonRpcPOSTClientService extends IRPCClient {
     async start(userHash, passhare) {
         isInheritedFrom(userHash, String);
         isInheritedFrom(passhare, String);
-        this.#userHash = userHash;
-        this.#passhare = passhare;
+        this.__userHash = userHash;
+        this.__passhare = passhare;
         
-        return this.call("login", [this.#userHash, this.#passhare]);
+        return this.call("login", [this.__userHash, this.__passhare]);
     } // end of start(userHash, passhare)
 
     async stop() {
@@ -50,12 +50,12 @@ class SimpleJsonRpcPOSTClientService extends IRPCClient {
     }
 
     async logout() {
-        this.#userHash = undefined;
-        this.#passhare = undefined;
+        this.__userHash = undefined;
+        this.__passhare = undefined;
     }
     
     async call(func, args) {
-        args = addAuthArgs(args, this.#userHash, this.#passhare);
+        args = addAuthArgs(args, this.__userHash, this.__passhare);
         return new Promise( (resolve, reject) => {
             this.jrpc.call(func, args).then((d) =>{
                 if(!d.error) {

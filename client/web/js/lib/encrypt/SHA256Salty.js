@@ -1,12 +1,12 @@
 'use strict';
 class SHA256Salty extends IHash {
-    #saltSentence;
-    #sha256;
+    __saltSentence;
+    __sha256;
 
     constructor(saltSentence = "My own secret sentence for salt", mySha256 = sha256) {
         super();
-        this.#saltSentence = saltSentence;
-        this.#sha256 = mySha256;
+        this.__saltSentence = saltSentence;
+        this.__sha256 = mySha256;
     }
 
     string(str /* :string */) /* :string */ {
@@ -22,13 +22,13 @@ class SHA256Salty extends IHash {
     }
     
     array(str /* :string */) /* :number[] */ {
-        return this.postSalt(this.#sha256.array(this.preSalt(str)));
+        return this.postSalt(this.__sha256.array(this.preSalt(str)));
     }
 
     preSalt(str /* :string */) {
         let res = "";
         for(let i = 0; i < str.length; ++i) {
-            let saltChar = this.#saltSentence[i % this.#saltSentence.length] || "\0"; // incase if this.saltSentence is empty
+            let saltChar = this.__saltSentence[i % this.__saltSentence.length] || "\0"; // incase if this.saltSentence is empty
             res += String.fromCharCode((str.charCodeAt(i) + i * saltChar.charCodeAt(0) ) % 256) 
             res += saltChar;
         }
