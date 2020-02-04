@@ -1,6 +1,6 @@
 'use strict';
 class IRPCClient extends AbstractClass {
-    static abstractMethods = [
+    abstractMethods = [
         "call" //(func, args) -> Promise
         //,"authentication", //(userHash:string, userPassword:string)
     ]

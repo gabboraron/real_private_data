@@ -3,8 +3,8 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
     simple_jsonrpc;
     WebSocket;
     jrpc;
-    #userHash;
-    #passhare;
+    __userHash;
+    __passhare;
     
     constructor(
           ws_url
@@ -30,10 +30,10 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
         }
         isInheritedFrom(userHash, String);
         isInheritedFrom(passhare, String);
-        this.#userHash = userHash;
-        this.#passhare = passhare;
+        this.__userHash = userHash;
+        this.__passhare = passhare;
         
-        return this.call("login", [this.#userHash, this.#passhare]);
+        return this.call("login", [this.__userHash, this.__passhare]);
     } // end of start(userHash, passhare)
 
     async stop() {
@@ -42,13 +42,13 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
     }
 
     async logout() {
-        this.#userHash = undefined;
-        this.#passhare = undefined;
+        this.__userHash = undefined;
+        this.__passhare = undefined;
         this.socket.close();
     }
     
     async call(func, args) {
-        args = addAuthArgs(args, this.#userHash, this.#passhare);
+        args = addAuthArgs(args, this.__userHash, this.__passhare);
         return new Promise( (resolve, reject) => {
             this.jrpc.call(func, args).then((d) =>{
                 if(!d.error) {

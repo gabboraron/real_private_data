@@ -4,6 +4,7 @@ async function main(){
     window.theHash = new SHA256Salty(theConfig.salt);
     window.theEncryptor = AESEncryptor;
     window.theHtmlDownloaderService = new HtmlDownloaderService();
+    window.theFileFactory = new FileFactory();
     window.theDirManager = new DirManagerService();
     await theHtmlDownloaderService.start();
     window.theRpcWrapper = new RPCWrapperService();
