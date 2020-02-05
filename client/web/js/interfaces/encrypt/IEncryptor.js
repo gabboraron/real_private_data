@@ -3,8 +3,8 @@
 class IEncryptor extends AbstractClass {
     abstractMethods = [
         "encryptFromString", //(data:string): any
-        "descryptToString", //(data:any) /* -> string */
+        "decryptToString", //(data:any) /* -> string */
         "encryptFromNumber", //(data: Number ) /* -> any */
-        "descryptToNumber" //(data: any) /* -> Number */ 
+        "decryptToNumber" //(data: any) /* -> Number */ 
     ];
 }

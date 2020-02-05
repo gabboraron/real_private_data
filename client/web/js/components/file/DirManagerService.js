@@ -32,7 +32,7 @@ class DirManagerService {
         for(let i = 0; i < this.localFiles.length; ++i) {
             files.push({
                 "encryptedName":this.localFiles[i].__encryptedName,
-                "descryptedName":this.localFiles[i].descryptName()
+                "decryptedName":this.localFiles[i].decryptName()
                 });
         }
         return files;

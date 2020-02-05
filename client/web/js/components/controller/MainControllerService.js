@@ -55,7 +55,7 @@ class MainControllerService extends ControllerServiceBase {
         let tr = document.createElement("tr");
         
         let link = document.createElement("a");
-        link.innerText = f.descryptedName;
+        link.innerText = f.decryptedName;
         link.class = "mainOpenFile";
         link.href = "#";
         link.addEventListener("click", (e) =>{
@@ -68,7 +68,7 @@ class MainControllerService extends ControllerServiceBase {
         tr.appendChild(linkTd);
 
         let typeTd = document.createElement("td");
-        typeTd.innerText = f.descryptedName.match(/[.]([^.]+)$/)[1];
+        typeTd.innerText = f.decryptedName.match(/[.]([^.]+)$/)[1];
         tr.appendChild(typeTd);
         return tr;
     }

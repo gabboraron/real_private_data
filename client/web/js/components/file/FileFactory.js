@@ -14,7 +14,7 @@ class FileFactory {
     }
 
     createFileFromEncryptedNameBytes(nameBytes, nameEncryptor) {
-        let plainName = nameEncryptor.descryptToString(nameBytes);
+        let plainName = nameEncryptor.decryptToString(nameBytes);
         let type = plainName.match(/[.]([^.]+)$/)[1];
         let f = this.createFile(type);
         f.setNameEncryptor(nameEncryptor);

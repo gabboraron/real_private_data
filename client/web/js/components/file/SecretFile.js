@@ -34,7 +34,7 @@ class SecretFile //extends ISecretFile
         this.__contentEncryptor = contentEncryptor;
         if(check){
             try {
-                this.descript();
+                this.decrypt();
             } catch(e) {
                 this.__contentEncryptor = undefined;
                 throw e;
@@ -49,7 +49,7 @@ class SecretFile //extends ISecretFile
         let currEncryptor = this.__contentEncryptor;
         this.__contentEncryptor = oldEncryptor;
         try {
-            let text = this.descript().txt;
+            let text = this.decrypt().txt;
             this.__contentEncryptor = newEncryptor;
             this.encrypt(text);
         } catch(e){
@@ -109,8 +109,8 @@ class SecretFile //extends ISecretFile
         return true;
     }
     
-    descryptName() {
-        return this.__nameEncryptor.descryptToString(this.__encryptedName);
+    decryptName() {
+        return this.__nameEncryptor.decryptToString(this.__encryptedName);
     }
     
     /**
@@ -123,13 +123,13 @@ class SecretFile //extends ISecretFile
         this.__encryptedContent = this.__contentEncryptor.encryptFromString(txt);
     }
     
-    descript() {
-        let rawDescrypted = this.__contentEncryptor.descryptToString(this.__encryptedContent);
-        let sep  = rawDescrypted.indexOf("|");
-        let timestampSec = Number(rawDescrypted.substr(0,sep));
+    decrypt() {
+        let rawDecrypted = this.__contentEncryptor.decryptToString(this.__encryptedContent);
+        let sep  = rawDecrypted.indexOf("|");
+        let timestampSec = Number(rawDecrypted.substr(0,sep));
         return {
             "modifyDate" : new Date(timestampSec*1000),
-            "txt" : rawDescrypted.substr(sep+1)
+            "txt" : rawDecrypted.substr(sep+1)
         };
     }
     
@@ -181,8 +181,8 @@ async function testSecretFile() {
     sf.encrypt(data);
     sf.setName(name);
 
-    let descrypted = sf.descript();
-    console.log(descrypted);
+    let decrypted = sf.decrypt();
+    console.log(decrypted);
     console.log(sf.__encryptedContent);
 
     console.log(sf.toJson());
@@ -204,7 +204,7 @@ async function testUpdateSecretFile() {
     sf.encrypt(data);
     await sf.upload(false);
     await sf.download();
-    var c = sf.descript();
+    var c = sf.decrypt();
     if(c.txt === data){
         console.log("ok", c.modifyDate)
     }

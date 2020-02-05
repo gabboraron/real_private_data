@@ -54,9 +54,9 @@ class TxtFileControllerService extends SecretFileControllerService {
      async openFile(elementName, e, t) {
          try {
              await super.openFile(elementName, e, t);
-             let descrypted = this.file.descript();
-             //this.getItem(this.htmlItems.).innerText = descrypted.modifyDate
-             this.getItem(this.htmlItems.txtPlanInput).value = descrypted.txt;
+             let decrypted = this.file.decrypt();
+             //this.getItem(this.htmlItems.).innerText = decrypted.modifyDate
+             this.getItem(this.htmlItems.txtPlanInput).value = decrypted.txt;
          } catch(e) {
              this.message(e)
          }

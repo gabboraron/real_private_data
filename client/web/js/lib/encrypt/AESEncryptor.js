@@ -41,7 +41,7 @@ class AESEncryptor extends IEncryptor {
      * 
      * @param {UInt8Array} data 
      */
-    descryptToString(data) {
+    decryptToString(data) {
         let aesCtr = new this.aesjs.ModeOfOperation.ctr(this.key);
         let decrypted = this.aesjs.utils.utf8.fromBytes(aesCtr.decrypt(data));
         let hash = decrypted.substr(0, 64);
@@ -66,8 +66,8 @@ class AESEncryptor extends IEncryptor {
      * 
      * @param {UInt8Array} data 
      */
-    descryptToNumber(data) {
-        return Number(this.descryptToString(data));
+    decryptToNumber(data) {
+        return Number(this.decryptToString(data));
     }
 }
 
@@ -90,7 +90,7 @@ function aesTest() {
     var data = "pistike";
     var s1 = e1.encryptFromString(data);
     try {
-        let descryted = e1.descryptToString(s1);
+        let descryted = e1.decryptToString(s1);
         if(descryted === data){
             console.log("Test ok");
         } else{
@@ -101,7 +101,7 @@ function aesTest() {
     }
 
     try {
-        let descryted = e1_2.descryptToString(s1);
+        let descryted = e1_2.decryptToString(s1);
         if(descryted === data){
             console.log("Test ok");
         } else{
@@ -112,7 +112,7 @@ function aesTest() {
     }
 
     try {
-        let descryted = e2.descryptToString(s1);
+        let descryted = e2.decryptToString(s1);
         if(descryted === data){
             console.error("Test error");
         } else {
@@ -124,7 +124,7 @@ function aesTest() {
 
     let n = 3;
     let nEncrypted = e1.encryptFromNumber(n);
-    let nDecrypted = e1_2.descryptToNumber(nEncrypted);
+    let nDecrypted = e1_2.decryptToNumber(nEncrypted);
     if(n === nDecrypted ) {
         console.log("OK: "+n+" === "+nDecrypted);
     }
