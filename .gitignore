@@ -6,11 +6,11 @@
 .vscode/
 
 #sandbox
-client/web/sandbox/**
+src/web/sandbox/**
 sandbox/**
 
 #Generated files
-client/web/generated/**
+src/web/generated/**
 
 #Data
 data/**
