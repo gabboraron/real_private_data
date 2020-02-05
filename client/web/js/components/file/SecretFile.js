@@ -46,9 +46,16 @@ class SecretFile //extends ISecretFile
         if(typeof(oldEncryptor) === undefined) {
             oldEncryptor = this.__contentEncryptor;
         }
-        let text = this.oldEncryptor.descript(this.__encryptedContent);
-        this.__contentEncryptor = newEncryptor;
-        this.encrypt(text);
+        let currEncryptor = this.__contentEncryptor;
+        this.__contentEncryptor = oldEncryptor;
+        try {
+            let text = this.descript().txt;
+            this.__contentEncryptor = newEncryptor;
+            this.encrypt(text);
+        } catch(e){
+            this.__contentEncryptor = currEncryptor;
+            throw e;
+        }
     }
 
     /**
@@ -69,7 +76,7 @@ class SecretFile //extends ISecretFile
         let oldEncryptor = undefined;
         if(oldPlainPassword)
             oldEncryptor = theEncryptor.fromString(oldPlainPassword);
-        return this.changeContentEncryptor(newEncryptor, oldPlainPassword);
+        return this.changeContentEncryptor(newEncryptor, oldEncryptor);
     }
 
     /**

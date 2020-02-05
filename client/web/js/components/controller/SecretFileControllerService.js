@@ -6,6 +6,8 @@ class SecretFileControllerService extends ControllerServiceBase {
     
 
     start(body, file) {
+        body = body || this.body;
+        this.body = body;
         if(file) {
             this.initFile(body);
         } else {
@@ -25,9 +27,7 @@ class SecretFileControllerService extends ControllerServiceBase {
 
     initCreateFile(body) {
         this.isCreate = true;
-        let html = theHtmlDownloaderService.getHtml("newFilePassword");
-        let filePasswordMainDiv = body.getElementsByClassName("filePasswordMainDiv")[0];
-        filePasswordMainDiv.innerHTML = html.getElementsByTagName("body")[0].innerHTML;
+        this.initFilePasswordDiv("newFilePassword");
         super.start(body);
         this.file.setNameEncryptor( theEncryptor.fromHexString(theUserManager.__dirHash));
     }
@@ -42,9 +42,7 @@ class SecretFileControllerService extends ControllerServiceBase {
             self.downloadFailed = true;
             self.message(e.toString());
         });
-        body = body || this.body;
-        this.body = body;
-        this.initFilePassword();
+        this.initFilePasswordDiv("filePassword");
         super.start(body);
         if(this.isCreate) {
             this.hideOpenPassword();
@@ -58,10 +56,11 @@ class SecretFileControllerService extends ControllerServiceBase {
         this.addEventListener(this.htmlItems.fPassLoginForm, "submit", this.openFile);
     }
     
-    initFilePassword() {
-        let html = theHtmlDownloaderService.getHtml("filePassword");
+    initFilePasswordDiv(htmlName) {
+        let html = theHtmlDownloaderService.getHtml(htmlName);
         let filePasswordMainDiv = this.body.getElementsByClassName("filePasswordMainDiv")[0];
         filePasswordMainDiv.innerHTML = html.getElementsByTagName("body")[0].innerHTML;
+        this.addEventListener(this.htmlItems.fPassChangePasswordForm, "submit", this.chgPassword);
     }
     
     hideOpenPassword(){
@@ -80,7 +79,7 @@ class SecretFileControllerService extends ControllerServiceBase {
         this.getItem(this.htmlItems.fPassChangePasswordHideLink).style = "display:inline;";
     }
     
-    setPassword(onlyCheck = true) {
+    setPassword() {
         let newPassword  = this.getItem(this.htmlItems.fPassNewPasswordInput);
         let newPassword2 = this.getItem(this.htmlItems.fPassNewPassword2Input);
         //let oldPassword = oldPassword = this.getItem(this.htmlItems.fPassOldPasswordInput);
@@ -114,21 +113,48 @@ class SecretFileControllerService extends ControllerServiceBase {
         console.log(msg.toString())
     }
     
-     async openFile(elementName, e, t) {
-         await this.waitDownload();
-         console.debug("after download ready");
-         let password  = this.getItem(this.htmlItems.fPassLoginPasswordInput);
-         try {
-             this.file.setPassword(password.value, true);             
-         } catch(e) {
-             this.message(e.toString());
-             return;
-         }
-         this.getItem(this.htmlItems.secretFileMainDiv).style = "display: block;";
-         this.getItem(this.htmlItems.fPassLoginForm).style = "display:none;";
-     }
+    async openFile(elementName, e, t) {
+        await this.waitDownload();
+        console.debug("after download ready");
+        let password  = this.getItem(this.htmlItems.fPassLoginPasswordInput);
+        try {
+            this.file.setPassword(password.value, true);             
+        } catch(e) {
+            this.message(e.toString());
+            return;
+        }
+        this.getItem(this.htmlItems.secretFileMainDiv).style = "display: block;";
+        this.getItem(this.htmlItems.fPassLoginForm).style = "display:none;";
+    }
 
-     async waitDownload() {
+    async chgPassword(elementName, e, t) {
+        let newPassword  = this.getItem(this.htmlItems.fPassNewPasswordInput);
+        let newPassword2 = this.getItem(this.htmlItems.fPassNewPassword2Input);
+        let oldPassword = this.getItem(this.htmlItems.fPassOldPasswordInput);
+
+        if(-1 !== [newPassword.value, newPassword2.value, oldPassword.value].indexOf("")) {
+            // TODO: ErrorObject
+            let msg = new ErrorObject("Error: password, and/or password again is empty and or oldPassword");
+            this.message(msg);
+            throw msg;
+        } else if(newPassword.value != newPassword2.value) {
+            // TODO: ErrorObject
+            let msg = new ErrorObject("Error: password, and password again is not equal");
+            this.message(msg);
+            throw msg;
+        }
+        try{
+            this.file.chgPassword(newPassword.value, oldPassword.value)
+            await this.file.upload()
+        } catch(e) {
+            newPassword .value=""
+            newPassword2.value=""
+            oldPassword.value=""
+            throw e
+        }
+    }
+    
+    async waitDownload() {
         let self = this;
         if(this.downloadRedy) {
             return true;
@@ -152,20 +178,21 @@ class SecretFileControllerService extends ControllerServiceBase {
 };
 
 SecretFileControllerService.htmlItems = {
-    "fPassChangePasswordShowLink" : "fPassChangePasswordShowLink",
-    "fPassTable"                  : "fPassTable",
     "fPassLoginPasswordInput"     : "fPassLoginPasswordInput",
-    "fPassFilenameForm"           : "fPassFilenameForm",
-    "fPassOpenFileSubmit"         : "fPassOpenFileSubmit",
-    "fPassNameInput"              : "fPassNameInput",
-    "fPassChangePasswordForm"     : "fPassChangePasswordForm",
     "fPassSaveNameButton"         : "fPassSaveNameButton",
-    "fPassNewPasswordInput"       : "fPassNewPasswordInput",
-    "fPassOldPasswordTr"          : "fPassOldPasswordTr",
+    "fPassOpenFileSubmit"         : "fPassOpenFileSubmit",
+    "fPassFilenameForm"           : "fPassFilenameForm",
+    "fPassChangePasswordShowLink" : "fPassChangePasswordShowLink",
     "fPassNewPassword2Input"      : "fPassNewPassword2Input",
-    "fPassLoginForm"              : "fPassLoginForm",
     "fPassChangePasswordHideLink" : "fPassChangePasswordHideLink",
-    "fPassOldPasswordInput"       : "fPassOldPasswordInput",
+    "fPassOldPasswordTr"          : "fPassOldPasswordTr",
     "fPassChangePasswordTitle"    : "fPassChangePasswordTitle",
+    "fPassChangePasswordForm"     : "fPassChangePasswordForm",
+    "fPassOldPasswordInput"       : "fPassOldPasswordInput",
+    "fPassNewPasswordInput"       : "fPassNewPasswordInput",
+    "pPassSubmit"                 : "pPassSubmit",
+    "fPassLoginForm"              : "fPassLoginForm",
+    "fPassNameInput"              : "fPassNameInput",
+    "fPassTable"                  : "fPassTable",
     "secretFileMainDiv"           : "secretFileMainDiv"
 };
