@@ -1,0 +1,7 @@
+Main page
+    - Implement Change password
+Txt file
+    - Change password move to menu
+    - Show encoded text
+Phone book file
+    - Implement it
