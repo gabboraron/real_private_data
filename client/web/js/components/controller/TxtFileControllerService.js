@@ -46,7 +46,7 @@ class TxtFileControllerService extends SecretFileControllerService {
             this.message(e.toString());
             return false;
         }
-        this.initFile();
+        this.initFile(this.body);
         this.getItem(this.htmlItems.secretFileMainDiv).style = "display: block;";
         this.getItem(this.htmlItems.fPassLoginForm).style = "display:none;";
      }
