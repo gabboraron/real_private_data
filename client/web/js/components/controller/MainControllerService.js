@@ -77,9 +77,4 @@ class MainControllerService extends ControllerServiceBase {
         let f = theDirManager.openFile(encryptedName);
         thePageLoader.loadPage("txtFile",undefined, true, f);
     }
-    
-    logout(elementName, e, t) {
-        console.debug("TODO: implement");
-    }
-
 }

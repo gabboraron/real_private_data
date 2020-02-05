@@ -7,16 +7,10 @@ class TxtFileControllerService extends SecretFileControllerService {
     start(body, file) {
         this.file = file || theFileFactory.createFile("txt");
         super.start(body, file);
-        this.addEventListener( this.htmlItems.txtFileBackLink, "click", this.back);
     }
     
     stop() {
         super.stop();
-    }
-    
-    back(elementName, e, t) {
-        this.stop();
-        thePageLoader.loadPage("main", undefined, true)
     }
 
     async save() {

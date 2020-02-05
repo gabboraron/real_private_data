@@ -12,8 +12,10 @@ class ControllerServiceBase {
         this.htmlItems = htmlItems;
     }
 
-    start(body){
+    start(body) {
         this.body = body;
+        this.addEventListener( this.htmlItems.txtFileBackLink, "click", this.backToMain);
+        this.addEventListener( "logoutLink", "click", this.logout);
     }
 
     stop(){
@@ -76,4 +78,13 @@ class ControllerServiceBase {
             event.element.removeEventListener(event.eventType, event.func);
         }
     }
+
+    backToMain(e, t, f) {
+        thePageLoader.loadPage("main", undefined, true);
+    }
+
+    logout(e, t, f) {
+        thePageLoader.logout();
+    }
+
 }

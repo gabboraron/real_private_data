@@ -20,11 +20,6 @@ class SecretFileControllerService extends ControllerServiceBase {
         super.stop();
     }
     
-    back(elementName, e, t) {
-        this.stop();
-        thePageLoader.loadPage("main", undefined, true)
-    }
-
     initCreateFile(body) {
         this.isCreate = true;
         this.initFilePasswordDiv("newFilePassword");

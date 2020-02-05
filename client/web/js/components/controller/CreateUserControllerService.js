@@ -51,10 +51,6 @@ class CreateUserControllerService extends ControllerServiceBase {
         this.getItem(this.htmlItems.createUserForm).reset();
     }
 
-    back(elementName, e, t) {
-        thePageLoader.loadPage("main", undefined, true)
-    }
-
     /**
      * 
      * @param {string} msg 

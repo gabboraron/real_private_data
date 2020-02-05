@@ -36,6 +36,7 @@ class PageLoaderService {
     }
     
     stop() {
+        this.logout();
         return true;
     }
     
@@ -115,19 +116,13 @@ class PageLoaderService {
     login(userName) {
         this.userName = userName;
         this.logedIn = true;
-        this.__logoutSetEventListener();
-        this.__logoutSetStyle("display: inline;");
     }
 
-    logout(e) {
-        if(typeof(e) !== "undefined" && typeof(e.preventDefault) === "function")
-            e.preventDefault();
-        
+    logout() {
         theUserManager.logout();
         this.userName = undefined;
         this.logedIn = false;
         this.loadPage("login", undefined, true);
-        this.__logoutSetStyle("display:none;");
     }
 
     __logoutSetStyle(style){
