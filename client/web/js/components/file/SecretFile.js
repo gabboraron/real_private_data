@@ -93,7 +93,12 @@ class SecretFile //extends ISecretFile
      * @param {string} name 
      */
     setName(name) {
+        let ext = "." + this.type;
+        if( !name.endsWith(ext)){
+            name += ext;
+        }
         this.__encryptedName = this.__nameEncryptor.encryptFromString(name);
+        return name;
     }
 
     /**

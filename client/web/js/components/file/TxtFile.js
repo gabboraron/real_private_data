@@ -13,16 +13,4 @@ class TxtFile extends SecretFile {
     stop() {
         return super.start();
     }
-
-    /**
-     * 
-     * @param {string} name 
-     */
-    setName(name) {
-        if( !name.endsWith(".txt")){
-            name += ".txt";
-        }
-        super.setName(name);
-        return name;
-    }
 }
