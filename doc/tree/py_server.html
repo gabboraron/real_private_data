@@ -28,62 +28,68 @@
 </head>
 <body>
 	<h1>Directory Tree</h1><p>
-	<a href="../../server/python">./server/python</a><br>
-	├── <a href="../../server/python/config/">config</a><br>
-	│   ├── <a href="../../server/python/config/arg.py">arg.py</a><br>
-	│   ├── <a href="../../server/python/config/config_base.py">config_base.py</a><br>
-	│   ├── <a href="../../server/python/config/config_factory.py">config_factory.py</a><br>
-	│   ├── <a href="../../server/python/config/__init__.py">__init__.py</a><br>
-	│   ├── <a href="../../server/python/config/the_config.py">the_config.py</a><br>
-	│   └── <a href="../../server/python/config/tools.py">tools.py</a><br>
-	├── <a href="../../server/python/config.json">config.json</a><br>
-	├── <a href="../../server/python/create_user.py">create_user.py</a><br>
-	├── <a href="../../server/python/data_manager/">data_manager</a><br>
-	│   ├── <a href="../../server/python/data_manager/file_manager.py">file_manager.py</a><br>
-	│   └── <a href="../../server/python/data_manager/__init__.py">__init__.py</a><br>
-	├── <a href="../../server/python/error_object/">error_object</a><br>
-	│   ├── <a href="../../server/python/error_object/enum2.py">enum2.py</a><br>
-	│   ├── <a href="../../server/python/error_object/error_object.py">error_object.py</a><br>
-	│   ├── <a href="../../server/python/error_object/error_type_enum.py">error_type_enum.py</a><br>
-	│   ├── <a href="../../server/python/error_object/error_type.py">error_type.py</a><br>
-	│   ├── <a href="../../server/python/error_object/error_types.py">error_types.py</a><br>
-	│   ├── <a href="../../server/python/error_object/get_error_type_dict.py">get_error_type_dict.py</a><br>
-	│   └── <a href="../../server/python/error_object/__init__.py">__init__.py</a><br>
-	├── <a href="../../server/python/js_generator/">js_generator</a><br>
-	│   ├── <a href="../../server/python/js_generator/__init__.py">__init__.py</a><br>
-	│   └── <a href="../../server/python/js_generator/js_generator.py">js_generator.py</a><br>
-	├── <a href="../../server/python/rpc_wrapper/">rpc_wrapper</a><br>
-	│   ├── <a href="../../server/python/rpc_wrapper/auth_wrapper.py">auth_wrapper.py</a><br>
-	│   ├── <a href="../../server/python/rpc_wrapper/__init__.py">__init__.py</a><br>
-	│   ├── <a href="../../server/python/rpc_wrapper/rpc_wrapper.py">rpc_wrapper.py</a><br>
-	│   └── <a href="../../server/python/rpc_wrapper/web_method.py">web_method.py</a><br>
-	├── <a href="../../server/python/run_server.py">run_server.py</a><br>
-	├── <a href="../../server/python/server/">server</a><br>
-	│   ├── <a href="../../server/python/server/data_request_handler.py">data_request_handler.py</a><br>
-	│   ├── <a href="../../server/python/server/__init__.py">__init__.py</a><br>
-	│   ├── <a href="../../server/python/server/redirector_request_handler_factory.py">redirector_request_handler_factory.py</a><br>
-	│   ├── <a href="../../server/python/server/rpc_request_post_handler_factory.py">rpc_request_post_handler_factory.py</a><br>
-	│   ├── <a href="../../server/python/server/rpc_request_ws_handler_factory.py">rpc_request_ws_handler_factory.py</a><br>
-	│   ├── <a href="../../server/python/server/rpc_wrapper_factory.py">rpc_wrapper_factory.py</a><br>
-	│   └── <a href="../../server/python/server/web_request_handler_factory.py">web_request_handler_factory.py</a><br>
-	├── <a href="../../server/python/sha256Salty/">sha256Salty</a><br>
-	│   ├── <a href="../../server/python/sha256Salty/__init__.py">__init__.py</a><br>
-	│   ├── <a href="../../server/python/sha256Salty/sha256Salty2.py">sha256Salty2.py</a><br>
-	│   └── <a href="../../server/python/sha256Salty/sha256Salty.py">sha256Salty.py</a><br>
-	├── <a href="../../server/python/test.py">test.py</a><br>
-	└── <a href="../../server/python/tests/">tests</a><br>
-	&nbsp;&nbsp;&nbsp; ├── <a href="../../server/python/tests/data_manager/">data_manager</a><br>
-	&nbsp;&nbsp;&nbsp; │   ├── <a href="../../server/python/tests/data_manager/__init__.py">__init__.py</a><br>
-	&nbsp;&nbsp;&nbsp; │   └── <a href="../../server/python/tests/data_manager/test_file_manager.py">test_file_manager.py</a><br>
-	&nbsp;&nbsp;&nbsp; ├── <a href="../../server/python/tests/__init__.py">__init__.py</a><br>
-	&nbsp;&nbsp;&nbsp; ├── <a href="../../server/python/tests/test_create_empty_database/">test_create_empty_database</a><br>
-	&nbsp;&nbsp;&nbsp; ├── <a href="../../server/python/tests/test_rpc.py">test_rpc.py</a><br>
-	&nbsp;&nbsp;&nbsp; └── <a href="../../server/python/tests/user_manager_test.py">user_manager_test.py</a><br>
+	<a href="../../src/python">./src/python</a><br>
+	├── <a href="../../src/python/common/">common</a><br>
+	│   ├── <a href="../../src/python/common/dictgenerator.py">dictgenerator.py</a><br>
+	│   ├── <a href="../../src/python/common/generatedby.py">generatedby.py</a><br>
+	│   ├── <a href="../../src/python/common/getprojectdir.py">getprojectdir.py</a><br>
+	│   └── <a href="../../src/python/common/__init__.py">__init__.py</a><br>
+	├── <a href="../../src/python/config/">config</a><br>
+	│   ├── <a href="../../src/python/config/arg.py">arg.py</a><br>
+	│   ├── <a href="../../src/python/config/config_base.py">config_base.py</a><br>
+	│   ├── <a href="../../src/python/config/config_factory.py">config_factory.py</a><br>
+	│   ├── <a href="../../src/python/config/__init__.py">__init__.py</a><br>
+	│   ├── <a href="../../src/python/config/the_config.py">the_config.py</a><br>
+	│   └── <a href="../../src/python/config/tools.py">tools.py</a><br>
+	├── <a href="../../src/python/config.json">config.json</a><br>
+	├── <a href="../../src/python/create_user.py">create_user.py</a><br>
+	├── <a href="../../src/python/data_manager/">data_manager</a><br>
+	│   ├── <a href="../../src/python/data_manager/file_manager.py">file_manager.py</a><br>
+	│   └── <a href="../../src/python/data_manager/__init__.py">__init__.py</a><br>
+	├── <a href="../../src/python/error_object/">error_object</a><br>
+	│   ├── <a href="../../src/python/error_object/enum2.py">enum2.py</a><br>
+	│   ├── <a href="../../src/python/error_object/error_object.py">error_object.py</a><br>
+	│   ├── <a href="../../src/python/error_object/error_type_enum.py">error_type_enum.py</a><br>
+	│   ├── <a href="../../src/python/error_object/error_type.py">error_type.py</a><br>
+	│   ├── <a href="../../src/python/error_object/error_types.py">error_types.py</a><br>
+	│   ├── <a href="../../src/python/error_object/get_error_type_dict.py">get_error_type_dict.py</a><br>
+	│   └── <a href="../../src/python/error_object/__init__.py">__init__.py</a><br>
+	├── <a href="../../src/python/js_generator/">js_generator</a><br>
+	│   ├── <a href="../../src/python/js_generator/__init__.py">__init__.py</a><br>
+	│   └── <a href="../../src/python/js_generator/js_generator.py">js_generator.py</a><br>
+	├── <a href="../../src/python/rpc_wrapper/">rpc_wrapper</a><br>
+	│   ├── <a href="../../src/python/rpc_wrapper/auth_wrapper.py">auth_wrapper.py</a><br>
+	│   ├── <a href="../../src/python/rpc_wrapper/__init__.py">__init__.py</a><br>
+	│   ├── <a href="../../src/python/rpc_wrapper/rpc_wrapper.py">rpc_wrapper.py</a><br>
+	│   └── <a href="../../src/python/rpc_wrapper/web_method.py">web_method.py</a><br>
+	├── <a href="../../src/python/run_server.py">run_server.py</a><br>
+	├── <a href="../../src/python/server/">server</a><br>
+	│   ├── <a href="../../src/python/server/data_request_handler.py">data_request_handler.py</a><br>
+	│   ├── <a href="../../src/python/server/__init__.py">__init__.py</a><br>
+	│   ├── <a href="../../src/python/server/redirector_request_handler_factory.py">redirector_request_handler_factory.py</a><br>
+	│   ├── <a href="../../src/python/server/rpc_request_post_handler_factory.py">rpc_request_post_handler_factory.py</a><br>
+	│   ├── <a href="../../src/python/server/rpc_request_ws_handler_factory.py">rpc_request_ws_handler_factory.py</a><br>
+	│   ├── <a href="../../src/python/server/rpc_wrapper_factory.py">rpc_wrapper_factory.py</a><br>
+	│   └── <a href="../../src/python/server/web_request_handler_factory.py">web_request_handler_factory.py</a><br>
+	├── <a href="../../src/python/sha256Salty/">sha256Salty</a><br>
+	│   ├── <a href="../../src/python/sha256Salty/__init__.py">__init__.py</a><br>
+	│   ├── <a href="../../src/python/sha256Salty/sha256Salty2.py">sha256Salty2.py</a><br>
+	│   └── <a href="../../src/python/sha256Salty/sha256Salty.py">sha256Salty.py</a><br>
+	├── <a href="../../src/python/test.py">test.py</a><br>
+	├── <a href="../../src/python/tests/">tests</a><br>
+	│   ├── <a href="../../src/python/tests/data_manager/">data_manager</a><br>
+	│   │   ├── <a href="../../src/python/tests/data_manager/__init__.py">__init__.py</a><br>
+	│   │   └── <a href="../../src/python/tests/data_manager/test_file_manager.py">test_file_manager.py</a><br>
+	│   ├── <a href="../../src/python/tests/__init__.py">__init__.py</a><br>
+	│   ├── <a href="../../src/python/tests/test_rpc.py">test_rpc.py</a><br>
+	│   └── <a href="../../src/python/tests/user_manager_test.py">user_manager_test.py</a><br>
+	├── <a href="../../src/python/tools_create_html_file_dict.py">tools_create_html_file_dict.py</a><br>
+	└── <a href="../../src/python/tools_getclasses.py">tools_getclasses.py</a><br>
 	<br><br>
 	</p>
 	<p>
 
-10 directories, 40 files
+10 directories, 46 files
 	<br><br>
 	</p>
 	<hr>

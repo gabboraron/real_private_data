@@ -2,13 +2,13 @@
 
 import os
 import pathlib
-from toolslib.dictgenerator import dictgenerator
-from toolslib.getprojectdir import getprojectdir
-import toolslib.generatedby as gby
+from common.dictgenerator import dictgenerator
+from common.getprojectdir import getprojectdir
+import common.generatedby as gby
 
 global htmlDir, filePath
 projectDir = getprojectdir()
-webdir   = projectDir.joinpath("client/web")
+webdir   = projectDir.joinpath("src/web")
 htmlDir  = webdir.joinpath("html/")
 filePath = webdir.joinpath("js/htmlFileDict.js")
 
