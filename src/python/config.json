@@ -3,8 +3,8 @@
 "host":"localhost",
 "open_port":8080,
 "secure_port":8443,
-"crt_file": "/home/somla/working/real_private_data/server/ssl/httpscertificate/new_crt.crt",
-"key_file": "/home/somla/working/real_private_data/server/ssl/httpscertificate/new_key.key",
-"web_root": "/home/somla/working/real_private_data/client/web",
+"crt_file": "/home/somla/working/real_private_data/ssl/httpscertificate/new_crt.crt",
+"key_file": "/home/somla/working/real_private_data/ssl/httpscertificate/new_key.key",
+"web_root": "/home/somla/working/real_private_data/src/web",
 "data_dir": "/home/somla/working/real_private_data/data"
 }
