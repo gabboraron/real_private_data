@@ -6,11 +6,17 @@
 .vscode/
 
 #sandbox
-client/web/sandbox/**
+src/web/sandbox/**
 sandbox/**
 
 #Generated files
-client/web/generated/**
+src/web/generated/**
 
 #Data
 data/**
+
+# SSL keys
+.key/**
+
+# config
+src/python/config.json
