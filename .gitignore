@@ -14,3 +14,9 @@ src/web/generated/**
 
 #Data
 data/**
+
+# SSL keys
+.key/**
+
+# config
+src/python/config.json
