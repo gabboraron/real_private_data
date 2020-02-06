@@ -42,6 +42,11 @@ function i_copy_sample_config {
 function i_make_data_dir {
     mkdir -vp "$dir_project/data"
 }
+
+function i_make_generated_dir {
+    mkdir -vp "$dir_project/src/web/generated"
+}
+
 function all {
     for command in `cat $dir_curr/install.sh | grep "^function i_" | grep -v "install_for_loop" | sed "s/^function //g" | sed 's/{$//g'`; do #install_for_loop
         $command $@;
