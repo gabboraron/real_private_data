@@ -3,14 +3,12 @@
 import os
 import pathlib
 from common.dictgenerator import dictgenerator
-from common.getprojectdir import getprojectdir
+from common.the_project_paths import THE_PROJECT_PATHS
 import common.generatedby as gby
 
 global htmlDir, filePath
-projectDir = getprojectdir()
-webdir   = projectDir.joinpath("src/web")
-htmlDir  = webdir.joinpath("html/")
-filePath = webdir.joinpath("js/htmlFileDict.js")
+htmlDir  = THE_PROJECT_PATHS.dir_web.joinpath("html/")
+filePath = THE_PROJECT_PATHS.dir_web.joinpath("js/htmlFileDict.js")
 
 def getHtmls():
     htmls = os.listdir( htmlDir )
