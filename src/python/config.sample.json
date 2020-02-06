@@ -1,0 +1,10 @@
+{
+"debug":true,
+"host":"localhost",
+"open_port":8080,
+"secure_port":8443,
+"crt_file": "[[dir_project]]/.key/rpd.crt",
+"key_file": "[[dir_project]]/.key/rpd.key",
+"web_root": "[[dir_project]]/src/web",
+"data_dir": "[[dir_project]]/data"
+}
