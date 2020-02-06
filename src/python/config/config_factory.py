@@ -2,6 +2,7 @@ import argparse
 import json
 from .the_config import TheConfig
 from .tools import ConfigIter
+from .the_config_variables import THE_CONFIG_VARIABLES
 
 def boolean_arg(s):
     if s.lower() in {"true","false"}:
@@ -29,7 +30,15 @@ class ConfigFactory:
                 arg.value = parsed_args[arg.name]
             elif arg.name in config_json and config_json[arg.name] is not None:
                 arg.value = config_json[arg.name]
+            arg.value = self.prepare_arg(arg.value)
 
+    @staticmethod
+    def prepare_arg(arg:any):
+        if type(arg) is str:
+            for key, value in THE_CONFIG_VARIABLES.__dict__.items():
+                arg = arg.replace("[[{}]]".format(key), value)
+        return arg
+    
     def checkArguments(self):
         emptyArguments = []
         typeErrors = []
