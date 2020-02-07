@@ -1,0 +1,5 @@
+For test
+https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-directory-structure
+
+SSL Certificate
+https://askubuntu.com/questions/645818/how-to-install-certificates-for-command-line
