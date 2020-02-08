@@ -3,3 +3,19 @@ https://stackoverflow.com/questions/1896918/running-unittest-with-typical-test-d
 
 SSL Certificate
 https://askubuntu.com/questions/645818/how-to-install-certificates-for-command-line
+
+Port forwarding
+https://www.cyberciti.biz/faq/linux-port-redirection-with-iptables/
+https://askubuntu.com/questions/646293/open-port-80-on-ubuntu-server
+sudo iptables -i wlo1 -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 9080
+sudo iptables -i wlo1 -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 9443
+
+#https://askubuntu.com/questions/444729/redirect-port-80-to-8080-and-make-it-work-on-local-machine
+sudo iptables -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 9080
+sudo iptables -t nat -A OUTPUT -o lo -p tcp --dport 443 -j REDIRECT --to-port 9443
+
+#Save rules
+#https://linuxconfig.org/how-to-make-iptables-rules-persistent-after-reboot-on-linux
+apt-get install iptables-persistent
+iptables-save > /etc/iptables/rules.v4
+#ip6tables-save > /etc/iptables/rules.v6
