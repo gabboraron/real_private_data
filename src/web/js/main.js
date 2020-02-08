@@ -1,6 +1,9 @@
 'use strict';
 
 async function main(){
+    if(theConfig.debug) {
+        document.body.classList.add("debugBody");
+    }
     window.theHash = new SHA256Salty(theConfig.salt);
     window.theEncryptor = AESEncryptor;
     window.theHtmlDownloaderService = new HtmlDownloaderService();
