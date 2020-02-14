@@ -109,6 +109,10 @@ class PhoneBookFile extends SecretFile {
     this.encrypt(JSON.stringify(phbObj))
   }
   
+  /**
+   * 
+   * @param {string} nickName 
+   */
   getContact(nickName) {
     let layer2 = this.__getLayer2()
     let contact = PhoneBookContact.fromEncrypted(Uint8Array.from(layer2[nickName]), this.__contentEncryptor)
