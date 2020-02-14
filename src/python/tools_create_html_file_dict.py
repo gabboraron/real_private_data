@@ -2,6 +2,7 @@
 
 import os
 import pathlib
+import re
 from common.dictgenerator import dictgenerator
 from common.the_project_paths import THE_PROJECT_PATHS
 import common.generatedby as gby
@@ -17,7 +18,7 @@ def getHtmls():
 
 def writeFile():
     htmls = getHtmls()
-    d = { k.rstrip(".html"):k for k in htmls }
+    d = { re.match('(.*)[.]html$', k)[1]:k for k in htmls }
     text = '"use strict";\n'
     text += gby.generatedby(gby.Language.JAVASCRIPT)
     text += "\n\n"
