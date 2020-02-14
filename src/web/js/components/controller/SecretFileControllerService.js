@@ -14,6 +14,8 @@ class SecretFileControllerService extends ControllerServiceBase {
             this.initCreateFile(body);
         }
         this.addEventListener(this.htmlItems.fPassSaveButton, "click", this.save);
+        this.addEventListener(this.htmlItems.fPassChangePasswordForm, "submit", this.setPassword)
+        this.hideMainDiv()
     }
     
     stop() {
@@ -55,7 +57,6 @@ class SecretFileControllerService extends ControllerServiceBase {
         let html = theHtmlDownloaderService.getHtml(htmlName);
         let filePasswordMainDiv = this.body.getElementsByClassName("filePasswordMainDiv")[0];
         filePasswordMainDiv.innerHTML = html.getElementsByTagName("body")[0].innerHTML;
-        this.addEventListener(this.htmlItems.fPassChangePasswordForm, "submit", this.chgPassword);
     }
     
     hideOpenPassword(){
@@ -66,6 +67,14 @@ class SecretFileControllerService extends ControllerServiceBase {
         this.getItem(this.htmlItems.fPassChangePasswordForm).style = "display:none;";
         this.getItem(this.htmlItems.fPassChangePasswordShowLink).style = "display:inline;";
         this.getItem(this.htmlItems.fPassChangePasswordHideLink).style = "display:none;";
+    }
+    
+    showMainDiv() {
+        this.getItem(this.htmlItems.secretFileMainDiv).style = "display:block;"
+    }
+    
+    hideMainDiv() {
+        this.getItem(this.htmlItems.secretFileMainDiv).style = "display:none;"
     }
     
     showChangePassword() {
@@ -90,7 +99,10 @@ class SecretFileControllerService extends ControllerServiceBase {
             this.message(msg);
             throw msg;
         }
-        return this.file.setPassword(newPassword.value);
+        let ret = this.file.setPassword(newPassword.value);
+        this.file.clear()
+        this.showMainDiv()
+        return ret
     }
     
     setName() {
@@ -106,6 +118,7 @@ class SecretFileControllerService extends ControllerServiceBase {
     
     message(msg){
         console.log(msg.toString())
+        this.getItem("message").innerText = msg.toString()
     }
     
     async openFile(elementName, e, t) {
@@ -116,9 +129,9 @@ class SecretFileControllerService extends ControllerServiceBase {
             this.file.setPassword(password.value, true);             
         } catch(e) {
             this.message(e.toString());
-            return;
+            throw e
         }
-        this.getItem(this.htmlItems.secretFileMainDiv).style = "display: block;";
+        this.showMainDiv()
         this.getItem(this.htmlItems.fPassLoginForm).style = "display:none;";
     }
 
