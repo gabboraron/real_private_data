@@ -6,11 +6,12 @@
  */
 class PageLoaderService {
     pages = {
-        "login"       : "login",
-        "main"        : "main",
-        "chgPassword" : "chgPassword",
-        "createUser"  : "createUser",
-        "txtFile"     : "txtFile"
+        "login"         : "login",
+        "main"          : "main",
+        "chgPassword"   : "chgPassword",
+        "createUser"    : "createUser",
+        "txtFile"       : "txtFile",
+        "phoneBookFile" : "phoneBookFile"
     };
 
     constructor(){
@@ -23,11 +24,12 @@ class PageLoaderService {
         this.currentPage  = undefined;
 
         this.controllers = {
-            "login"       : new LoginControllerService(),
-            "main"        : new MainControllerService(),
-            "chgPassword" : new ChgPasswordControllerService(),
-            "createUser"  : new CreateUserControllerService(),
-            "txtFile"     : new TxtFileControllerService()
+            "login"         : new LoginControllerService(),
+            "main"          : new MainControllerService(),
+            "chgPassword"   : new ChgPasswordControllerService(),
+            "createUser"    : new CreateUserControllerService(),
+            "txtFile"       : new TxtFileControllerService(),
+            "phoneBookFile" : new PhoneBookFileControllerService()
         }
     }
 
