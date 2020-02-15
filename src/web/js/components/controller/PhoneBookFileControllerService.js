@@ -28,8 +28,6 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             return false;
         }
         this.initFile(this.body);
-        this.getItem(this.htmlItems.secretFileMainDiv).style = "display: block;";
-        this.getItem(this.htmlItems.fPassLoginForm).style = "display:none;";
     }
 
     async openFile(elementName, e, t) {
@@ -113,6 +111,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         let contacts = this.file.getNickNames()
         let table = document.createElement("table")
         for(let i = 0; i < contacts.length; ++i) {
+            let nickName = contacts[i]
             let tr = document.createElement("tr")
             let nickNameTd = document.createElement("td")
             let nickNameLink = document.createElement("a")
@@ -120,11 +119,27 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             let tdDetails = document.createElement("td")
             nickNameLink.addEventListener("click", (e) => {
                 e.preventDefault()
-                self.showContact(tdDetails, contacts[i])
+                self.showContact(tdDetails, nickName)
             });
-            nickNameLink.innerText = contacts[i]
+            nickNameLink.innerText = nickName
             nickNameTd.appendChild(nickNameLink)
             tr.appendChild(nickNameTd)
+            let deleteTd = document.createElement("td")
+            let deleteLink = document.createElement("a")
+            deleteLink.href = "#"
+            deleteLink.innerText = "Delete"
+            deleteLink.addEventListener("click", async (e) => {
+                try {
+                    this.file.removeContact(nickName)
+                    await this.file.upload()
+                    self.listContacts()
+                } catch(e) {
+                    this.message(e.toString())
+                }
+
+            })
+            deleteTd.appendChild(deleteLink)
+            tr.appendChild(deleteTd)
             table.appendChild(tr)
             let trDetails = document.createElement("tr")
             trDetails.appendChild(tdDetails)
