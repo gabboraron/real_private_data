@@ -40,6 +40,14 @@ class PhoneBookNumber {
 
 class PhoneBookContact extends SecretJson {
   
+  /**
+   * 
+   * @param {IEncryptor} encryptor 
+   * @param {string} fullName 
+   * @param {string} address 
+   * @param {string} description 
+   * @param {Array<string>} phoneNumbers 
+   */
   constructor(encryptor,
     fullName,
     address,
