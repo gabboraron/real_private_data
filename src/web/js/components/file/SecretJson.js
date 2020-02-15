@@ -24,8 +24,9 @@ class SecretJson
             throw "use changeContentEncryptor instead of setContentEncryptor";
         }
         this.__contentEncryptor = contentEncryptor;
-        if(check){almafa
-            }
+        console.error("TODO: check it")
+        if(check){
+
         }
     }
     
