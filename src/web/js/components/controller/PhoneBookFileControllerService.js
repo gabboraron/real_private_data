@@ -18,21 +18,6 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         super.stop();
     }
 
-    async save() {
-        if(this.isCreate)
-            this.createFile();
-        else {
-            let txt = this.getItem(this.htmlItems.txtPlanInput).value;
-            this.file.encrypt(txt);
-            try {
-                await this.file.upload();
-            } catch(e) {
-                this.message(e.toString());
-                return false;
-            }
-        }
-    }
-
     async createFile() {
         console.debug("createFile");
         this.setName();
@@ -105,7 +90,10 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
                 this.file.addPhoneNumber(nickName, new PhoneBookNumber(phoneNumber, phoneNumberType))
             }
             this.file.setName(this.getItem("fPassNameInput").value)
-            await this.file.upload(true)
+            // FIXME: hack
+            await this.file.upload(this.isCreate)
+            if(this.isCreate)
+                this.isCreate = false
         } catch(e) {
             this.message(e.toString())
         }
@@ -147,10 +135,11 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         this.getItem("phbContacts").appendChild(table)
     }
     
-    showAddPhoneNumber() {
-    }
-    
     showContact(tdDetails, nickName) {
+        if(tdDetails.innerHTML !== "") {
+            tdDetails.innerHTML = ""
+            return
+        }
         let contact = this.file.getContact(nickName)
         let html = theHtmlDownloaderService.getHtml("phoneBookContact")
         html.getElementsByClassName("phbContactNickName")[0].innerText = nickName
