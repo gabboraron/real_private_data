@@ -116,11 +116,6 @@ class SecretFileControllerService extends ControllerServiceBase {
         nameInput.value = this.file.setName(nameInput.value);
     }
     
-    message(msg){
-        console.log(msg.toString())
-        this.getItem("message").innerText = msg.toString()
-    }
-    
     async openFile(elementName, e, t) {
         await this.waitDownload();
         console.debug("after download ready");
