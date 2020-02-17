@@ -13,8 +13,10 @@ class ErrorObject {
             this.date = new Date();
         }
         if(typeof(ErrorTypes[ty]) === "undefined" ) {
-            if(theConfig.debug)
-                console.error("TODO: Create error_object for " + ty)
+            this.msg = ty
+            if(theConfig.debug) {
+                console.warn("TODO: Create error_object for " + this.msg)
+            }
             return;
         }
         this.ty = ty;
