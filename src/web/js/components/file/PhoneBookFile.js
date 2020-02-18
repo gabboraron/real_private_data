@@ -72,6 +72,18 @@ class PhoneBookContact extends SecretJson {
     obj.phoneNumbers.push(phbNumber)
     this.encrypt(obj)
   }
+  removePhoneNumber(idx) {
+    let obj = this.decrypt()
+    obj.phoneNumbers.splice(idx, 1)
+    this.encrypt(obj)
+  }
+
+  modifyPhoneNumber(idx, phoneNumber) {
+    let obj = this.decrypt()
+    obj.phoneNumbers[idx].ty = phoneNumber.ty
+    obj.phoneNumbers[idx].phoneNumber = phoneNumber.phoneNumber
+    this.encrypt(obj)
+  }
 }
 PhoneBookContact.fromEncrypted = function(encrypted, encryptor) {
   let phbContact = new PhoneBookContact(encryptor)
@@ -140,6 +152,22 @@ class PhoneBookFile extends SecretFile {
     let layer2 = this.__getLayer2()
     let contact = PhoneBookContact.fromEncrypted(Uint8Array.from(layer2[nickName]), this.__contentEncryptor)
     contact.addPhoneNumber(phoneNumber)
+    layer2[nickName] = Array.from(contact.getEncryptedContent())
+    this.encrypt(JSON.stringify(layer2))
+  }
+
+  removePhoneNumber(nickName, idx){
+    let layer2 = this.__getLayer2()
+    let contact = PhoneBookContact.fromEncrypted(Uint8Array.from(layer2[nickName]), this.__contentEncryptor)
+    contact.removePhoneNumber(idx)
+    layer2[nickName] = Array.from(contact.getEncryptedContent())
+    this.encrypt(JSON.stringify(layer2))
+  }
+
+  modifyPhoneNumber(nickName, idx, phoneNumber){
+    let layer2 = this.__getLayer2()
+    let contact = PhoneBookContact.fromEncrypted(Uint8Array.from(layer2[nickName]), this.__contentEncryptor)
+    contact.modifyPhoneNumber(idx, phoneNumber)
     layer2[nickName] = Array.from(contact.getEncryptedContent())
     this.encrypt(JSON.stringify(layer2))
   }
