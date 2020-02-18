@@ -105,3 +105,20 @@ function remove(self, elementName){
     }
     self[elementName] = undefined;
 }
+
+
+/**
+ * 
+ * @param {string} innerText 
+ * @param {function} func 
+ */
+function createLink(innerText, func) {
+    let link = document.createElement("a")
+    link.href = "#"
+    link.innerText = innerText
+    link.addEventListener("click", (e) =>{
+        e.preventDefault()
+        func(e)
+    })
+    return link
+}
