@@ -48,28 +48,77 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         let html = theHtmlDownloaderService.getHtml("phoneBookModifyContact")
         html.getElementsByClassName("phbAddNumberButton")[0].addEventListener("click", () => {
             let numbersDiv = html.getElementsByClassName("phbPhoneNumbers")[0]
-            let numDiv = document.createElement("div")
-            numDiv.classList.add("phbAddPhoneNumberDiv")
-            let select = document.createElement("select")
-            select.classList.add("phoneNumberTypeSelect")
-            let phonebookTypes = Object.keys(PhoneNumberType)
-            for(let i = 0; i< phonebookTypes.length; ++i) {
-                let option = document.createElement("option")
-                option.innerText = phonebookTypes[i]
-                option.value = phonebookTypes[i]
-                select.appendChild(option)
-            }
-            numDiv.appendChild(select)
-            let phoneNumber = document.createElement("input")
-            phoneNumber.classList.add("phoneNumberInput")
-
-            numDiv.appendChild(phoneNumber)
+            let numDiv = this.createPhoneNuberInput().numDiv
             numbersDiv.appendChild(numDiv)
         })
         element.innerHTML = ""
         element.appendChild(html)
     }
 
+    createPhoneNuberInput(phoneNumber = "", ty = "mobil") {
+        let numDiv = document.createElement("div")
+        numDiv.classList.add("phbAddPhoneNumberDiv")
+        let typeSelect = document.createElement("select")
+        typeSelect.classList.add("phoneNumberTypeSelect")
+        let phonebookTypes = Object.keys(PhoneNumberType)
+        for(let i = 0; i< phonebookTypes.length; ++i) {
+            let option = document.createElement("option")
+            option.innerText = phonebookTypes[i]
+            option.value = phonebookTypes[i]
+            typeSelect.appendChild(option)
+        }
+        typeSelect.value = ty
+        numDiv.appendChild(typeSelect)
+        let phoneNumberInput = document.createElement("input")
+        phoneNumberInput.classList.add("phoneNumberInput")
+        phoneNumberInput.value = phoneNumber
+        numDiv.appendChild(phoneNumberInput)
+        return {
+            "numDiv": numDiv,
+            "phoneNumberInput": phoneNumberInput,
+            "typeSelect":typeSelect
+        }
+    }
+
+    createPhoneNumberModifier(phoneNumber = "", 
+        ty = "mobil", 
+        nickName, 
+        idx, 
+        tdDetails,
+        addButtons = false 
+        ) {
+        let self = this
+        let numHtmls = this.createPhoneNuberInput(phoneNumber, ty)
+
+        if(addButtons) {
+            let modifyLink = document.createElement("a")
+            modifyLink.innerText = "Save"
+            modifyLink.href = "#"
+            modifyLink.addEventListener("click", async (e) => {
+                e.preventDefault()
+                let pbn = new PhoneBookNumber(
+                    numHtmls.phoneNumberInput.value, 
+                    numHtmls.typeSelect.value
+                )
+                self.file.modifyPhoneNumber(nickName, idx, pbn)
+                await self.file.upload()
+                self.showContact(tdDetails, nickName, true)
+            })
+            let cancelLink = document.createElement("a")
+            cancelLink.innerText = "Cancel"
+            cancelLink.href = "#"
+            cancelLink.addEventListener("click", async (e) => {
+                e.preventDefault()
+                self.showContact(tdDetails, nickName, true)
+            })
+            let divideSpan = document.createElement("span")
+            divideSpan.innerText = " "
+            numHtmls.numDiv.appendChild(modifyLink)
+            numHtmls.numDiv.appendChild(divideSpan)
+            numHtmls.numDiv.appendChild(cancelLink)
+        }
+        return numHtmls.numDiv
+    }
     async addContact(elementName, e, t) {
         let addContactDiv = this.getItem("phbAddContact")
         try {
@@ -90,8 +139,9 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             this.file.setName(this.getItem("fPassNameInput").value)
             // FIXME: hack
             await this.file.upload(this.isCreate)
-            if(this.isCreate)
-                this.isCreate = false
+            this.isCreate = false
+            
+            this.clearAddContact()
         } catch(e) {
             this.message(e.toString())
         }
@@ -105,7 +155,18 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
 
     hideAddContact() {
         this.getItem(this.htmlItems.phbAddContact).style = "display: none;"
+        this.clearAddContact()
     }
+    
+    clearAddContact() {
+        let addContactDiv = this.getItem("phbAddContact")
+        addContactDiv.getElementsByClassName("phbNickName")[0].value = ""
+        addContactDiv.getElementsByClassName("phbFullName")[0].value = ""
+        addContactDiv.getElementsByClassName("phbAddress")[0].value = ""
+        addContactDiv.getElementsByClassName("phbDescription")[0].value = ""
+        addContactDiv.getElementsByClassName("phbPhoneNumbers")[0].innerHTML = ""
+    }
+
     listContacts(){
         let self = this
         let contacts = this.file.getNickNames()
@@ -124,11 +185,24 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             nickNameLink.innerText = nickName
             nickNameTd.appendChild(nickNameLink)
             tr.appendChild(nickNameTd)
+            
+            let modifyTd = document.createElement("td")
+            let modifyLink = document.createElement("a")
+            modifyLink.innerText = "Modify"
+            modifyLink.href = "#"
+            modifyLink.addEventListener("click", (e)=>{
+                e.preventDefault()
+                this.showContactModifier(tdDetails)
+            })
+            modifyTd.appendChild(modifyLink)
+            tr.appendChild(modifyTd)
+
             let deleteTd = document.createElement("td")
             let deleteLink = document.createElement("a")
             deleteLink.href = "#"
             deleteLink.innerText = "Delete"
             deleteLink.addEventListener("click", async (e) => {
+                e.preventDefault()
                 try {
                     this.file.removeContact(nickName)
                     await this.file.upload()
@@ -140,6 +214,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             })
             deleteTd.appendChild(deleteLink)
             tr.appendChild(deleteTd)
+            
             table.appendChild(tr)
             let trDetails = document.createElement("tr")
             trDetails.appendChild(tdDetails)
@@ -150,9 +225,11 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         this.getItem("phbContacts").appendChild(table)
     }
     
-    showContact(tdDetails, nickName) {
-        if(tdDetails.innerHTML !== "") {
-            tdDetails.innerHTML = ""
+    showContact(tdDetails, nickName, force = false) {
+        let self = this
+        let clear = tdDetails.innerHTML !== "" && !force
+        tdDetails.innerHTML = ""
+        if(clear) {
             return
         }
         let contact = this.file.getContact(nickName)
@@ -169,11 +246,56 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             typeTd.innerText = phoneNumber.ty
             let numberTd = document.createElement("td")
             numberTd.innerText = phoneNumber.phoneNumber
+            let numberModifyTd = document.createElement("td")
+            let numberModifyLink = document.createElement("a")
+            numberModifyLink.href = "#"
+            numberModifyLink.innerText = "Modify"
+            numberModifyLink.addEventListener("click", (e) => {
+                numberTd.innerHTML = ""
+                let numberDiv = self.createPhoneNumberModifier(phoneNumber.phoneNumber, phoneNumber.ty, nickName, i, tdDetails, true)
+                numberTd.appendChild(numberDiv)
+                e.preventDefault()
+            })
+            numberModifyTd.appendChild(numberModifyLink) 
+            let numberDeleteTd = document.createElement("td")
+            let numberDeleteLink = createLink("Delete", async (e) => {
+                self.file.removePhoneNumber(nickName, i)
+                await self.file.upload()
+                self.showContact(tdDetails, nickName, true)
+            })
+            numberDeleteTd.appendChild(numberDeleteLink)
             let tr = document.createElement("tr")
             tr.appendChild(typeTd)
             tr.appendChild(numberTd)
+            tr.appendChild(numberModifyTd)
+            tr.appendChild(numberDeleteTd)
             phoneNumbersTable.appendChild(tr)
         }
+        let tr = document.createElement("tr")
+        let td = document.createElement("td")
+        let addPhoneNumberButton = document.createElement("input")
+        addPhoneNumberButton.type = "button"
+        addPhoneNumberButton.value = "Add phone number"
+        addPhoneNumberButton.addEventListener("click", (e) => {
+            e.preventDefault()
+            let phoneInput = self.createPhoneNuberInput()
+            let saveLink = createLink("Save", async () => {
+                await self.file.addPhoneNumber(
+                    nickName,
+                    new PhoneBookNumber(
+                        phoneInput.phoneNumberInput.value,
+                        phoneInput.typeSelect.value
+                    )
+                )
+                await self.file.upload()
+                self.showContact(tdDetails, nickName, true)
+            })
+            phoneInput.numDiv.appendChild(saveLink)
+            td.appendChild(phoneInput.numDiv)
+        })
+        td.appendChild(addPhoneNumberButton)
+        tr.appendChild(td)
+        phoneNumbersTable.appendChild(tr)
         html.getElementsByClassName("phbContactPhoneNumbers")[0].appendChild(phoneNumbersTable)
         
         tdDetails.innerHTML = "";
