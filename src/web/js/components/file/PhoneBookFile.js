@@ -84,6 +84,14 @@ class PhoneBookContact extends SecretJson {
     obj.phoneNumbers[idx].phoneNumber = phoneNumber.phoneNumber
     this.encrypt(obj)
   }
+
+  modify(fullName, address, description) {
+    let obj = this.decrypt()
+    obj.fullName = typeof(fullName) !== "undefined" ? fullName : obj.fullName
+    obj.address = typeof(address) !== "undefined" ? address : obj.address
+    obj.description = typeof(description) !== "undefined" ? description : obj.description
+    this.encrypt(obj)
+  }
 }
 PhoneBookContact.fromEncrypted = function(encrypted, encryptor) {
   let phbContact = new PhoneBookContact(encryptor)
@@ -129,6 +137,16 @@ class PhoneBookFile extends SecretFile {
     this.encrypt(JSON.stringify(phbObj))
   }
   
+  modifyContact(nickName, fullName, address, description) {
+    let layer2 = this.__getLayer2()
+    if ("undefined" === typeof(layer2[nickName])) {
+      throw new ErrorObject("Contact not found")
+    }
+    let contact = PhoneBookContact.fromEncrypted(Uint8Array.from(layer2[nickName]), this.__contentEncryptor)
+    contact.modify(fullName, address, description)
+    layer2[nickName] = Array.from(contact.getEncryptedContent())
+    this.encrypt(JSON.stringify(layer2))
+  }
   /**
    * 
    * @param {string} nickName 
@@ -148,6 +166,19 @@ class PhoneBookFile extends SecretFile {
     this.encrypt(JSON.stringify(layer2))
   }
 
+  chgNickName(oldNickName, newNickName) {
+    let layer2 = this.__getLayer2()
+    if ( "undefined" === typeof(layer2[oldNickName])) {
+      throw ErrorObject("Contact not found")
+    }
+    if ( "undefined" !== typeof(layer2[newNickName])) {
+      throw ErrorObject("Contact has been already exist")
+    }
+    layer2[newNickName] = layer2[oldNickName]
+    delete layer2[oldNickName]
+    this.encrypt(JSON.stringify(layer2))
+  }
+  
   addPhoneNumber(nickName, phoneNumber) {
     let layer2 = this.__getLayer2()
     let contact = PhoneBookContact.fromEncrypted(Uint8Array.from(layer2[nickName]), this.__contentEncryptor)

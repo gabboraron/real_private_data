@@ -8,7 +8,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         this.file = file || theFileFactory.createFile("phb");
         super.start(body, file);
         let modifier = this.getItem(this.htmlItems.phbAddContact)
-        this.showContactModifier(modifier)
+        this.createAddContact(modifier)
         this.addEventListener("phbShowAddContactButton", "click", this.showAddContact)
         this.addEventListener("phbModifyContactCancelButton", "click", this.hideAddContact)
         this.addEventListener("phbModifyContactSaveButton", "click", this.addContact)
@@ -40,16 +40,54 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         }
     }
 
-    /**
-     * 
-     * @param {HTMLElement} element 
-     */
-    showContactModifier(element, nickName) {
+    createAddContact(element) {
         let html = theHtmlDownloaderService.getHtml("phoneBookModifyContact")
         html.getElementsByClassName("phbAddNumberButton")[0].addEventListener("click", () => {
             let numbersDiv = html.getElementsByClassName("phbPhoneNumbers")[0]
             let numDiv = this.createPhoneNuberInput().numDiv
             numbersDiv.appendChild(numDiv)
+        })
+        element.innerHTML = ""
+        element.appendChild(html)
+    }
+
+    showContactModifier(element, nickName) {
+        let self = this
+        let html = theHtmlDownloaderService.getHtml("phoneBookModifyContact")
+        html.getElementsByClassName("phbPhoneNumbersTr")[0].style = "display: none"
+        let contact = this.file.getContact(nickName)
+        html.getElementsByClassName("phbNickName")[0].value = nickName
+        html.getElementsByClassName("phbFullName")[0].value = contact.fullName
+        html.getElementsByClassName("phbAddress")[0].value = contact.address
+        html.getElementsByClassName("phbDescription")[0].value = contact.description
+        html.getElementsByClassName("phbModifyContactSaveButton")[0].addEventListener("click", async (e) => {
+            e.preventDefault()
+            let newNickName = html.getElementsByClassName("phbNickName")[0].value
+            if(newNickName !== nickName) {
+                self.file.chgNickName(nickName, newNickName)
+            }
+            self.file.modifyContact(
+                newNickName,
+                html.getElementsByClassName("phbFullName")[0].value,
+                html.getElementsByClassName("phbAddress")[0].value,
+                html.getElementsByClassName("phbDescription")[0].value
+            )
+            await this.file.upload()
+            //HACK
+            if(newNickName !== nickName) {
+                let nickNameLinks = document.getElementsByClassName("nickNameLinkInContainer")
+                for(let i = 0; i < nickNameLinks.length; ++i) {
+                    if(nickNameLinks[i].innerText === nickName) {
+                        nickNameLinks[i].innerText = newNickName
+                        break
+                    }
+                }
+            }
+            this.showContact(element, newNickName, true)
+        })
+        html.getElementsByClassName("phbModifyContactCancelButton")[0].addEventListener("click", (e) => {
+            e.preventDefault()
+            this.showContact(element, nickName, true)
         })
         element.innerHTML = ""
         element.appendChild(html)
@@ -171,12 +209,14 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         let self = this
         let contacts = this.file.getNickNames()
         let table = document.createElement("table")
+        table.classList.add("phbContactContainerTable")
         for(let i = 0; i < contacts.length; ++i) {
             let nickName = contacts[i]
             let tr = document.createElement("tr")
             let nickNameTd = document.createElement("td")
             let nickNameLink = document.createElement("a")
             nickNameLink.href = "#"
+            nickNameLink.classList.add("nickNameLinkInContainer")
             let tdDetails = document.createElement("td")
             nickNameLink.addEventListener("click", (e) => {
                 e.preventDefault()
@@ -192,7 +232,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             modifyLink.href = "#"
             modifyLink.addEventListener("click", (e)=>{
                 e.preventDefault()
-                this.showContactModifier(tdDetails)
+                this.showContactModifier(tdDetails, nickName)
             })
             modifyTd.appendChild(modifyLink)
             tr.appendChild(modifyTd)
