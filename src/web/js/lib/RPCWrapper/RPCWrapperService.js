@@ -36,17 +36,20 @@ class RPCWrapperService {
     
     /**
      * 
-     * @param {string} old_name sha256 hex string
-     * @param {string} new_name sha256 hex string
+     * @param {string} old_name bytes hex string
+     * @param {string} new_name bytes hex string
      */
     //TODO: never tested
     async rename_file(old_name, new_name){
         return theRpcClient.call("rename_file", [old_name, new_name]);
     }
 
-    //TODO: never tested
+    /**
+     * 
+     * @param {string} file_name bytes hex string
+     */
     async del_file(file_name){
-        return theRpcClient.call("del_file", [old_name, new_name]);
+        return theRpcClient.call("del_file", [file_name]);
     }
     
     

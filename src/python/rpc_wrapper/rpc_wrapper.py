@@ -43,19 +43,17 @@ class RPCWrapper:
         return self.file_manager.list_dir(__userhash__, __passhare__)
 
     
-    #################################
-
-    #TODO: never tested
     @web_method()
     def rename_file(self, old_name, new_name, __userhash__, __passhare__):
         return self.file_manager.rename_file(__userhash__, __passhare__, old_name, new_name )
 
-    #TODO: never tested
+    @web_method()
     def del_file(self, file_name, __userhash__, __passhare__):
         return self.file_manager.del_file(__userhash__, __passhare__, file_name)
     
     
     #TODO: never tested
+    @web_method()
     def change_password(self, old_user_hash, old_password_hash, new_user_hash, new_password_hash, files):
         return self.file_manager.change_password(old_user_hash, old_password_hash, new_user_hash, new_password_hash, files)
 

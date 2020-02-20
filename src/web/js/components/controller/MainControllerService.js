@@ -46,6 +46,7 @@ class MainControllerService extends ControllerServiceBase {
 
     async listFiles(refresh = false) {
         let files = await theDirManager.showFiles(refresh);
+        files.sort((a, b)=>{return insensitiveCompare(a.decryptedName, b.decryptedName)})
         let mainTable = this.getItem("mainFilesTable");
         mainTable.innerHTML = "";
         for(let i = 0; i < files.length; ++i) {
@@ -58,23 +59,88 @@ class MainControllerService extends ControllerServiceBase {
     createFileTr(f){
         let self = this;
         let tr = document.createElement("tr");
-        
-        let link = document.createElement("a");
-        link.innerText = f.decryptedName;
-        link.class = "mainOpenFile";
-        link.href = "#";
-        link.addEventListener("click", (e) =>{
-            e.preventDefault();
+        let link = createLink(f.decryptedName, () =>{
             self.openFile(f.encryptedName);
         });
-        
-        let linkTd = document.createElement("td");
-        linkTd.appendChild(link);
-        tr.appendChild(linkTd);
+        link.classList.add("mainOpenFile");
+        let fileNameTd = document.createElement("td");
+        fileNameTd.appendChild(link);
+        tr.appendChild(fileNameTd);
 
         let typeTd = document.createElement("td");
         typeTd.innerText = f.decryptedName.match(/[.]([^.]+)$/)[1];
         tr.appendChild(typeTd);
+
+        let renameTd = document.createElement("td")
+        let renameLink = createLink("Rename", async () =>{
+            fileNameTd.innerHTML = ""
+            let renameForm = document.createElement("form") 
+            let renameInput = document.createElement("input")
+            renameInput.value = f.decryptedName
+            renameForm.appendChild(renameInput)
+            
+            let renameSaveButton = document.createElement("input")
+            renameSaveButton.value = "Save"
+            renameSaveButton.type = "submit"
+            renameForm.appendChild(renameSaveButton)
+            
+            let renameCancelLink = createLink("Cancel", () => {
+                self.listFiles(true)
+            })
+            renameForm.appendChild(renameCancelLink)
+            
+            renameForm.addEventListener("submit", async (e) => {
+                e.preventDefault()
+                let oldName = f.decryptedName
+                let newName = renameInput.value
+                let extOld = oldName.match(/[.][^.]+$/)[0]
+                let extNew = newName.match(/[.][^.]+$/)[0]
+                if(extOld !== extNew) {
+                    newName += extOld
+                }
+                if("" === newName)
+                {
+                    this.message("Empty file name")
+                    return
+                } else if(newName === oldName) {
+                    this.message("Old name and new name are equal")
+                    return
+                }
+                try {
+                    // HACK
+                    let nameEncryptor = theEncryptor.fromHexString(theUserManager.__dirHash)
+                    let encryptedOldNameBytes = nameEncryptor.encryptFromString(oldName)
+                    let encryptedNewNameBytes = nameEncryptor.encryptFromString(newName)
+                    
+                    await theDirManager.renameFile(
+                        Uint8Array2String(encryptedOldNameBytes),
+                        Uint8Array2String(encryptedNewNameBytes)
+                    )
+                    self.message("Rename file is ready")
+                    self.listFiles(true)
+                } catch(e) {
+                    this.message(e.toString())
+                }
+            })
+            fileNameTd.appendChild(renameForm)
+        })
+        renameTd.appendChild(renameLink)
+        tr.appendChild(renameTd)
+        
+        let deleteTd = document.createElement("td")
+        let deleteLink = createLink("Delete", async () => {
+            let fnameString = Uint8Array2String(f.encryptedName)
+            try {
+                await theDirManager.removeFile(fnameString)
+                this.message("File delete is ready")
+            } catch(e) {
+                this.message(e.toString())
+            }
+            self.listFiles(true)
+        })
+        deleteTd.appendChild(deleteLink)
+        tr.appendChild(deleteTd)
+
         return tr;
     }
 
