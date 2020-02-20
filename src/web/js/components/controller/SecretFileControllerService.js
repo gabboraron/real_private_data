@@ -46,7 +46,7 @@ class SecretFileControllerService extends ControllerServiceBase {
         }
         this.getItem(this.htmlItems.secretFileMainDiv).style = "display:none;"
         this.isCreate = false;
-        this.getItem(this.htmlItems.fPassNameInput).value = this.file.decryptName();
+        thePageLoader.setTitlePostfix(this.file.decryptName())
         this.hideChangePassword();
         this.addEventListener(this.htmlItems.fPassChangePasswordHideLink, "click", this.hideChangePassword);
         this.addEventListener(this.htmlItems.fPassChangePasswordShowLink, "click", this.showChangePassword);
