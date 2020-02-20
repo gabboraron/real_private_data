@@ -43,4 +43,11 @@ class DirManagerService {
         let f = theFileFactory.createFileFromEncryptedNameBytes(fNameBytes, nameEncryptor);
         return f;
     }
+
+    renameFile(oldNameHexBytes, newNameHexBytes) {
+        return theRpcWrapper.rename_file(oldNameHexBytes, newNameHexBytes)
+    }
+    removeFile(fNameHexBytes) {
+        return theRpcWrapper.del_file(fNameHexBytes)
+    }
 }
