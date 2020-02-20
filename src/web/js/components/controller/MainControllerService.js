@@ -46,6 +46,7 @@ class MainControllerService extends ControllerServiceBase {
 
     async listFiles(refresh = false) {
         let files = await theDirManager.showFiles(refresh);
+        files.sort((a, b)=>{return insensitiveCompare(a.decryptedName, b.decryptedName)})
         let mainTable = this.getItem("mainFilesTable");
         mainTable.innerHTML = "";
         for(let i = 0; i < files.length; ++i) {
