@@ -72,7 +72,7 @@ class MainControllerService extends ControllerServiceBase {
         tr.appendChild(typeTd);
 
         let renameTd = document.createElement("td")
-        let renameLink = createLink("Rename", async () =>{
+        let renameLink = createLink("Rename", async () => {
             fileNameTd.innerHTML = ""
             let renameForm = document.createElement("form") 
             let renameInput = document.createElement("input")
@@ -82,11 +82,18 @@ class MainControllerService extends ControllerServiceBase {
             let renameSaveButton = document.createElement("input")
             renameSaveButton.value = "Save"
             renameSaveButton.type = "submit"
+            renameSaveButton.classList.add("btn")
+            renameSaveButton.classList.add("btn-secondary")
+            renameSaveButton.classList.add("btn-sm")
             renameForm.appendChild(renameSaveButton)
             
             let renameCancelLink = createLink("Cancel", () => {
                 self.listFiles(true)
             })
+            renameCancelLink.classList.add("btn")
+            renameCancelLink.classList.add("btn-secondary")
+            renameCancelLink.classList.add("btn-sm")
+    
             renameForm.appendChild(renameCancelLink)
             
             renameForm.addEventListener("submit", async (e) => {
@@ -124,6 +131,10 @@ class MainControllerService extends ControllerServiceBase {
             })
             fileNameTd.appendChild(renameForm)
         })
+        renameLink.classList.add("btn")
+        renameLink.classList.add("btn-secondary")
+        renameLink.classList.add("btn-sm")
+
         renameTd.appendChild(renameLink)
         tr.appendChild(renameTd)
         
@@ -138,6 +149,9 @@ class MainControllerService extends ControllerServiceBase {
             }
             self.listFiles(true)
         })
+        deleteLink.classList.add("btn")
+        deleteLink.classList.add("btn-secondary")
+        deleteLink.classList.add("btn-sm")
         deleteTd.appendChild(deleteLink)
         tr.appendChild(deleteTd)
 
