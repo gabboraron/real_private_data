@@ -132,6 +132,7 @@ class MainControllerService extends ControllerServiceBase {
             let fnameString = Uint8Array2String(f.encryptedName)
             try {
                 await theDirManager.removeFile(fnameString)
+                this.message("File delete is ready")
             } catch(e) {
                 this.message(e.toString())
             }
