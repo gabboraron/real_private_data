@@ -1,12 +1,14 @@
 "use strict";
 
 window.fileTypes = {
-    "txt":"txt"
+    "txt":"txt",
+    "phb":"phb"
 }
 
 class FileFactory {
     types = {
-        "txt" : TxtFile
+        "txt" : TxtFile,
+        "phb" : PhoneBookFile
     };
 
     createFile = function(type) {

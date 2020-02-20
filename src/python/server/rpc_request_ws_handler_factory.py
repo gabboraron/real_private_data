@@ -19,8 +19,10 @@ def RPCRequestWSHandlerFactory(rpc_wrapper: RPCWrapper):
 
         async def on_message(self, message):
             request = message
-            response = await dispatch(request, my_methods, basic_logging=True, debug=theConfig.debug )
-            print(response)
+            show_message = theConfig.show_rpc_message
+            response = await dispatch(request, my_methods, basic_logging=show_message, debug=theConfig.debug )
+            if show_message:
+                print(response)
             if response.wanted:
                 self.write_message(str(response))
 

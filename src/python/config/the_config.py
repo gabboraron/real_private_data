@@ -13,6 +13,7 @@ class TheConfig(ConfigBase):
     configFile:StrArg = StrArg(help="Config json file default: config.json", default_value=p["file_dir"] + "/config.json")
 
     debug:BoolArg      = BoolArg(help="debugmode default false", default_value=False, is_public=True)
+    show_rpc_message   = BoolArg(help="Show rpc message", default_value=False)
     open_port:IntArg   = IntArg(help="Open port", default_value = 8080)
     debug_open_port:IntArg = IntArg(help="debug port", default_value = 8081)
     secure_port:IntArg = IntArg(help="Secure port", default_value = 8443)

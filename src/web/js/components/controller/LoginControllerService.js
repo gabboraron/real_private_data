@@ -27,10 +27,6 @@ class LoginControllerService extends ControllerServiceBase {
         super.stop();
     }
     
-    message(msg) {
-        this.getItem(this.htmlItems.loginMessage).innerText = msg;
-    }
-    
     async login(elementName, e, t){
         this.message("Login...");
         console.log("Login...");

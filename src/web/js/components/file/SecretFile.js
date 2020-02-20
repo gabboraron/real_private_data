@@ -166,6 +166,9 @@ class SecretFile //extends ISecretFile
     async del_file() {
         return theRpcWrapper.del_file(this.__encryptedName);
     }
+    clear(){
+        this.encrypt("")
+    }
 };
 
 // todo not here

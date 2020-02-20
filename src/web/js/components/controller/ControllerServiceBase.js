@@ -1,15 +1,8 @@
 'use strict';
 class ControllerServiceBase {
     constructor(){
-        this.events = [];
-        let currProto = this;
-        let htmlItems = {};
-        while(currProto.constructor !== ControllerServiceBase) {
-            if(currProto.constructor.htmlItems)
-                htmlItems = Object.assign({}, htmlItems, currProto.constructor.htmlItems);
-            currProto = currProto.__proto__;
-        }
-        this.htmlItems = htmlItems;
+        this.events = []
+        this.__initHTMLItems()
     }
 
     start(body) {
@@ -55,9 +48,9 @@ class ControllerServiceBase {
         for(let i = 0; i < elements.length; ++i) {
             let element = elements[i];
             let f = (e) => { 
-                let ret = func.call(self, elementName, e, this );
                 if( typeof(e.preventDefault) === "function" && !e.disablePreventDefault)
-                    e.preventDefault();
+                    e.preventDefault()
+                let ret = func.call(self, elementName, e, this );
                 return ret; 
             };
             let event = {
@@ -87,4 +80,23 @@ class ControllerServiceBase {
         thePageLoader.logout();
     }
 
+    /**
+     * 
+     * @param {*} msg 
+     */
+    message(msg){
+        console.log(msg.toString())
+        this.getItem("message").innerText = msg.toString()
+    }
+
+    __initHTMLItems() {
+        let currProto = this
+        let htmlItems = {}
+        while(currProto.constructor !== ControllerServiceBase) {
+            if(currProto.constructor.htmlItems)
+                htmlItems = Object.assign({}, htmlItems, currProto.constructor.htmlItems)
+            currProto = currProto.__proto__
+        }
+        this.htmlItems = htmlItems
+    }
 }

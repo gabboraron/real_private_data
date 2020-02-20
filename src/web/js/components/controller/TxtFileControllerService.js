@@ -31,7 +31,6 @@ class TxtFileControllerService extends SecretFileControllerService {
     async createFile() {
         console.debug("createFile");
         this.setName();
-        this.setPassword();
         let txt = this.getItem(this.htmlItems.txtPlanInput).value;
         this.file.encrypt(txt);
         try{
@@ -41,21 +40,20 @@ class TxtFileControllerService extends SecretFileControllerService {
             return false;
         }
         this.initFile(this.body);
-        this.getItem(this.htmlItems.secretFileMainDiv).style = "display: block;";
-        this.getItem(this.htmlItems.fPassLoginForm).style = "display:none;";
-     }
+        this.showMainDiv()
+        this.hideChangePassword()
+    }
 
-     async openFile(elementName, e, t) {
-         try {
-             await super.openFile(elementName, e, t);
-             let decrypted = this.file.decrypt();
-             //this.getItem(this.htmlItems.).innerText = decrypted.modifyDate
-             this.getItem(this.htmlItems.txtPlanInput).value = decrypted.txt;
-         } catch(e) {
-             this.message(e)
-         }
-
-     }
+    async openFile(elementName, e, t) {
+        try {
+            await super.openFile(elementName, e, t);
+            let decrypted = this.file.decrypt();
+            //this.getItem(this.htmlItems.).innerText = decrypted.modifyDate
+            this.getItem(this.htmlItems.txtPlanInput).value = decrypted.txt;
+        } catch(e) {
+            this.message(e)
+        }
+    }
 }
 
 TxtFileControllerService.htmlItems = {

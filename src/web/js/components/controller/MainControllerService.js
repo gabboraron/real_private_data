@@ -5,16 +5,20 @@ class MainControllerService extends ControllerServiceBase {
     }
     
     htmlItems = {
-        "changePasswordLink" : "changePasswordLink",
+        "logoutLink"         : "logoutLink",
         "createUserLink"     : "createUserLink",
-        "createFileLink"     : "createFileLink"
+        "changePasswordLink" : "changePasswordLink",
+        "createTxtFileLink"  : "createTxtFileLink",
+        "createPhbFileLink"  : "createPhbFileLink",
+        "mainFilesTable"     : "mainFilesTable"
     }
 
     start(body) {
         super.start(body);
         this.addEventListener(this.htmlItems.changePasswordLink, "click", this.openPage);
         this.addEventListener(this.htmlItems.createUserLink, "click", this.openPage);
-        this.addEventListener(this.htmlItems.createFileLink, "click", this.openPage);
+        this.addEventListener(this.htmlItems.createTxtFileLink, "click", this.openPage);
+        this.addEventListener(this.htmlItems.createPhbFileLink, "click", this.openPage);
         this.listFiles(true);
     }
     
@@ -26,16 +30,16 @@ class MainControllerService extends ControllerServiceBase {
     openPage(elementName, e, t){
         switch(elementName){
             case this.htmlItems.createUserLink:
-                this.stop();
                 thePageLoader.loadPage("createUser", undefined, true);
                 break;
             case this.htmlItems.changePasswordLink:
-                this.stop();
                 thePageLoader.loadPage("chgPassword", undefined, true);
                 break;
-            case this.htmlItems.createFileLink:
-                this.stop();
+            case this.htmlItems.createTxtFileLink:
                 thePageLoader.loadPage("txtFile", undefined, true);
+                break;
+            case this.htmlItems.createPhbFileLink:
+                thePageLoader.loadPage("phoneBookFile", undefined, true);
                 break;
         }
     }
@@ -43,6 +47,7 @@ class MainControllerService extends ControllerServiceBase {
     async listFiles(refresh = false) {
         let files = await theDirManager.showFiles(refresh);
         let mainTable = this.getItem("mainFilesTable");
+        mainTable.innerHTML = "";
         for(let i = 0; i < files.length; ++i) {
             let tr = this.createFileTr( files[i])
             mainTable.appendChild(tr);
@@ -74,7 +79,11 @@ class MainControllerService extends ControllerServiceBase {
     }
 
     openFile(encryptedName) {
+        const type2Page = {
+            "txt" : "txtFile",
+            "phb" : "phoneBookFile"
+        }
         let f = theDirManager.openFile(encryptedName);
-        thePageLoader.loadPage("txtFile",undefined, true, f);
+        thePageLoader.loadPage(type2Page[f.type], undefined, true, f);
     }
 }
