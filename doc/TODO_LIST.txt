@@ -4,4 +4,11 @@ Txt file
     - Change password move to menu
     - Show encoded text
 Phone book file
-    - Implement it
+    - Implement it (on progress)
+SecretFile controller
+    - Implement delete file
+Server
+    - Do not log jsprc parameters in release mode
+
+JS general
+    - Service base (log start, and stop, and store open services)
