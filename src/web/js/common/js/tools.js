@@ -122,3 +122,16 @@ function createLink(innerText, func) {
     })
     return link
 }
+
+/**
+ * 
+ * @param {string} a 
+ * @param {string} b 
+ */
+function insensitiveCompare(a, b) {
+    //TODO: Hungarian abc
+    let aLow = a.toLowerCase()
+    let bLow = b.toLowerCase()
+    return aLow < bLow ? -1 :
+           aLow > bLow ?  1 : 0
+}

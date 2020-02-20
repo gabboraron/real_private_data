@@ -208,6 +208,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
     listContacts(){
         let self = this
         let contacts = this.file.getNickNames()
+        contacts.sort(insensitiveCompare)
         let table = document.createElement("table")
         table.classList.add("phbContactContainerTable")
         for(let i = 0; i < contacts.length; ++i) {
