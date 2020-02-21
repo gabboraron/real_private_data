@@ -44,4 +44,12 @@ class HtmlDownloaderService {
         element.innerHTML = this.htmlDict[htmlName];
         return element;
     }
+
+    getBody(htmlName) {
+        let html = this.getHtml(htmlName)
+        let bodyInnerHTML = html.getElementsByTagName("body")[0].innerHTML
+        let ret = document.createElement("div")
+        ret.innerHTML = bodyInnerHTML
+        return ret
+    }
 }

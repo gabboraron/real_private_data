@@ -55,9 +55,9 @@ class SecretFileControllerService extends ControllerServiceBase {
     }
     
     initFilePasswordDiv(htmlName) {
-        let html = theHtmlDownloaderService.getHtml(htmlName);
+        let html = theHtmlDownloaderService.getBody(htmlName);
         let filePasswordMainDiv = this.body.getElementsByClassName("filePasswordMainDiv")[0];
-        filePasswordMainDiv.innerHTML = html.getElementsByTagName("body")[0].innerHTML;
+        filePasswordMainDiv.innerHTML = html.innerHTML;
     }
     
     hideOpenPassword(){

@@ -41,7 +41,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
     }
 
     createAddContact(element) {
-        let html = theHtmlDownloaderService.getHtml("phoneBookModifyContact")
+        let html = theHtmlDownloaderService.getBody("phoneBookModifyContact")
         html.getElementsByClassName("phbAddNumberButton")[0].addEventListener("click", () => {
             let numbersDiv = html.getElementsByClassName("phbPhoneNumbers")[0]
             let numDiv = this.createPhoneNuberInput().numDiv
@@ -53,7 +53,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
 
     showContactModifier(element, nickName) {
         let self = this
-        let html = theHtmlDownloaderService.getHtml("phoneBookModifyContact")
+        let html = theHtmlDownloaderService.getBody("phoneBookModifyContact")
         html.getElementsByClassName("phbPhoneNumbersTr")[0].style = "display: none"
         let contact = this.file.getContact(nickName)
         html.getElementsByClassName("phbNickName")[0].value = nickName
@@ -259,7 +259,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             return
         }
         let contact = this.file.getContact(nickName)
-        let html = theHtmlDownloaderService.getHtml("phoneBookContact")
+        let html = theHtmlDownloaderService.getBody("phoneBookContact")
         html.getElementsByClassName("phbContactNickName")[0].innerText = nickName
         html.getElementsByClassName("phbContactFullname")[0].innerText = contact.fullName
         html.getElementsByClassName("phbContactAddress")[0].innerText = contact.address
