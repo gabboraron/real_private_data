@@ -14,7 +14,8 @@ class SecretFileControllerService extends ControllerServiceBase {
             this.initCreateFile(body);
         }
         this.addEventListener(this.htmlItems.fPassSaveButton, "click", this.save);
-        this.addEventListener(this.htmlItems.fPassChangePasswordForm, "submit", this.setPassword)
+        this.addEventListener("fPassNewPasswordForm", "submit", this.setPassword)
+        this.addEventListener(this.htmlItems.fPassChangePasswordForm, "submit", this.chgPassword)
         this.hideMainDiv()
     }
     
@@ -146,7 +147,7 @@ class SecretFileControllerService extends ControllerServiceBase {
             this.message(msg);
             throw msg;
         }
-        try{
+        try {
             this.file.chgPassword(newPassword.value, oldPassword.value)
             await this.file.upload()
         } catch(e) {
