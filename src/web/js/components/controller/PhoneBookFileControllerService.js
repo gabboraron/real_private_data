@@ -129,11 +129,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         let numHtmls = this.createPhoneNuberInput(phoneNumber, ty)
 
         if(addButtons) {
-            let modifyLink = document.createElement("a")
-            modifyLink.innerText = "Save"
-            modifyLink.href = "#"
-            modifyLink.addEventListener("click", async (e) => {
-                e.preventDefault()
+            let modifyLink = createButton("Save", async () => {
                 let pbn = new PhoneBookNumber(
                     numHtmls.phoneNumberInput.value, 
                     numHtmls.typeSelect.value
@@ -142,11 +138,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
                 await self.file.upload()
                 self.showContact(tdDetails, nickName, true)
             })
-            let cancelLink = document.createElement("a")
-            cancelLink.innerText = "Cancel"
-            cancelLink.href = "#"
-            cancelLink.addEventListener("click", async (e) => {
-                e.preventDefault()
+            let cancelLink = createButton("Cancel", async () => {
                 self.showContact(tdDetails, nickName, true)
             })
             let divideSpan = document.createElement("span")
@@ -228,21 +220,14 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             tr.appendChild(nickNameTd)
             
             let modifyTd = document.createElement("td")
-            let modifyLink = document.createElement("a")
-            modifyLink.innerText = "Modify"
-            modifyLink.href = "#"
-            modifyLink.addEventListener("click", (e)=>{
-                e.preventDefault()
+            let modifyLink = createButton("Modify", () => {
                 this.showContactModifier(tdDetails, nickName)
             })
             modifyTd.appendChild(modifyLink)
             tr.appendChild(modifyTd)
 
             let deleteTd = document.createElement("td")
-            let deleteLink = document.createElement("a")
-            deleteLink.href = "#"
-            deleteLink.innerText = "Delete"
-            deleteLink.addEventListener("click", async (e) => {
+            let deleteLink = createButton("Delete", async (e) => {
                 e.preventDefault()
                 try {
                     this.file.removeContact(nickName)
@@ -288,10 +273,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             let numberTd = document.createElement("td")
             numberTd.innerText = phoneNumber.phoneNumber
             let numberModifyTd = document.createElement("td")
-            let numberModifyLink = document.createElement("a")
-            numberModifyLink.href = "#"
-            numberModifyLink.innerText = "Modify"
-            numberModifyLink.addEventListener("click", (e) => {
+            let numberModifyLink = createButton("Modify", (e) => {
                 numberTd.innerHTML = ""
                 let numberDiv = self.createPhoneNumberModifier(phoneNumber.phoneNumber, phoneNumber.ty, nickName, i, tdDetails, true)
                 numberTd.appendChild(numberDiv)
@@ -299,7 +281,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             })
             numberModifyTd.appendChild(numberModifyLink) 
             let numberDeleteTd = document.createElement("td")
-            let numberDeleteLink = createLink("Delete", async (e) => {
+            let numberDeleteLink = createButton("Delete", async (e) => {
                 self.file.removePhoneNumber(nickName, i)
                 await self.file.upload()
                 self.showContact(tdDetails, nickName, true)
@@ -320,7 +302,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         addPhoneNumberButton.addEventListener("click", (e) => {
             e.preventDefault()
             let phoneInput = self.createPhoneNuberInput()
-            let saveLink = createLink("Save", async () => {
+            let saveLink = createButton("Save", async () => {
                 await self.file.addPhoneNumber(
                     nickName,
                     new PhoneBookNumber(

@@ -9,5 +9,12 @@
 }
 
 .debugBody {
-    background-color: rgb(190, 238, 171);
+    background-color: rgb(241, 220, 122);
+}
+.mainFilesTable{
+    margin-left: 10px
+}
+
+h2 {
+    margin-left: 10px
 }

@@ -3,20 +3,26 @@
         <title>Main</title>
     </head>
     <body>
-        <ul>
-            <li><a class="changePasswordLink" href="#">Change password</a></li>
-            <li><a class="createUserLink" href="#">Create user</a></li>
-            <li>
-                Create File
-                <ul>
-                    <li><a class="createTxtFileLink" href="#">Create txt file</a></li>
-                    <li><a class="createPhbFileLink" href="#">Create phonebook file</a></li>
-                </ul>
-            </li>
-            <li><a class="logoutLink" href="#">Logout</a></li>
-        </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Create File
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ul>
+                            <li><a class="createTxtFileLink" href="#" class="dropdown-item">Create txt file</a></li>
+                            <li><a class="createPhbFileLink" href="#" class="dropdown-item">Create phonebook file</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item active"><a class="changePasswordLink nav-link" href="#">Change password</a></li>
+                <li class="nav-item active"><a class="createUserLink nav-link" href="#">Create user</a></li>
+                <li class="nav-item active"><a class="logoutLink nav-link" href="#">Logout</a></li>
+            </ul>
+        </nav>
         <div class="message"></div>
-        <div>Files</div>
-        <table class="mainFilesTable"></table>
+        <h2>Files</h2>
+        <table class="mainFilesTable table table-sm table-responsive"></table>
     </body>
 </html>
