@@ -125,6 +125,28 @@ function createLink(innerText, func) {
 
 /**
  * 
+ * @param {string} value 
+ * @param {function} func 
+ * @param {string} type 
+ */
+function createButton(value, func, type = "button") {
+    let button = document.createElement("input")
+    button.type = type
+    button.value = value
+    button.classList.add("btn")
+    button.classList.add("btn-secondary")
+    button.classList.add("btn-sm")
+    button.addEventListener("click", (e) =>{
+        if("submit" !== type) {
+            e.preventDefault()
+        }
+        func(e)
+    })
+    return button
+}
+
+/**
+ * 
  * @param {string} a 
  * @param {string} b 
  */

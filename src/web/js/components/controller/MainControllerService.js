@@ -61,7 +61,7 @@ class MainControllerService extends ControllerServiceBase {
         let tr = document.createElement("tr");
         let link = createLink(f.decryptedName, () =>{
             self.openFile(f.encryptedName);
-        });
+        })
         link.classList.add("mainOpenFile");
         let fileNameTd = document.createElement("td");
         fileNameTd.appendChild(link);
@@ -72,28 +72,19 @@ class MainControllerService extends ControllerServiceBase {
         tr.appendChild(typeTd);
 
         let renameTd = document.createElement("td")
-        let renameLink = createLink("Rename", async () => {
+        let renameLink = createButton("Rename", async () => {
             fileNameTd.innerHTML = ""
             let renameForm = document.createElement("form") 
             let renameInput = document.createElement("input")
             renameInput.value = f.decryptedName
             renameForm.appendChild(renameInput)
             
-            let renameSaveButton = document.createElement("input")
-            renameSaveButton.value = "Save"
-            renameSaveButton.type = "submit"
-            renameSaveButton.classList.add("btn")
-            renameSaveButton.classList.add("btn-secondary")
-            renameSaveButton.classList.add("btn-sm")
+            let renameSaveButton = createButton("Save", ()=>{}, "submit")
             renameForm.appendChild(renameSaveButton)
             
-            let renameCancelLink = createLink("Cancel", () => {
+            let renameCancelLink = createButton("Cancel", () => {
                 self.listFiles(true)
-            })
-            renameCancelLink.classList.add("btn")
-            renameCancelLink.classList.add("btn-secondary")
-            renameCancelLink.classList.add("btn-sm")
-    
+            })    
             renameForm.appendChild(renameCancelLink)
             
             renameForm.addEventListener("submit", async (e) => {
@@ -139,7 +130,7 @@ class MainControllerService extends ControllerServiceBase {
         tr.appendChild(renameTd)
         
         let deleteTd = document.createElement("td")
-        let deleteLink = createLink("Delete", async () => {
+        let deleteLink = createButton("Delete", async () => {
             let fnameString = Uint8Array2String(f.encryptedName)
             try {
                 await theDirManager.removeFile(fnameString)
@@ -149,9 +140,6 @@ class MainControllerService extends ControllerServiceBase {
             }
             self.listFiles(true)
         })
-        deleteLink.classList.add("btn")
-        deleteLink.classList.add("btn-secondary")
-        deleteLink.classList.add("btn-sm")
         deleteTd.appendChild(deleteLink)
         tr.appendChild(deleteTd)
 
