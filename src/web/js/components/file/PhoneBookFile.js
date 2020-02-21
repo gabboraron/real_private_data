@@ -203,13 +203,15 @@ class PhoneBookFile extends SecretFile {
     this.encrypt(JSON.stringify(layer2))
   }
 
+  clear() {
+    this.encrypt("{}")  
+  }
+
   __getLayer2() {
     let txt = this.decrypt().txt
     return JSON.parse(txt)
   }
-  clear() {
-    this.encrypt("{}")  
-  }
+
 }
 
 
