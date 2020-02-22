@@ -18,7 +18,7 @@ class CreateUserControllerService extends ControllerServiceBase {
     start(body) {
         super.start(body);
         this.addEventListener( this.htmlItems.createUserForm, "submit", this.createUser);
-        this.addEventListener( this.htmlItems.createUserBackLink, "click", this.back);
+        this.addEventListener( this.htmlItems.createUserBackLink, "click", this.backToMain);
     }
     
     stop() {
