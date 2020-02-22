@@ -67,7 +67,9 @@ class FileManager:
 
     def rename_file(self, user_hash, password_hash, old_name, new_name):
         if not self.is_exist(user_hash, password_hash, old_name):
-            raise Exception("TODO: some exception")
+            raise Exception("TODO: some exception file not exist")
+        if self.is_exist(user_hash, password_hash, new_name):
+            raise Exception("TODO: some exception new file exist")
         old_path = self.__get_file_path(user_hash, password_hash, old_name)
         new_path = self.__get_file_path(user_hash, password_hash, new_name)
         os.rename(old_path, new_path)
