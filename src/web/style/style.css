@@ -8,9 +8,14 @@
     height: 300px;
 }
 
-.debugBody {
-    background-color: rgb(241, 220, 122);
+body {
+    background-color: rgb(241, 220, 122) !important;
 }
+
+.debugBody {
+    background-color: rgb(176, 241, 122) !important;
+}
+
 .mainFilesTable{
     margin-left: 10px
 }
