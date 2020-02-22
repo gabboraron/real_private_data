@@ -167,9 +167,12 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
                 let phoneNumber = numberDiv.getElementsByClassName("phoneNumberInput")[0].value
                 this.file.addPhoneNumber(nickName, new PhoneBookNumber(phoneNumber, phoneNumberType))
             }
-            this.file.setName(this.getItem("fPassNameInput").value)
+            if(this.isCreate) {
+                this.file.setName(this.getItem("fPassNameInput").value)
+            }
             // FIXME: hack
             await this.file.upload(this.isCreate)
+            this.message("Contact added")
             this.isCreate = false
             
             this.clearAddContact()
