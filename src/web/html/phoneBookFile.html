@@ -3,14 +3,16 @@
         <title>PhoneBook File</title>
     </head>
     <body>
-        <ul>
-            <li><a class="txtFileBackLink" href="#">Back</a></li>
-            <li><a class="logoutLink" href="#">Logout</a></li>
-        </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="txtFileBackLink nav-link" href="#">Back</a></li>
+                <li class="nav-item active"><a class="logoutLink nav-link" href="#">Logout</a></li>
+            </ul>
+        </nav>
         <div class="message"></div>
         <div class="filePasswordMainDiv"></div>
         <div class="secretFileMainDiv">
-            <input type="submit" class="phbShowAddContactButton" value="Add contact"><br>
+            <input type="submit" class="phbShowAddContactButton btn btn-secondary btn-sm" value="Add contact"><br>
             <div class="phbAddContact" style="display: none;"></div>
             <div class="phbContacts"></div>
             Encoded:<br>

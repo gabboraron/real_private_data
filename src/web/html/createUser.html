@@ -3,10 +3,12 @@
         <title>Create user</title>
     </head>
     <body>
-        <ul>
-            <li><a class="createUserBackLink" href="#">Back</a></li>
-            <li><a class="logoutLink" href="#">Logout</a></li>
-        </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="createUserBackLink nav-link" href="#">Back</a></li>
+                <li class="nav-item active"><a class="logoutLink nav-link" href="#">Logout</a></li>
+            </ul>
+        </nav>
         <div class="message"></div>
         <form class="createUserForm">
             <table>
@@ -24,7 +26,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" class="createUserButton" value="Create User"></td>
+                    <td><input type="submit" class="createUserButton btn btn-secondary btn-sm" value="Create User"></td>
                 </tr>
             </table>
         </form>

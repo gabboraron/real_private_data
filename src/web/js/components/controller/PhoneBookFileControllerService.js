@@ -301,11 +301,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         }
         let tr = document.createElement("tr")
         let td = document.createElement("td")
-        let addPhoneNumberButton = document.createElement("input")
-        addPhoneNumberButton.type = "button"
-        addPhoneNumberButton.value = "Add phone number"
-        addPhoneNumberButton.addEventListener("click", (e) => {
-            e.preventDefault()
+        let addPhoneNumberButton = createButton("Add phone number", () => {
             let phoneInput = self.createPhoneNuberInput()
             let saveLink = createButton("Save", async () => {
                 await self.file.addPhoneNumber(
