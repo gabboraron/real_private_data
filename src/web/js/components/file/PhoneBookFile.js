@@ -207,6 +207,37 @@ class PhoneBookFile extends SecretFile {
     this.encrypt("{}")  
   }
 
+  changeContentEncryptor(newEncryptor, oldEncryptor) {
+    if(typeof(oldEncryptor) === undefined) {
+      oldEncryptor = this.__contentEncryptor;
+    }
+    let currEncryptor = this.__contentEncryptor;
+    this.__contentEncryptor = oldEncryptor;
+    try {
+        let text = this.decrypt().txt;
+        this.__contentEncryptor = newEncryptor;
+        let layer2 = JSON.parse(text)
+        let nickNames = Object.keys(layer2)
+        for(let i = 0; i < nickNames.length; ++i ) {
+          let nickName = nickNames[i]
+          let contact = oldEncryptor.decryptToString(layer2[nickName])
+          layer2[nickName] = Array.from(newEncryptor.encryptFromString(contact))
+        }
+        let json = JSON.stringify(layer2)
+        this.encrypt(json);
+    } catch(e){
+        this.__contentEncryptor = currEncryptor;
+        throw e;
+    }
+  }
+  chgPassword(newPlainPassword, oldPlainPassword) {
+    let newEncryptor = theEncryptor.fromString(newPlainPassword);
+    let oldEncryptor = undefined;
+    if(oldPlainPassword)
+        oldEncryptor = theEncryptor.fromString(oldPlainPassword);
+    return this.changeContentEncryptor(newEncryptor, oldEncryptor);
+  }
+  
   __getLayer2() {
     let txt = this.decrypt().txt
     return JSON.parse(txt)
