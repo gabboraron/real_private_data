@@ -120,11 +120,11 @@ class PageLoaderService {
         this.logedIn = true;
     }
 
-    logout() {
+    logout(msg = "Logout was successful") {
         theUserManager.logout();
         this.userName = undefined;
         this.logedIn = false;
-        this.loadPage("login", undefined, true);
+        this.loadPage("login", undefined, true, msg);
     }
 
     __logoutSetStyle(style){
