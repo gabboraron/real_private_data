@@ -17,7 +17,7 @@ class ChgPasswordControllerService extends ControllerServiceBase {
     start(body) {
         super.start(body);
         this.addEventListener( this.htmlItems.chgForm, "submit", this.chgPassword );
-        this.addEventListener( this.htmlItems.chgBackLink, "click", this.back );
+        this.addEventListener( this.htmlItems.chgBackLink, "click", this.backToMain );
         
     }
     
@@ -25,12 +25,21 @@ class ChgPasswordControllerService extends ControllerServiceBase {
         super.stop();
     }
     
-    chgPassword(elementName, e, t) {
-
+    resetForm() {
+        this.getItem(this.htmlItems.chgOldPassword).value = ""
+        this.getItem(this.htmlItems.chgNewPassword).value = ""
+        this.getItem(this.htmlItems.chgNewPassword2).value = ""
     }
-    
-    back(elementName, e, t) {
-        this.stop();
-        thePageLoader.loadPage("main", undefined, true);
+    async chgPassword(elementName, e, t) {
+        let oldPassword = this.getItem(this.htmlItems.chgOldPassword).value
+        let newPassword1 = this.getItem(this.htmlItems.chgNewPassword).value
+        let newPassword2 = this.getItem(this.htmlItems.chgNewPassword2).value
+        
+        try {
+            await theUserManager.chgPassword(oldPassword, newPassword1)
+            thePageLoader.logout("Password has been changed")
+        } catch(e) {
+            this.error(e)
+        }
     }
 }

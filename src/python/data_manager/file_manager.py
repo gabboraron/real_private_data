@@ -65,7 +65,6 @@ class FileManager:
             return ret
 
 
-    #TODO: never tested
     def rename_file(self, user_hash, password_hash, old_name, new_name):
         if not self.is_exist(user_hash, password_hash, old_name):
             raise Exception("TODO: some exception")
@@ -75,7 +74,6 @@ class FileManager:
         return True
     
     
-    #TODO: never tested
     def del_file(self, user_hash, password_hash, file_name):
         if not self.is_exist(user_hash, password_hash, file_name):
             raise Exception("TODO: error object: File not exist")
@@ -83,7 +81,6 @@ class FileManager:
         return True
     
     
-    #TODO: never tested
     def change_password(self, old_user_hash, old_password_hash, new_user_hash, new_password_hash, files):
         # files = [{"old":"old_name","new":"new_name"}]
         # TODO: Transaction
