@@ -36,10 +36,9 @@ h2 {
 }
 
 .messageOK {
-    background: #67d255;
+    background: #bcf9b1;
     border: solid #5d9c31;
     padding: 10;
-
 }
 .messageError {
     background: #f9a8d7;
