@@ -14,9 +14,9 @@ async function main(){
     window.theUserManager = new UserManagerService();
     theUserManager.start();
     window.thePageLoader = new PageLoaderService();
-    let loggerWindow = new MyWindow(document.getElementById("logDiv"));
-    loggerWindow.setTitle("Logging");
-    window.theLogger = new Logger(false, theConfig.debug, loggerWindow.windowBody);
+    //let loggerWindow = new MyWindow(document.getElementById("logDiv"));
+    //loggerWindow.setTitle("Logging");
+    //window.theLogger = new Logger(false, theConfig.debug, loggerWindow.windowBody);
     thePageLoader.loadPage("login", undefined, true);
     //TODO: DELETE NEXT 3 lines, and discomment pervious line
     //await theUserManager.login("u", "p", "SimpleJsonRpcWebSocketClientService");
