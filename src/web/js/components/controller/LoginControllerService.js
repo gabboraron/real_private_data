@@ -38,7 +38,7 @@ class LoginControllerService extends ControllerServiceBase {
             await theUserManager.login(user, password, rpcName);
         } catch(e) {
             this.getItem(this.htmlItems.loginPassword).value = "";
-            this.message(e.msg);
+            this.error(e.msg);
             console.log(e.toString());
             return;
         }

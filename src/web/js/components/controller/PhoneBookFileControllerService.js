@@ -23,8 +23,9 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         this.setName();
         try{
             await this.file.upload(true);
+            this.message("File created successfully")
         } catch(e) {
-            this.message(e.toString());
+            this.error(e.toString());
             return false;
         }
         this.initFile(this.body);
@@ -36,7 +37,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             this.listContacts()
             //this.getItem(this.htmlItems.).innerText = decrypted.modifyDate
         } catch(e) {
-            this.message(e)
+            this.error(e)
         }
     }
 
@@ -173,7 +174,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             
             this.clearAddContact()
         } catch(e) {
-            this.message(e.toString())
+            this.error(e.toString())
         }
 
         this.listContacts()
@@ -235,7 +236,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
                     await this.file.upload()
                     self.listContacts()
                 } catch(e) {
-                    this.message(e.toString())
+                    this.error(e.toString())
                 }
 
             })

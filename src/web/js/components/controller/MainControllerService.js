@@ -99,10 +99,10 @@ class MainControllerService extends ControllerServiceBase {
                 }
                 if("" === newName)
                 {
-                    this.message("Empty file name")
+                    this.error("Empty file name")
                     return
                 } else if(newName === oldName) {
-                    this.message("Old name and new name are equal")
+                    this.error("Old name and new name are equal")
                     return
                 }
                 try {
@@ -118,7 +118,7 @@ class MainControllerService extends ControllerServiceBase {
                     self.message("Rename file is ready")
                     self.listFiles(true)
                 } catch(e) {
-                    this.message(e.toString())
+                    this.error(e.toString())
                 }
             })
             fileNameTd.appendChild(renameForm)
@@ -137,7 +137,7 @@ class MainControllerService extends ControllerServiceBase {
                 await theDirManager.removeFile(fnameString)
                 this.message("File delete is ready")
             } catch(e) {
-                this.message(e.toString())
+                this.error(e.toString())
             }
             self.listFiles(true)
         })

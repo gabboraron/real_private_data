@@ -84,9 +84,15 @@ class ControllerServiceBase {
      * 
      * @param {*} msg 
      */
-    message(msg){
+    message(msg, ty = "message"){
         console.log(msg.toString())
-        this.getItem("message").innerText = msg.toString()
+        let msgDiv = this.getItem("message")
+        msgDiv.classList.value = ( ty === "message" )? "message messageOK" : "message messageError"
+        msgDiv.innerText = msg.toString()
+    }
+
+    error(msg) {
+        this.message(msg, "error")
     }
 
     __initHTMLItems() {

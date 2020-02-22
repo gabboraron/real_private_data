@@ -32,11 +32,11 @@ class CreateUserControllerService extends ControllerServiceBase {
 
         if([username, password, password2].indexOf("") !== -1) {
             // TODO: ErrorObject
-            this.message("Error: Empty username and/or password and/or password password again");
+            this.error("Error: Empty username and/or password and/or password password again");
             return;
         }
         if(password !== password2) {
-            this.message("Error: password != password again");
+            this.error("Error: password != password again");
             this.getItem(this.htmlItems.createUserPassword).value = "";
             this.getItem(this.htmlItems.createUserPassword2).value = "";
             return;
@@ -46,16 +46,8 @@ class CreateUserControllerService extends ControllerServiceBase {
             await theUserManager.createUser(username, password);
             this.message("User created.");
         } catch(e){
-            this.message(e.toString());
+            this.error(e.toString());
         }
         this.getItem(this.htmlItems.createUserForm).reset();
-    }
-
-    /**
-     * 
-     * @param {string} msg 
-     */
-    message(msg) {
-        this.getItem(this.htmlItems.createUserMessage).innerText = msg;
     }
 }

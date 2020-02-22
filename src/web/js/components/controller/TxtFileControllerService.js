@@ -22,7 +22,7 @@ class TxtFileControllerService extends SecretFileControllerService {
             try {
                 await this.file.upload();
             } catch(e) {
-                this.message(e.toString());
+                this.error(e.toString());
                 return false;
             }
         }
@@ -36,7 +36,7 @@ class TxtFileControllerService extends SecretFileControllerService {
         try{
             await this.file.upload(true);
         } catch(e) {
-            this.message(e.toString());
+            this.error(e.toString());
             return false;
         }
         this.initFile(this.body);
@@ -51,7 +51,7 @@ class TxtFileControllerService extends SecretFileControllerService {
             //this.getItem(this.htmlItems.).innerText = decrypted.modifyDate
             this.getItem(this.htmlItems.txtPlanInput).value = decrypted.txt;
         } catch(e) {
-            this.message(e)
+            this.error(e)
         }
     }
 }

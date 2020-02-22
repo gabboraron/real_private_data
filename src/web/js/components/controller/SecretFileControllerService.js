@@ -92,12 +92,12 @@ class SecretFileControllerService extends ControllerServiceBase {
         if(-1 !== [newPassword.value, newPassword2.value].indexOf("")) {
             // TODO: ErrorObject
             let msg = new ErrorObject("Error: password, and/or password again is empty");
-            this.message(msg);
+            this.error(msg);
             throw msg;
         } else if(newPassword.value != newPassword2.value) {
             // TODO: ErrorObject
             let msg = new ErrorObject("Error: password, and password again is not equal");
-            this.message(msg);
+            this.error(msg);
             throw msg;
         }
         let ret = this.file.setPassword(newPassword.value);
@@ -111,7 +111,7 @@ class SecretFileControllerService extends ControllerServiceBase {
         if("" === nameInput.value){
             // TODO: errorObject
             let msg = "Error, you have to give name to file";
-            this.message(msg);
+            this.error(msg);
             throw msg;
         }
         nameInput.value = this.file.setName(nameInput.value);
@@ -122,9 +122,10 @@ class SecretFileControllerService extends ControllerServiceBase {
         console.debug("after download ready");
         let password  = this.getItem(this.htmlItems.fPassLoginPasswordInput);
         try {
-            this.file.setPassword(password.value, true);             
+            this.file.setPassword(password.value, true);
+            this.message("File opened")             
         } catch(e) {
-            this.message(e.toString());
+            this.error(e.toString());
             throw e
         }
         this.showMainDiv()
@@ -139,12 +140,12 @@ class SecretFileControllerService extends ControllerServiceBase {
         if(-1 !== [newPassword.value, newPassword2.value, oldPassword.value].indexOf("")) {
             // TODO: ErrorObject
             let msg = new ErrorObject("Error: password, and/or password again is empty and or oldPassword");
-            this.message(msg);
+            this.error(msg);
             throw msg;
         } else if(newPassword.value != newPassword2.value) {
             // TODO: ErrorObject
             let msg = new ErrorObject("Error: password, and password again is not equal");
-            this.message(msg);
+            this.error(msg);
             throw msg;
         }
         try {

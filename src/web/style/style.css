@@ -34,3 +34,18 @@ body {
 h2 {
     margin-left: 10px
 }
+
+.messageOK {
+    background: #67d255;
+    border: solid #5d9c31;
+    padding: 10;
+
+}
+.messageError {
+    background: #f9a8d7;
+    border: solid #c33c3c;
+    padding: 10;
+}
+.message {
+    margin: 5px;
+}
