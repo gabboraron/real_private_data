@@ -10,16 +10,27 @@
 
 body {
     background-color: rgb(241, 220, 122) !important;
+    margin:10px !important
 }
 
 .debugBody {
     background-color: rgb(176, 241, 122) !important;
 }
 
+.oddRow {
+    background-color: rgb(224, 205, 113);
+}
+.debugBody .oddRow {
+    background-color: #93d05a;
+}
 .mainFilesTable{
     margin-left: 10px
 }
+.phbShowContactDiv {
+    padding: 15px;
+    background: #ceb97c;
 
+}
 h2 {
     margin-left: 10px
 }

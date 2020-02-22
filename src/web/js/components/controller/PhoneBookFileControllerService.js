@@ -206,6 +206,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         for(let i = 0; i < contacts.length; ++i) {
             let nickName = contacts[i]
             let tr = document.createElement("tr")
+            tr.classList.add((0 === i % 2)?"oddRow":"evenRow")
             let nickNameTd = document.createElement("td")
             let nickNameLink = document.createElement("a")
             nickNameLink.href = "#"

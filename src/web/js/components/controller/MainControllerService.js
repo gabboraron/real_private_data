@@ -50,15 +50,16 @@ class MainControllerService extends ControllerServiceBase {
         let mainTable = this.getItem("mainFilesTable");
         mainTable.innerHTML = "";
         for(let i = 0; i < files.length; ++i) {
-            let tr = this.createFileTr( files[i])
+            let tr = this.createFileTr( files[i], i)
             mainTable.appendChild(tr);
         }
         
     }
 
-    createFileTr(f){
+    createFileTr(f, i){
         let self = this;
         let tr = document.createElement("tr");
+        tr.classList.add((0 === i % 2)?"oddRow":"evenRow")
         let link = createLink(f.decryptedName, () =>{
             self.openFile(f.encryptedName);
         })
