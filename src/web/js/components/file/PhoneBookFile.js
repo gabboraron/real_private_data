@@ -169,10 +169,10 @@ class PhoneBookFile extends SecretFile {
   chgNickName(oldNickName, newNickName) {
     let layer2 = this.__getLayer2()
     if ( "undefined" === typeof(layer2[oldNickName])) {
-      throw ErrorObject("Contact not found")
+      throw new ErrorObject("Contact not found")
     }
     if ( "undefined" !== typeof(layer2[newNickName])) {
-      throw ErrorObject("Contact has been already exist")
+      throw new ErrorObject("Contact has been already exist")
     }
     layer2[newNickName] = layer2[oldNickName]
     delete layer2[oldNickName]
