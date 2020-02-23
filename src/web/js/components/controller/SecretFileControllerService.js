@@ -20,6 +20,7 @@ class SecretFileControllerService extends ControllerServiceBase {
     }
     
     stop() {
+        remove(this, "file")
         super.stop();
     }
     
