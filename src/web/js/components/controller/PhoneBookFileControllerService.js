@@ -64,27 +64,28 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         html.getElementsByClassName("phbModifyContactSaveButton")[0].addEventListener("click", async (e) => {
             e.preventDefault()
             let newNickName = html.getElementsByClassName("phbNickName")[0].value
-            if(newNickName !== nickName) {
-                self.file.chgNickName(nickName, newNickName)
-            }
-            self.file.modifyContact(
+            try {
+                if(newNickName !== nickName) {
+                    self.file.chgNickName(nickName, newNickName)
+                }
+                self.file.modifyContact(
                 newNickName,
                 html.getElementsByClassName("phbFullName")[0].value,
                 html.getElementsByClassName("phbAddress")[0].value,
                 html.getElementsByClassName("phbDescription")[0].value
-            )
-            await this.file.upload()
+                )
+                await this.file.upload()
+                this.message("Modification is ready")
+            } catch(e) {
+                this.error(e)
+                return
+            }
             //HACK
             if(newNickName !== nickName) {
-                let nickNameLinks = document.getElementsByClassName("nickNameLinkInContainer")
-                for(let i = 0; i < nickNameLinks.length; ++i) {
-                    if(nickNameLinks[i].innerText === nickName) {
-                        nickNameLinks[i].innerText = newNickName
-                        break
-                    }
-                }
+                self.listContacts()
+            } else {
+                this.showContact(element, newNickName, true)
             }
-            this.showContact(element, newNickName, true)
         })
         html.getElementsByClassName("phbModifyContactCancelButton")[0].addEventListener("click", (e) => {
             e.preventDefault()
