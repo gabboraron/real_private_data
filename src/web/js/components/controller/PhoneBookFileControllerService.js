@@ -213,15 +213,11 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             let tr = document.createElement("tr")
             tr.classList.add((0 === i % 2)?"oddRow":"evenRow")
             let nickNameTd = document.createElement("td")
-            let nickNameLink = document.createElement("a")
-            nickNameLink.href = "#"
-            nickNameLink.classList.add("nickNameLinkInContainer")
             let tdDetails = document.createElement("td")
-            nickNameLink.addEventListener("click", (e) => {
-                e.preventDefault()
+            let nickNameLink = document.createLink(nickName, () => {
                 self.showContact(tdDetails, nickName)
-            });
-            nickNameLink.innerText = nickName
+            })
+            nickNameLink.classList.add("nickNameLinkInContainer")
             nickNameTd.appendChild(nickNameLink)
             tr.appendChild(nickNameTd)
             
