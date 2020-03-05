@@ -9,3 +9,9 @@ class IRPCClient extends AbstractClass {
         console.warn("TODO: Implement");
     }
 }
+
+IRPCClient.EVENT = {
+    open:  "open",
+    close: "close",
+    error: "error"
+}

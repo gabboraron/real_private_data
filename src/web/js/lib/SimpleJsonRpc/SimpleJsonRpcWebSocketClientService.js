@@ -5,7 +5,7 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
     jrpc;
     __userHash;
     __passhare;
-    
+
     constructor(
           ws_url
         , mySimple_jsonrpc = simple_jsonrpc
@@ -20,6 +20,12 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
         
         this.ws_protociol = "https:" == window.location.protocol? "wss":"ws"
         this.ws_url = ws_url || this.ws_protociol +"://" + window.location.host + "/ws_rpc"
+
+        this.listeners = {
+            error:[],
+            open:[],
+            close:[]
+        }
     } // end of constructor(...)
     
     async start(userHash, passhare) {
@@ -71,7 +77,10 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
             } catch(e) {
                 reject(ErrorTypeEnum.CONNECTION_ERROR, e.toString());
             }
-            self.socket.onopen = () =>{ resolve(true)};
+            self.socket.onopen = (e) => {
+                self.notify(IRPCClient.EVENT.open, e)
+                resolve(true)
+            };
             self.socket.onmessage = function(event) {
                 self.jrpc.messageHandler(event.data);
             };
@@ -81,21 +90,43 @@ class SimpleJsonRpcWebSocketClientService extends IRPCClient {
             };
     
             self.socket.onerror = function(error) {
+                self.notify(IRPCClient.EVENT.error, error)
                 let e = new ErrorObject(ErrorTypeEnum.CONNECTION_ERROR, error.message)
-                console.error(e.toString());
+                console.debug(e.toString());
                 reject(e);
             };
     
             self.socket.onclose = function(event) {
+                self.notify(IRPCClient.EVENT.close, event)
                 if (event.wasClean) {
-                    console.info('Connection close was clean');
+                    console.debug('Connection close was clean');
                 } else {
                     let e = new ErrorObject(ErrorTypeEnum.CONNECTION_ERROR, 'Connection suddenly close');
-                    console.error(e.toString());
+                    console.debug(e.toString());
                 }
-                console.info('close code : ' + event.code + ' reason: ' + event.reason);
+                console.debug('close code : ' + event.code + ' reason: ' + event.reason);
             };
         });
     } // end of async jrpcInit()
 
+    addEventListener(type, listener) {
+        this.listeners[type].push(listener)
+    }
+
+    removeEventListener(type, listener){
+        let listeners = this.listeners[type]
+        for(let i = listeners.length - 1; i --> 0;) {
+            if( listeners[i] === listener) {
+                listeners.splice(i, 1)                
+            }
+        }
+    }
+
+    notify(type, e) {
+        let listeners = this.listeners[type]
+        for(let i = 0; i < listeners.length; ++i) {
+            listeners[i](e)
+        }
+    }
+    
 } // end of SimpleJsonRpcWebSocketClient

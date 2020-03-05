@@ -116,15 +116,25 @@ class PageLoaderService {
     }
 
     login(userName) {
+        this.startLogout = false
+        let self = this
         this.userName = userName;
         this.logedIn = true;
+
+        theRpcClient.addEventListener("close", (e) => { self.handleClose(e) })
     }
 
-    logout(msg = "Logout was successful") {
-        theUserManager.logout();
+    handleClose(e) {
+        if(!this.startLogout) {
+            this.logout(new ErrorObject("Suddenly loged out"), "error")
+        }
+    }
+    async logout(msg = "Logout was successful", ty = "msg") {
+        this.startLogout = true
+        await theUserManager.logout();
         this.userName = undefined;
         this.logedIn = false;
-        this.loadPage("login", undefined, true, msg);
+        this.loadPage("login", undefined, true, msg, ty);
     }
 
     __logoutSetStyle(style){

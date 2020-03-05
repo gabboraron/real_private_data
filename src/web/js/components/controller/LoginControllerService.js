@@ -16,13 +16,17 @@ class LoginControllerService extends ControllerServiceBase {
         "loginRpcClientRadios" : "loginRpcClientRadios"
     }
 
-    start(body, msg) {
+    start(body, msg, msgType) {
         super.start(body);
         this.createRadios();
         this.addEventListener( this.htmlItems.loginButton, "click", this.login);
         this.addEventListener(this.htmlItems.loginRpcClientForm, "submit", this.login);
         if("undefined" !== typeof(msg)) {
-            this.message(msg)
+            if("error" === msgType) {
+                this.error(msg.toString())
+            } else {
+                this.message(msg.toString())
+            }
         }
     }
 
