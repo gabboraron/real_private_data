@@ -214,7 +214,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             tr.classList.add((0 === i % 2)?"oddRow":"evenRow")
             let nickNameTd = document.createElement("td")
             let tdDetails = document.createElement("td")
-            let nickNameLink = document.createLink(nickName, () => {
+            let nickNameLink = createLink(nickName, () => {
                 self.showContact(tdDetails, nickName)
             })
             nickNameLink.classList.add("nickNameLinkInContainer")
