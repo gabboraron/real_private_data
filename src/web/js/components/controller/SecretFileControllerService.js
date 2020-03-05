@@ -32,11 +32,11 @@ class SecretFileControllerService extends ControllerServiceBase {
     }
     
     
-    initFile(body) {
+    initFile(body, downloadMsg = "File downloaded") {
         let self = this;
         this.file.download().then(() => {
             self.downloadRedy = true;
-            self.message("File downloaded");
+            self.message(downloadMsg);
         }).catch((e)=>{
             self.downloadFailed = true;
             self.message(e.toString());

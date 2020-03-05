@@ -21,6 +21,7 @@ class TxtFileControllerService extends SecretFileControllerService {
             this.file.encrypt(txt);
             try {
                 await this.file.upload();
+                this.message("File has been saved succesfully")
             } catch(e) {
                 this.error(e.toString());
                 return false;
@@ -39,7 +40,7 @@ class TxtFileControllerService extends SecretFileControllerService {
             this.error(e.toString());
             return false;
         }
-        this.initFile(this.body);
+        this.initFile(this.body, "File has been saved succesfully")
         this.showMainDiv()
         this.hideChangePassword()
     }
