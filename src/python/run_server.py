@@ -45,6 +45,13 @@ application = tornado.web.Application([
     (r"/(.*)", tornado.web.StaticFileHandler, { "path": theConfig.web_root, "default_filename": "index.html" }),
 ])
 
+def start_server(server, port):
+    try:
+        server.listen(port)
+    except OSError as error:
+        logging.error(error)
+        exit()
+
 
 if __name__ == '__main__':
     logging.info("Runner command: " +" ".join(sys.argv))
@@ -52,16 +59,16 @@ if __name__ == '__main__':
     ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ssl_ctx.load_cert_chain(theConfig.crt_file, theConfig.key_file)
     https_server = tornado.httpserver.HTTPServer(application, ssl_options=ssl_ctx)
-    https_server.listen(theConfig.secure_port)
+    start_server(https_server, theConfig.secure_port)
     logging.info("HTTPS Server starting... https://%s:%d/"%(theConfig.host, theConfig.secure_port))
 
     http_server = tornado.httpserver.HTTPServer(redirecterApplication)
-    http_server.listen(theConfig.open_port)
+    start_server(http_server, theConfig.open_port)
     logging.info("HTTP redirect Server starting... http://%s:%d/"%(theConfig.host, theConfig.open_port))
     
     if theConfig.debug:
         http_server2 = tornado.httpserver.HTTPServer(application)
-        http_server2.listen(8081)
+        start_server(http_server2, theConfig.debug_open_port)
         logging.info("Debug HTTP Server starting... http://%s:%d/"%(theConfig.host, theConfig.debug_open_port))
 
         data_path = theConfig.web_root + "/generated/data.js"
@@ -71,7 +78,8 @@ if __name__ == '__main__':
 
     try:
         tornado.ioloop.IOLoop.instance().start()
-    except KeyboardInterrupt as identifier:
+    except KeyboardInterrupt:
         logging.info("Server closed because KeyboardInterrupt")
         exit()
-    
+    except Exception as e:
+        logging.error(e)
