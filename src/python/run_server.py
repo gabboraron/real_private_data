@@ -10,6 +10,7 @@ import tornado.web
 from config import theConfig
 
 import log.log
+from config.tools import configLog
 from server.redirector_request_handler_factory import RedirectorRequestHandlerFactory
 from server.rpc_request_post_handler_factory import RPCRequestPOSTHandlerFactory
 from server.rpc_request_ws_handler_factory import RPCRequestWSHandlerFactory
@@ -46,6 +47,8 @@ application = tornado.web.Application([
 
 
 if __name__ == '__main__':
+    logging.info("Runner command: " +" ".join(sys.argv))
+    configLog(False)
     ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ssl_ctx.load_cert_chain(theConfig.crt_file, theConfig.key_file)
     https_server = tornado.httpserver.HTTPServer(application, ssl_options=ssl_ctx)
@@ -66,5 +69,9 @@ if __name__ == '__main__':
         with open(data_path,"w") as f:
             f.write(JsGenerator())
 
-    tornado.ioloop.IOLoop.instance().start()
-
+    try:
+        tornado.ioloop.IOLoop.instance().start()
+    except KeyboardInterrupt as identifier:
+        logging.info("Server closed because KeyboardInterrupt")
+        exit()
+    

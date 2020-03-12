@@ -1,4 +1,5 @@
 import json
+import logging
 from .the_config import TheConfig
 from .arg import Arg
 
@@ -35,3 +36,9 @@ window.theConfig = """ + jsonStr + ";"
 def configToJs(fileName:str):
     with open(fileName,"w") as f:
         f.write(configToJsString())
+
+def configLog(onlyPublic = True):
+    configDict = configToDict(onlyPublic)
+    logging.info("Config:")
+    for (k,v) in configDict.items():
+        logging.info("{}: {}".format(k, v))
