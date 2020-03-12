@@ -59,7 +59,6 @@ class ConfigFactory:
         
 
     def CreateConfig(self) -> TheConfig:
-        print("CreateConfig")
         parsed_args = self.getArgsFromParser()
         if "help" in parsed_args:
             self.argParser.print_help()

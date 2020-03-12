@@ -13,6 +13,9 @@ class TheConfig(ConfigBase):
     configFile:StrArg = StrArg(help="Config json file default: config.json", default_value=p["file_dir"] + "/config.json")
 
     debug:BoolArg      = BoolArg(help="debugmode default false", default_value=False, is_public=True)
+    logLevel           = StrArg(help="logLevel", default_value="INFO")
+    logFile            = StrArg(help="Log File, default None it means, not log", default_value="")
+    logFormat          = StrArg(help="Log format", default_value="[%(asctime)s][%(levelname)s] %(message)s")
     show_rpc_message   = BoolArg(help="Show rpc message", default_value=False)
     open_port:IntArg   = IntArg(help="Open port", default_value = 8080)
     debug_open_port:IntArg = IntArg(help="debug port", default_value = 8081)

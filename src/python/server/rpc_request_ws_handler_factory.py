@@ -1,4 +1,5 @@
 import sys
+import logging
 
 from jsonrpcserver import methods, async_dispatch as dispatch
 import tornado.websocket
@@ -15,20 +16,20 @@ def RPCRequestWSHandlerFactory(rpc_wrapper: RPCWrapper):
 
     class RPCRequestWSHandler(tornado.websocket.WebSocketHandler):
         def open(self):
-            print("WebSocket opened")
+            logging.debug("WebSocket opened")
 
         async def on_message(self, message):
             request = message
             show_message = theConfig.show_rpc_message
             response = await dispatch(request, my_methods, basic_logging=show_message, debug=theConfig.debug )
             if show_message:
-                print(response)
+                logging.debug(response)
             if response.wanted:
                 self.write_message(str(response))
 
         
         def on_close(self):
-            print("WebSocket closed")
+            logging.debug("WebSocket closed")
 
 
     return RPCRequestWSHandler

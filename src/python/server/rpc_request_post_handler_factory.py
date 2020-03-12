@@ -1,5 +1,5 @@
 import sys
-
+import logging
 from jsonrpcserver import methods, async_dispatch as dispatch
 import tornado.web
 
@@ -16,7 +16,7 @@ def RPCRequestPOSTHandlerFactory( rpc_wrapper: RPCWrapper ):
         async def post(self):
             request = self.request.body.decode()
             response = await dispatch(request, my_methods )
-            print(response)
+            logging.debug(response)
             if response.wanted:
                 self.write(str(response))
 

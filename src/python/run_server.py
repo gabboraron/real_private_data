@@ -2,12 +2,14 @@
 
 import ssl
 import sys
+import logging
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
 
 from config import theConfig
 
+import log.log
 from server.redirector_request_handler_factory import RedirectorRequestHandlerFactory
 from server.rpc_request_post_handler_factory import RPCRequestPOSTHandlerFactory
 from server.rpc_request_ws_handler_factory import RPCRequestWSHandlerFactory
@@ -18,7 +20,7 @@ from js_generator.js_generator import JsGenerator
 from data_manager.file_manager import FileManager
 
 if sys.version_info.major != 3:
-    print("please use python3")
+    logging.error("please use python3")
 
 # generate csr, and key:
 #
@@ -48,19 +50,19 @@ if __name__ == '__main__':
     ssl_ctx.load_cert_chain(theConfig.crt_file, theConfig.key_file)
     https_server = tornado.httpserver.HTTPServer(application, ssl_options=ssl_ctx)
     https_server.listen(theConfig.secure_port)
-    print("HTTPS Server starting... https://%s:%d/"%(theConfig.host, theConfig.secure_port))
+    logging.info("HTTPS Server starting... https://%s:%d/"%(theConfig.host, theConfig.secure_port))
 
     http_server = tornado.httpserver.HTTPServer(redirecterApplication)
     http_server.listen(theConfig.open_port)
-    print("HTTP redirect Server starting... http://%s:%d/"%(theConfig.host, theConfig.open_port))
+    logging.info("HTTP redirect Server starting... http://%s:%d/"%(theConfig.host, theConfig.open_port))
     
     if theConfig.debug:
         http_server2 = tornado.httpserver.HTTPServer(application)
         http_server2.listen(8081)
-        print("Debug HTTP Server starting... http://%s:%d/"%(theConfig.host, theConfig.debug_open_port))
+        logging.info("Debug HTTP Server starting... http://%s:%d/"%(theConfig.host, theConfig.debug_open_port))
 
         data_path = theConfig.web_root + "/generated/data.js"
-        print("Save data.js to {}".format(data_path))
+        logging.info("Save data.js to {}".format(data_path))
         with open(data_path,"w") as f:
             f.write(JsGenerator())
 
