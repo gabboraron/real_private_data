@@ -1,5 +1,9 @@
 import json
 import logging
+import pandas
+from pyexcel_ods import save_data
+from collections import OrderedDict
+
 from .the_config import TheConfig
 from .arg import Arg
 
@@ -42,3 +46,59 @@ def configLog(onlyPublic = True):
     logging.info("Config:")
     for (k,v) in configDict.items():
         logging.info("{}: {}".format(k, v))
+
+def configToCSV(csv_file_path):
+    csv_columns = ["Name", "Help", "Default value", "Optional", "Public"]
+    try:
+        with open(csv_file_path, "w") as csvfile:
+            csv_writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+            csv_writer.writeheader()
+            for c in ConfigIter():
+                csv_row = {
+                    "Name":c.name,
+                    "Help":c.help,
+                    "Default value":c.default_value,
+                    "Optional":c.is_optional,
+                    "Public":c.is_public
+                }
+                csv_writer.writerow(csv_row)
+    except Exception as e:
+        logging.error(e)
+
+def configToDataFrame():
+    rows = []
+    for c in ConfigIter():
+        row = {
+            "Name":c.name,
+            "Help":c.help,
+            "Default value":c.default_value,
+            "Optional":c.is_optional,
+            "Public":c.is_public
+        }
+        rows.append(row)
+    df = pandas.DataFrame(rows)
+    return df
+
+
+def configToOds(ods_file_path):
+    rows = []
+    rows.append(list([
+        "Name",
+        "Help",
+        "Default value",
+        "Optional",
+        "Public"
+    ]))
+    for c in ConfigIter():
+        row = list([
+            str(c.name),
+            str(c.help),
+            str(c.default_value),
+            str(c.is_optional),
+            str(c.is_public)
+        ])
+        rows.append(row)
+    print(rows)
+    d = OrderedDict()
+    d.update({"Config": rows})
+    save_data(str(ods_file_path), d)

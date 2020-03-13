@@ -1,0 +1,20 @@
+Name,Help,Default value,Optional,Public
+configFile,Config json file default: config.json,./config.json,True,False
+debug,debugmode default false,False,True,True
+logLevel,logLevel,INFO,True,False
+logFile,"Log File, default None it means, not log",,True,False
+logFormat,Log format,[%(asctime)s][%(levelname)s] %(message)s,True,False
+show_rpc_message,Show rpc message,False,True,False
+open_port,Open port,8080,True,False
+debug_open_port,debug port,8081,True,False
+secure_port,Secure port,8443,True,False
+host,host,localhost,True,False
+crt_file,crt_file,,False,False
+key_file,key_file,,False,False
+web_root,web root,,False,False
+data_dir,Data dir,,True,False
+test_dir,Dir for test,/var/tmp/real_private_data,True,False
+salt,Salt,My own Salt,True,True
+server_salt,Salt,Server salt,True,False
+enable_create_user,Enable Create user,False,True,False
+defaultRpcClient,Default Rpc call,SimpleJsonRpcWebSocketClientService,True,True
