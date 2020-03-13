@@ -46,7 +46,9 @@ class MainControllerService extends ControllerServiceBase {
 
     async listFiles(refresh = false) {
         let files = await theDirManager.showFiles(refresh);
-        files.sort((a, b)=>{return insensitiveCompare(a.decryptedName, b.decryptedName)})
+        files.sort((a, b) => {
+            return insensitiveCompare(a.decryptedName, b.decryptedName)
+        })
         let mainTable = this.getItem("mainFilesTable");
         mainTable.innerHTML = "";
         for(let i = 0; i < files.length; ++i) {
@@ -60,7 +62,7 @@ class MainControllerService extends ControllerServiceBase {
         let self = this;
         let tr = document.createElement("tr");
         tr.classList.add((0 === i % 2)?"oddRow":"evenRow")
-        let link = createLink(f.decryptedName, () =>{
+        let link = createLink(f.decryptedName, () => {
             self.openFile(f.encryptedName);
         })
         link.classList.add("mainOpenFile");
@@ -73,55 +75,8 @@ class MainControllerService extends ControllerServiceBase {
         tr.appendChild(typeTd);
 
         let renameTd = document.createElement("td")
-        let renameLink = createButton("Rename", async () => {
-            fileNameTd.innerHTML = ""
-            let renameForm = document.createElement("form") 
-            let renameInput = document.createElement("input")
-            renameInput.value = f.decryptedName
-            renameForm.appendChild(renameInput)
-            
-            let renameSaveButton = createButton("Save", ()=>{}, "submit")
-            renameForm.appendChild(renameSaveButton)
-            
-            let renameCancelLink = createButton("Cancel", () => {
-                self.listFiles(true)
-            })    
-            renameForm.appendChild(renameCancelLink)
-            
-            renameForm.addEventListener("submit", async (e) => {
-                e.preventDefault()
-                let oldName = f.decryptedName
-                let newName = renameInput.value
-                let extOld = oldName.match(/[.][^.]+$/)[0]
-                let extNew = newName.match(/[.][^.]+$/)[0]
-                if(extOld !== extNew) {
-                    newName += extOld
-                }
-                if("" === newName)
-                {
-                    this.error("Empty file name")
-                    return
-                } else if(newName === oldName) {
-                    this.error("Old name and new name are equal")
-                    return
-                }
-                try {
-                    // HACK
-                    let nameEncryptor = theEncryptor.fromHexString(theUserManager.__dirHash)
-                    let encryptedOldNameBytes = nameEncryptor.encryptFromString(oldName)
-                    let encryptedNewNameBytes = nameEncryptor.encryptFromString(newName)
-                    
-                    await theDirManager.renameFile(
-                        Uint8Array2String(encryptedOldNameBytes),
-                        Uint8Array2String(encryptedNewNameBytes)
-                    )
-                    self.message("Rename file is ready")
-                    self.listFiles(true)
-                } catch(e) {
-                    this.error(e.toString())
-                }
-            })
-            fileNameTd.appendChild(renameForm)
+        let renameLink = createButton("Rename", () => {
+            self.renameHandler(fileNameTd, f);
         })
         renameLink.classList.add("btn")
         renameLink.classList.add("btn-secondary")
@@ -131,20 +86,79 @@ class MainControllerService extends ControllerServiceBase {
         tr.appendChild(renameTd)
         
         let deleteTd = document.createElement("td")
-        let deleteLink = createButton("Delete", async () => {
-            let fnameString = Uint8Array2String(f.encryptedName)
-            try {
-                await theDirManager.removeFile(fnameString)
-                this.message("File delete is ready")
-            } catch(e) {
-                this.error(e.toString())
-            }
-            self.listFiles(true)
+        let deleteLink = createButton("Delete", () => {
+            self.deleteHandler(f)
         })
         deleteTd.appendChild(deleteLink)
         tr.appendChild(deleteTd)
 
         return tr;
+    }
+
+    async deleteHandler(f) {
+        let fnameString = Uint8Array2String(f.encryptedName)
+        try {
+            await theDirManager.removeFile(fnameString)
+            this.message("File delete is ready")
+        } catch(e) {
+            this.error(e.toString())
+        }
+        this.listFiles(true)
+    }
+
+    async renameHandler(fileNameTd, f) {
+        let self = this;
+        fileNameTd.innerHTML = ""
+        let renameForm = document.createElement("form") 
+        let renameInput = document.createElement("input")
+        renameInput.value = f.decryptedName
+        renameForm.appendChild(renameInput)
+        
+        let renameSaveButton = createButton("Save", ()=>{}, "submit")
+        renameForm.appendChild(renameSaveButton)
+        
+        let renameCancelLink = createButton("Cancel", () => {
+            self.listFiles(true)
+        })
+        renameForm.appendChild(renameCancelLink)
+        renameForm.addEventListener("submit", (e) => {
+            self.renameSubmitHandler(e, f, renameInput)
+        })
+        fileNameTd.appendChild(renameForm)
+    }
+    
+    async renameSubmitHandler(e, f, renameInput) {
+        e.preventDefault()
+        let oldName = f.decryptedName
+        let newName = renameInput.value
+        let extOld = oldName.match(/[.][^.]+$/)[0]
+        let extNew = newName.match(/[.][^.]+$/)[0]
+        if(extOld !== extNew) {
+            newName += extOld
+        }
+        if("" === newName)
+        {
+            this.error("Empty file name")
+            return
+        } else if(newName === oldName) {
+            this.error("Old name and new name are equal")
+            return
+        }
+        try {
+            // HACK
+            let nameEncryptor = theEncryptor.fromHexString(theUserManager.__dirHash)
+            let encryptedOldNameBytes = nameEncryptor.encryptFromString(oldName)
+            let encryptedNewNameBytes = nameEncryptor.encryptFromString(newName)
+            
+            await theDirManager.renameFile(
+                Uint8Array2String(encryptedOldNameBytes),
+                Uint8Array2String(encryptedNewNameBytes)
+            )
+            this.message("Rename file is ready")
+            this.listFiles(true)
+        } catch(e) {
+            this.error(e.toString())
+        }
     }
 
     openFile(encryptedName) {
