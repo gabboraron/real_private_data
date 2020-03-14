@@ -19,6 +19,7 @@ from rpc_wrapper.rpc_wrapper import RPCWrapper
 
 from js_generator.js_generator import JsGenerator
 from data_manager.file_manager import FileManager
+from common.kill_log import init_kill_log
 
 if sys.version_info.major != 3:
     logging.error("please use python3")
@@ -56,6 +57,7 @@ def start_server(server, port):
 if __name__ == '__main__':
     logging.info("Runner command: " +" ".join(sys.argv))
     configLog(False)
+    init_kill_log()
     ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ssl_ctx.load_cert_chain(theConfig.crt_file, theConfig.key_file)
     https_server = tornado.httpserver.HTTPServer(application, ssl_options=ssl_ctx)
