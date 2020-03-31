@@ -1,5 +1,5 @@
 {
-"debug":true,
+"debug":false,
 "logLevel":"INFO",
 "logFile":"/var/tmp/rpd_[[now]].log",
 "host":"localhost",
