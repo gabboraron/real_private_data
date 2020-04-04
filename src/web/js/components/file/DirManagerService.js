@@ -15,13 +15,14 @@ class DirManagerService {
     }
     
     async refreshFileList() {
-        this.stop();
-        this.localFiles = [];
-        let files = await theRpcWrapper.list_dir();
-        let encryptor = theEncryptor.fromHexString(theUserManager.__dirHash);
+        this.stop()
+        let files = await theRpcWrapper.list_dir()
+        let encryptor = theEncryptor.fromHexString(theUserManager.__dirHash)
+        let localFiles = []
         for(let i = 0; i < files.length; ++i) {
-            this.localFiles.push(theFileFactory.createFileFromEncryptedName(files[i], encryptor));    
+            localFiles.push(theFileFactory.createFileFromEncryptedName(files[i], encryptor))
         }
+        this.localFiles = localFiles
     }
 
     async showFiles(refresh = false) {
