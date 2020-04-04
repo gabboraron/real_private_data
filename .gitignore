@@ -23,3 +23,7 @@ src/python/config.json
 src/python/config.*.json
 # config.sample is traced
 !src/python/config.sample.json
+
+src/service/rpd.service
+src/service/rpd.*.service
+!src/service/rpd.sample.service

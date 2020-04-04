@@ -1,0 +1,14 @@
+[Unit]
+Description=Real Private Data
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=rpd-server
+# the running command
+ExecStart=/home/rpd-user/real_private_data/bin/server/rpd_server.sh --configFile "/home/rpd-user/real_private_data/src/python/config.service.json"
+
+[Install]
+WantedBy=multi-user.target
