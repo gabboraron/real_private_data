@@ -24,6 +24,9 @@ class ControllerServiceBase {
         if("undefined" === typeof(index)){
             index = 0;
         }
+        if("undefined" === typeof(this.body)){
+            return undefined
+        }
         return this.body.getElementsByClassName(item)[index];
     }
 
@@ -89,12 +92,31 @@ class ControllerServiceBase {
         let msgDiv = this.getItem("message")
         msgDiv.classList.value = ( ty === "message" )? "message messageOK" : "message messageError"
         msgDiv.innerText = msg.toString()
+        this.closeMessageDivWaitStart()
     }
 
     error(msg) {
         this.message(msg, "error")
     }
-
+    
+    closeMessageDivWaitStart() {
+        let self = this
+        let waitTime = theConfig.hideMessageTime
+        this.closeMessageTime = (new Date().getTime()) + waitTime - 200
+        setTimeout(() => {self.closeMessageDiv(true)}, waitTime)
+    }
+    
+    closeMessageDiv(wait = false) {
+        let currTime = (new Date()).getTime();
+        if(wait && currTime < this.closeMessageTime) {
+            return
+        }
+        let msgDiv = this.getItem("message")
+        if(typeof(msgDiv) !== "undefined") {
+            msgDiv.classList.value = "message hide"
+        }
+    }
+    
     __initHTMLItems() {
         let currProto = this
         let htmlItems = {}

@@ -37,9 +37,9 @@ class FileManager:
             ) -> bool:
         is_exist = self.is_exist(user_hash, password_hash, file_name)
         if is_new and is_exist:
-            raise Exception("TODO: ERROR_OBJECT File has been already exist")
+            raise ErrorObject(ErrorTypeEnum.FILE_EXIST)
         elif not is_new and not is_exist:
-            raise Exception("TODO: ERROR_OBJECT File not exist")
+            raise ErrorObject(ErrorTypeEnum.FILE_NOT_EXIST)
 
         try:
             with open(self.__get_file_path(user_hash, password_hash, file_name), "wb") as f:

@@ -31,3 +31,4 @@ class TheConfig(ConfigBase):
     enable_create_user:BoolArg = BoolArg(help="Enable Create user", default_value=False)
 
     defaultRpcClient   = StrArg(help="Default Rpc call", is_public=True, default_value="SimpleJsonRpcWebSocketClientService")
+    hideMessageTime = IntArg(help="Wait for hide messages in millisec", is_public=True, default_value=4000)

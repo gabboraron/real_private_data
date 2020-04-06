@@ -48,3 +48,7 @@ h2 {
 .message {
     margin: 5px;
 }
+
+.hide {
+    display: none;
+}

@@ -31,12 +31,13 @@ class CreateUserControllerService extends ControllerServiceBase {
         let password2 = this.getItem(this.htmlItems.createUserPassword2).value;
 
         if([username, password, password2].indexOf("") !== -1) {
-            // TODO: ErrorObject
-            this.error("Error: Empty username and/or password and/or password password again");
+            let err = new ErrorObject(ErrorTypeEnum.EMPTY_USERNAME_PASSWORD);
+            this.error(err);
             return;
         }
         if(password !== password2) {
-            this.error("Error: password != password again");
+            let err = new ErrorObject(ErrorTypeEnum.PASSWORD_NOT_EQUAL_PASSWORD2);
+            this.error(err);
             this.getItem(this.htmlItems.createUserPassword).value = "";
             this.getItem(this.htmlItems.createUserPassword2).value = "";
             return;

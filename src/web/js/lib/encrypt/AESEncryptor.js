@@ -48,7 +48,7 @@ class AESEncryptor extends IEncryptor {
         let d = decrypted.substr(64);
         let hash2 = sha256(d);
         if(hash2 !== hash) {
-            throw new ErrorObject("Decryption failure");
+            throw new ErrorObject(ErrorTypeEnum.DECRYPTION_FAILURE);
         }
         return d;
     }

@@ -91,15 +91,13 @@ class SecretFileControllerService extends ControllerServiceBase {
         //let oldPassword = oldPassword = this.getItem(this.htmlItems.fPassOldPasswordInput);
 
         if(-1 !== [newPassword.value, newPassword2.value].indexOf("")) {
-            // TODO: ErrorObject
-            let msg = new ErrorObject("Error: password, and/or password again is empty");
-            this.error(msg);
-            throw msg;
+            let err = new ErrorObject(ErrorTypeEnum.PASWORD_PASSWORD2_EMPTY);
+            this.error(err);
+            throw err;
         } else if(newPassword.value != newPassword2.value) {
-            // TODO: ErrorObject
-            let msg = new ErrorObject("Error: password, and password again is not equal");
-            this.error(msg);
-            throw msg;
+            let err = new ErrorObject(ErrorTypeEnum.PASSWORD_NOT_EQUAL_PASSWORD2);
+            this.error(err);
+            throw err;
         }
         let ret = this.file.setPassword(newPassword.value);
         this.file.clear()
@@ -110,10 +108,10 @@ class SecretFileControllerService extends ControllerServiceBase {
     setName() {
         let nameInput = this.getItem(this.htmlItems.fPassNameInput);
         if("" === nameInput.value){
-            // TODO: errorObject
             let msg = "Error, you have to give name to file";
-            this.error(msg);
-            throw msg;
+            let err = new ErrorObject(ErrorTypeEnum.EMPTY_FILE_FIELD);
+            this.error(err);
+            throw err;
         }
         nameInput.value = this.file.setName(nameInput.value);
     }
@@ -139,15 +137,13 @@ class SecretFileControllerService extends ControllerServiceBase {
         let oldPassword = this.getItem(this.htmlItems.fPassOldPasswordInput);
 
         if(-1 !== [newPassword.value, newPassword2.value, oldPassword.value].indexOf("")) {
-            // TODO: ErrorObject
-            let msg = new ErrorObject("Error: password, and/or password again is empty and or oldPassword");
-            this.error(msg);
-            throw msg;
+            let err = new ErrorObject(ErrorTypeEnum.PASWORD_PASSWORD2_OLD_PASSWORD_EMPTY);
+            this.error(err);
+            throw err;
         } else if(newPassword.value != newPassword2.value) {
-            // TODO: ErrorObject
-            let msg = new ErrorObject("Error: password, and password again is not equal");
-            this.error(msg);
-            throw msg;
+            let err = new ErrorObject(ErrorTypeEnum.PASSWORD_NOT_EQUAL_PASSWORD2);
+            this.error(err);
+            throw err;
         }
         try {
             this.file.chgPassword(newPassword.value, oldPassword.value)
@@ -165,7 +161,7 @@ class SecretFileControllerService extends ControllerServiceBase {
         if(this.downloadRedy) {
             return true;
         } else if(this.downloadFailed) {
-            throw new ErrorObject("Download error");
+            throw new ErrorObject(ErrorTypeEnum.DOWNLOAD_ERROR);
         }
         return new Promise((resolve, reject) => {
             let promiseSelf = this;
@@ -176,7 +172,7 @@ class SecretFileControllerService extends ControllerServiceBase {
                     resolve(true);
                 } else if(self.downloadFailed) {
                     window.clearInterval(promiseSelf.i);
-                    reject(new ErrorObject("Download error"));
+                    reject(new ErrorObject(ErrorTypeEnum.DOWNLOAD_ERROR));
                 }
             },1000);
         }); 

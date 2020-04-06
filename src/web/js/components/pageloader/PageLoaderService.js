@@ -126,7 +126,7 @@ class PageLoaderService {
 
     handleClose(e) {
         if(!this.startLogout) {
-            this.logout(new ErrorObject("Suddenly loged out"), "error")
+            this.logout(new ErrorObject(ErrorTypeEnum.SUDDENLY_LOGGED_OUT), "error")
         }
     }
     async logout(msg = "Logout was successful", ty = "msg") {

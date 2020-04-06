@@ -131,7 +131,7 @@ class PhoneBookFile extends SecretFile {
     );
     let phbObj = this.__getLayer2()
     if ("undefined" !== typeof(phbObj[nickName])) {
-      throw new ErrorObject("The contact has been already in the contact list")
+      throw new ErrorObject(ErrorTypeEnum.CONTACT_ALREADY_IN_LIST)
     }
     phbObj[nickName] = Array.from(contact.getEncryptedContent())
     this.encrypt(JSON.stringify(phbObj))
@@ -140,7 +140,7 @@ class PhoneBookFile extends SecretFile {
   modifyContact(nickName, fullName, address, description) {
     let layer2 = this.__getLayer2()
     if ("undefined" === typeof(layer2[nickName])) {
-      throw new ErrorObject("Contact not found")
+      throw new ErrorObject(ErrorTypeEnum.CONTACT_NOT_FOUND)
     }
     let contact = PhoneBookContact.fromEncrypted(Uint8Array.from(layer2[nickName]), this.__contentEncryptor)
     contact.modify(fullName, address, description)
@@ -160,7 +160,7 @@ class PhoneBookFile extends SecretFile {
   removeContact(nickName) {
     let layer2 = this.__getLayer2()
     if ( "undefined" === typeof(layer2[nickName])) {
-      throw ErrorObject("Contact not found")
+      throw new ErrorObject(ErrorTypeEnum.CONTACT_NOT_FOUND)
     }
     delete layer2[nickName]
     this.encrypt(JSON.stringify(layer2))
@@ -169,10 +169,10 @@ class PhoneBookFile extends SecretFile {
   chgNickName(oldNickName, newNickName) {
     let layer2 = this.__getLayer2()
     if ( "undefined" === typeof(layer2[oldNickName])) {
-      throw new ErrorObject("Contact not found")
+      throw new ErrorObject(ErrorTypeEnum.CONTACT_NOT_FOUND)
     }
     if ( "undefined" !== typeof(layer2[newNickName])) {
-      throw new ErrorObject("Contact has been already exist")
+      throw new ErrorObject(ErrorTypeEnum.CONTACT_ALREADY_IN_LIST)
     }
     layer2[newNickName] = layer2[oldNickName]
     delete layer2[oldNickName]
