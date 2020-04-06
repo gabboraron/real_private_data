@@ -230,7 +230,9 @@ sudo iptables -i &lt;interface&gt; -t nat -A PREROUTING -p tcp --dport 80 -j RED
 <p>A konfigurálás két féle lehet.<br />
 Vagy fájlból, vagy command line argumentumként megadva.<br />
 A command line argumentumnak nagyobb priorítása van.<br />
-Kötelező, hogy legyen config fájl</p>
+Kötelező, hogy legyen config fájl.<br />
+A konfigurációs paraméterek lehetnek publikusak, ez azt jelenti, hogy a kliens oldalon is láthatóak.<br />
+A nem publikus konfig beállítások csak a szerver oldalon láthatóak.</p>
 <h3 id="konfigurációs-változók">Konfigurációs változók</h3>
 <p>A konfigba vannak változók amiket [[változó név]]-ként érünk el.<br />
 Például: <strong>./rpd_server.sh –logLevel /</strong><em><strong>var</strong></em><strong>/tmp/log[[now]].log<br />
@@ -426,6 +428,13 @@ Lásd: <a href="https://docs.python.org/3/library/logging.html" class="uri">http
 <td>Igen</td>
 <td>Igen</td>
 </tr>
+<tr class="odd">
+<td>hideMessageTime</td>
+<td>Az üzenetek elrejtése előtti idő ezredmásodpercben</td>
+<td>5000</td>
+<td>Igen</td>
+<td>Igen</td>
+</tr>
 </tbody>
 </table>
 <h3 id="példa">Példa</h3>
@@ -449,8 +458,37 @@ Lásd: <a href="https://docs.python.org/3/library/logging.html" class="uri">http
 <h1 id="használat">Használat</h1>
 <h2 id="szerver-oldal">Szerver oldal</h2>
 <p>Alapjában véve a <strong>./bin </strong>mappában vannak a futtatható fájlok, ott van egy <strong>server </strong>és egy <strong>tools</strong></p>
-<p>A <strong>szerver</strong> mappában vannak a szerverhez kellő dolgok, a <strong>tools </strong>mappában a fejlesztéshez szükséges toolok.</p>
-<h3 id="binszerverrpd_server.sh">./bin/szerver/rpd_server.sh</h3>
-<p>Ez a szerver indító script-je.</p>
+<p>A <strong>server</strong> mappában vannak a szerverhez kellő dolgok, a <strong>tools </strong>mappában a fejlesztéshez szükséges toolok, ezért azokat majd a fejlesztői dokumentációban fogom részletezni.</p>
+<h3 id="binserverrpd_server.sh">./bin/server/rpd_server.sh</h3>
+<p>Lásd <strong>./src/python/run_server.py</strong></p>
+<h3 id="binserverrpd_create_user.sh">./bin/server/rpd_create_user.sh</h3>
+<p>Lásd <strong>./src/python/create_user.py</strong></p>
+<h3 id="srcpythonrun_server.py">./src/python/run_server.py</h3>
+<p>Maga a szerver, a beállításokat lásd a <strong>Konfigurálás</strong> fejezetet, alapértelmezettként a <strong>./src/python/config.json </strong>fájlt fogja betölteni --<strong>configFile </strong></p>
+<h3 id="srcpythoncreate_user.py">./src/python/create_user.py</h3>
+<p>Felhasználó létrehozása, érdemes beállítani a –<strong>configFile</strong>-t, alapértelmezettként a <strong>./src/python/config.json </strong>fájlt használja.</p>
+<p><img src="Pictures/1000020100000302000000867699C55659AA7F03.png" width="642" height="111" /><br />
+<strong>Enter your username:</strong> Írd be a felhasználónevet<br />
+<strong>Enter your password:</strong> Írd be a jelszót<br />
+<strong>Enter your password again:</strong> Írd be a jelszót megint</p>
+<p></p>
+<h2 id="kliens-oldal">Kliens oldal</h2>
+<h3 id="az-oldal-elérése">Az oldal elérése</h3>
+<p>Az oldalt az épp aktuális címén lehet elérni a böngészőben, de ha nem akarunk SSL hitelesítést venni, akkor sajnos a böngésző “nem biztonságos”-nak fogja látni az oldalunkat.</p>
+<p><img src="Pictures/100002010000027A000003141821B461CE63CD4B.png" width="295" height="435" /><img src="Pictures/1000020100000240000003656F3E774A6844520D.png" width="305" height="431" /></p>
+<p></p>
+<h3 id="bejelentkezés">Bejelentkezés</h3>
+<p><img src="Pictures/10000201000001F40000014517A57B782B43355D.png" width="499" height="324" /></p>
+<p>RPC Client:</p>
+<p><em>SimpleJsonRpcWebSocketClientService</em>: a kommunikációhoz használjuk a SimpleJsonRpcWebSocketClient-et, ez egy websocket alapú kommunikáció.<br />
+Előnye, hogy folyamatos kapcsolat van a szerver, és a kliens között, Hátránya, hogy így folyamatosan van kommunikációs forgalom, de csak elhanyagolható.<br />
+</p>
+<p><em>SimpleJsonRpcPOSTClientService</em>: HTTP post alapú kommunikációt biztosít.<br />
+Előnye, hogy csak akkor van kommunikáció, amikor szervertől kérünk valamit.<br />
+Hátránya, hogy mindig új kapcsolatot kell létesíteni.</p>
+<p>Username: felhasználónév<br />
+Password: jelszó<br />
+Login: bejelentkezés gomb a bejelentkezéshez</p>
+<p></p>
 </body>
 </html>
