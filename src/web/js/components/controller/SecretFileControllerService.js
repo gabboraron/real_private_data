@@ -108,7 +108,6 @@ class SecretFileControllerService extends ControllerServiceBase {
     setName() {
         let nameInput = this.getItem(this.htmlItems.fPassNameInput);
         if("" === nameInput.value){
-            let msg = "Error, you have to give name to file";
             let err = new ErrorObject(ErrorTypeEnum.EMPTY_FILE_FIELD);
             this.error(err);
             throw err;
