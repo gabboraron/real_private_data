@@ -117,6 +117,24 @@ class ControllerServiceBase {
         }
     }
     
+    hideElement(element) {
+        if(typeof(element) === "string") {
+            element = this.getItem(element)
+        }
+        if("undefined" !== typeof(element)) {
+            element.classList.add("hide")
+        }
+    }
+    showElement(element) {
+        if(typeof(element) === "string") {
+            element = this.getItem(element)
+        }
+        if("undefined" !== typeof(element)) {
+            element.classList.remove("hide")
+        }
+    }
+
+
     __initHTMLItems() {
         let currProto = this
         let htmlItems = {}

@@ -46,7 +46,7 @@ class SecretFileControllerService extends ControllerServiceBase {
         if(this.isCreate) {
             this.hideOpenPassword();
         }
-        this.getItem(this.htmlItems.secretFileMainDiv).style = "display:none;"
+        this.hideElement(this.htmlItems.secretFileMainDiv)
         this.isCreate = false;
         thePageLoader.setTitlePostfix(this.file.decryptName())
         this.hideChangePassword();
@@ -62,27 +62,25 @@ class SecretFileControllerService extends ControllerServiceBase {
     }
     
     hideOpenPassword(){
-        this.getItem(this.htmlItems.fPassLoginForm).style = "display:none;";
+        this.hideElement(this.htmlItems.fPassLoginForm);
     }
     
     hideChangePassword() {
-        this.getItem(this.htmlItems.fPassChangePasswordForm).style = "display:none;";
-        this.getItem(this.htmlItems.fPassChangePasswordShowLink).style = "display:inline;";
-        this.getItem(this.htmlItems.fPassChangePasswordHideLink).style = "display:none;";
+        this.hideElement(this.htmlItems.fPassChangePasswordForm)
     }
     
     showMainDiv() {
-        this.getItem(this.htmlItems.secretFileMainDiv).style = "display:block;"
+        this.showElement(this.htmlItems.secretFileMainDiv)
+        this.showElement("fPassChangePasswordShowNavItem")
+        this.showElement("phbShowAddContactNavItem")
     }
     
     hideMainDiv() {
-        this.getItem(this.htmlItems.secretFileMainDiv).style = "display:none;"
+        this.hideElement(this.htmlItems.secretFileMainDiv);
     }
     
     showChangePassword() {
-        this.getItem(this.htmlItems.fPassChangePasswordForm).style = "display:block;";
-        this.getItem(this.htmlItems.fPassChangePasswordShowLink).style = "display:none;";
-        this.getItem(this.htmlItems.fPassChangePasswordHideLink).style = "display:inline;";
+        this.showElement(this.htmlItems.fPassChangePasswordForm)
     }
     
     setPassword() {
