@@ -23,6 +23,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         this.setName();
         try{
             await this.file.upload(true);
+            this.showEncryptedData()
             this.message("File created successfully")
         } catch(e) {
             this.error(e.toString());
@@ -33,7 +34,8 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
 
     async openFile(elementName, e, t) {
         try {
-            await super.openFile(elementName, e, t);
+            await super.openFile(elementName, e, t)
+            this.showEncryptedData()
             this.listContacts()
             //this.getItem(this.htmlItems.).innerText = decrypted.modifyDate
         } catch(e) {
@@ -92,6 +94,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
                 html.getElementsByClassName("phbDescription")[0].value
             )
             await this.file.upload()
+            this.showEncryptedData()
             this.message("Modification is ready")
         } catch(e) {
             this.error(e)
@@ -99,7 +102,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         }
         //HACK
         if(newNickName !== nickName) {
-            self.listContacts()
+            this.listContacts()
         } else {
             this.showContact(element, newNickName, true)
         }
@@ -162,6 +165,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         )
         this.file.modifyPhoneNumber(nickName, idx, pbn)
         await this.file.upload()
+        this.showEncryptedData()
         this.showContact(tdDetails, nickName, true)
     }
     
@@ -187,6 +191,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             }
             // FIXME: hack
             await this.file.upload(this.isCreate)
+            this.showEncryptedData()
             this.message("Contact added")
             this.isCreate = false
             
@@ -264,6 +269,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
         try {
             this.file.removeContact(nickName)
             await this.file.upload()
+            this.showEncryptedData()
             this.listContacts()
         } catch(e) {
             this.error(e.toString())
@@ -337,6 +343,7 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
     async numberDeleteHandler(nickName, i, tdDetails) {
         this.file.removePhoneNumber(nickName, i)
         await this.file.upload()
+        this.showEncryptedData()
         this.showContact(tdDetails, nickName, true)
     }
 
@@ -359,7 +366,16 @@ class PhoneBookFileControllerService extends SecretFileControllerService {
             )
         )
         await this.file.upload()
+        this.showEncryptedData()
         this.showContact(tdDetails, nickName, true)
+    }
+
+    showEncryptedData() {
+        if(!theConfig.show_encrypted_data){
+            return
+        }
+        this.getItem("txtEncodedInput").value = Uint8Array2String(this.file.__encryptedContent)
+        this.getItem("txtEncodedInputLayer2").value = this.file.getLayer2Str()
     }
 } // end of PhoneBookFileControllerService
 

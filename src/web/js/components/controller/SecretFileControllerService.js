@@ -73,6 +73,10 @@ class SecretFileControllerService extends ControllerServiceBase {
         this.showElement(this.htmlItems.secretFileMainDiv)
         this.showElement("fPassChangePasswordShowNavItem")
         this.showElement("phbShowAddContactNavItem")
+        this.showElement("fPassSaveNavItem")
+        if(theConfig.show_encrypted_data) {
+            this.showElement("encodedDiv")
+        }
     }
     
     hideMainDiv() {
@@ -173,6 +177,12 @@ class SecretFileControllerService extends ControllerServiceBase {
                 }
             },1000);
         }); 
+    }
+
+    showEncryptedData() {
+        let txt = this.getItem(this.htmlItems.txtPlanInput).value
+        this.file.encrypt(txt)
+        this.getItem("txtEncodedInput").value = Uint8Array2String(this.file.__encryptedContent)
     }
 };
 

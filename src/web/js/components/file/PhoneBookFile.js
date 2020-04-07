@@ -242,7 +242,14 @@ class PhoneBookFile extends SecretFile {
     let txt = this.decrypt().txt
     return JSON.parse(txt)
   }
-
+  getLayer2Str() {
+    let layer2 = this.__getLayer2()
+    let layer2Str = {}
+    for(let key in layer2){
+      layer2Str[key] = Uint8Array2String(layer2[key])
+    }
+    return JSON.stringify(layer2Str, null, 4)
+  }
 }
 
 

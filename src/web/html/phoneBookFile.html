@@ -15,9 +15,14 @@
         <div class="filePasswordMainDiv"></div>
         <div class="secretFileMainDiv">
             <div class="phbAddContact" style="display: none;"></div>
+            <h2>Contact list</h2>
             <div class="phbContacts"></div>
-            Encoded:<br>
-            <textarea class="txtEncodedInput"></textarea>
+            <div class="encodedDiv hide">
+                <h2>Encrypted layer 1</h2>
+                <textarea class="txtEncodedInput" readonly></textarea><br>
+                <h2>Encrypted layer 2</h2>
+                <textarea class="txtEncodedInputLayer2" readonly></textarea>
+            </div>
         </div>
     </body>
 </html>

@@ -8,6 +8,11 @@
     height: 300px;
 }
 
+.txtEncodedInputLayer2 {
+    width: 100%;
+    height: 300px;
+}
+
 body {
     background-color: rgb(241, 220, 122) !important;
     margin:10px !important

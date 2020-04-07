@@ -7,6 +7,9 @@ class TxtFileControllerService extends SecretFileControllerService {
     start(body, file) {
         this.file = file || theFileFactory.createFile("txt");
         super.start(body, file);
+        if(theConfig.show_encrypted_data){
+            this.addEventListener("txtPlanInput", "keyup", this.showEncryptedData)
+        }
     }
     
     stop() {
@@ -51,6 +54,9 @@ class TxtFileControllerService extends SecretFileControllerService {
             let decrypted = this.file.decrypt();
             //this.getItem(this.htmlItems.).innerText = decrypted.modifyDate
             this.getItem(this.htmlItems.txtPlanInput).value = decrypted.txt;
+            if(theConfig.show_encrypted_data) {
+                this.showEncryptedData()
+            }
         } catch(e) {
             this.error(e)
         }
