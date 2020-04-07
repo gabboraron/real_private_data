@@ -19,6 +19,9 @@ class MainControllerService extends ControllerServiceBase {
         this.addEventListener(this.htmlItems.createUserLink, "click", this.openPage);
         this.addEventListener(this.htmlItems.createTxtFileLink, "click", this.openPage);
         this.addEventListener(this.htmlItems.createPhbFileLink, "click", this.openPage);
+        if(theConfig.enable_create_user) {
+            this.showElement(this.getItem("createUserNavItem"))
+        }
         this.listFiles(true);
     }
     
