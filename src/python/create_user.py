@@ -26,7 +26,7 @@ def create_user(username, password):
 if __name__ == "__main__":
     username  = input("Enter your username: ")
     password  = getpass.getpass("Enter your password: ")
-    password2 = getpass.getpass("Enter your password again :")
+    password2 = getpass.getpass("Enter your password again: ")
     if username == "" or password == "":
         print("Username and/or password is empty")
         exit()
