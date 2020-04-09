@@ -579,13 +579,156 @@ Address:A kontakt címe<br />
 Description:A kontaktról egy leírás<br />
 Add phone number:Új telefonszám hozzáadása (lást feljebb)</p>
 <p>Megjegyzés: amikor létrehozunk egy Telefonkönyvfájlt, akkor jön igazából létre, amikor az első kontaktot hozzáadtuk.</p>
-<h4 id="felhasználó-létrehozása">Felhasználó létrehozása</h4>
+<h4 id="felhasználó-létrehozása"><span id="anchor-47"></span>Felhasználó létrehozása</h4>
 <p><img src="Pictures/100002010000022C0000018F8691609CE31506E2.png" width="556" height="399" />New Username mező:Új felhasználó neve<br />
 Password mező:Új felhasználó jelszava<br />
 Password again mező:Új felhasználó jelszava megint<br />
 Create User gomb:A felhasználó létrehozása</p>
-<h1 id="fejlesztői-dokumentáció"><span id="anchor-47"></span>Fejlesztői dokumentáció</h1>
-<h2 id="tesztelési-terv"><span id="anchor-48"></span>Tesztelési terv</h2>
+<h4 id="üzenetek-megjelenítése"><span id="anchor-48"></span>Üzenetek megjelenítése</h4>
+<p><img src="Pictures/10000201000003F70000016C21CCC3E30A23471F.png" width="558" height="200" /></p>
+<p></p>
+<p><img src="Pictures/10000201000003F70000016C04C77D7EEB12B9FA.png" width="554" height="198" /></p>
+<p>Az üzenetek a menüsor alatt jelennek meg.<br />
+Ha valami sikeres volt, akkor zöld hátterük lesz, ha sikertelen, akkor piros.<br />
+A hibaüzenetekről lásd a <strong>Hibaüzenetek</strong> fejezetet</p>
+<h4 id="hibaüzenetek">Hibaüzenetek</h4>
+<p>Két fajta hiba lehet lehet kliens oldali (<strong>LOCAL</strong>) és lehet szerver oldali (<strong>REMOTE</strong>) hiba.<br />
+A kliens oldali hibák 1xx a szerver oldaliak 2xx alakúak<br />
+Egy hibának van kódja, hibaüzenete, és esetleg további adata (például távoli függvény hibánál a függvény hibaüzenete)</p>
+<h5 id="lokális-kliens-oldali-hibák-local">Lokális, kliens oldali hibák (LOCAL)</h5>
+<table>
+<tbody>
+<tr class="odd">
+<td>101</td>
+<td>CONNECTION_ERROR</td>
+<td>Connection error</td>
+<td>Kapcsolat hiba</td>
+</tr>
+<tr class="even">
+<td>102</td>
+<td>LOCAL_CALL_ERROR</td>
+<td>Function call local error</td>
+<td>Lokális függvényhiba</td>
+</tr>
+<tr class="odd">
+<td>103</td>
+<td>ALREADY_LOGEDIN</td>
+<td>You are already logged in</td>
+<td>Már be vagy jelentkezve</td>
+</tr>
+<tr class="even">
+<td>104</td>
+<td>EMPTY_USERNAME_PASSWORD</td>
+<td>Empty username and/or password and/or password password again</td>
+<td>Üres felhasználónév és/vagy jelszó és/vagy a jelszó mégegyszer mező üres</td>
+</tr>
+<tr class="odd">
+<td>105</td>
+<td>PASSWORD_NOT_EQUAL_PASSWORD2</td>
+<td>Password and password again is not equal</td>
+<td>A jelszó és a jelszó mégegyszer nem egyezik</td>
+</tr>
+<tr class="even">
+<td>106</td>
+<td>PASWORD_PASSWORD2_EMPTY</td>
+<td>Password, and/or password again is empty</td>
+<td>Üres jelszómező</td>
+</tr>
+<tr class="odd">
+<td>107</td>
+<td>PASWORD_PASSWORD2_OLD_PASSWORD_EMPTY</td>
+<td>Password, and/or password again is empty and or oldPassword</td>
+<td>A régi jelszó és/vagy az új jelszó és/vagy az új jelszó mégegyszer üres</td>
+</tr>
+<tr class="even">
+<td>108</td>
+<td>EMPTY_FILE_FIELD</td>
+<td>File field is empty</td>
+<td>A fájl mező üres</td>
+</tr>
+<tr class="odd">
+<td>109</td>
+<td>DOWNLOAD_ERROR</td>
+<td>Download error</td>
+<td>Hiba letöltéskor</td>
+</tr>
+<tr class="even">
+<td>110</td>
+<td>CONTACT_ALREADY_IN_LIST</td>
+<td>The contact has been already in the contact list</td>
+<td>A kapcsolat már a kapcsolat listában van</td>
+</tr>
+<tr class="odd">
+<td>111</td>
+<td>CONTACT_NOT_FOUND</td>
+<td>Contact not found</td>
+<td>A kapcsolat nem található</td>
+</tr>
+<tr class="even">
+<td>112</td>
+<td>SUDDENLY_LOGGED_OUT</td>
+<td>Suddenly logged out</td>
+<td>Hirtelen kijelentkeződött</td>
+</tr>
+<tr class="odd">
+<td>113</td>
+<td>DECRYPTION_FAILURE</td>
+<td>Decryption failure</td>
+<td>A visszafejtés sikertelen</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<h5 id="távoli-szerver-oldali-hibák-remote">Távoli, szerver oldali hibák (REMOTE)</h5>
+<table>
+<tbody>
+<tr class="odd">
+<td>201</td>
+<td>MISSING_USERNAME_PASSWORD</td>
+<td>Missing username and/or password</td>
+<td>Hiányzó felhasználónév és/vagy jelszó</td>
+</tr>
+<tr class="even">
+<td>202</td>
+<td>BAD_USERNAME_PASSWORD</td>
+<td>Bad username and/or password</td>
+<td>Hibás felhasználónév és/vagy jelszó</td>
+</tr>
+<tr class="odd">
+<td>203</td>
+<td>REMOTE_FUNCTION_ERROR</td>
+<td>Remote function error</td>
+<td>Távoli függvény hiba</td>
+</tr>
+<tr class="even">
+<td>204</td>
+<td>USER_REGISTRATED</td>
+<td>User has been already registrated</td>
+<td>A felhasználó már regisztrálva van</td>
+</tr>
+<tr class="odd">
+<td>205</td>
+<td>DISABLED_CREATE_USER</td>
+<td>Disabled create new user</td>
+<td>Nincs engedélyezve új felhasználó hozzáadása</td>
+</tr>
+<tr class="even">
+<td>206</td>
+<td>FILE_EXIST</td>
+<td>File has been already exist</td>
+<td>A fájl már létezik</td>
+</tr>
+<tr class="odd">
+<td>207</td>
+<td>FILE_NOT_EXIST</td>
+<td>File not exist</td>
+<td>A fájl nem létezik</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<h1 id="fejlesztői-dokumentáció"><span id="anchor-49"></span>Fejlesztői dokumentáció</h1>
+<h2 id="tesztelési-terv"><span id="anchor-50"></span>Tesztelési terv</h2>
 <p>A txt fájlok teszteléséhez Arany János összes költeményeit használom:</p>
 <p><a href="https://mek.oszk.hu/00500/00597/html/index.htm" class="uri">https://mek.oszk.hu/00500/00597/html/index.htm</a></p>
 <p>A telefonkönyvek teszteléséhez az ELTE honlapján elérhető telefonszámokat használom:</p>
@@ -593,7 +736,7 @@ Create User gomb:A felhasználó létrehozása</p>
 <li>ELTE IK Média- és Oktatásinformatikai Tanszék &gt; A Tanszékről &gt; Oktatók és munkatársak<br />
 <a href="https://mot.inf.elte.hu/munkatarsak" class="uri">https://mot.inf.elte.hu/munkatarsak</a></li>
 </ol>
-<h3 id="előkészületek-1"><span id="anchor-49"></span>Előkészületek</h3>
+<h3 id="előkészületek-1"><span id="anchor-51"></span>Előkészületek</h3>
 <p>Létrehozok egy üres adatbázist a projekt mellé, és megcsinálom a szükséges config fájlt:</p>
 <p>{</p>
 <p>&quot;host&quot;:&quot;localhost&quot;,</p>
@@ -608,9 +751,9 @@ Create User gomb:A felhasználó létrehozása</p>
 <p>&quot;web_root&quot;: &quot;[[dir_project]]/src/web&quot;,</p>
 <p>&quot;data_dir&quot;: &quot;[[dir_project]]/../test_data&quot;</p>
 <p>}</p>
-<h3 id="eset-a-szerver-elindítása-black-box"><span id="anchor-50"></span>1. eset: A szerver elindítása (black box)</h3>
+<h3 id="eset-a-szerver-elindítása-black-box"><span id="anchor-52"></span>1. eset: A szerver elindítása (black box)</h3>
 <p>./run_server --configFile config.test.json</p>
-<h4 id="elvárt-eredmény"><span id="anchor-51"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény"><span id="anchor-53"></span>Elvárt eredmény</h4>
 <p>1. <strong>Loggolja a konfigurált beállításokat:</strong></p>
 <p>[2020-04-08 12:25:01,276][INFO] Loglevel: INFO</p>
 <p>[2020-04-08 12:25:01,440][INFO] Runner command: ./run_server.py --configFile config.test.json</p>
@@ -648,36 +791,36 @@ Create User gomb:A felhasználó létrehozása</p>
 <p></p>
 <p><img src="Pictures/100002010000035B000000B22FB9CDEA4FD37054.png" width="642" height="133" />3 másodperc múlva</p>
 <p><img src="Pictures/10000201000001F40000014517A57B782B43355D.png" width="499" height="324" /></p>
-<h3 id="eset-felhasználók-létrehozása-konzolból-black-box"><span id="anchor-52"></span>2. eset: Felhasználók létrehozása konzolból (black box)</h3>
+<h3 id="eset-felhasználók-létrehozása-konzolból-black-box"><span id="anchor-54"></span>2. eset: Felhasználók létrehozása konzolból (black box)</h3>
 <p>2 felhasználót fogok létrehozni</p>
 <p><img src="Pictures/100002010000031D000000F2976BA035B3996C7B.png" width="642" height="195" /><strong>Felhasználónév</strong>: test_user1 <strong>password:</strong> password1<br />
 <strong>Felhasználónév</strong>: test_user2 <strong>password: </strong>password2</p>
 <p><img src="Pictures/100002010000031D000000F2E88902532E77D116.png" width="642" height="195" /></p>
-<h4 id="elvárt-eredmény-1"><span id="anchor-53"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-1"><span id="anchor-55"></span>Elvárt eredmény</h4>
 <p>1. Hozzon létre két felhasználói mappát:</p>
 <p><img src="Pictures/100002010000024E000000623AFAC37FC5C00533.png" width="589" height="98" />2. Be tudjak lépni a felhasználókkal, ezt lásd lejjebb a bejelentkezés tesztelésénél.</p>
-<h3 id="eset-üresen-hagyott-mezők-felhasználó-létrehozása-közben"><span id="anchor-54"></span>3. eset: Üresen hagyott mezők felhasználó létrehozása közben</h3>
+<h3 id="eset-üresen-hagyott-mezők-felhasználó-létrehozása-közben"><span id="anchor-56"></span>3. eset: Üresen hagyott mezők felhasználó létrehozása közben</h3>
 <p>Vagy a felhasználónevet, vagy a jelszó mezőt, vagy mindkettőt hagyjuk üresen</p>
-<h4 id="elvárt-eredmény-2"><span id="anchor-55"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-2"><span id="anchor-57"></span>Elvárt eredmény</h4>
 <p><img src="Pictures/100002010000031D0000013A193006CF92705A40.png" width="623" height="245" /><strong>Username and/or password is empty</strong> üzenet, a data dir változatlan hagyása</p>
-<h3 id="eset-jelszó-és-jelszó-mégegyszer-nem-egyezik-cli"><span id="anchor-56"></span>4. eset: jelszó és jelszó mégegyszer nem egyezik (CLI)</h3>
+<h3 id="eset-jelszó-és-jelszó-mégegyszer-nem-egyezik-cli"><span id="anchor-58"></span>4. eset: jelszó és jelszó mégegyszer nem egyezik (CLI)</h3>
 <h3 id="section"><img src="Pictures/100002010000031D00000086F18BAFFF29656A89.png" width="642" height="108" /></h3>
-<h4 id="elvárt-eredmény-3"><span id="anchor-57"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-3"><span id="anchor-59"></span>Elvárt eredmény</h4>
 <p>Hibaüzenet, test_data dir ne változzon</p>
-<h3 id="eset-létező-felhasználó-hozzáadása-azonos-jelszóval"><span id="anchor-58"></span>5. eset: Létező felhasználó hozzáadása azonos jelszóval</h3>
+<h3 id="eset-létező-felhasználó-hozzáadása-azonos-jelszóval"><span id="anchor-60"></span>5. eset: Létező felhasználó hozzáadása azonos jelszóval</h3>
 <p>Meg kell jegyezzem, hogy itt a felhasználónév és a jelszó páros azonosít egy felhasználót, így például <strong>User1/password1</strong> és <strong>User1/password2</strong> nem ugyanaz a felhasználó.</p>
 <p>Gondolkodtam ennek javításán, de nem igazán lehetséges úgy, hogy ne adjon többlet információt a szerver üzemeltetőjének a felhasználóról.</p>
 <p>test_user1/password1</p>
 <p><img src="Pictures/100002010000031D0000008614CCB9C6A936E847.png" width="642" height="108" /></p>
-<h4 id="elvárt-eredmény-4"><span id="anchor-59"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-4"><span id="anchor-61"></span>Elvárt eredmény</h4>
 <p>Hibaüzenet, test_data dir ne változzon</p>
-<h3 id="eset-létező-felhasználó-hozzáadása-más-jelszóval-cli"><span id="anchor-60"></span>6. eset: Létező felhasználó hozzáadása más jelszóval (cli)</h3>
+<h3 id="eset-létező-felhasználó-hozzáadása-más-jelszóval-cli"><span id="anchor-62"></span>6. eset: Létező felhasználó hozzáadása más jelszóval (cli)</h3>
 <p><strong>test_user1/password2</strong> létrehozása</p>
-<h4 id="elvárt-eredmény-5"><img src="Pictures/100002010000031D00000086C6457FFF882A34CD.png" width="613" height="103" /><span id="anchor-61"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-5"><img src="Pictures/100002010000031D00000086C6457FFF882A34CD.png" width="613" height="103" /><span id="anchor-63"></span>Elvárt eredmény</h4>
 <p>1. Hozzon létre egy új felhasználói mappát</p>
 <p><img src="Pictures/100002010000024E00000074FBA42ABA16A2EA41.png" width="589" height="115" /></p>
 <p>2. Be tudjak lépni az új felhasználóval, ezt lásd lejjebb a bejelentkezés tesztelésénél.</p>
-<h3 id="eset-belépés-hibás-jelszóval-gui"><span id="anchor-62"></span>7. eset: Belépés hibás jelszóval (GUI)</h3>
+<h3 id="eset-belépés-hibás-jelszóval-gui"><span id="anchor-64"></span>7. eset: Belépés hibás jelszóval (GUI)</h3>
 <p>Bejelentkezés<strong> </strong>a következő felhasználókkal</p>
 <table>
 <tbody>
@@ -701,9 +844,9 @@ Create User gomb:A felhasználó létrehozása</p>
 </table>
 <p></p>
 <p>(<strong>SimpleJsonRpcWebSocketClientService</strong> és <strong>SimpleJsonRpcPOSTClientService </strong>segítségével is)</p>
-<h4 id="elvárt-eredmény-6"><span id="anchor-63"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-6"><span id="anchor-65"></span>Elvárt eredmény</h4>
 <p><img src="Pictures/10000201000001FC0000017DFCC82713BC118645.png" width="508" height="381" />Hibaüzenet</p>
-<h3 id="eset-bejelentkezés-valós-felhasználókkal-gui"><span id="anchor-64"></span>8. eset: Bejelentkezés valós felhasználókkal (GUI)</h3>
+<h3 id="eset-bejelentkezés-valós-felhasználókkal-gui"><span id="anchor-66"></span>8. eset: Bejelentkezés valós felhasználókkal (GUI)</h3>
 <p>Bejelentkezés<strong> </strong>a következő felhasználókkal (<strong>SimpleJsonRpcWebSocketClientService</strong> és <strong>SimpleJsonRpcPOSTClientService </strong>segítségével is)</p>
 <table>
 <tbody>
@@ -726,20 +869,20 @@ Create User gomb:A felhasználó létrehozása</p>
 </tbody>
 </table>
 <p></p>
-<h4 id="elvárt-eredmény-7"><span id="anchor-65"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-7"><span id="anchor-67"></span>Elvárt eredmény</h4>
 <p>Bejelentkezés az oldalra, és a main oldalra irányítás.</p>
 <h3 id="section-1"><img src="Pictures/10000201000001D900000140756AC15CC24E107F.png" width="473" height="320" /></h3>
-<h3 id="eset-felhasználó-létrehozása-gui"><span id="anchor-66"></span>9. eset: Felhasználó létrehozása (GUI)</h3>
+<h3 id="eset-felhasználó-létrehozása-gui"><span id="anchor-68"></span>9. eset: Felhasználó létrehozása (GUI)</h3>
 <p><strong>test_user3/password3</strong> létrehozása</p>
-<h4 id="elvárt-eredmény-8"><span id="anchor-67"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-8"><span id="anchor-69"></span>Elvárt eredmény</h4>
 <p>1. sikeres létrehozás</p>
 <p><img src="Pictures/100002010000023D000001AA20A24A135A40C772.png" width="573" height="425" />2. sikeres bejelntekzés az új felhasználóval (lásd <strong>8. eset: Bejelentkezés valós felhasználókkal (GUI) </strong>).</p>
-<h3 id="eset-txt-fájl-létrehozása"><span id="anchor-68"></span>10. eset: Txt Fájl létrehozása</h3>
+<h3 id="eset-txt-fájl-létrehozása"><span id="anchor-70"></span>10. eset: Txt Fájl létrehozása</h3>
 <p>Hozzunk létre pár txt fájlt.</p>
-<h4 id="elvárt-eredmény-9"><span id="anchor-69"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-9"><span id="anchor-71"></span>Elvárt eredmény</h4>
 <p>A fájlok létrejönnek, és meg is tudjuk őket nyitni, lásd lejjebb</p>
 <p><img src="Pictures/100002010000039700000391C7F524C2E18491CD.png" width="604" height="600" /></p>
-<h3 id="eset-telefonkönyv-fájl-létrehozása"><span id="anchor-70"></span>11. eset: Telefonkönyv fájl létrehozása</h3>
+<h3 id="eset-telefonkönyv-fájl-létrehozása"><span id="anchor-72"></span>11. eset: Telefonkönyv fájl létrehozása</h3>
 <p>Ehhez csináltam egy teszt robotot, ami létrehoz egy Telefonkönyv fájlt, és feltölti adatokkal.</p>
 <p><a href="https://localhost:11443/testPhoneBook.html" class="uri">https://localhost:11443/testPhoneBook.html</a></p>
 <p><strong>waitTime</strong>: Megmondja, hogy mennyit várjon a teszt két művelet között<br />
@@ -748,9 +891,9 @@ Create User gomb:A felhasználó létrehozása</p>
 <strong>fileName</strong>: Mi legyen a létrehozandó fájl neve<br />
 <strong>filePassword</strong>: Mi legyen a jelszava</p>
 <p><img src="Pictures/10000201000001FC0000022BBC859C5CC233AF1F.png" width="508" height="554" /></p>
-<h4 id="elvárt-eredmény-10"><span id="anchor-71"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-10"><span id="anchor-73"></span>Elvárt eredmény</h4>
 <p>A fájl létrehozása, és a telefonkönyv adatok tárolása.</p>
-<h3 id="eset-nézzük-meg-hogy-a-szerveren-tárolt-adatok-tényleg-titkosak-e"><span id="anchor-72"></span>12. eset: Nézzük meg, hogy a szerveren tárolt adatok tényleg titkosak-e</h3>
+<h3 id="eset-nézzük-meg-hogy-a-szerveren-tárolt-adatok-tényleg-titkosak-e"><span id="anchor-74"></span>12. eset: Nézzük meg, hogy a szerveren tárolt adatok tényleg titkosak-e</h3>
 <ol style="list-style-type: decimal">
 <li>Kilistázzuk a mappákat tee paranccsal</li>
 <li>megnézzük a fájlokat cat paranccsal</li>
@@ -758,8 +901,8 @@ Create User gomb:A felhasználó létrehozása</p>
 </ol>
 <p><img src="Pictures/100002010000024E000002A2BFA6C3F2C761EB55.png" width="589" height="674" />Itt látható, hogy mind a mappák (felhasználók nevei), és a benne lévő fájlok nevei is titkosítottak.</p>
 <p><img src="Pictures/100002010000024E000002B41EE2773EF9BEFDC2.png" width="589" height="691" />Itt látható, hogy a fájl cat-tal megjelenítve is értelmetlen</p>
-<h3 id="a-teszt-közben-létrejött-felhasználók-és-fájlok"><span id="anchor-73"></span>A teszt közben létrejött felhasználók és fájlok</h3>
-<h4 id="felhasználók"><span id="anchor-74"></span>Felhasználók</h4>
+<h3 id="a-teszt-közben-létrejött-felhasználók-és-fájlok"><span id="anchor-75"></span>A teszt közben létrejött felhasználók és fájlok</h3>
+<h4 id="felhasználók"><span id="anchor-76"></span>Felhasználók</h4>
 <table>
 <tbody>
 <tr class="odd">
@@ -784,7 +927,7 @@ Create User gomb:A felhasználó létrehozása</p>
 </tr>
 </tbody>
 </table>
-<h4 id="fájlok"><span id="anchor-75"></span>Fájlok</h4>
+<h4 id="fájlok"><span id="anchor-77"></span>Fájlok</h4>
 <table>
 <tbody>
 <tr class="odd">
