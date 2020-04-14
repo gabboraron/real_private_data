@@ -592,8 +592,8 @@ Create User gomb:A felhasználó létrehozása</p>
 Ha valami sikeres volt, akkor zöld hátterük lesz, ha sikertelen, akkor piros.<br />
 A hibaüzenetekről lásd a <strong>Hibaüzenetek</strong> fejezetet</p>
 <h4 id="hibaüzenetek">Hibaüzenetek</h4>
-<p>Két fajta hiba lehet lehet kliens oldali (<strong>LOCAL</strong>) és lehet szerver oldali (<strong>REMOTE</strong>) hiba.<br />
-A kliens oldali hibák 1xx a szerver oldaliak 2xx alakúak<br />
+<p>Két fajta hiba lehet, lehet kliens oldali (<strong>LOCAL</strong>) és lehet szerver oldali (<strong>REMOTE</strong>) hiba.<br />
+A kliens oldali hibák kódjai <strong>1xx</strong> a szerver oldaliak <strong>2xx</strong> alakúak<br />
 Egy hibának van kódja, hibaüzenete, és esetleg további adata (például távoli függvény hibánál a függvény hibaüzenete)</p>
 <h5 id="lokális-kliens-oldali-hibák-local">Lokális, kliens oldali hibák (LOCAL)</h5>
 <table>
@@ -728,6 +728,29 @@ Egy hibának van kódja, hibaüzenete, és esetleg további adata (például tá
 </table>
 <p></p>
 <h1 id="fejlesztői-dokumentáció"><span id="anchor-49"></span>Fejlesztői dokumentáció</h1>
+<h2 id="adatstruktúrák">Adatstruktúrák</h2>
+<h3 id="felhasználói-adatok-tárolása-a-szerveren">Felhasználói adatok tárolása a szerveren</h3>
+<p>A szerveren van egy mappa a felhasználóknak, ezt a <strong>data_dir</strong> konfigurációval állíthatjuk be, hogy hol legyen.<br />
+Ebben a mappában minden felhasználónak létrehozunk egy új mappát, amiben a már titkos adatokat tároljuk.<br />
+A felhasználó mappájába a már előre titkosított fájlok vannak titkosított névvel.</p>
+<h4 id="felhasználó-mappa-generálása">Felhasználó mappa generálása</h4>
+<p>Bemenet: felhasználónév, jelszó</p>
+<ol style="list-style-type: decimal">
+<li>shaAlgoritmus = SHA256Salty(theConfig.server_salt)</li>
+<li>felhasználó_hash = shaAlgoritmus(felhasználónév)</li>
+<li>jelszó_hash = shaAlgoritmus(jelszó)</li>
+<li>felhasználó_mappa = shaAlgoritmus(concat(felhasználó_hash, jelszó_hash ))</li>
+</ol>
+<p>Megjegyzések</p>
+<ol style="list-style-type: decimal">
+<li>a 2. és 3. lépés jellemzően a kliens oldalon történik meg (csak a CLI regisztrálásnál történik szerver oldalon), így a szerver már a felhasználó nevét is titkosan kapja meg.</li>
+<li>Az SHA256Salty algoritmus kicserélhető, és ki is kell cserélni hosszútávon valami lassabbra</li>
+<li>A theConfig.server_salt konfigurálható, lásd a konfig fejezetet</li>
+<li>az SHA256Salty visszatérési értéke hexadecimális számrendszerben ábrázolt számok (00-ff)</li>
+</ol>
+<h4 id="section"></h4>
+<p></p>
+<p></p>
 <h2 id="tesztelési-terv"><span id="anchor-50"></span>Tesztelési terv</h2>
 <p>A txt fájlok teszteléséhez Arany János összes költeményeit használom:</p>
 <p><a href="https://mek.oszk.hu/00500/00597/html/index.htm" class="uri">https://mek.oszk.hu/00500/00597/html/index.htm</a></p>
@@ -804,7 +827,7 @@ Egy hibának van kódja, hibaüzenete, és esetleg további adata (például tá
 <h4 id="elvárt-eredmény-2"><span id="anchor-57"></span>Elvárt eredmény</h4>
 <p><img src="Pictures/100002010000031D0000013A193006CF92705A40.png" width="623" height="245" /><strong>Username and/or password is empty</strong> üzenet, a data dir változatlan hagyása</p>
 <h3 id="eset-jelszó-és-jelszó-mégegyszer-nem-egyezik-cli"><span id="anchor-58"></span>4. eset: jelszó és jelszó mégegyszer nem egyezik (CLI)</h3>
-<h3 id="section"><img src="Pictures/100002010000031D00000086F18BAFFF29656A89.png" width="642" height="108" /></h3>
+<h3 id="section-1"><img src="Pictures/100002010000031D00000086F18BAFFF29656A89.png" width="642" height="108" /></h3>
 <h4 id="elvárt-eredmény-3"><span id="anchor-59"></span>Elvárt eredmény</h4>
 <p>Hibaüzenet, test_data dir ne változzon</p>
 <h3 id="eset-létező-felhasználó-hozzáadása-azonos-jelszóval"><span id="anchor-60"></span>5. eset: Létező felhasználó hozzáadása azonos jelszóval</h3>
@@ -871,7 +894,7 @@ Egy hibának van kódja, hibaüzenete, és esetleg további adata (például tá
 <p></p>
 <h4 id="elvárt-eredmény-7"><span id="anchor-67"></span>Elvárt eredmény</h4>
 <p>Bejelentkezés az oldalra, és a main oldalra irányítás.</p>
-<h3 id="section-1"><img src="Pictures/10000201000001D900000140756AC15CC24E107F.png" width="473" height="320" /></h3>
+<h3 id="section-2"><img src="Pictures/10000201000001D900000140756AC15CC24E107F.png" width="473" height="320" /></h3>
 <h3 id="eset-felhasználó-létrehozása-gui"><span id="anchor-68"></span>9. eset: Felhasználó létrehozása (GUI)</h3>
 <p><strong>test_user3/password3</strong> létrehozása</p>
 <h4 id="elvárt-eredmény-8"><span id="anchor-69"></span>Elvárt eredmény</h4>
