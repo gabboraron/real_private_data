@@ -17,7 +17,7 @@
 <p>Nem tudhatom, hogy ha egy felhőben tárolom az adataimat, akkor vajon a Google, a Microsoft, a Facebook, az Apple vagy más cégek, akik ilyeneket szolgáltatnak felhasználja-e őket. Ilyen szempontból mondjuk a megnevezettek még korrektek, mert az általános szerződési feltételeikben megfogalmazzák, hogy az adatainkat felhasználják.</p>
 <p>Sajnos arra jelenleg nincs erőforrásom, hogy egy saját Operációs rendszert írjak, vagy hogy leellenőrizzek egy Linuxot, Open/Free BSD-t hogy vajon visszaél-e az adataimmal, így ezeknek el kell hinnem, hogy nem teszik.<br />
 De tudok csinálni olyan programot, ami azt biztosítja számomra, hogy az adataimat a kliens oldalon titkosítva küldöm el a felhőbe, akkor a felhőben lévő cég nem tudhatja, hogy mik is voltak azok.</p>
-<p>Így jött az öltet, hogy először egy egyszerű szervert csinálok, ahol fájlokat tudok tárolni, amikbe az egyszerűség kedvéért először csak szövegeket, vagy telefonkönyvet tudok tárolni.<br />
+<p>Így jött az öltet, hogy először egy egyszerű szervert csinálok, ahol fájlokat tudok tárolni, amikbe az egyszerűség kedvéért előszőr csak szövegeket, vagy telefonkönyveket tudok tárolni.<br />
 Így hiába olvashatja az adott szerverszolgáltató az adataimat, nem fog hozzáférni az információhoz, mert az már a kliens oldalon titkosítva van.</p>
 <p>Fontos volt számomra, hogy nyílt forráskódú legyen, hogy biztosítva legyen, hogy tényleg titkosít, és tényleg nem ment semmilyen adatot.</p>
 <p></p>
@@ -728,12 +728,18 @@ Egy hibának van kódja, hibaüzenete, és esetleg további adata (például tá
 </table>
 <p></p>
 <h1 id="fejlesztői-dokumentáció"><span id="anchor-49"></span>Fejlesztői dokumentáció</h1>
-<h2 id="adatstruktúrák">Adatstruktúrák</h2>
-<h3 id="felhasználói-adatok-tárolása-a-szerveren">Felhasználói adatok tárolása a szerveren</h3>
+<h2 id="megoldási-terv">Megoldási terv</h2>
+<p>A projekt két részből áll. Egy szerverből, és egy kliensből. A szerver pythonban íródik, a kliens JavaScript-ben.</p>
+<p>A szervernek két szerepe van.</p>
+<p>1. a statikus (html, és JavaScript) fájlok kiszolgálása</p>
+<p>2. a felhasználók fájljainak tárolása (fontos, hogy a szerver a felhasználókról minél kevesebbet tudjon, így minden, titkosan fog érkezni a szerverhez: felhasználó név, jelszó, fájl név, fájl tartalom.)</p>
+<p></p>
+<h3 id="adatstruktúrák">Adatstruktúrák</h3>
+<h4 id="felhasználói-adatok-tárolása-a-szerveren">Felhasználói adatok tárolása a szerveren</h4>
 <p>A szerveren van egy mappa a felhasználóknak, ezt a <strong>data_dir</strong> konfigurációval állíthatjuk be, hogy hol legyen.<br />
 Ebben a mappában minden felhasználónak létrehozunk egy új mappát, amiben a már titkos adatokat tároljuk.<br />
 A felhasználó mappájába a már előre titkosított fájlok vannak titkosított névvel.</p>
-<h4 id="felhasználó-mappa-generálása">Felhasználó mappa generálása</h4>
+<h5 id="felhasználó-mappa-generálása">Felhasználó mappa generálása</h5>
 <p>Bemenet: felhasználónév, jelszó</p>
 <ol style="list-style-type: decimal">
 <li>shaAlgoritmus = SHA256Salty(theConfig.server_salt)</li>
@@ -931,22 +937,18 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <tr class="odd">
 <td>test_user1</td>
 <td>password1</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>test_user1</td>
 <td>password2</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>test_user2</td>
 <td>password2</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>test_user3</td>
 <td>password3</td>
-<td></td>
 </tr>
 </tbody>
 </table>
@@ -957,43 +959,36 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <td>test_user1/password1</td>
 <td>A MÉH ROMÁNCA.txt</td>
 <td>Petofi</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>test_user1/password1</td>
 <td>A SZEGÉNY JOBBÁGY.txt</td>
 <td>Petofi</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>test_user1/password1</td>
 <td>A VARRÓ LEÁNYOK.txt</td>
 <td>Petofi</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>test_user1/password1</td>
 <td>ARANYAIMHOZ.txt</td>
 <td>Petofi</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>test_user1/password1</td>
 <td>EGYKORI TANÍTVÁNYOM EMLÉKKÖNYVÉBE.txt</td>
 <td>Petofi</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>test_user1/password1</td>
 <td>VÁLASZ PETŐFINEK.txt</td>
 <td>Petofi</td>
-<td></td>
 </tr>
 <tr class="odd">
 <td>test_user1/password1</td>
 <td>ELTE IK Média- és Oktatásinformatikai Tanszék.phb</td>
 <td>Media</td>
-<td></td>
 </tr>
 </tbody>
 </table>
