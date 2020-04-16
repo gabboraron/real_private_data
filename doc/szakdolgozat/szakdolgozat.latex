@@ -883,7 +883,7 @@ Ha valami sikeres volt, akkor zöld hátterük lesz, ha sikertelen, akkor
 piros.\\
 A hibaüzenetekről lásd a \textbf{Hibaüzenetek} fejezetet
 
-\paragraph{Hibaüzenetek}\label{hibauxfczenetek}
+\paragraph[Hibaüzenetek]{\texorpdfstring{\protect\hypertarget{anchor-49}{}{}Hibaüzenetek}{Hibaüzenetek}}\label{hibauxfczenetek}
 
 Két fajta hiba lehet, lehet kliens oldali (\textbf{LOCAL}) és lehet
 szerver oldali (\textbf{REMOTE}) hiba.\\
@@ -892,8 +892,10 @@ A kliens oldali hibák kódjai \textbf{1xx} a szerver oldaliak
 Egy hibának van kódja, hibaüzenete, és esetleg további adata (például
 távoli függvény hibánál a függvény hibaüzenete)
 
-\subparagraph{Lokális, kliens oldali hibák
-(LOCAL)}\label{lokuxe1lis-kliens-oldali-hibuxe1k-local}
+\subparagraph[Lokális, kliens oldali hibák
+(LOCAL)]{\texorpdfstring{\protect\hypertarget{anchor-50}{}{}Lokális,
+kliens oldali hibák
+(LOCAL)}{Lokális, kliens oldali hibák (LOCAL)}}\label{lokuxe1lis-kliens-oldali-hibuxe1k-local}
 
 \begin{longtable}[]{@{}llll@{}}
 \toprule
@@ -927,8 +929,10 @@ sikertelen\tabularnewline
 \bottomrule
 \end{longtable}
 
-\subparagraph{Távoli, szerver oldali hibák
-(REMOTE)}\label{tuxe1voli-szerver-oldali-hibuxe1k-remote}
+\subparagraph[Távoli, szerver oldali hibák
+(REMOTE)]{\texorpdfstring{\protect\hypertarget{anchor-51}{}{}Távoli,
+szerver oldali hibák
+(REMOTE)}{Távoli, szerver oldali hibák (REMOTE)}}\label{tuxe1voli-szerver-oldali-hibuxe1k-remote}
 
 \begin{longtable}[]{@{}llll@{}}
 \toprule
@@ -950,10 +954,12 @@ létezik\tabularnewline
 \end{longtable}
 
 \section[Fejlesztői
-dokumentáció]{\texorpdfstring{\protect\hypertarget{anchor-49}{}{}Fejlesztői
+dokumentáció]{\texorpdfstring{\protect\hypertarget{anchor-52}{}{}Fejlesztői
 dokumentáció}{Fejlesztői dokumentáció}}\label{fejlesztux151i-dokumentuxe1ciuxf3}
 
-\subsection{Megoldási terv}\label{megolduxe1si-terv}
+\subsection[Megoldási
+terv]{\texorpdfstring{\protect\hypertarget{anchor-53}{}{}Megoldási
+terv}{Megoldási terv}}\label{megolduxe1si-terv}
 
 A projekt két részből áll. Egy szerverből, és egy kliensből. A szerver
 pythonban íródik, a kliens JavaScript-ben.
@@ -964,12 +970,14 @@ A szervernek két szerepe van.
 
 2. a felhasználók fájljainak tárolása (fontos, hogy a szerver a
 felhasználókról minél kevesebbet tudjon, így minden, titkosan fog
-érkezni a szerverhez: felhasználó név, jelszó, fájl név, fájl tartalom.)
+érkezni a szerverhez: felhasználó név, jelszó, fájlnév, fájl tartalom.)
 
-\subsubsection{Adatstruktúrák}\label{adatstruktuxfaruxe1k}
+\subsubsection[Adattárolás]{\texorpdfstring{\protect\hypertarget{anchor-54}{}{}Adattárolás}{Adattárolás}}\label{adattuxe1roluxe1s}
 
-\paragraph{Felhasználói adatok tárolása a
-szerveren}\label{felhasznuxe1luxf3i-adatok-tuxe1roluxe1sa-a-szerveren}
+\paragraph[Felhasználói adatok tárolása a
+szerveren]{\texorpdfstring{\protect\hypertarget{anchor-55}{}{}Felhasználói
+adatok tárolása a
+szerveren}{Felhasználói adatok tárolása a szerveren}}\label{felhasznuxe1luxf3i-adatok-tuxe1roluxe1sa-a-szerveren}
 
 A szerveren van egy mappa a felhasználóknak, ezt a \textbf{data\_dir}
 konfigurációval állíthatjuk be, hogy hol legyen.\\
@@ -978,8 +986,10 @@ a már titkos adatokat tároljuk.\\
 A felhasználó mappájába a már előre titkosított fájlok vannak
 titkosított névvel.
 
-\subparagraph{Felhasználó mappa
-generálása}\label{felhasznuxe1luxf3-mappa-generuxe1luxe1sa}
+\subparagraph[Felhasználó mappa
+generálása]{\texorpdfstring{\protect\hypertarget{anchor-56}{}{}Felhasználó
+mappa
+generálása}{Felhasználó mappa generálása}}\label{felhasznuxe1luxf3-mappa-generuxe1luxe1sa}
 
 Bemenet: felhasználónév, jelszó
 
@@ -1014,12 +1024,669 @@ Megjegyzések
 \item
   az SHA256Salty visszatérési értéke hexadecimális számrendszerben
   ábrázolt számok (00-ff)
+\item
+  Az SHA256Salty algoritmust lásd lejjebb
 \end{enumerate}
 
-\paragraph{}\label{section}
+\paragraph[Fájlnevek]{\texorpdfstring{\protect\hypertarget{anchor-57}{}{}Fájlnevek}{Fájlnevek}}\label{fuxe1jlnevek}
+
+A titkosítatlan fájlnevek tartalmazzák a fájlok kiterjesztését (jelenleg
+.txt vagy .phb (szöveges fájl, vagy telefonkönyv fájl)
+
+A fájlnevek a következéképp generálódnak (ez minden esetben a kliens
+oldalon történik)
+
+Bemenet: jelszó, fájlnév
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  shaAlgoritmus = SHA256Salty(theConfig.server\_salt)
+\item
+  fájl\_név\_hash = shaAlgorimus(concat(jelszó, jelszó))
+\item
+  fájl\_név = AESEncryptor(fájl\_név\_hash, fájl\_név)
+\end{enumerate}
+
+Megjegyzések:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Az shaAlgoritmus cserélhető, és érdemes is lesz valami lassabbra
+  cserélni
+\item
+  AESEncryptor algoritmust lásd lejjebb. (ez is cserélhető lesz)
+\item
+  Jelenleg ugyanazt a jelszót használom a fájlok nevének titkosításához,
+  mint a szerver eléréséhez, de másképp hash-elem le. (a szervernél
+  szimplán a jelszót hashelem, itt meg a jelszót kétszer leírva
+  hashelem, de ha a szerver oldali jelszót sikerül feltörni, akkor ezt
+  is.
+\end{enumerate}
+
+\paragraph[Titkosított fájl
+(SecretFile)]{\texorpdfstring{\protect\hypertarget{anchor-58}{}{}Titkosított
+fájl
+(SecretFile)}{Titkosított fájl (SecretFile)}}\label{titkosuxedtott-fuxe1jl-secretfile}
+
+A titkos fájl két részből áll:
+
+Van egy fájlnév (lásd feljebb), és egy fájl tartalom.
+
+A Titkosított fájl tartalmának felépítése:
+
+titkosítatlan\_tartalom = concat(időbélyeg, "\textbar{}", tartalom)
+
+titkosított tartalom: AESEncryptor(fájl jelszó, titkosítatlan\_tartalom)
+
+Megjegyzések
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  az időbélyeg 1970 január 1. 0:00:00 másodpercétől eltelt másodpercek
+  száma
+\item
+  Az AESEncryptor majd kicserélhető lesz
+\end{enumerate}
+
+\paragraph[AESEncryptor
+formátuma]{\texorpdfstring{\protect\hypertarget{anchor-59}{}{}AESEncryptor
+formátuma}{AESEncryptor formátuma}}\label{aesencryptor-formuxe1tuma}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  hash = sha256(adat)
+\item
+  titkosítatlan = concat(hash, adat)
+\item
+  titkosított = AES256(titkosítatlan)
+\end{enumerate}
+
+Megjegyzés
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A hash egy ellenőrző összeg, és mindig 64 hosszú string (0-f), mert
+  16-os számrendszerben van ábrázolva
+\item
+  A kimenet byte sorozat.
+\end{enumerate}
+
+\paragraph[Txt fájl (.txt)
+formátuma]{\texorpdfstring{\protect\hypertarget{anchor-60}{}{}Txt fájl
+(.txt)
+formátuma}{Txt fájl (.txt) formátuma}}\label{txt-fuxe1jl-.txt-formuxe1tuma}
+
+A txt fájl 4 rétegből áll.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  titkosítatlan szöveg ( txt )
+\item
+  Minden txt fájl egy Titkosított fájl (
+  \textless{}időbélyeg\textgreater{}\textbar{}\textless{}txt\textgreater{}
+  )
+\item
+  Minden Titkosított fájl AESEncryptor-t használ, így
+  (\textless{}hash\textgreater{}\textless{}időbélyeg\textgreater{}\textbar{}\textless{}txt\textgreater{})
+  alakú
+\item
+  Az AES titkosított adat
+\end{enumerate}
+
+\paragraph[Telefonkönyv fájl (.phb)
+formátuma]{\texorpdfstring{\protect\hypertarget{anchor-61}{}{}Telefonkönyv
+fájl (.phb)
+formátuma}{Telefonkönyv fájl (.phb) formátuma}}\label{telefonkuxf6nyv-fuxe1jl-.phb-formuxe1tuma}
+
+Három rétegből áll:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Titkosított adat (AESEncryptor-ral titkosítva)
+\item
+  Az első kicsomagolás után
+
+  \{
+
+  "becenév1":\textless{}titkosított kontakt adat\textgreater{},
+
+  "becenév2":\textless{}titkosított kontakt adat\textgreater{}
+
+  \}
+\item
+  Titkosítatlan kontakt adat\\
+  \{
+
+  "full\_name":"\textless{}teljes név\textgreater{}",
+
+  "phone\_numbers":{[}
+
+  \{
+
+  "type":"\textless{}telefon típus\textgreater{}",
+
+  "number":"\textless{}telefonszám\textgreater{}"
+
+  \}
+
+  {]}
+
+  "address":"\textless{}cím\textgreater{}",
+
+  "description":"\textless{}leírás\textgreater{}"
+
+  \}
+\end{enumerate}
+
+Megjegyzések:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Az AESEncryptor kicserélhető lesz
+\item
+  A \textless{}titkosított becenévadat\textgreater{} is ugyanazzal az
+  jelszóval, és ugyanazzal az encryptorral van jelenleg titkosítva.
+\item
+  Mivel a \textless{}titkosított kontakt adat\textgreater{} külön
+  titkosítva van, így a memoriában mindig csak egy kontaktnak látszanak
+  az adatai.
+\end{enumerate}
+
+\subsubsection{Szerver oldal}\label{szerver-oldal-1}
+
+\paragraph{Mappa és fájl struktúrájának
+áttekintése}\label{mappa-uxe9s-fuxe1jl-struktuxfaruxe1juxe1nak-uxe1ttekintuxe9se}
+
+src/web
+
+├──~\href{../../../../../../../../common/}{common} -- A gyakran használt
+egyszerű függvények, osztályok helye\\
+│~~
+├──~\href{../../../../../../../../common/dictgenerator.py}{dictgenerator.py}
+-- JSON-t generál dictionaryból\\
+│~~
+├──~\href{../../../../../../../../common/generatedby.py}{generatedby.py}
+-- HTML és JavaScript fájlokba írja bele, melyik fájl, és mikor
+generálta (még fejleszteni kell)\\
+│~~
+├──~\href{../../../../../../../../common/__init__.py}{\_\_init\_\_.py}
+-- Csomag init fájlja\\
+│~~ ├──~\href{../../../../../../../../common/kill_log.py}{kill\_log.py}
+-- Ha valamiért leáll a program, loggoljuk ki\\
+│~~ ├──~\href{../../../../../../../../common/singleton.py}{singleton.py}
+-- Singleton osztály\\
+│~~
+└──~\href{../../../../../../../../common/the_project_paths.py}{the\_project\_paths.py}
+-- A projekt fontosabb mappáit tartalmazza\\
+├──~\href{../../../../../../../../config/}{config} -- A projekt összes
+beállítását itt egyben kezelem\\
+│~~ ├──~\href{../../../../../../../../config/arg.py}{arg.py} -- A
+beállítások argumentum típusai\\
+│~~
+├──~\href{../../../../../../../../config/config_base.py}{config\_base.py}
+-- A the\_config őse. Garantálja, hogy singleton legyen\\
+│~~
+├──~\href{../../../../../../../../config/config_factory.py}{config\_factory.py}
+-- A config osztály létrehozója\\
+│~~
+├──~\href{../../../../../../../../config/__init__.py}{\_\_init\_\_.py}
+-- A csomag inicializálója\\
+│~~
+├──~\href{../../../../../../../../config/the_config.py}{the\_config.py}
+-- A konfig opciók (ide lehet új beállításokat rakni)\\
+│~~
+├──~\href{../../../../../../../../config/the_config_variables.py}{the\_config\_variables.py}
+-- A konfigurációs változók, amiket aztán fel lehet használni a
+konfiguráció írásakor\\
+│~~ └──~\href{../../../../../../../../config/tools.py}{tools.py} --
+Segéd eszközök a konfighoz\\
+├──~\href{../../../../../../../../data_manager/}{data\_manager} -- A
+felhasználói adatok kezelése\\
+│~~
+├──~\href{../../../../../../../../data_manager/file_manager.py}{file\_manager.py}
+-- Fájlok (és mappák) kezelése\\
+│~~
+└──~\href{../../../../../../../../data_manager/__init__.py}{\_\_init\_\_.py}
+-- A csomag inicializálója\\
+├──~\href{../../../../../../../../error_object/}{error\_object} --
+Központosított hiba objektumok, a szerveren és a kliens oldalon is
+elérhetőek\\
+│~~ ├──~\href{../../../../../../../../error_object/enum2.py}{enum2.py}
+-- Enum kibővítése\\
+│~~
+├──~\href{../../../../../../../../error_object/error_object.py}{error\_object.py}
+-- Egy Hiba objektum osztálya\\
+│~~
+├──~\href{../../../../../../../../error_object/error_type_enum.py}{error\_type\_enum.py}
+-- A hibák típusának enum-ja\\
+│~~
+├──~\href{../../../../../../../../error_object/error_type.py}{error\_type.py}
+Egy hiba típus osztálya\\
+│~~
+├──~\href{../../../../../../../../error_object/error_types.py}{error\_types.py}
+-- Az összes fajta hiba típus (új hibatípust ide kell felvenni)\\
+│~~
+├──~\href{../../../../../../../../error_object/get_error_type_dict.py}{get\_error\_type\_dict.py}
+-- Egy json-t csinál a hibatípusokból\\
+│~~
+└──~\href{../../../../../../../../error_object/__init__.py}{\_\_init\_\_.py}
+-- A projekt inicializálója\\
+├──~\href{../../../../../../../../js_generator/}{js\_generator} --
+JavaScript-et generál\\
+│~~
+├──~\href{../../../../../../../../js_generator/__init__.py}{\_\_init\_\_.py}
+-- A projekt inicializálója\\
+│~~
+└──~\href{../../../../../../../../js_generator/js_generator.py}{js\_generator.py}
+-- JavaScript generátor\\
+├──~\href{../../../../../../../../log/}{log} -- Logokért felelős
+csomag\\
+│~~ ├──~\href{../../../../../../../../log/__init__.py}{\_\_init\_\_.py}
+-- A csomag inicializálója\\
+│~~ └──~\href{../../../../../../../../log/log.py}{log.py} -- A python
+logging inicializálása\\
+├──~\href{../../../../../../../../rpc_wrapper/}{rpc\_wrapper} -- A
+szerver és a kliens közötti kommunikációért felelős osztály ``felső
+rétege'', a meghívható függvények gyüjteménye, és authentikálás
+biztosítása\\
+│~~
+├──~\href{../../../../../../../../rpc_wrapper/auth_wrapper.py}{auth\_wrapper.py}
+-- A hitelesítésért felelős wrapper függvény\\
+│~~
+├──~\href{../../../../../../../../rpc_wrapper/__init__.py}{\_\_init\_\_.py}
+-- A csomag inicializálása\\
+│~~
+├──~\href{../../../../../../../../rpc_wrapper/rpc_wrapper.py}{rpc\_wrapper.py}
+-- A függvények, amiket a kliens is elér\\
+│~~
+└──~\href{../../../../../../../../rpc_wrapper/web_method.py}{web\_method.py}
+-- Jelzi az prc\_wrapperben, ha egy függvény elérhető a kliens oldalon
+is\\
+├──~\href{../../../../../../../../server/}{server} -- Tornado webserver,
+mind a statikus adatok kiszolgálásáért, mind az RPC ``alsó rétegéért
+felel''\\
+│~~
+├──~\href{../../../../../../../../server/data_request_handler.py}{data\_request\_handler.py}
+-- A generált adatokért: felel
+\href{https://localhost:9443/generated/data.js}{generated/data.js}\\
+│~~
+├──~\href{../../../../../../../../server/__init__.py}{\_\_init\_\_.py}
+-- A csomag inicializálása\\
+│~~
+├──~\href{../../../../../../../../server/redirector_request_handler_factory.py}{redirector\_request\_handler\_factory.py}
+-- HTTP szerver, ami átirányít a titkosított szerverre\\
+│~~
+├──~\href{../../../../../../../../server/rpc_request_post_handler_factory.py}{rpc\_request\_post\_handler\_factory.py}
+-- JSON RPC hívások POST protokollon keresztül\\
+│~~
+├──~\href{../../../../../../../../server/rpc_request_ws_handler_factory.py}{rpc\_request\_ws\_handler\_factory.py}
+-- JSON RPC hívások WebSocket protokollon keresztül\\
+│~~
+├──~\href{../../../../../../../../server/rpc_wrapper_factory.py}{rpc\_wrapper\_factory.py}
+-- Az RPC szerver létrehozása\\
+│~~
+└──~\href{../../../../../../../../server/web_request_handler_factory.py}{web\_request\_handler\_factory.py}
+-- A statikus fájlok kiszolgálója\\
+├──~\href{../../../../../../../../sha256Salty/}{sha256Salty} -- Hashelés
+SHA256 sózással csomagja\\
+│~~
+├──~\href{../../../../../../../../sha256Salty/__init__.py}{\_\_init\_\_.py}
+-- Csomag inicializálása\\
+│~~
+├──~\href{../../../../../../../../sha256Salty/sha256Salty2.py}{sha256Salty2.py}
+-- Az egyik sózott hash algoritmus\\
+│~~
+└──~\href{../../../../../../../../sha256Salty/sha256Salty.py}{sha256Salty.py}
+-- A másik sózott hash algoritmus\\
+├──~\href{../../../../../../../../config.json}{config.json} -- Config
+fájl (nem verziókövetett)\\
+├──~\href{../../../../../../../../config.sample.json}{config.sample.json}
+-- Config fájl példa verziókövetett\\
+├──~\href{../../../../../../../../config.test.json}{config.test.json} --
+Config fájl, a config.*.json fájlok nem verziókövetettek kivétel a
+sample\\
+├──~\href{../../../../../../../../create_user.py}{create\_user.py} --
+Felhasználó létrehozása\\
+├──~\href{../../../../../../../../run_server.py}{run\_server.py} --
+szerver inicializálása, és futtatása\\
+├──~\href{../../../../../../../../tools_create_config_csv.py}{tools\_create\_config\_csv.py}
+-- A configokból csinál csv-t\\
+├──~\href{../../../../../../../../tools_create_config_ods.py}{tools\_create\_config\_ods.py}
+-- A configokból csinál ods-t\\
+├──~\href{../../../../../../../../tools_create_html_file_dict.py}{tools\_create\_html\_file\_dict.py}
+-- A statikus html fájlok nevéből csinál egy JSON-t\\
+└──~\href{../../../../../../../../tools_getclasses.py}{tools\_getclasses.py}
+-- Az összes html fájlból kinyeri a class mezőket\\
+
+\subsubsection{Kliens oldal}\label{kliens-oldal-1}
+
+src/web\\
+├──~\href{../../../../../../../../generated/}{generated} -- A generált
+fájlok mappája\\
+│~~ ├──~\href{../../../../../../../../generated/data.js}{data.js} --
+Adatok (theConfig, errorObjects,...)\\
+│~~
+└──~\href{../../../../../../../../generated/theHtmlClasses.js}{theHtmlClasses.js}
+-- HTML Classes\\
+├──~\href{../../../../../../../../html/}{html} -- A statikus html
+fájlok\\
+│~~
+├──~\href{../../../../../../../../html/chgPassword.html}{chgPassword.html}
+-- Jelszóváltoztatáshoz a html fájl\\
+│~~
+├──~\href{../../../../../../../../html/createUser.html}{createUser.html}
+-- Új felhasználó létrehozásához a html fájl\\
+│~~
+├──~\href{../../../../../../../../html/filePassword.html}{filePassword.html}
+-- A fájl jelszavának megadásához a html fájl\\
+│~~ ├──~\href{../../../../../../../../html/login.html}{login.html} -- A
+bejelentkezéshez szükséges HTML fájl\\
+│~~ ├──~\href{../../../../../../../../html/main.html}{main.html} -- A
+főoldal html fájlja\\
+│~~
+├──~\href{../../../../../../../../html/newFilePassword.html}{newFilePassword.html}
+-- Az fájl jelszavának megadásához HTML fájl\\
+│~~
+├──~\href{../../../../../../../../html/phoneBookContact.html}{phoneBookContact.html}
+- A Telefonkönyv kontaktjának HTML fájlja\\
+│~~
+├──~\href{../../../../../../../../html/phoneBookFile.html}{phoneBookFile.html}
+-- A telefonkönyv HTML fájlja\\
+│~~
+├──~\href{../../../../../../../../html/phoneBookModifyContact.html}{phoneBookModifyContact.html}
+-- A telefonkönyv kontakt módosításának HTML fájlja\\
+│~~ └──~\href{../../../../../../../../html/txtFile.html}{txtFile.html}
+-- A txt fájl HTML fájlja\\
+├──~\href{../../../../../../../../js/}{js} -- Az összes JavaScript\\
+│~~ ├──~\href{../../../../../../../../js/common/}{common} -- A gyakran
+használt JavaScript függvények, osztályok\\
+│~~ │~~ ├──~\href{../../../../../../../../js/common/js/}{js} -- Alap
+JavaScript függvények, osztályo\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/js/AbstractClass.js}{AbstractClass.js}
+-- Absztrakt osztály hack JavaScriptben\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/js/BigInttoJSONHack.js}{BigInttoJSONHack.js}
+-- Nagy számok tárolása JSON-ban, mert a JavaScript alapból nem
+támogatja\\
+│~~ │~~ │~~
+└──~\href{../../../../../../../../js/common/js/tools.js}{tools.js} --
+Pár hasznos függvény\\
+│~~ │~~
+└──~\href{../../../../../../../../js/common/thirdparty/}{thirdparty} --
+Külső könyvtárak.\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/aes-js/}{aes-js}
+-- AES titkosításhoz könyvtár\\
+│~~ │~~ ~~~ │~~
+└──~\href{../../../../../../../../js/common/thirdparty/aes-js/index.js}{index.js}\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/}{bootstrap-4.4.1-dist}
+-- A menühöz függvénykönyvtár\\
+│~~ │~~ ~~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/}{css}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.css}{bootstrap.css}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.css.map}{bootstrap.css.map}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.css}{bootstrap-grid.css}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.css.map}{bootstrap-grid.css.map}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.min.css}{bootstrap-grid.min.css}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.min.css.map}{bootstrap-grid.min.css.map}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.min.css}{bootstrap.min.css}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.min.css.map}{bootstrap.min.css.map}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.css}{bootstrap-reboot.css}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.css.map}{bootstrap-reboot.css.map}\\
+│~~ │~~ ~~~ │~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.min.css}{bootstrap-reboot.min.css}\\
+│~~ │~~ ~~~ │~~ │~~
+└──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.min.css.map}{bootstrap-reboot.min.css.map}\\
+│~~ │~~ ~~~ │~~
+└──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/}{js}\\
+│~~ │~~ ~~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.js}{bootstrap.bundle.js}\\
+│~~ │~~ ~~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.js.map}{bootstrap.bundle.js.map}\\
+│~~ │~~ ~~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js}{bootstrap.bundle.min.js}\\
+│~~ │~~ ~~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js.map}{bootstrap.bundle.min.js.map}\\
+│~~ │~~ ~~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.js}{bootstrap.js}\\
+│~~ │~~ ~~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.js.map}{bootstrap.js.map}\\
+│~~ │~~ ~~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.min.js}{bootstrap.min.js}\\
+│~~ │~~ ~~~ │~~ ~~~
+└──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.min.js.map}{bootstrap.min.js.map}\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/js-sha256/}{js-sha256}
+-- A sha256-hoz függvénykönyvtár\\
+│~~ │~~ ~~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/js-sha256/sha256.js}{sha256.js}\\
+│~~ │~~ ~~~ │~~
+└──~\href{../../../../../../../../js/common/thirdparty/js-sha256/sha256.min.js}{sha256.min.js}\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/simple-jsonrpc-js/}{simple-jsonrpc-js}
+-- Az RPC-hez függvénykönyvtár\\
+│~~ │~~ ~~~ │~~
+├──~\href{../../../../../../../../js/common/thirdparty/simple-jsonrpc-js/simple-jsonrpc-js.js}{simple-jsonrpc-js.js}\\
+│~~ │~~ ~~~ │~~
+└──~\href{../../../../../../../../js/common/thirdparty/simple-jsonrpc-js/simple-jsonrpc-js.min.js}{simple-jsonrpc-js.min.js}\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap.min.js}{bootstrap.min.js}\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/bootstrap.min.js.map}{bootstrap.min.js.map}\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/jquery-3.4.1.slim.min.js}{jquery-3.4.1.slim.min.js}
+-- Jquery a bootstrap-hoz\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/common/thirdparty/popper.min.js}{popper.min.js}
+-- Popper a bootstrap-hoz\\
+│~~ │~~ ~~~
+└──~\href{../../../../../../../../js/common/thirdparty/popper.min.js.map}{popper.min.js.map}
+-- Popper a bootstrap-hoz\\
+│~~ ├──~\href{../../../../../../../../js/components/}{components} -- A
+kliens komponensei\\
+│~~ │~~
+├──~\href{../../../../../../../../js/components/controller/}{controller}
+-- Az oldalak kontrollerjei\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/controller/ChgPasswordControllerService.js}{ChgPasswordControllerService.js}
+-- Jelszó módosítás kontrollere\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/controller/ControllerServiceBase.js}{ControllerServiceBase.js}
+-- A kontrollerek őse, pár alap szolgáltatás van benne\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/controller/CreateUserControllerService.js}{CreateUserControllerService.js}
+-- Új felhasználó létrehozásának a kontrollerje\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/controller/LoginControllerService.js}{LoginControllerService.js}
+-- A bejelentkezés kontrollere\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/controller/MainControllerService.js}{MainControllerService.js}
+-- A főoldal kontrollere\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/controller/PhoneBookFileControllerService.js}{PhoneBookFileControllerService.js}
+-- A telefonkönyvfájl kontrollere (a SecretFileController-ből
+származik\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/controller/SampleControllerService.js}{SampleControllerService.js}
+-- Egy példa kontroller\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/controller/SecretFileControllerService.js}{SecretFileControllerService.js}
+-- A titkos fájlok kontrollere\\
+│~~ │~~ │~~
+└──~\href{../../../../../../../../js/components/controller/TxtFileControllerService.js}{TxtFileControllerService.js}
+-- A txt fájlok kontrollere (a SecretFileController-ből származik)\\
+│~~ │~~ ├──~\href{../../../../../../../../js/components/file/}{file} --
+A fájlkezeléssel foglalkozó osztályok mappája\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/file/DirManagerService.js}{DirManagerService.js}
+-- A mappakezeléssel foglalkozik\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/file/FileFactory.js}{FileFactory.js}
+-- Fájl osztály létrehozása (.phb és .txt-is)\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/file/PhoneBookFile.js}{PhoneBookFile.js}
+-- Telefonkönyv fájl osztály (ami SecretFile)\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/file/SecretFile.js}{SecretFile.js}
+-- Titkos fájl osztály\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/file/SecretJson.js}{SecretJson.js}
+-- Titkos Json osztály\\
+│~~ │~~ │~~
+└──~\href{../../../../../../../../js/components/file/TxtFile.js}{TxtFile.js}
+-- Txt fájl osztály, ami SectretFile\\
+│~~ │~~
+├──~\href{../../../../../../../../js/components/pageloader/}{pageloader}
+-- Az oldalak letöltésével, és betöltésével foglalkozik\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/components/pageloader/HtmlDownloader.js}{HtmlDownloader.js}
+-- A html oldalak letöltése\\
+│~~ │~~ │~~
+└──~\href{../../../../../../../../js/components/pageloader/PageLoaderService.js}{PageLoaderService.js}
+-- Az oldalak betöltése\\
+│~~ │~~
+└──~\href{../../../../../../../../js/components/UserManager/}{UserManager}
+-- A felhasználókkal foglalkozik\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/components/UserManager/UserManagerService.js}{UserManagerService.js}
+-- A felhasználók osztálya\\
+│~~ │~~ ~~~
+└──~\href{../../../../../../../../js/components/UserManager/UserManagerServiceMock.js}{UserManagerServiceMock.js}
+-- A felhasználók osztályának kimockolt verziója\\
+│~~ ├──~\href{../../../../../../../../js/interfaces/}{interfaces} --
+Interfészek\\
+│~~ │~~
+├──~\href{../../../../../../../../js/interfaces/encrypt/}{encrypt} -
+Titkosítók\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/interfaces/encrypt/IEncryptor.js}{Iencryptor.js}
+-- Kétirányú titkosító interface\\
+│~~ │~~ │~~
+└──~\href{../../../../../../../../js/interfaces/encrypt/IHash.js}{Ihash.js}
+-- Egy irányú titkosító interface\\
+│~~ │~~ ├──~\href{../../../../../../../../js/interfaces/file/}{file} --
+Fájl interfészek\\
+│~~ │~~ │~~
+└──~\href{../../../../../../../../js/interfaces/file/ISecretFile.js}{IsecretFile.js}
+-- Titkos fájl interfész\\
+│~~ │~~ ├──~\href{../../../../../../../../js/interfaces/RPC/}{RPC} --
+RPC interfészek\\
+│~~ │~~ │~~
+└──~\href{../../../../../../../../js/interfaces/RPC/IRPCClient.js}{IRPCClient.js}
+- RPC kliens interfész\\
+│~~ │~~
+└──~\href{../../../../../../../../js/interfaces/UserManager/}{UserManager}
+-- User manager interfészek\\
+│~~ │~~ ~~~
+└──~\href{../../../../../../../../js/interfaces/UserManager/IUserManagerService.js}{IuserManagerService.js}
+-- User manager interfész\\
+│~~ ├──~\href{../../../../../../../../js/lib/}{lib} - Könyvtárak\\
+│~~ │~~ ├──~\href{../../../../../../../../js/lib/encrypt/}{encrypt} --
+Titkosító könyvtárak\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/lib/encrypt/AESEncryptor.js}{AESEncryptor.js}
+-- Kétirányú titkosító könyvtár AES-t használva\\
+│~~ │~~ │~~
+└──~\href{../../../../../../../../js/lib/encrypt/SHA256Salty.js}{SHA256Salty.js}
+-- Egyirányú titkosító könyvtár SHA256-ot használva sózva\\
+│~~ │~~
+├──~\href{../../../../../../../../js/lib/ErrorObject/}{ErrorObject} --
+Hiba objektum könyvtár\\
+│~~ │~~ │~~
+└──~\href{../../../../../../../../js/lib/ErrorObject/ErrorObject.js}{ErrorObject.js}
+- Hiba objektum könyvtár\\
+│~~ │~~
+├──~\href{../../../../../../../../js/lib/RPCWrapper/}{RPCWrapper} -- RPC
+wrapper könyvtár\\
+│~~ │~~ │~~
+├──~\href{../../../../../../../../js/lib/RPCWrapper/RpcClients.js}{RpcClients.js}
+-- Az elérhető RPC kliensek tárolója (window.theRpcClients)\\
+│~~ │~~ │~~
+└──~\href{../../../../../../../../js/lib/RPCWrapper/RPCWrapperService.js}{RPCWrapperService.js}
+-- Az összes elérhető RPC függvény\\
+│~~ │~~
+└──~\href{../../../../../../../../js/lib/SimpleJsonRpc/}{SimpleJsonRpc}
+-- A SimpleJsonRpc osztályok az adatátvitelhez\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/lib/SimpleJsonRpc/SimpleJsonRpcPOSTClientService.js}{SimpleJsonRpcPOSTClientService.js}
+-- RPC adatátvitel HTTP POST protokollal\\
+│~~ │~~ ~~~
+└──~\href{../../../../../../../../js/lib/SimpleJsonRpc/SimpleJsonRpcWebSocketClientService.js}{SimpleJsonRpcWebSocketClientService.js}
+-- RPC adatátvitel WS protokollal\\
+│~~ ├──~\href{../../../../../../../../js/test/}{test} - tesztek\\
+│~~ │~~ └──~\href{../../../../../../../../js/test/webtest/}{webtest} -
+webtesztek\\
+│~~ │~~ ~~~ ├──~\href{../../../../../../../../js/test/webtest/lib/}{lib}
+-- könyvtárak a webteszthez\\
+│~~ │~~ ~~~ │~~
+├──~\href{../../../../../../../../js/test/webtest/lib/createFile.js}{createFile.js}
+-- robotkattintgatással fájl létrehozása\\
+│~~ │~~ ~~~ │~~
+├──~\href{../../../../../../../../js/test/webtest/lib/login.js}{login.js}
+-- robotkattintgatással bejelentkezés\\
+│~~ │~~ ~~~ │~~
+├──~\href{../../../../../../../../js/test/webtest/lib/phonebook.js}{phonebook.js}
+-- robotkattintgatással telefonkönyv manipulációk\\
+│~~ │~~ ~~~ │~~
+└──~\href{../../../../../../../../js/test/webtest/lib/tools.js}{tools.js}
+-- eszközök a web-teszthez\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/test/webtest/dataMedia.js}{dataMedia.js}
+-- Telefonkönyv adatok az ELTE oldaláról\\
+│~~ │~~ ~~~
+├──~\href{../../../../../../../../js/test/webtest/getDataFromMedia.js}{getDataFromMedia.js}
+-- adatok letöltéséhez segéd szkript az ELET oldaláról\\
+│~~ │~~ ~~~
+└──~\href{../../../../../../../../js/test/webtest/testPhoneBookAddContacts.js}{testPhoneBookAddContacts.js}
+-- Egy teszt, ami létrehoz egy telefonkönyvet, és feltölti adatokkal\\
+│~~
+├──~\href{../../../../../../../../js/htmlFileDict.js}{htmlFileDict.js}
+-- A htmlFájlok JSON-ja\\
+│~~ ├──~\href{../../../../../../../../js/main.js}{main.js} -- A main
+JavaScript fájl\\
+├──~\href{../../../../../../../../style/}{style} -- Az oldal stílusa\\
+│~~
+├──~\href{../../../../../../../../style/bootstrap.min.css}{bootstrap.min.css}
+-- Bootstraphoz stílus lap\\
+│~~
+├──~\href{../../../../../../../../style/bootstrap.min.css.map}{bootstrap.min.css.map}
+-- Bootstraphoz stílus lap\\
+│~~ └──~\href{../../../../../../../../style/style.css}{style.css} --
+saját stílus lap\\
+├──~\href{../../../../../../../../favicon.ico}{favicon.ico} - ikon\\
+├──~\href{../../../../../../../../index.html}{index.html} - főoldal\\
+└──~\href{../../../../../../../../testPhoneBook.html}{testPhoneBook.html}
+-- A telefonkönyv teszt indítása
 
 \subsection[Tesztelési
-terv]{\texorpdfstring{\protect\hypertarget{anchor-50}{}{}Tesztelési
+terv]{\texorpdfstring{\protect\hypertarget{anchor-62}{}{}Tesztelési
 terv}{Tesztelési terv}}\label{teszteluxe9si-terv}
 
 A txt fájlok teszteléséhez Arany János összes költeményeit használom:
@@ -1038,7 +1705,7 @@ telefonszámokat használom:
   \url{https://mot.inf.elte.hu/munkatarsak}
 \end{enumerate}
 
-\subsubsection[Előkészületek]{\texorpdfstring{\protect\hypertarget{anchor-51}{}{}Előkészületek}{Előkészületek}}\label{elux151kuxe9szuxfcletek-1}
+\subsubsection[Előkészületek]{\texorpdfstring{\protect\hypertarget{anchor-63}{}{}Előkészületek}{Előkészületek}}\label{elux151kuxe9szuxfcletek-1}
 
 Létrehozok egy üres adatbázist a projekt mellé, és megcsinálom a
 szükséges config fájlt:
@@ -1069,14 +1736,14 @@ szükséges config fájlt:
 \}
 
 \subsubsection[1. eset: A szerver elindítása (black
-box)]{\texorpdfstring{\protect\hypertarget{anchor-52}{}{}1. eset: A
+box)]{\texorpdfstring{\protect\hypertarget{anchor-64}{}{}1. eset: A
 szerver elindítása (black
 box)}{1. eset: A szerver elindítása (black box)}}\label{eset-a-szerver-elinduxedtuxe1sa-black-box}
 
 ./run\_server -\/-configFile config.test.json
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-53}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-65}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny}
 
 1. \textbf{Loggolja a konfigurált beállításokat:}
@@ -1161,7 +1828,7 @@ másodperc múlva
 \includegraphics[width=5.20830in,height=3.38540in]{Pictures/10000201000001F40000014517A57B782B43355D.png}
 
 \subsubsection[2. eset: Felhasználók létrehozása konzolból (black
-box)]{\texorpdfstring{\protect\hypertarget{anchor-54}{}{}2. eset:
+box)]{\texorpdfstring{\protect\hypertarget{anchor-66}{}{}2. eset:
 Felhasználók létrehozása konzolból (black
 box)}{2. eset: Felhasználók létrehozása konzolból (black box)}}\label{eset-felhasznuxe1luxf3k-luxe9trehozuxe1sa-konzolbuxf3l-black-box}
 
@@ -1174,7 +1841,7 @@ test\_user1 \textbf{password:} password1\\
 \includegraphics[width=6.69290in,height=2.03190in]{Pictures/100002010000031D000000F2E88902532E77D116.png}
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-55}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-67}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-1}
 
 1. Hozzon létre két felhasználói mappát:
@@ -1184,7 +1851,7 @@ Be tudjak lépni a felhasználókkal, ezt lásd lejjebb a bejelentkezés
 tesztelésénél.
 
 \subsubsection[3. eset: Üresen hagyott mezők felhasználó létrehozása
-közben]{\texorpdfstring{\protect\hypertarget{anchor-56}{}{}3. eset:
+közben]{\texorpdfstring{\protect\hypertarget{anchor-68}{}{}3. eset:
 Üresen hagyott mezők felhasználó létrehozása
 közben}{3. eset: Üresen hagyott mezők felhasználó létrehozása közben}}\label{eset-uxfcresen-hagyott-mezux151k-felhasznuxe1luxf3-luxe9trehozuxe1sa-kuxf6zben}
 
@@ -1192,27 +1859,27 @@ Vagy a felhasználónevet, vagy a jelszó mezőt, vagy mindkettőt hagyjuk
 üresen
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-57}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-69}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-2}
 
 \includegraphics[width=6.49800in,height=2.55980in]{Pictures/100002010000031D0000013A193006CF92705A40.png}\textbf{Username
 and/or password is empty} üzenet, a data dir változatlan hagyása
 
 \subsubsection[4. eset: jelszó és jelszó mégegyszer nem egyezik
-(CLI)]{\texorpdfstring{\protect\hypertarget{anchor-58}{}{}4. eset:
+(CLI)]{\texorpdfstring{\protect\hypertarget{anchor-70}{}{}4. eset:
 jelszó és jelszó mégegyszer nem egyezik
 (CLI)}{4. eset: jelszó és jelszó mégegyszer nem egyezik (CLI)}}\label{eset-jelszuxf3-uxe9s-jelszuxf3-muxe9gegyszer-nem-egyezik-cli}
 
-\subsubsection{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D00000086F18BAFFF29656A89.png}}{}}\label{section-1}
+\subsubsection{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D00000086F18BAFFF29656A89.png}}{}}\label{section}
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-59}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-71}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-3}
 
 Hibaüzenet, test\_data dir ne változzon
 
 \subsubsection[5. eset: Létező felhasználó hozzáadása azonos
-jelszóval]{\texorpdfstring{\protect\hypertarget{anchor-60}{}{}5. eset:
+jelszóval]{\texorpdfstring{\protect\hypertarget{anchor-72}{}{}5. eset:
 Létező felhasználó hozzáadása azonos
 jelszóval}{5. eset: Létező felhasználó hozzáadása azonos jelszóval}}\label{eset-luxe9tezux151-felhasznuxe1luxf3-hozzuxe1aduxe1sa-azonos-jelszuxf3val}
 
@@ -1228,20 +1895,20 @@ test\_user1/password1
 \includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D0000008614CCB9C6A936E847.png}
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-61}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-73}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-4}
 
 Hibaüzenet, test\_data dir ne változzon
 
 \subsubsection[6. eset: Létező felhasználó hozzáadása más jelszóval
-(cli)]{\texorpdfstring{\protect\hypertarget{anchor-62}{}{}6. eset:
+(cli)]{\texorpdfstring{\protect\hypertarget{anchor-74}{}{}6. eset:
 Létező felhasználó hozzáadása más jelszóval
 (cli)}{6. eset: Létező felhasználó hozzáadása más jelszóval (cli)}}\label{eset-luxe9tezux151-felhasznuxe1luxf3-hozzuxe1aduxe1sa-muxe1s-jelszuxf3val-cli}
 
 \textbf{test\_user1/password2} létrehozása
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\includegraphics[width=6.39370in,height=1.07520in]{Pictures/100002010000031D00000086C6457FFF882A34CD.png}\protect\hypertarget{anchor-63}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\includegraphics[width=6.39370in,height=1.07520in]{Pictures/100002010000031D00000086C6457FFF882A34CD.png}\protect\hypertarget{anchor-75}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-5}
 
 1. Hozzon létre egy új felhasználói mappát
@@ -1252,7 +1919,7 @@ eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-5}
 bejelentkezés tesztelésénél.
 
 \subsubsection[7. eset: Belépés hibás jelszóval
-(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-64}{}{}7. eset:
+(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-76}{}{}7. eset:
 Belépés hibás jelszóval
 (GUI)}{7. eset: Belépés hibás jelszóval (GUI)}}\label{eset-beluxe9puxe9s-hibuxe1s-jelszuxf3val-gui}
 
@@ -1271,13 +1938,13 @@ test\_user2 & dinnye\tabularnewline
 \textbf{SimpleJsonRpcPOSTClientService }segítségével is)
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-65}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-77}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-6}
 
 \includegraphics[width=5.29170in,height=3.96890in]{Pictures/10000201000001FC0000017DFCC82713BC118645.png}Hibaüzenet
 
 \subsubsection[8. eset: Bejelentkezés valós felhasználókkal
-(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-66}{}{}8. eset:
+(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-78}{}{}8. eset:
 Bejelentkezés valós felhasználókkal
 (GUI)}{8. eset: Bejelentkezés valós felhasználókkal (GUI)}}\label{eset-bejelentkezuxe9s-valuxf3s-felhasznuxe1luxf3kkal-gui}
 
@@ -1295,22 +1962,22 @@ test\_user2 & password2\tabularnewline
 \end{longtable}
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-67}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-79}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-7}
 
 Bejelentkezés az oldalra, és a main oldalra irányítás.
 
-\subsubsection{\texorpdfstring{\protect\includegraphics[width=4.92720in,height=3.33350in]{Pictures/10000201000001D900000140756AC15CC24E107F.png}}{}}\label{section-2}
+\subsubsection{\texorpdfstring{\protect\includegraphics[width=4.92720in,height=3.33350in]{Pictures/10000201000001D900000140756AC15CC24E107F.png}}{}}\label{section-1}
 
 \subsubsection[9. eset: Felhasználó létrehozása
-(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-68}{}{}9. eset:
+(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-80}{}{}9. eset:
 Felhasználó létrehozása
 (GUI)}{9. eset: Felhasználó létrehozása (GUI)}}\label{eset-felhasznuxe1luxf3-luxe9trehozuxe1sa-gui}
 
 \textbf{test\_user3/password3} létrehozása
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-69}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-81}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-8}
 
 1. sikeres létrehozás
@@ -1320,14 +1987,14 @@ sikeres bejelntekzés az új felhasználóval (lásd \textbf{8. eset:
 Bejelentkezés valós felhasználókkal (GUI) }).
 
 \subsubsection[10. eset: Txt Fájl
-létrehozása]{\texorpdfstring{\protect\hypertarget{anchor-70}{}{}10.
+létrehozása]{\texorpdfstring{\protect\hypertarget{anchor-82}{}{}10.
 eset: Txt Fájl
 létrehozása}{10. eset: Txt Fájl létrehozása}}\label{eset-txt-fuxe1jl-luxe9trehozuxe1sa}
 
 Hozzunk létre pár txt fájlt.
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-71}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-83}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-9}
 
 A fájlok létrejönnek, és meg is tudjuk őket nyitni, lásd lejjebb
@@ -1335,7 +2002,7 @@ A fájlok létrejönnek, és meg is tudjuk őket nyitni, lásd lejjebb
 \includegraphics[width=6.29530in,height=6.25350in]{Pictures/100002010000039700000391C7F524C2E18491CD.png}
 
 \subsubsection[11. eset: Telefonkönyv fájl
-létrehozása]{\texorpdfstring{\protect\hypertarget{anchor-72}{}{}11.
+létrehozása]{\texorpdfstring{\protect\hypertarget{anchor-84}{}{}11.
 eset: Telefonkönyv fájl
 létrehozása}{11. eset: Telefonkönyv fájl létrehozása}}\label{eset-telefonkuxf6nyv-fuxe1jl-luxe9trehozuxe1sa}
 
@@ -1354,14 +2021,14 @@ között\\
 \includegraphics[width=5.29170in,height=5.78110in]{Pictures/10000201000001FC0000022BBC859C5CC233AF1F.png}
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-73}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-85}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-10}
 
 A fájl létrehozása, és a telefonkönyv adatok tárolása.
 
 \subsubsection[12. eset: Nézzük meg, hogy a szerveren tárolt adatok
 tényleg
-titkosak-e]{\texorpdfstring{\protect\hypertarget{anchor-74}{}{}12. eset:
+titkosak-e]{\texorpdfstring{\protect\hypertarget{anchor-86}{}{}12. eset:
 Nézzük meg, hogy a szerveren tárolt adatok tényleg
 titkosak-e}{12. eset: Nézzük meg, hogy a szerveren tárolt adatok tényleg titkosak-e}}\label{eset-nuxe9zzuxfck-meg-hogy-a-szerveren-tuxe1rolt-adatok-tuxe9nyleg-titkosak-e}
 
@@ -1384,11 +2051,11 @@ nevei is titkosítottak.
 látható, hogy a fájl cat-tal megjelenítve is értelmetlen
 
 \subsubsection[A teszt közben létrejött felhasználók és
-fájlok]{\texorpdfstring{\protect\hypertarget{anchor-75}{}{}A teszt
+fájlok]{\texorpdfstring{\protect\hypertarget{anchor-87}{}{}A teszt
 közben létrejött felhasználók és
 fájlok}{A teszt közben létrejött felhasználók és fájlok}}\label{a-teszt-kuxf6zben-luxe9trejuxf6tt-felhasznuxe1luxf3k-uxe9s-fuxe1jlok}
 
-\paragraph[Felhasználók]{\texorpdfstring{\protect\hypertarget{anchor-76}{}{}Felhasználók}{Felhasználók}}\label{felhasznuxe1luxf3k}
+\paragraph[Felhasználók]{\texorpdfstring{\protect\hypertarget{anchor-88}{}{}Felhasználók}{Felhasználók}}\label{felhasznuxe1luxf3k}
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
@@ -1399,7 +2066,7 @@ test\_user3 & password3\tabularnewline
 \bottomrule
 \end{longtable}
 
-\paragraph[Fájlok]{\texorpdfstring{\protect\hypertarget{anchor-77}{}{}Fájlok}{Fájlok}}\label{fuxe1jlok}
+\paragraph[Fájlok]{\texorpdfstring{\protect\hypertarget{anchor-89}{}{}Fájlok}{Fájlok}}\label{fuxe1jlok}
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
