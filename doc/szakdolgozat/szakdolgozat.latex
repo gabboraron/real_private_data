@@ -76,35 +76,36 @@ Szakdolgozat
 \subsection[Motiváció]{\texorpdfstring{\protect\hypertarget{anchor-1}{}{}Motiváció}{Motiváció}}\label{motivuxe1ciuxf3}
 
 Jelen világunkban az információ érték, ezért gyakorlatilag mindenki
-visszaél velük.
+visszaél vele.
 
 Sajnos nem tudhatom azt, hogy az operációs rendszer, amit használok,
-mennyi információt gyüjt rólam, és mire használja fel. Ez nincs másképp
+mennyi információt gyűjt rólam, és mire használja fel. Ez nincs másképp
 az e-mail szolgáltatókkal, a különböző felhő alapú tárolókkal.
 
 Nem tudhatom, hogy ha egy felhőben tárolom az adataimat, akkor vajon a
 Google, a Microsoft, a Facebook, az Apple vagy más cégek, akik ilyeneket
-szolgáltatnak felhasználja-e őket. Ilyen szempontból mondjuk a
+szolgáltatnak, felhasználják-e őket. Ilyen szempontból mondjuk a
 megnevezettek még korrektek, mert az általános szerződési feltételeikben
 megfogalmazzák, hogy az adatainkat felhasználják.
 
-Sajnos arra jelenleg nincs erőforrásom, hogy egy saját Operációs
-rendszert írjak, vagy hogy leellenőrizzek egy Linuxot, Open/Free BSD-t
-hogy vajon visszaél-e az adataimmal, így ezeknek el kell hinnem, hogy
-nem teszik.\\
+Sajnos arra jelenleg nincs erőforrásom, hogy egy saját operációs
+rendszert írjak, vagy leellenőrizzek egy Linuxot, Open/Free BSD-t hogy
+vajon visszaél-e az adataimmal, így ezeknek el kell hinnem, hogy nem
+teszik.\\
 De tudok csinálni olyan programot, ami azt biztosítja számomra, hogy az
 adataimat a kliens oldalon titkosítva küldöm el a felhőbe, akkor a
 felhőben lévő cég nem tudhatja, hogy mik is voltak azok.
 
-Így jött az öltet, hogy először egy egyszerű szervert csinálok, ahol
-fájlokat tudok tárolni, amikbe az egyszerűség kedvéért előszőr csak
+Így jött az öltet, hogy először egy egyszerű szervert készítek, ahol
+fájlokat tudok tárolni, amikbe az egyszerűség kedvéért először csak
 szövegeket, vagy telefonkönyveket tudok tárolni.\\
 Így hiába olvashatja az adott szerverszolgáltató az adataimat, nem fog
 hozzáférni az információhoz, mert az már a kliens oldalon titkosítva
 van.
 
-Fontos volt számomra, hogy nyílt forráskódú legyen, hogy biztosítva
-legyen, hogy tényleg titkosít, és tényleg nem ment semmilyen adatot.
+Fontos volt számomra, hogy az általam készített program nyílt forráskódú
+legyen, hogy biztosítva legyen, hogy tényleg titkosít, és tényleg nem
+ment semmilyen adatot.
 
 \subsection[Teszt
 környezet]{\texorpdfstring{\protect\hypertarget{anchor-2}{}{}Teszt
@@ -112,7 +113,7 @@ környezet}{Teszt környezet}}\label{teszt-kuxf6rnyezet}
 
 \subsubsection[Hardware]{\texorpdfstring{\protect\hypertarget{anchor-3}{}{}Hardware}{Hardware}}\label{hardware}
 
-RAM: 16GB (ez lehet hogy kevés lesz sok felhasználóra.)
+RAM: 16GB (ez lehet, hogy kevés lesz sok felhasználóra.)
 
 Processor: Intel(R) Core(TM) i7-4600U CPU @ 2.10GHz
 
