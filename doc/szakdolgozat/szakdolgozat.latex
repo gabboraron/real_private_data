@@ -71,7 +71,7 @@
 
 Szakdolgozat
 
-verzió 0.3
+verzió 0.4
 
 to
 
@@ -730,7 +730,7 @@ betölteni -\/-\textbf{configFile }
 Felhasználó létrehozása, érdemes beállítani a --\textbf{configFile}-t,
 alapértelmezettként a \textbf{./src/python/config.json }fájlt használja.
 
-\includegraphics[width=6.69290in,height=1.16460in]{Pictures/1000020100000302000000867699C55659AA7F03.png}\\
+\includegraphics[width=5.91020in,height=1.16460in]{Pictures/1000020100000302000000867699C55659AA7F03.png}\\
 \textbf{Enter your username:} Írd be a felhasználónevet\\
 \textbf{Enter your password:} Írd be a jelszót\\
 \textbf{Enter your password again:} Írd be a jelszót megint
@@ -775,13 +775,17 @@ struktúrája]{\texorpdfstring{\protect\hypertarget{anchor-39}{}{}A
 főoldal
 struktúrája}{A főoldal struktúrája}}\label{a-fux151oldal-struktuxfaruxe1ja}
 
+\begin{figure}
+\centering
 \includegraphics[width=6.69290in,height=6.74840in]{Pictures/10000201000002CE000002D4BBD02C325AD91ACD.png}
+\caption{\\
+5. ábra: A főoldal struktúrája}
+\end{figure}
 
 \paragraph[A főoldal
-gombjai]{\texorpdfstring{\protect\hypertarget{anchor-40}{}{}A főoldal
-gombjai}{A főoldal gombjai}}\label{a-fux151oldal-gombjai}
-
-\includegraphics[width=6.69290in,height=6.74840in]{Pictures/10000201000002CE000002D481DF485A34A1C615.png}
+gombjai]{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=6.74840in]{Pictures/10000201000002CE000002D481DF485A34A1C615.png}\protect\hypertarget{anchor-40}{}{}A
+főoldal
+gombjai}{ 6. ábra: A főoldal gombjaiA főoldal gombjai}}\label{uxe1bra-a-fux151oldal-gombjaia-fux151oldal-gombjai}
 
 Felhasználó létrehozása gomb
 
@@ -795,7 +799,7 @@ Ha rákattintasz, megnyitja a fájlt.
 \subparagraph[Fájl létrehozása
 menü]{\texorpdfstring{\protect\includegraphics[width=2.27090in,height=1.50000in]{Pictures/10000201000000DA00000090C1CC68BAF501167F.png}\protect\hypertarget{anchor-41}{}{}Fájl
 létrehozása
-menü}{Fájl létrehozása menü}}\label{fuxe1jl-luxe9trehozuxe1sa-menuxfc}
+menü}{ 7. ábra: Új fájl gombjaiFájl létrehozása menü}}\label{uxe1bra-uxfaj-fuxe1jl-gombjaifuxe1jl-luxe9trehozuxe1sa-menuxfc}
 
 Create txt file: Létrehoz egy txt fájlt
 
@@ -842,7 +846,7 @@ show\_encrypted\_data konfiguráció True (Lásd Konfiguráció fejezet)
 \paragraph[Txt fájl
 létrehozása]{\texorpdfstring{\protect\includegraphics[width=5.23980in,height=3.80200in]{Pictures/10000201000001F70000016DA1CC577E13C841EB.png}\protect\hypertarget{anchor-45}{}{}Txt
 fájl
-létrehozása}{Txt fájl létrehozása}}\label{txt-fuxe1jl-luxe9trehozuxe1sa}
+létrehozása}{ 11. ábra: Txt fájl létrehozása formTxt fájl létrehozása}}\label{uxe1bra-txt-fuxe1jl-luxe9trehozuxe1sa-formtxt-fuxe1jl-luxe9trehozuxe1sa}
 
 \subparagraph[Back menü:Visszalép a főoldalra\\
 Logout menü:Kijelentkezés\\
@@ -890,7 +894,12 @@ struktúrája]{\texorpdfstring{\protect\hypertarget{anchor-49}{}{}Telefonkönyv
 fájl oldal
 struktúrája}{Telefonkönyv fájl oldal struktúrája}}\label{telefonkuxf6nyv-fuxe1jl-oldal-struktuxfaruxe1ja}
 
+\begin{figure}
+\centering
 \includegraphics[width=6.69290in,height=4.85710in]{Pictures/10000201000003FD000002E5EF6CB6DDB659E8C1.png}
+\caption{\\
+14. ábra: Telefonkönyv fájl oldalstruktúrája}
+\end{figure}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1024,9 +1033,19 @@ Create User gomb:A felhasználó létrehozása
 megjelenítése]{\texorpdfstring{\protect\hypertarget{anchor-56}{}{}Üzenetek
 megjelenítése}{Üzenetek megjelenítése}}\label{uxfczenetek-megjelenuxedtuxe9se}
 
+\begin{figure}
+\centering
 \includegraphics[width=5.81810in,height=2.08620in]{Pictures/10000201000003F70000016C21CCC3E30A23471F.png}
+\caption{\\
+21. ábra: Üzenet megjelenítése (valami sikeres volt)}
+\end{figure}
 
+\begin{figure}
+\centering
 \includegraphics[width=5.77910in,height=2.07200in]{Pictures/10000201000003F70000016C04C77D7EEB12B9FA.png}
+\caption{\\
+22. ábra: Hibaüzenet megjelenítése}
+\end{figure}
 
 Az üzenetek a menüsor alatt jelennek meg.\\
 Ha valami sikeres volt, akkor zöld hátterük lesz, ha sikertelen, akkor
@@ -2022,7 +2041,12 @@ tényleg ugyanaz van benne, mint a képernyőn.
 \includegraphics[width=6.69290in,height=1.38660in]{Pictures/100002010000035B000000B22FB9CDEA4FD37054.png}3
 másodperc múlva
 
+\begin{figure}
+\centering
 \includegraphics[width=5.20830in,height=3.38540in]{Pictures/10000201000001F40000014517A57B782B43355D.png}
+\caption{\\
+24. ábra: Bejelentkező oldal}
+\end{figure}
 
 \subsubsection[2. eset: Felhasználók létrehozása konzolból (black
 box)]{\texorpdfstring{\protect\hypertarget{anchor-77}{}{}2. eset:
@@ -2035,7 +2059,12 @@ box)}{2. eset: Felhasználók létrehozása konzolból (black box)}}\label{eset-
 test\_user1 \textbf{password:} password1\\
 \textbf{Felhasználónév}: test\_user2 \textbf{password: }password2
 
+\begin{figure}
+\centering
 \includegraphics[width=6.69290in,height=2.03190in]{Pictures/100002010000031D000000F2E88902532E77D116.png}
+\caption{\\
+25. ábra: Felhasználó létrehozása CLI-ből}
+\end{figure}
 
 \paragraph[Elvárt
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-78}{}{}Elvárt
@@ -2067,7 +2096,7 @@ and/or password is empty} üzenet, a data dir változatlan hagyása
 jelszó és jelszó mégegyszer nem egyezik
 (CLI)}{4. eset: jelszó és jelszó mégegyszer nem egyezik (CLI)}}\label{eset-jelszuxf3-uxe9s-jelszuxf3-muxe9gegyszer-nem-egyezik-cli}
 
-\subsubsection{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D00000086F18BAFFF29656A89.png}}{}}\label{section}
+\subsubsection{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D00000086F18BAFFF29656A89.png}}{ 28. ábra: A jelszó és a jelszó mégegyszer mező nem egyezik}}\label{uxe1bra-a-jelszuxf3-uxe9s-a-jelszuxf3-muxe9gegyszer-mezux151-nem-egyezik}
 
 \paragraph[Elvárt
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-82}{}{}Elvárt
@@ -2089,7 +2118,12 @@ adjon többlet információt a szerver üzemeltetőjének a felhasználóról.
 
 test\_user1/password1
 
+\begin{figure}
+\centering
 \includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D0000008614CCB9C6A936E847.png}
+\caption{\\
+29. ábra: Létező felhasználó hozzáadása mégegyszer}
+\end{figure}
 
 \paragraph[Elvárt
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-84}{}{}Elvárt
@@ -2106,11 +2140,16 @@ Létező felhasználó hozzáadása más jelszóval
 
 \paragraph[Elvárt
 eredmény]{\texorpdfstring{\protect\includegraphics[width=6.39370in,height=1.07520in]{Pictures/100002010000031D00000086C6457FFF882A34CD.png}\protect\hypertarget{anchor-86}{}{}Elvárt
-eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-5}
+eredmény}{ 30. ábra: Létező felhasználó hozzáadása más jelszóvalElvárt eredmény}}\label{uxe1bra-luxe9tezux151-felhasznuxe1luxf3-hozzuxe1aduxe1sa-muxe1s-jelszuxf3valelvuxe1rt-eredmuxe9ny}
 
 1. Hozzon létre egy új felhasználói mappát
 
+\begin{figure}
+\centering
 \includegraphics[width=6.14570in,height=1.20830in]{Pictures/100002010000024E00000074FBA42ABA16A2EA41.png}
+\caption{\\
+31. ábra: Új mappa létrejött a felhasználónak}
+\end{figure}
 
 2. Be tudjak lépni az új felhasználóval, ezt lásd lejjebb a
 bejelentkezés tesztelésénél.
@@ -2136,7 +2175,7 @@ test\_user2 & dinnye\tabularnewline
 
 \paragraph[Elvárt
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-88}{}{}Elvárt
-eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-6}
+eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-5}
 
 \includegraphics[width=5.29170in,height=3.96890in]{Pictures/10000201000001FC0000017DFCC82713BC118645.png}Hibaüzenet
 
@@ -2160,11 +2199,11 @@ test\_user2 & password2\tabularnewline
 
 \paragraph[Elvárt
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-90}{}{}Elvárt
-eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-7}
+eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-6}
 
 Bejelentkezés az oldalra, és a main oldalra irányítás.
 
-\subsubsection{\texorpdfstring{\protect\includegraphics[width=4.92720in,height=3.33350in]{Pictures/10000201000001D900000140756AC15CC24E107F.png}}{}}\label{section-1}
+\subsubsection{\texorpdfstring{\protect\includegraphics[width=4.92720in,height=3.33350in]{Pictures/10000201000001D900000140756AC15CC24E107F.png}}{ 32. ábra: Főoldal (még nincs egy fájl sem)}}\label{uxe1bra-fux151oldal-muxe9g-nincs-egy-fuxe1jl-sem}
 
 \subsubsection[9. eset: Felhasználó létrehozása
 (GUI)]{\texorpdfstring{\protect\hypertarget{anchor-91}{}{}9. eset:
@@ -2175,7 +2214,7 @@ Felhasználó létrehozása
 
 \paragraph[Elvárt
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-92}{}{}Elvárt
-eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-8}
+eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-7}
 
 1. sikeres létrehozás
 
@@ -2192,11 +2231,16 @@ Hozzunk létre pár txt fájlt.
 
 \paragraph[Elvárt
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-94}{}{}Elvárt
-eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-9}
+eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-8}
 
 A fájlok létrejönnek, és meg is tudjuk őket nyitni, lásd lejjebb
 
+\begin{figure}
+\centering
 \includegraphics[width=6.29530in,height=6.25350in]{Pictures/100002010000039700000391C7F524C2E18491CD.png}
+\caption{\\
+34. ábra: Új text fájl létrehozva}
+\end{figure}
 
 \subsubsection[11. eset: Telefonkönyv fájl
 létrehozása]{\texorpdfstring{\protect\hypertarget{anchor-95}{}{}11.
@@ -2215,11 +2259,16 @@ között\\
 \textbf{fileName}: Mi legyen a létrehozandó fájl neve\\
 \textbf{filePassword}: Mi legyen a jelszava
 
+\begin{figure}
+\centering
 \includegraphics[width=5.29170in,height=5.78110in]{Pictures/10000201000001FC0000022BBC859C5CC233AF1F.png}
+\caption{\\
+35. ábra: Telefonkönyv létrehozása robottal}
+\end{figure}
 
 \paragraph[Elvárt
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-96}{}{}Elvárt
-eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-10}
+eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-9}
 
 A fájl létrehozása, és a telefonkönyv adatok tárolása.
 
