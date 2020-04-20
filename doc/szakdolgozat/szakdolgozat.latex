@@ -71,7 +71,9 @@
 
 Szakdolgozat
 
-verzió 0.2
+verzió 0.3
+
+to
 
 \section[Bevezetés]{\texorpdfstring{\protect\hypertarget{anchor}{}{}Bevezetés}{Bevezetés}}\label{bevezetuxe9s}
 
@@ -186,78 +188,19 @@ A szerver oldalnak öt feladata van:
 dokumentáció]{\texorpdfstring{\protect\hypertarget{anchor-3}{}{}Felhasználói
 dokumentáció}{Felhasználói dokumentáció}}\label{felhasznuxe1luxf3i-dokumentuxe1ciuxf3}
 
-\subsection[A
-feladat]{\texorpdfstring{\protect\hypertarget{anchor-4}{}{}A
-feladat}{A feladat}}\label{a-feladat-1}
+\subsection[A program
+célja]{\texorpdfstring{\protect\hypertarget{anchor-4}{}{}A program
+célja}{A program célja}}\label{a-program-cuxe9lja}
 
-Egy olyan program írása, ami szöveges adatokat, és telefonkönyv adatokat
-olyan titkosan tart, amennyire csak lehetséges.
+Ez a program két részből áll, egy szerverből, és egy kliensből.
 
-A program két részből áll. Egy szerverből és egy kliensből.
+A szervernek két feladata van: a felhasználó azonosítása, és fájl
+kiszolgállás.
 
-A kliensnek négy feladata van:
+A kliens oldal telefonkönyvfájlok, és szöveges fájlok kezelésére, és
+titkosítására való.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Telefonköny fájl és txt fájl létrehozása, megjelenítése, módosítása
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    A telefonfájl fájlnál figyelni kell arra, hogy a memóriában mindig
-    maximum egy kontaktnak legyenek titkosítatlanul az adatai.
-  \end{enumerate}
-\item
-  A fájlok titkosítása, és visszafejtése, még a nevüket is titkosítani
-  kell
-\item
-  A felhasználói adatok titkosítása a szerver elől (még a
-  felhasználónevét is)
-\item
-  Kommunikáció a szerverrel (RPC segítségével)
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Autentikáció
-  \item
-    Fájlok letöltése, feltöltése, törlése.
-  \end{enumerate}
-\end{enumerate}
-
-A szerver oldalnak öt feladata van:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  A felhasználók authentikációja
-\item
-  A felhasználók adatainak tárolása (fájlkiszolgáló)
-
-  \begin{enumerate}
-  \def\labelenumii{\arabic{enumii}.}
-  \tightlist
-  \item
-    Minden felhasználónak létre kell hozni egy mappát, de figyleni kell
-    rá, hogy a felhasználóról minél kevesebb információt tároljon, így
-    hash-elést kell használni, hogy még a felhasználó neve se
-    derülhessen ki.
-  \item
-    A fájlok eleve titkosan kell, hogy megérkezzenek, egy titkos névvel,
-    és tartalommal
-  \item
-    Ezen fájlok manipulálása: átnevezés, létrehozás, felülírás, törlés.
-  \end{enumerate}
-\item
-  A klienssel kommunikálás RPC-t használva.
-\item
-  A kliens statikus fájljainak kiszolgálása.
-\item
-  Biztosítani, hogy a kommunikáció is titkosan zajlik.
-\end{enumerate}
+Továbbá kommunikál a szerverrel.
 
 \subsection[Kiknek íródott ez a
 program?]{\texorpdfstring{\protect\hypertarget{anchor-5}{}{}Kiknek
@@ -314,9 +257,10 @@ legalsó rétegéért.
 Jsonrpcserver, simple-jsonrpc-js: Az RPC kommunikációért (a tornado
 felett).
 
-\subsection[Teszt
-környezet]{\texorpdfstring{\protect\hypertarget{anchor-10}{}{}Teszt
-környezet}{Teszt környezet}}\label{teszt-kuxf6rnyezet}
+\subsection[Szükséges hardver és szoftver
+feltételek]{\texorpdfstring{\protect\hypertarget{anchor-10}{}{}Szükséges
+hardver és szoftver
+feltételek}{Szükséges hardver és szoftver feltételek}}\label{szuxfcksuxe9ges-hardver-uxe9s-szoftver-feltuxe9telek}
 
 \subsubsection[Hardware]{\texorpdfstring{\protect\hypertarget{anchor-11}{}{}Hardware}{Hardware}}\label{hardware}
 
@@ -803,7 +747,7 @@ Az oldalt az épp aktuális címén lehet elérni a böngészőben, de ha nem
 akarunk SSL hitelesítést venni, akkor sajnos a böngésző ``nem
 biztonságos''-nak fogja látni az oldalunkat.
 
-\includegraphics[width=3.07830in,height=4.54020in]{Pictures/100002010000027A000003141821B461CE63CD4B.png}\includegraphics[width=3.18110in,height=4.49530in]{Pictures/1000020100000240000003656F3E774A6844520D.png}
+\includegraphics[width=2.71890in,height=4.54020in]{Pictures/100002010000027A000003141821B461CE63CD4B.png}\includegraphics[width=3.18110in,height=4.49530in]{Pictures/1000020100000240000003656F3E774A6844520D.png}
 
 \paragraph[Bejelentkezés]{\texorpdfstring{\protect\hypertarget{anchor-38}{}{}Bejelentkezés}{Bejelentkezés}}\label{bejelentkezuxe9s}
 
@@ -1412,6 +1356,47 @@ Megjegyzések:
   titkosítva van, így a memoriában mindig csak egy kontaktnak látszanak
   az adatai.
 \end{enumerate}
+
+\subsubsection{Szerver oldal
+felépítése}\label{szerver-oldal-feluxe9puxedtuxe9se}
+
+Fontos, hogy a szerver oldalt modulokból építsük fel, hogy könnyű legyen
+a modulokat cserélgetni.
+
+\paragraph{Főbb modulok}\label{fux151bb-modulok}
+
+config: Modul a konfigurációnak, fontos, hogy ezeket a konfigurációkat
+(vagyis ezek egy részét) a kliens oldalon is elérhetővé kell tenni.
+
+A szervert lehessen json fájlból is és command line argumentumokkal is
+konfigurálni.
+
+A konfigurációs argumentumoknál be lehessen állítani, hogy mi az
+alapértéke, láthassa-e a kliens és hogy kötelező-e megadni.
+
+file\_manager: A felhasználói mappák és fájlok kezeléséért felelős:
+létrehozás, törlés, átnevezés\ldots{}
+
+error\_object: Központosított Error kezelés, a hibaüzeneteket és azok
+leírását kezeli, fontos, hogy kliens oldalon is elérhető legyen.
+
+rpc\_wrapper: A kliens oldalról elérhető függvények, az rpc protokolltól
+függetlenül. Fontos szempont ezt külön kezelni mind a belső működéstől
+(file\_manager) az authentikációtól (auth\_wrapper), és az adatátvitel
+megvalósításától (server, rpc\_request\_post\_handler,
+rpc\_request\_ws\_handler)
+
+server: Első körben tornado szervert használjunk, de gondoskodjunk
+arról, hogy ez cserélhető legyen.
+
+Itt biztosítsuk a kliens statikus fájljainak elküldését is, és adjunk
+lehetőséget RPC csatlakozásra is
+
+create\_user -- legyen egy modolunk szerver oldalon is, ami hasonlóan
+titkosítja a felhasználó adatokat, mint kliens oldalon, hogy szerver
+oldalról is tudjunk létrehozni felhasználókat CLI felületről.
+
+\subsection{Megvalósítás}\label{megvaluxf3suxedtuxe1s}
 
 \subsubsection[Szerver
 oldal]{\texorpdfstring{\protect\hypertarget{anchor-70}{}{}Szerver

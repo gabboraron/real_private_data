@@ -9,9 +9,9 @@
 </head>
 <body>
 <p>Szakdolgozat</p>
-<p>verzió 0.2</p>
+<p>verzió 0.3</p>
 <p></p>
-<p></p>
+<p>to</p>
 <h1 id="bevezetés"><span id="anchor"></span>Bevezetés</h1>
 <h2 id="motiváció"><span id="anchor-1"></span>Motiváció</h2>
 <p>Jelen világunkban az információ érték, ezért gyakorlatilag mindenki visszaél vele.</p>
@@ -53,36 +53,11 @@ De tudok csinálni olyan programot, ami azt biztosítja számomra, hogy az adata
 <li>Biztosítani, hogy a kommunikáció is titkosan zajlik.</li>
 </ol>
 <h1 id="felhasználói-dokumentáció"><span id="anchor-3"></span>Felhasználói dokumentáció</h1>
-<h2 id="a-feladat-1"><span id="anchor-4"></span>A feladat</h2>
-<p>Egy olyan program írása, ami szöveges adatokat, és telefonkönyv adatokat olyan titkosan tart, amennyire csak lehetséges.</p>
-<p>A program két részből áll. Egy szerverből és egy kliensből.</p>
-<p>A kliensnek négy feladata van:</p>
-<ol style="list-style-type: decimal">
-<li><p>Telefonköny fájl és txt fájl létrehozása, megjelenítése, módosítása</p>
-<ol style="list-style-type: decimal">
-<li>A telefonfájl fájlnál figyelni kell arra, hogy a memóriában mindig maximum egy kontaktnak legyenek titkosítatlanul az adatai.</li>
-</ol></li>
-<li>A fájlok titkosítása, és visszafejtése, még a nevüket is titkosítani kell</li>
-<li>A felhasználói adatok titkosítása a szerver elől (még a felhasználónevét is)</li>
-<li><p>Kommunikáció a szerverrel (RPC segítségével)</p>
-<ol style="list-style-type: decimal">
-<li>Autentikáció</li>
-<li>Fájlok letöltése, feltöltése, törlése.</li>
-</ol></li>
-</ol>
-<p>A szerver oldalnak öt feladata van:</p>
-<ol style="list-style-type: decimal">
-<li>A felhasználók authentikációja</li>
-<li><p>A felhasználók adatainak tárolása (fájlkiszolgáló)</p>
-<ol style="list-style-type: decimal">
-<li>Minden felhasználónak létre kell hozni egy mappát, de figyleni kell rá, hogy a felhasználóról minél kevesebb információt tároljon, így hash-elést kell használni, hogy még a felhasználó neve se derülhessen ki.</li>
-<li>A fájlok eleve titkosan kell, hogy megérkezzenek, egy titkos névvel, és tartalommal</li>
-<li>Ezen fájlok manipulálása: átnevezés, létrehozás, felülírás, törlés.</li>
-</ol></li>
-<li>A klienssel kommunikálás RPC-t használva.</li>
-<li>A kliens statikus fájljainak kiszolgálása.</li>
-<li>Biztosítani, hogy a kommunikáció is titkosan zajlik.</li>
-</ol>
+<h2 id="a-program-célja"><span id="anchor-4"></span>A program célja</h2>
+<p>Ez a program két részből áll, egy szerverből, és egy kliensből.</p>
+<p>A szervernek két feladata van: a felhasználó azonosítása, és fájl kiszolgállás.</p>
+<p>A kliens oldal telefonkönyvfájlok, és szöveges fájlok kezelésére, és titkosítására való.</p>
+<p>Továbbá kommunikál a szerverrel.</p>
 <h2 id="kiknek-íródott-ez-a-program"><span id="anchor-5"></span>Kiknek íródott ez a program?</h2>
 <p>A program célközönsége olyan felhasználók sokasága, akik nem bíznak a felhőszolgáltatókban, és biztosak szeretnének lenni abban, hogy az adataik biztonságban vannak.</p>
 <h3 id="felhasználói-előismeretek"><span id="anchor-6"></span>Felhasználói előismeretek</h3>
@@ -98,7 +73,7 @@ De tudok csinálni olyan programot, ami azt biztosítja számomra, hogy az adata
 <p>HTTPS: Az adatok titkos továbbításához.</p>
 <p>tornado: Python webszerver, a statikus fájlok kiszolgálásáért, és az RPC legalsó rétegéért.</p>
 <p>Jsonrpcserver, simple-jsonrpc-js: Az RPC kommunikációért (a tornado felett).</p>
-<h2 id="teszt-környezet"><span id="anchor-10"></span>Teszt környezet</h2>
+<h2 id="szükséges-hardver-és-szoftver-feltételek"><span id="anchor-10"></span>Szükséges hardver és szoftver feltételek</h2>
 <h3 id="hardware"><span id="anchor-11"></span>Hardware</h3>
 <p>RAM: 16GB (ez lehet, hogy kevés lesz sok felhasználóra.)</p>
 <p>Processor: Intel(R) Core(TM) i7-4600U CPU @ 2.10GHz</p>
@@ -542,7 +517,7 @@ Lásd: <a href="https://docs.python.org/3/library/logging.html" class="uri">http
 <h3 id="kliens-oldal"><span id="anchor-36"></span>Kliens oldal</h3>
 <h4 id="az-oldal-elérése"><span id="anchor-37"></span>Az oldal elérése</h4>
 <p>Az oldalt az épp aktuális címén lehet elérni a böngészőben, de ha nem akarunk SSL hitelesítést venni, akkor sajnos a böngésző “nem biztonságos”-nak fogja látni az oldalunkat.</p>
-<p><img src="Pictures/100002010000027A000003141821B461CE63CD4B.png" width="295" height="435" /><img src="Pictures/1000020100000240000003656F3E774A6844520D.png" width="305" height="431" /></p>
+<p><img src="Pictures/100002010000027A000003141821B461CE63CD4B.png" title="fig:" alt=" Illustration 2: SSL hiba továbblépés" width="261" height="435" /><img src="Pictures/1000020100000240000003656F3E774A6844520D.png" title="fig:" alt=" Illustration 3: SSL hiba továbblépés" width="305" height="431" /></p>
 <p></p>
 <h4 id="bejelentkezés"><span id="anchor-38"></span>Bejelentkezés</h4>
 <p>RPC Client:</p>
@@ -904,6 +879,20 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <li>A &lt;titkosított becenévadat&gt; is ugyanazzal az jelszóval, és ugyanazzal az encryptorral van jelenleg titkosítva.</li>
 <li>Mivel a &lt;titkosított kontakt adat&gt; külön titkosítva van, így a memoriában mindig csak egy kontaktnak látszanak az adatai.</li>
 </ol>
+<h3 id="szerver-oldal-felépítése">Szerver oldal felépítése</h3>
+<p>Fontos, hogy a szerver oldalt modulokból építsük fel, hogy könnyű legyen a modulokat cserélgetni.</p>
+<h4 id="főbb-modulok">Főbb modulok</h4>
+<p>config: Modul a konfigurációnak, fontos, hogy ezeket a konfigurációkat (vagyis ezek egy részét) a kliens oldalon is elérhetővé kell tenni.</p>
+<p>A szervert lehessen json fájlból is és command line argumentumokkal is konfigurálni.</p>
+<p>A konfigurációs argumentumoknál be lehessen állítani, hogy mi az alapértéke, láthassa-e a kliens és hogy kötelező-e megadni.</p>
+<p>file_manager: A felhasználói mappák és fájlok kezeléséért felelős: létrehozás, törlés, átnevezés…</p>
+<p>error_object: Központosított Error kezelés, a hibaüzeneteket és azok leírását kezeli, fontos, hogy kliens oldalon is elérhető legyen.</p>
+<p>rpc_wrapper: A kliens oldalról elérhető függvények, az rpc protokolltól függetlenül. Fontos szempont ezt külön kezelni mind a belső működéstől (file_manager) az authentikációtól (auth_wrapper), és az adatátvitel megvalósításától (server, rpc_request_post_handler, rpc_request_ws_handler)</p>
+<p>server: Első körben tornado szervert használjunk, de gondoskodjunk arról, hogy ez cserélhető legyen.</p>
+<p>Itt biztosítsuk a kliens statikus fájljainak elküldését is, és adjunk lehetőséget RPC csatlakozásra is</p>
+<p>create_user – legyen egy modolunk szerver oldalon is, ami hasonlóan titkosítja a felhasználó adatokat, mint kliens oldalon, hogy szerver oldalról is tudjunk létrehozni felhasználókat CLI felületről.</p>
+<p></p>
+<h2 id="megvalósítás">Megvalósítás</h2>
 <h3 id="szerver-oldal-1"><span id="anchor-70"></span>Szerver oldal</h3>
 <h4 id="mappa-és-fájl-struktúrájának-áttekintése"><span id="anchor-71"></span>Mappa és fájl struktúrájának áttekintése</h4>
 <p>src/web</p>
