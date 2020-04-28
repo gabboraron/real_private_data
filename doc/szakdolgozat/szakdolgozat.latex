@@ -78,7 +78,7 @@ Programozási Nyelvek és Fordítóprogramok Tanszék
 
 Kliens oldalon maximálisan titkosított adatbázis
 
-verzió 0.9
+verzió 0.10
 
 \section{\texorpdfstring{\protect\hypertarget{anchor}{}{}}{}}\label{section}
 
@@ -2484,5 +2484,76 @@ test\_user1/password1 & ELTE IK Média- és Oktatásinformatikai
 Tanszék.phb & Media\tabularnewline
 \bottomrule
 \end{longtable}
+
+\section{}\label{section-1}
+
+\section[Forrásjegyzet]{\texorpdfstring{\protect\hypertarget{anchor-110}{}{}Forrásjegyzet}{Forrásjegyzet}}\label{forruxe1sjegyzet}
+
+{[}1{]} tornado hivatalos oldala:
+\url{https://www.tornadoweb.org/en/stable/} {[}Hozzáférés dátuma: 28 04
+2020{]}
+
+{[}2{]} tornado GitHub oldala:
+\url{https://github.com/tornadoweb/tornado/} {[}Hozzáférés dátuma: 28 04
+2020{]}
+
+{[}3{]} tornado PyPi oldala: \url{https://pypi.org/project/tornado/}
+{[}Hozzáférés dátuma: 28 04 2020{]}
+
+{[}4{]} jsonrpcserver GitHub oldala:
+\url{https://github.com/bcb/jsonrpcserver} {[}Hozzáférés dátuma: 28 04
+2020{]}
+
+{[}5{]} jsonrpcserver PyPi oldala:
+\url{https://pypi.org/project/jsonrpcserver/} {[}Hozzáférés dátuma: 28
+04 2020{]}
+
+{[}6{]} pandas hivatalos oldala: \url{https://pandas.pydata.org/}
+{[}Hozzáférés dátuma: 28 04 2020{]}
+
+{[}7{]} pandas GitHub oldala: \url{https://github.com/pandas-dev/pandas}
+{[}Hozzáférés dátuma: 28 04 2020{]}
+
+{[}8{]} pandas PyPi oldala: \url{https://pypi.org/project/pandas/}
+{[}Hozzáférés dátuma: 28 04 2020{]}
+
+{[}9{]} Pyexcel-ods GitHub oldala:
+\url{https://github.com/pyexcel/pyexcel-ods} {[}Hozzáférés dátuma: 28 04
+2020{]}
+
+{[}10{]} Pyexcel-ods PyPi oldala:
+\url{https://pypi.org/project/pyexcel-ods/} {[}Hozzáférés dátuma: 28 04
+2020{]}
+
+{[}11{]} aes-js NPM oldala: \url{https://www.npmjs.com/package/aes-js}
+{[}Hozzáférés dátuma: 28 04 2020{]}
+
+{[}12{]} Aes-js hivatalos oldala:
+\url{https://cdn.rawgit.com/ricmoo/aes-js} {[}Hozzáférés dátuma: 28 04
+2020{]}
+
+{[}13{]} bootstrap hivatalos oldala: \url{https://getbootstrap.com/}
+{[}Hozzáférés dátuma: 28 04 2020{]}
+
+{[}14{]} jquery hivatalos oldala: \url{https://jquery.com/}
+{[}Hozzáférés dátuma: 28 04 2020{]}
+
+{[}15{]} Js-sha256 NPM oldala:
+\url{https://www.npmjs.com/package/js-sha256} {[}Hozzáférés dátuma: 28
+04 2020{]}
+
+{[}16{]} popper.js hivatalos oldala: \url{https://popper.js.org/}
+{[}Hozzáférés dátuma: 28 04 2020{]}
+
+{[}17{]} Simple-jsonrpc-js GitHub oldala:
+\url{https://github.com/jershell/simple-jsonrpc-js} {[}Hozzáférés
+dátuma: 28 04 2020{]}
+
+{[}18{]} Google Chrome hivatalos oldala:
+\url{https://www.google.com/chrome/} {[}Hozzáférés dátuma: 28 04 2020{]}
+
+{[}19{]} Mozilla Firefox hivatalos oldala:
+\url{https://www.mozilla.org/en-US/firefox/} {[}Hozzáférés dátuma: 28 04
+2020{]}
 
 \end{document}
