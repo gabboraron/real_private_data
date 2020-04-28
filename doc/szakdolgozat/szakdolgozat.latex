@@ -78,7 +78,7 @@ Programozási Nyelvek és Fordítóprogramok Tanszék
 
 Kliens oldalon maximálisan titkosított adatbázis
 
-verzió 0.7
+verzió 0.8
 
 \section{\texorpdfstring{\protect\hypertarget{anchor}{}{}}{}}\label{section}
 
@@ -342,6 +342,9 @@ simple-jsonrpc-js & 1.0.0 &
 githubról]{\texorpdfstring{\protect\hypertarget{anchor-19}{}{}Letöltés
 githubról}{Letöltés githubról}}\label{letuxf6ltuxe9s-githubruxf3l}
 
+A programot a githubról lehet letölteni. Programozóknak a git-tel
+javaslom, felhasználóknak teljesen megfelelő a szimpla zip-es letöltés.
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
@@ -395,6 +398,9 @@ Ehhez egy VirtualBoxot használtam, arra feltelepítettem egy Ubuntut, így
 egy teljesen új linuxon van tesztelve, amin még nincs semmi.
 
 \subsubsection[Függőségek]{\texorpdfstring{\protect\hypertarget{anchor-21}{}{}Függőségek}{Függőségek}}\label{fuxfcggux151suxe9gek}
+
+Ezeket a függőségeket kell telepíteni hogy a program teljes mértékben
+működhessen.
 
 \paragraph[Iptables-persistent]{\texorpdfstring{\protect\hypertarget{anchor-22}{}{}Iptables-persistent}{Iptables-persistent}}\label{iptables-persistent}
 
@@ -1486,7 +1492,11 @@ algoritmusok}{Fontosabb algoritmusok}}\label{fontosabb-algoritmusok}
 
 \paragraph[SHA256Salty]{\texorpdfstring{\protect\hypertarget{anchor-76}{}{}SHA256Salty}{SHA256Salty}}\label{sha256salty}
 
-Bementet: str, salt\_string
+\textbf{Leírás:} Ez az algoritmus egy hash-t csinál, ami sózva van.
+
+\textbf{Bementet:} str, salt\_string
+
+Algoritmus:
 
 hexString(SHA256(preSalt(str,salt\_string)))
 
@@ -1514,7 +1524,11 @@ kódját.
 
 \paragraph[AESEncryptor]{\texorpdfstring{\protect\hypertarget{anchor-77}{}{}AESEncryptor}{AESEncryptor}}\label{aesencryptor}
 
-Bemenet: data, jelszó\_hash
+\textbf{Leírás:} Ez az algoritmus adatokat titkosít AES256 algoritmussal
+
+\textbf{Bemenet:} data, jelszó\_hash
+
+Algoritmus:
 
 ellenőrző\_hash = sha256(data);
 

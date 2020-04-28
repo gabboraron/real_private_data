@@ -16,7 +16,7 @@
 <p></p>
 <p></p>
 <p>Kliens oldalon maximálisan titkosított adatbázis</p>
-<p>verzió 0.7</p>
+<p>verzió 0.8</p>
 <p></p>
 <p></p>
 <p></p>
@@ -174,6 +174,7 @@ Mozilla Firefox74.0 <a href="https://www.mozilla.org/en-US/firefox/" class="uri"
 </table>
 <p><span id="anchor-18"></span></p>
 <h2 id="letöltés-githubról"><span id="anchor-19"></span>Letöltés githubról</h2>
+<p>A programot a githubról lehet letölteni. Programozóknak a git-tel javaslom, felhasználóknak teljesen megfelelő a szimpla zip-es letöltés.</p>
 <ol style="list-style-type: decimal">
 <li><p>git-tel</p>
 <ol style="list-style-type: decimal">
@@ -201,6 +202,7 @@ Mozilla Firefox74.0 <a href="https://www.mozilla.org/en-US/firefox/" class="uri"
 <h2 id="installálás"><span id="anchor-20"></span>Installálás</h2>
 <p>Ehhez egy VirtualBoxot használtam, arra feltelepítettem egy Ubuntut, így egy teljesen új linuxon van tesztelve, amin még nincs semmi.</p>
 <h3 id="függőségek"><span id="anchor-21"></span>Függőségek</h3>
+<p>Ezeket a függőségeket kell telepíteni hogy a program teljes mértékben működhessen.</p>
 <h4 id="iptables-persistent"><span id="anchor-22"></span>Iptables-persistent</h4>
 <p>Csak ha portforwardingolni akarunk</p>
 <p>sudo apt-get install iptables-persistent</p>
@@ -944,7 +946,9 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <p>A megvalósításhoz Visual Studio Code-ot használtam Ubuntu linux alatt.</p>
 <h3 id="fontosabb-algoritmusok"><span id="anchor-75"></span>Fontosabb algoritmusok</h3>
 <h4 id="sha256salty"><span id="anchor-76"></span>SHA256Salty</h4>
-<p>Bementet: str, salt_string</p>
+<p><strong>Leírás:</strong> Ez az algoritmus egy hash-t csinál, ami sózva van.</p>
+<p><strong>Bementet:</strong> str, salt_string</p>
+<p>Algoritmus:</p>
 <p>hexString(SHA256(preSalt(str,salt_string)))</p>
 <p>Ahol preSalt(str,salt_string):</p>
 <p>res = ””</p>
@@ -956,7 +960,9 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <p>return ret;</p>
 <p>ahol fromCharCode egy számból adja vissza az ott elhelyezkedő ASCII karaktert, és charCode pedig egy ASCII karakterből adja vissza az ASCII kódját.</p>
 <h4 id="aesencryptor"><span id="anchor-77"></span>AESEncryptor</h4>
-<p>Bemenet: data, jelszó_hash</p>
+<p><strong>Leírás:</strong> Ez az algoritmus adatokat titkosít AES256 algoritmussal</p>
+<p><strong>Bemenet:</strong> data, jelszó_hash</p>
+<p>Algoritmus:</p>
 <p>ellenőrző_hash = sha256(data);</p>
 <p>data = ellenőrző_hash + data</p>
 <p>textBytes = utf8ToBytes(data)</p>
