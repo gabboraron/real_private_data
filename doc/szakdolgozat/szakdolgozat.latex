@@ -78,11 +78,9 @@ Programozási Nyelvek és Fordítóprogramok Tanszék
 
 Kliens oldalon maximálisan titkosított adatbázis
 
-verzió 0.6
+verzió 0.7
 
-\section{}\label{section}
-
-\section[Tartalomjegyzék]{\texorpdfstring{\protect\hypertarget{anchor}{}{}Tartalomjegyzék}{Tartalomjegyzék}}\label{tartalomjegyzuxe9k}
+\section{\texorpdfstring{\protect\hypertarget{anchor}{}{}}{}}\label{section}
 
 \section[Bevezetés]{\texorpdfstring{\protect\hypertarget{anchor-1}{}{}Bevezetés}{Bevezetés}}\label{bevezetuxe9s}
 
@@ -110,7 +108,7 @@ adataimat a kliens oldalon titkosítva küldöm el a felhőbe, akkor a
 felhőben lévő cég nem tudhatja, hogy mik is voltak azok.
 
 Így jött az öltet, hogy először egy egyszerű szervert készítek, ahol
-fájlokat tudok tárolni, amikbe az egyszerűség kedvéért először csak
+fájlokat tudok tárolni, melyekben az egyszerűség kedvéért először csak
 szövegeket, vagy telefonkönyveket tudok tárolni.\\
 Így hiába olvashatja az adott szerverszolgáltató az adataimat, nem fog
 hozzáférni az információhoz, mert az már a kliens oldalon titkosítva
@@ -244,7 +242,7 @@ előismeretek.}{A szerver üzemeltetői előismeretek.}}\label{a-szerver-uxfczem
 Igyekeztem minél egyszerűbben konfigurálható szervert létrehozni, és
 igyekeztem részletes telepítési, és üzemeltetési útmutatót adni.
 
-Mindemellett érdemes Minimális szintű Linux ismeretekkel rendelkezni.
+Mindemellett érdemes minimális szintű Linux ismeretekkel rendelkezni.
 
 \subsection[Fontosabb eszközök a
 megvalósításhoz]{\texorpdfstring{\protect\hypertarget{anchor-10}{}{}Fontosabb

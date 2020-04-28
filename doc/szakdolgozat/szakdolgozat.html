@@ -16,7 +16,7 @@
 <p></p>
 <p></p>
 <p>Kliens oldalon maximálisan titkosított adatbázis</p>
-<p>verzió 0.6</p>
+<p>verzió 0.7</p>
 <p></p>
 <p></p>
 <p></p>
@@ -26,8 +26,7 @@
 <p></p>
 <p></p>
 <p></p>
-<h1 id="section"></h1>
-<h1 id="tartalomjegyzék"><span id="anchor"></span>Tartalomjegyzék</h1>
+<h1 id="section"><span id="anchor"></span></h1>
 <p></p>
 <h1 id="bevezetés"><span id="anchor-1"></span>Bevezetés</h1>
 <h2 id="motiváció"><span id="anchor-2"></span>Motiváció</h2>
@@ -36,7 +35,7 @@
 <p>Nem tudhatom, hogy ha egy felhőben tárolom az adataimat, akkor vajon a Google, a Microsoft, a Facebook, az Apple vagy más cégek, akik ilyeneket szolgáltatnak, felhasználják-e őket. Ilyen szempontból mondjuk a megnevezettek még korrektek, mert az általános szerződési feltételeikben megfogalmazzák, hogy az adatainkat felhasználják.</p>
 <p>Sajnos arra jelenleg nincs erőforrásom, hogy egy saját operációs rendszert írjak, vagy leellenőrizzek egy Linuxot, Open/Free BSD-t hogy vajon visszaél-e az adataimmal, így ezeknek el kell hinnem, hogy nem teszik.<br />
 De tudok csinálni olyan programot, ami azt biztosítja számomra, hogy az adataimat a kliens oldalon titkosítva küldöm el a felhőbe, akkor a felhőben lévő cég nem tudhatja, hogy mik is voltak azok.</p>
-<p>Így jött az öltet, hogy először egy egyszerű szervert készítek, ahol fájlokat tudok tárolni, amikbe az egyszerűség kedvéért először csak szövegeket, vagy telefonkönyveket tudok tárolni.<br />
+<p>Így jött az öltet, hogy először egy egyszerű szervert készítek, ahol fájlokat tudok tárolni, melyekben az egyszerűség kedvéért először csak szövegeket, vagy telefonkönyveket tudok tárolni.<br />
 Így hiába olvashatja az adott szerverszolgáltató az adataimat, nem fog hozzáférni az információhoz, mert az már a kliens oldalon titkosítva van.</p>
 <p>Fontos volt számomra, hogy az általam készített program nyílt forráskódú legyen, hogy biztosítva legyen, hogy tényleg titkosít, és tényleg nem ment semmilyen adatot.</p>
 <h2 id="a-feladat"><span id="anchor-3"></span>A feladat</h2>
@@ -83,7 +82,7 @@ De tudok csinálni olyan programot, ami azt biztosítja számomra, hogy az adata
 <p>Azoknak a felhasználóknak, akiknek csak a klienst kell használniuk, elegendő minimális informatikai ismerettel rendelkeznie. Csak a böngésző használata követelmény a számára</p>
 <h4 id="a-szerver-üzemeltetői-előismeretek."><span id="anchor-9"></span>A szerver üzemeltetői előismeretek.</h4>
 <p>Igyekeztem minél egyszerűbben konfigurálható szervert létrehozni, és igyekeztem részletes telepítési, és üzemeltetési útmutatót adni.</p>
-<p>Mindemellett érdemes Minimális szintű Linux ismeretekkel rendelkezni.</p>
+<p>Mindemellett érdemes minimális szintű Linux ismeretekkel rendelkezni.</p>
 <h2 id="fontosabb-eszközök-a-megvalósításhoz"><span id="anchor-10"></span>Fontosabb eszközök a megvalósításhoz</h2>
 <p><strong>AES256 algoritmus:</strong> A fájlok, és a fájlok neveinek titkosításához</p>
 <p><strong>SHA256 algoritmus (sózva):</strong> a felhasználó nevek és jelszavak titkosításához, a felhasználói mappa létrehozásához, meg az AES kulcs generálásához.</p>
