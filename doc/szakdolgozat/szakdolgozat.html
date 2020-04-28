@@ -16,7 +16,7 @@
 <p></p>
 <p></p>
 <p>Kliens oldalon maximálisan titkosított adatbázis</p>
-<p>verzió 0.8</p>
+<p>verzió 0.9</p>
 <p></p>
 <p></p>
 <p></p>
@@ -1154,7 +1154,22 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 ├── <a href="../../../../../../../../favicon.ico">favicon.ico</a> - ikon<br />
 ├── <a href="../../../../../../../../index.html">index.html</a> - főoldal<br />
 └── <a href="../../../../../../../../testPhoneBook.html">testPhoneBook.html</a> – A telefonkönyv teszt indítása</p>
-<h2 id="tesztelési-terv"><span id="anchor-81"></span>Tesztelési terv</h2>
+<h3 id="fejlesztési-lehetőségek"><span id="anchor-81"></span>Fejlesztési lehetőségek</h3>
+<p>A projekt még nagyon a kezdeti időszakában van, így rengeteg fejlesztési lehetőség van.</p>
+<ol style="list-style-type: decimal">
+<li>A kliens oldalt megvalósítani Android és PC alkalmazásként is.</li>
+<li><p>Több típusú fájl, ne csak txt vagy telefonkönyv fájl, hanem</p>
+<ol style="list-style-type: decimal">
+<li>Fájl típusú, amibe bármilyen fájlt le lehet titkosítani</li>
+<li>Naptár titkosítás.</li>
+</ol></li>
+<li>Fájl importálás/exportálás.</li>
+<li>Telefonkönyv importálás (főleg a majd készülő androidos verzióban)</li>
+<li>UI-ről választható titkosítási forma, hashelési forma.</li>
+<li>SSL helyett quantum safe kommunikáció</li>
+<li>Szerver windows support.</li>
+</ol>
+<h2 id="tesztelési-terv"><span id="anchor-82"></span>Tesztelési terv</h2>
 <p>A txt fájlok teszteléséhez Arany János összes költeményeit használom:</p>
 <p><a href="https://mek.oszk.hu/00500/00597/html/index.htm" class="uri">https://mek.oszk.hu/00500/00597/html/index.htm</a></p>
 <p>A telefonkönyvek teszteléséhez az ELTE honlapján elérhető telefonszámokat használom:</p>
@@ -1162,7 +1177,7 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <li>ELTE IK Média- és Oktatásinformatikai Tanszék &gt; A Tanszékről &gt; Oktatók és munkatársak<br />
 <a href="https://mot.inf.elte.hu/munkatarsak" class="uri">https://mot.inf.elte.hu/munkatarsak</a></li>
 </ol>
-<h3 id="előkészületek-1"><span id="anchor-82"></span>Előkészületek</h3>
+<h3 id="előkészületek-1"><span id="anchor-83"></span>Előkészületek</h3>
 <p>Létrehozok egy üres adatbázist a projekt mellé, és megcsinálom a szükséges config fájlt:</p>
 <p>{</p>
 <p>&quot;host&quot;:&quot;localhost&quot;,</p>
@@ -1177,9 +1192,9 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <p>&quot;web_root&quot;: &quot;[[dir_project]]/src/web&quot;,</p>
 <p>&quot;data_dir&quot;: &quot;[[dir_project]]/../test_data&quot;</p>
 <p>}</p>
-<h3 id="eset-a-szerver-elindítása-black-box"><span id="anchor-83"></span>1. eset: A szerver elindítása (black box)</h3>
+<h3 id="eset-a-szerver-elindítása-black-box"><span id="anchor-84"></span>1. eset: A szerver elindítása (black box)</h3>
 <p>./run_server --configFile config.test.json</p>
-<h4 id="elvárt-eredmény"><span id="anchor-84"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény"><span id="anchor-85"></span>Elvárt eredmény</h4>
 <p>1. <strong>Loggolja a konfigurált beállításokat:</strong></p>
 <p>[2020-04-08 12:25:01,276][INFO] Loglevel: INFO</p>
 <p>[2020-04-08 12:25:01,440][INFO] Runner command: ./run_server.py --configFile config.test.json</p>
@@ -1221,7 +1236,7 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <p class="caption"><br />
 25. ábra: Bejelentkező oldal</p>
 </div>
-<h3 id="eset-felhasználók-létrehozása-konzolból-black-box"><span id="anchor-85"></span>2. eset: Felhasználók létrehozása konzolból (black box)</h3>
+<h3 id="eset-felhasználók-létrehozása-konzolból-black-box"><span id="anchor-86"></span>2. eset: Felhasználók létrehozása konzolból (black box)</h3>
 <p>2 felhasználót fogok létrehozni</p>
 <p><img src="Pictures/100002010000031D000000F2976BA035B3996C7B.png" width="642" height="195" /><strong>Felhasználónév</strong>: test_user1 <strong>password:</strong> password1<br />
 <strong>Felhasználónév</strong>: test_user2 <strong>password: </strong>password2</p>
@@ -1230,18 +1245,18 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <p class="caption"><br />
 26. ábra: Felhasználó létrehozása CLI-ből</p>
 </div>
-<h4 id="elvárt-eredmény-1"><span id="anchor-86"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-1"><span id="anchor-87"></span>Elvárt eredmény</h4>
 <p>1. Hozzon létre két felhasználói mappát:</p>
 <p><img src="Pictures/100002010000024E000000623AFAC37FC5C00533.png" title="fig:" alt=" 27. ábra: Titkos felhasználói mappák" width="589" height="98" />2. Be tudjak lépni a felhasználókkal, ezt lásd lejjebb a bejelentkezés tesztelésénél.</p>
-<h3 id="eset-üresen-hagyott-mezők-felhasználó-létrehozása-közben"><span id="anchor-87"></span>3. eset: Üresen hagyott mezők felhasználó létrehozása közben</h3>
+<h3 id="eset-üresen-hagyott-mezők-felhasználó-létrehozása-közben"><span id="anchor-88"></span>3. eset: Üresen hagyott mezők felhasználó létrehozása közben</h3>
 <p>Vagy a felhasználónevet, vagy a jelszó mezőt, vagy mindkettőt hagyjuk üresen</p>
-<h4 id="elvárt-eredmény-2"><span id="anchor-88"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-2"><span id="anchor-89"></span>Elvárt eredmény</h4>
 <p><img src="Pictures/100002010000031D0000013A193006CF92705A40.png" title="fig:" alt=" 28. ábra: Hibás felhasználó létrehozás (üres felhasználónév vagy jelszó, vagy jelszó mégegyszer mező)" width="623" height="245" /><strong>Username and/or password is empty</strong> üzenet, a data dir változatlan hagyása</p>
-<h3 id="eset-jelszó-és-jelszó-mégegyszer-nem-egyezik-cli"><span id="anchor-89"></span>4. eset: jelszó és jelszó mégegyszer nem egyezik (CLI)</h3>
+<h3 id="eset-jelszó-és-jelszó-mégegyszer-nem-egyezik-cli"><span id="anchor-90"></span>4. eset: jelszó és jelszó mégegyszer nem egyezik (CLI)</h3>
 <h3 id="ábra-a-jelszó-és-a-jelszó-mégegyszer-mező-nem-egyezik"><img src="Pictures/100002010000031D00000086F18BAFFF29656A89.png" title="fig:" alt=" 29. ábra: A jelszó és a jelszó mégegyszer mező nem egyezik" width="642" height="108" /></h3>
-<h4 id="elvárt-eredmény-3"><span id="anchor-90"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-3"><span id="anchor-91"></span>Elvárt eredmény</h4>
 <p>Hibaüzenet, test_data dir ne változzon</p>
-<h3 id="eset-létező-felhasználó-hozzáadása-azonos-jelszóval"><span id="anchor-91"></span>5. eset: Létező felhasználó hozzáadása azonos jelszóval</h3>
+<h3 id="eset-létező-felhasználó-hozzáadása-azonos-jelszóval"><span id="anchor-92"></span>5. eset: Létező felhasználó hozzáadása azonos jelszóval</h3>
 <p>Meg kell jegyezzem, hogy itt a felhasználónév és a jelszó páros azonosít egy felhasználót, így például <strong>User1/password1</strong> és <strong>User1/password2</strong> nem ugyanaz a felhasználó.</p>
 <p>Gondolkodtam ennek javításán, de nem igazán lehetséges úgy, hogy ne adjon többlet információt a szerver üzemeltetőjének a felhasználóról.</p>
 <p>test_user1/password1</p>
@@ -1250,11 +1265,11 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <p class="caption"><br />
 30. ábra: Létező felhasználó hozzáadása mégegyszer</p>
 </div>
-<h4 id="elvárt-eredmény-4"><span id="anchor-92"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-4"><span id="anchor-93"></span>Elvárt eredmény</h4>
 <p>Hibaüzenet, test_data dir ne változzon</p>
-<h3 id="eset-létező-felhasználó-hozzáadása-más-jelszóval-cli"><span id="anchor-93"></span>6. eset: Létező felhasználó hozzáadása más jelszóval (cli)</h3>
+<h3 id="eset-létező-felhasználó-hozzáadása-más-jelszóval-cli"><span id="anchor-94"></span>6. eset: Létező felhasználó hozzáadása más jelszóval (cli)</h3>
 <p><strong>test_user1/password2</strong> létrehozása</p>
-<h4 id="ábra-létező-felhasználó-hozzáadása-más-jelszóvalelvárt-eredmény"><img src="Pictures/100002010000031D00000086C6457FFF882A34CD.png" title="fig:" alt=" 31. ábra: Létező felhasználó hozzáadása más jelszóval" width="613" height="103" /><span id="anchor-94"></span>Elvárt eredmény</h4>
+<h4 id="ábra-létező-felhasználó-hozzáadása-más-jelszóvalelvárt-eredmény"><img src="Pictures/100002010000031D00000086C6457FFF882A34CD.png" title="fig:" alt=" 31. ábra: Létező felhasználó hozzáadása más jelszóval" width="613" height="103" /><span id="anchor-95"></span>Elvárt eredmény</h4>
 <p>1. Hozzon létre egy új felhasználói mappát</p>
 <div class="figure">
 <img src="Pictures/100002010000024E00000074FBA42ABA16A2EA41.png" alt=" 32. ábra: Új mappa létrejött a felhasználónak" width="589" height="115" />
@@ -1262,7 +1277,7 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 32. ábra: Új mappa létrejött a felhasználónak</p>
 </div>
 <p>2. Be tudjak lépni az új felhasználóval, ezt lásd lejjebb a bejelentkezés tesztelésénél.</p>
-<h3 id="eset-belépés-hibás-jelszóval-gui"><span id="anchor-95"></span>7. eset: Belépés hibás jelszóval (GUI)</h3>
+<h3 id="eset-belépés-hibás-jelszóval-gui"><span id="anchor-96"></span>7. eset: Belépés hibás jelszóval (GUI)</h3>
 <p>Bejelentkezés<strong> </strong>a következő felhasználókkal</p>
 <table>
 <tbody>
@@ -1286,9 +1301,9 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 </table>
 <p></p>
 <p>(<strong>SimpleJsonRpcWebSocketClientService</strong> és <strong>SimpleJsonRpcPOSTClientService </strong>segítségével is)</p>
-<h4 id="elvárt-eredmény-5"><span id="anchor-96"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-5"><span id="anchor-97"></span>Elvárt eredmény</h4>
 <p><img src="Pictures/10000201000001FC0000017DFCC82713BC118645.png" width="508" height="381" />Hibaüzenet</p>
-<h3 id="eset-bejelentkezés-valós-felhasználókkal-gui"><span id="anchor-97"></span>8. eset: Bejelentkezés valós felhasználókkal (GUI)</h3>
+<h3 id="eset-bejelentkezés-valós-felhasználókkal-gui"><span id="anchor-98"></span>8. eset: Bejelentkezés valós felhasználókkal (GUI)</h3>
 <p>Bejelentkezés<strong> </strong>a következő felhasználókkal (<strong>SimpleJsonRpcWebSocketClientService</strong> és <strong>SimpleJsonRpcPOSTClientService </strong>segítségével is)</p>
 <table>
 <tbody>
@@ -1311,24 +1326,24 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 </tbody>
 </table>
 <p></p>
-<h4 id="elvárt-eredmény-6"><span id="anchor-98"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-6"><span id="anchor-99"></span>Elvárt eredmény</h4>
 <p>Bejelentkezés az oldalra, és a main oldalra irányítás.</p>
 <h3 id="ábra-főoldal-még-nincs-egy-fájl-sem"><img src="Pictures/10000201000001D900000140756AC15CC24E107F.png" title="fig:" alt=" 33. ábra: Főoldal (még nincs egy fájl sem)" width="473" height="320" /></h3>
-<h3 id="eset-felhasználó-létrehozása-gui"><span id="anchor-99"></span>9. eset: Felhasználó létrehozása (GUI)</h3>
+<h3 id="eset-felhasználó-létrehozása-gui"><span id="anchor-100"></span>9. eset: Felhasználó létrehozása (GUI)</h3>
 <p><strong>test_user3/password3</strong> létrehozása</p>
-<h4 id="elvárt-eredmény-7"><span id="anchor-100"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-7"><span id="anchor-101"></span>Elvárt eredmény</h4>
 <p>1. sikeres létrehozás</p>
 <p><img src="Pictures/100002010000023D000001AA20A24A135A40C772.png" title="fig:" alt=" 34. ábra: Új felhasználó létrehozva" width="573" height="425" />2. sikeres bejelntekzés az új felhasználóval (lásd <strong>8. eset: Bejelentkezés valós felhasználókkal (GUI) </strong>).</p>
-<h3 id="eset-txt-fájl-létrehozása"><span id="anchor-101"></span>10. eset: Txt Fájl létrehozása</h3>
+<h3 id="eset-txt-fájl-létrehozása"><span id="anchor-102"></span>10. eset: Txt Fájl létrehozása</h3>
 <p>Hozzunk létre pár txt fájlt.</p>
-<h4 id="elvárt-eredmény-8"><span id="anchor-102"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-8"><span id="anchor-103"></span>Elvárt eredmény</h4>
 <p>A fájlok létrejönnek, és meg is tudjuk őket nyitni, lásd lejjebb</p>
 <div class="figure">
 <img src="Pictures/100002010000039700000391C7F524C2E18491CD.png" alt=" 35. ábra: Új text fájl létrehozva" width="604" height="600" />
 <p class="caption"><br />
 35. ábra: Új text fájl létrehozva</p>
 </div>
-<h3 id="eset-telefonkönyv-fájl-létrehozása"><span id="anchor-103"></span>11. eset: Telefonkönyv fájl létrehozása</h3>
+<h3 id="eset-telefonkönyv-fájl-létrehozása"><span id="anchor-104"></span>11. eset: Telefonkönyv fájl létrehozása</h3>
 <p>Ehhez csináltam egy teszt robotot, ami létrehoz egy Telefonkönyv fájlt, és feltölti adatokkal.</p>
 <p><a href="https://localhost:11443/testPhoneBook.html" class="uri">https://localhost:11443/testPhoneBook.html</a></p>
 <p><strong>waitTime</strong>: Megmondja, hogy mennyit várjon a teszt két művelet között<br />
@@ -1341,9 +1356,9 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 <p class="caption"><br />
 36. ábra: Telefonkönyv létrehozása robottal</p>
 </div>
-<h4 id="elvárt-eredmény-9"><span id="anchor-104"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-9"><span id="anchor-105"></span>Elvárt eredmény</h4>
 <p>A fájl létrehozása, és a telefonkönyv adatok tárolása.</p>
-<h3 id="eset-nézzük-meg-hogy-a-szerveren-tárolt-adatok-tényleg-titkosak-e"><span id="anchor-105"></span>12. eset: Nézzük meg, hogy a szerveren tárolt adatok tényleg titkosak-e</h3>
+<h3 id="eset-nézzük-meg-hogy-a-szerveren-tárolt-adatok-tényleg-titkosak-e"><span id="anchor-106"></span>12. eset: Nézzük meg, hogy a szerveren tárolt adatok tényleg titkosak-e</h3>
 <ol style="list-style-type: decimal">
 <li>Kilistázzuk a mappákat tee paranccsal</li>
 <li>megnézzük a fájlokat cat paranccsal</li>
@@ -1351,8 +1366,8 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 </ol>
 <p><img src="Pictures/100002010000024E000002A2BFA6C3F2C761EB55.png" title="fig:" alt=" 37. ábra: Titkos felhasználónevek, és fájlnevek" width="589" height="674" />Itt látható, hogy mind a mappák (felhasználók nevei), és a benne lévő fájlok nevei is titkosítottak.</p>
 <p><img src="Pictures/100002010000024E000002B41EE2773EF9BEFDC2.png" title="fig:" alt=" 38. ábra: Titkos fájl tartalma cat parancssal megjelenítve" width="589" height="691" />Itt látható, hogy a fájl cat-tal megjelenítve is értelmetlen</p>
-<h3 id="a-teszt-közben-létrejött-felhasználók-és-fájlok"><span id="anchor-106"></span>A teszt közben létrejött felhasználók és fájlok</h3>
-<h4 id="felhasználók"><span id="anchor-107"></span>Felhasználók</h4>
+<h3 id="a-teszt-közben-létrejött-felhasználók-és-fájlok"><span id="anchor-107"></span>A teszt közben létrejött felhasználók és fájlok</h3>
+<h4 id="felhasználók"><span id="anchor-108"></span>Felhasználók</h4>
 <table>
 <tbody>
 <tr class="odd">
@@ -1373,7 +1388,7 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 </tr>
 </tbody>
 </table>
-<h4 id="fájlok"><span id="anchor-108"></span>Fájlok</h4>
+<h4 id="fájlok"><span id="anchor-109"></span>Fájlok</h4>
 <table>
 <tbody>
 <tr class="odd">
@@ -1414,20 +1429,5 @@ A felhasználó mappájába a már előre titkosított fájlok vannak titkosíto
 </tbody>
 </table>
 <p></p>
-<h2 id="fejlesztési-lehetőségek"><span id="anchor-109"></span>Fejlesztési lehetőségek</h2>
-<p>A projekt még nagyon a kezdeti időszakában van, így rengeteg fejlesztési lehetőség van.</p>
-<ol style="list-style-type: decimal">
-<li>A kliens oldalt megvalósítani Android és PC alkalmazásként is.</li>
-<li><p>Több típusú fájl, ne csak txt vagy telefonkönyv fájl, hanem</p>
-<ol style="list-style-type: decimal">
-<li>Fájl típusú, amibe bármilyen fájlt le lehet titkosítani</li>
-<li>Naptár titkosítás.</li>
-</ol></li>
-<li>Fájl importálás/exportálás.</li>
-<li>Telefonkönyv importálás (főleg a majd készülő androidos verzióban)</li>
-<li>UI-ről választható titkosítási forma, hashelési forma.</li>
-<li>SSL helyett quantum safe kommunikáció</li>
-<li>Szerver windows support.</li>
-</ol>
 </body>
 </html>
