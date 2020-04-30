@@ -78,7 +78,7 @@ Programozási Nyelvek és Fordítóprogramok Tanszék
 
 Kliens oldalon maximálisan titkosított adatbázis
 
-verzió 0.11
+verzió 0.12
 
 \section{\texorpdfstring{\protect\hypertarget{anchor}{}{}}{}}\label{section}
 
@@ -760,7 +760,7 @@ Az oldalt az épp aktuális címén lehet elérni a böngészőben, de ha nem
 akarunk SSL hitelesítést venni, akkor sajnos a böngésző ``nem
 biztonságos''-nak fogja látni az oldalunkat.
 
-\includegraphics[width=2.71890in,height=4.54020in]{Pictures/100002010000027A000003141821B461CE63CD4B.png}\includegraphics[width=3.18110in,height=4.49530in]{Pictures/1000020100000240000003656F3E774A6844520D.png}
+\includegraphics[width=2.71890in,height=4.39290in]{Pictures/100002010000027A000003141821B461CE63CD4B.png}\includegraphics[width=3.18110in,height=4.34370in]{Pictures/1000020100000240000003656F3E774A6844520D.png}
 
 \paragraph[Bejelentkezés]{\texorpdfstring{\protect\hypertarget{anchor-39}{}{}Bejelentkezés}{Bejelentkezés}}\label{bejelentkezuxe9s}
 
@@ -783,22 +783,18 @@ Hátránya, hogy mindig új kapcsolatot kell létesíteni.
 \textbf{Password:} jelszó\\
 \textbf{Login}: bejelentkezés gomb a bejelentkezéshez
 
+\paragraph{}\label{section-1}
+
 \paragraph[A főoldal
 struktúrája]{\texorpdfstring{\protect\hypertarget{anchor-40}{}{}A
 főoldal
 struktúrája}{A főoldal struktúrája}}\label{a-fux151oldal-struktuxfaruxe1ja}
 
-\begin{figure}
-\centering
-\includegraphics[width=6.69290in,height=6.74840in]{Pictures/10000201000002CE000002D4BBD02C325AD91ACD.png}
-\caption{\\
-5. ábra: A főoldal struktúrája}
-\end{figure}
+\paragraph{\texorpdfstring{\protect\includegraphics[width=3.97200in,height=3.92520in]{Pictures/10000201000002CE000002D4BBD02C325AD91ACD.png}}{ 5. ábra: A főoldal struktúrája}}\label{uxe1bra-a-fux151oldal-struktuxfaruxe1ja}
 
 \paragraph[A főoldal
-gombjai]{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=6.74840in]{Pictures/10000201000002CE000002D481DF485A34A1C615.png}\protect\hypertarget{anchor-41}{}{}A
-főoldal
-gombjai}{ 6. ábra: A főoldal gombjaiA főoldal gombjai}}\label{uxe1bra-a-fux151oldal-gombjaia-fux151oldal-gombjai}
+gombjai]{\texorpdfstring{\protect\hypertarget{anchor-41}{}{}A főoldal
+gombjai}{A főoldal gombjai}}\label{a-fux151oldal-gombjai}
 
 Felhasználó létrehozása gomb
 
@@ -810,13 +806,14 @@ A fájl neve
 Ha rákattintasz, megnyitja a fájlt.
 
 \subparagraph[Fájl létrehozása
-menü]{\texorpdfstring{\protect\includegraphics[width=2.27090in,height=1.50000in]{Pictures/10000201000000DA00000090C1CC68BAF501167F.png}\protect\hypertarget{anchor-42}{}{}Fájl
+menü]{\texorpdfstring{\protect\includegraphics[width=4.02170in,height=4.14800in]{Pictures/10000201000002CE000002D481DF485A34A1C615.png}\protect\hypertarget{anchor-42}{}{}Fájl
 létrehozása
-menü}{ 7. ábra: Új fájl gombjaiFájl létrehozása menü}}\label{uxe1bra-uxfaj-fuxe1jl-gombjaifuxe1jl-luxe9trehozuxe1sa-menuxfc}
+menü}{6. ábra: A főoldal gombjaiFájl létrehozása menü}}\label{uxe1bra-a-fux151oldal-gombjaifuxe1jl-luxe9trehozuxe1sa-menuxfc}
 
 Create txt file: Létrehoz egy txt fájlt
 
-Create phonebook file: Létrehoz egy telefonkönyv fájlt
+\includegraphics[width=2.27090in,height=1.50000in]{Pictures/10000201000000DA00000090C1CC68BAF501167F.png}Create
+phonebook file: Létrehoz egy telefonkönyv fájlt
 
 \subparagraph[Fájl
 átnevezés]{\texorpdfstring{\protect\hypertarget{anchor-43}{}{}Fájl
@@ -867,7 +864,7 @@ File name mező:A fájl neve\\
 New password mező:A fájl jelszava\\
 New password again mező:A fájl jelszava mégegyszer\\
 Create file gomb:Ez a gomb hozza létre a fájlt, meg fog jelenni egy üres
-fájl.]{\texorpdfstring{\protect\includegraphics[width=5.63540in,height=5.93740in]{Pictures/100002010000021D0000023A5198B763A9C3BDB0.png}\protect\hypertarget{anchor-47}{}{}Back
+fájl.]{\texorpdfstring{\protect\hypertarget{anchor-47}{}{}Back
 menü:Visszalép a főoldalra\\
 Logout menü:Kijelentkezés\\
 File name mező:A fájl neve\\
@@ -1053,13 +1050,6 @@ megjelenítése}{Üzenetek megjelenítése}}\label{uxfczenetek-megjelenuxedtuxe9
 21. ábra: Üzenet megjelenítése (valami sikeres volt)}
 \end{figure}
 
-\begin{figure}
-\centering
-\includegraphics[width=5.77910in,height=2.07200in]{Pictures/10000201000003F70000016C04C77D7EEB12B9FA.png}
-\caption{\\
-22. ábra: Hibaüzenet megjelenítése}
-\end{figure}
-
 Az üzenetek a menüsor alatt jelennek meg.\\
 Ha valami sikeres volt, akkor zöld hátterük lesz, ha sikertelen, akkor
 piros.\\
@@ -1067,8 +1057,9 @@ A hibaüzenetekről lásd a \textbf{Hibaüzenetek} fejezetet
 
 \paragraph[Hibaüzenetek]{\texorpdfstring{\protect\hypertarget{anchor-58}{}{}Hibaüzenetek}{Hibaüzenetek}}\label{hibauxfczenetek}
 
-Két fajta hiba lehet, lehet kliens oldali (\textbf{LOCAL}) és lehet
-szerver oldali (\textbf{REMOTE}) hiba.\\
+\includegraphics[width=5.77910in,height=2.07200in]{Pictures/10000201000003F70000016C04C77D7EEB12B9FA.png}Két
+fajta hiba lehet, lehet kliens oldali (\textbf{LOCAL}) és lehet szerver
+oldali (\textbf{REMOTE}) hiba.\\
 A kliens oldali hibák kódjai \textbf{1xx} a szerver oldaliak
 \textbf{2xx} alakúak\\
 Egy hibának van kódja, hibaüzenete, és esetleg további adata (például
@@ -1547,163 +1538,155 @@ oldal mappa és fájl struktúrájának
 
 src/web
 
-├──~\href{../../../../../../../../common/}{common} -- A gyakran használt
+├──~\href{../../../../../../common/}{common} -- A gyakran használt
 egyszerű függvények, osztályok helye\\
 │~~
-├──~\href{../../../../../../../../common/dictgenerator.py}{dictgenerator.py}
+├──~\href{../../../../../../common/dictgenerator.py}{dictgenerator.py}
 -- JSON-t generál dictionaryból\\
-│~~
-├──~\href{../../../../../../../../common/generatedby.py}{generatedby.py}
+│~~ ├──~\href{../../../../../../common/generatedby.py}{generatedby.py}
 -- HTML és JavaScript fájlokba írja bele, melyik fájl, és mikor
 generálta (még fejleszteni kell)\\
+│~~ ├──~\href{../../../../../../common/__init__.py}{\_\_init\_\_.py} --
+Csomag init fájlja\\
+│~~ ├──~\href{../../../../../../common/kill_log.py}{kill\_log.py} -- Ha
+valamiért leáll a program, loggoljuk ki\\
+│~~ ├──~\href{../../../../../../common/singleton.py}{singleton.py} --
+Singleton osztály\\
 │~~
-├──~\href{../../../../../../../../common/__init__.py}{\_\_init\_\_.py}
--- Csomag init fájlja\\
-│~~ ├──~\href{../../../../../../../../common/kill_log.py}{kill\_log.py}
--- Ha valamiért leáll a program, loggoljuk ki\\
-│~~ ├──~\href{../../../../../../../../common/singleton.py}{singleton.py}
--- Singleton osztály\\
-│~~
-└──~\href{../../../../../../../../common/the_project_paths.py}{the\_project\_paths.py}
+└──~\href{../../../../../../common/the_project_paths.py}{the\_project\_paths.py}
 -- A projekt fontosabb mappáit tartalmazza\\
-├──~\href{../../../../../../../../config/}{config} -- A projekt összes
+├──~\href{../../../../../../config/}{config} -- A projekt összes
 beállítását itt egyben kezelem\\
-│~~ ├──~\href{../../../../../../../../config/arg.py}{arg.py} -- A
-beállítások argumentum típusai\\
-│~~
-├──~\href{../../../../../../../../config/config_base.py}{config\_base.py}
+│~~ ├──~\href{../../../../../../config/arg.py}{arg.py} -- A beállítások
+argumentum típusai\\
+│~~ ├──~\href{../../../../../../config/config_base.py}{config\_base.py}
 -- A the\_config őse. Garantálja, hogy singleton legyen\\
 │~~
-├──~\href{../../../../../../../../config/config_factory.py}{config\_factory.py}
+├──~\href{../../../../../../config/config_factory.py}{config\_factory.py}
 -- A config osztály létrehozója\\
+│~~ ├──~\href{../../../../../../config/__init__.py}{\_\_init\_\_.py} --
+A csomag inicializálója\\
+│~~ ├──~\href{../../../../../../config/the_config.py}{the\_config.py} --
+A konfig opciók (ide lehet új beállításokat rakni)\\
 │~~
-├──~\href{../../../../../../../../config/__init__.py}{\_\_init\_\_.py}
--- A csomag inicializálója\\
-│~~
-├──~\href{../../../../../../../../config/the_config.py}{the\_config.py}
--- A konfig opciók (ide lehet új beállításokat rakni)\\
-│~~
-├──~\href{../../../../../../../../config/the_config_variables.py}{the\_config\_variables.py}
+├──~\href{../../../../../../config/the_config_variables.py}{the\_config\_variables.py}
 -- A konfigurációs változók, amiket aztán fel lehet használni a
 konfiguráció írásakor\\
-│~~ └──~\href{../../../../../../../../config/tools.py}{tools.py} --
-Segéd eszközök a konfighoz\\
-├──~\href{../../../../../../../../data_manager/}{data\_manager} -- A
+│~~ └──~\href{../../../../../../config/tools.py}{tools.py} -- Segéd
+eszközök a konfighoz\\
+├──~\href{../../../../../../data_manager/}{data\_manager} -- A
 felhasználói adatok kezelése\\
 │~~
-├──~\href{../../../../../../../../data_manager/file_manager.py}{file\_manager.py}
+├──~\href{../../../../../../data_manager/file_manager.py}{file\_manager.py}
 -- Fájlok (és mappák) kezelése\\
 │~~
-└──~\href{../../../../../../../../data_manager/__init__.py}{\_\_init\_\_.py}
+└──~\href{../../../../../../data_manager/__init__.py}{\_\_init\_\_.py}
 -- A csomag inicializálója\\
-├──~\href{../../../../../../../../error_object/}{error\_object} --
+├──~\href{../../../../../../error_object/}{error\_object} --
 Központosított hiba objektumok, a szerveren és a kliens oldalon is
 elérhetőek\\
-│~~ ├──~\href{../../../../../../../../error_object/enum2.py}{enum2.py}
--- Enum kibővítése\\
+│~~ ├──~\href{../../../../../../error_object/enum2.py}{enum2.py} -- Enum
+kibővítése\\
 │~~
-├──~\href{../../../../../../../../error_object/error_object.py}{error\_object.py}
+├──~\href{../../../../../../error_object/error_object.py}{error\_object.py}
 -- Egy Hiba objektum osztálya\\
 │~~
-├──~\href{../../../../../../../../error_object/error_type_enum.py}{error\_type\_enum.py}
+├──~\href{../../../../../../error_object/error_type_enum.py}{error\_type\_enum.py}
 -- A hibák típusának enum-ja\\
 │~~
-├──~\href{../../../../../../../../error_object/error_type.py}{error\_type.py}
+├──~\href{../../../../../../error_object/error_type.py}{error\_type.py}
 Egy hiba típus osztálya\\
 │~~
-├──~\href{../../../../../../../../error_object/error_types.py}{error\_types.py}
+├──~\href{../../../../../../error_object/error_types.py}{error\_types.py}
 -- Az összes fajta hiba típus (új hibatípust ide kell felvenni)\\
 │~~
-├──~\href{../../../../../../../../error_object/get_error_type_dict.py}{get\_error\_type\_dict.py}
+├──~\href{../../../../../../error_object/get_error_type_dict.py}{get\_error\_type\_dict.py}
 -- Egy json-t csinál a hibatípusokból\\
 │~~
-└──~\href{../../../../../../../../error_object/__init__.py}{\_\_init\_\_.py}
+└──~\href{../../../../../../error_object/__init__.py}{\_\_init\_\_.py}
 -- A projekt inicializálója\\
-├──~\href{../../../../../../../../js_generator/}{js\_generator} --
+├──~\href{../../../../../../js_generator/}{js\_generator} --
 JavaScript-et generál\\
 │~~
-├──~\href{../../../../../../../../js_generator/__init__.py}{\_\_init\_\_.py}
+├──~\href{../../../../../../js_generator/__init__.py}{\_\_init\_\_.py}
 -- A projekt inicializálója\\
 │~~
-└──~\href{../../../../../../../../js_generator/js_generator.py}{js\_generator.py}
+└──~\href{../../../../../../js_generator/js_generator.py}{js\_generator.py}
 -- JavaScript generátor\\
-├──~\href{../../../../../../../../log/}{log} -- Logokért felelős
-csomag\\
-│~~ ├──~\href{../../../../../../../../log/__init__.py}{\_\_init\_\_.py}
--- A csomag inicializálója\\
-│~~ └──~\href{../../../../../../../../log/log.py}{log.py} -- A python
-logging inicializálása\\
-├──~\href{../../../../../../../../rpc_wrapper/}{rpc\_wrapper} -- A
-szerver és a kliens közötti kommunikációért felelős osztály ``felső
-rétege'', a meghívható függvények gyüjteménye, és authentikálás
-biztosítása\\
+├──~\href{../../../../../../log/}{log} -- Logokért felelős csomag\\
+│~~ ├──~\href{../../../../../../log/__init__.py}{\_\_init\_\_.py} -- A
+csomag inicializálója\\
+│~~ └──~\href{../../../../../../log/log.py}{log.py} -- A python logging
+inicializálása\\
+├──~\href{../../../../../../rpc_wrapper/}{rpc\_wrapper} -- A szerver és
+a kliens közötti kommunikációért felelős osztály ``felső rétege'', a
+meghívható függvények gyüjteménye, és authentikálás biztosítása\\
 │~~
-├──~\href{../../../../../../../../rpc_wrapper/auth_wrapper.py}{auth\_wrapper.py}
+├──~\href{../../../../../../rpc_wrapper/auth_wrapper.py}{auth\_wrapper.py}
 -- A hitelesítésért felelős wrapper függvény\\
 │~~
-├──~\href{../../../../../../../../rpc_wrapper/__init__.py}{\_\_init\_\_.py}
--- A csomag inicializálása\\
+├──~\href{../../../../../../rpc_wrapper/__init__.py}{\_\_init\_\_.py} --
+A csomag inicializálása\\
 │~~
-├──~\href{../../../../../../../../rpc_wrapper/rpc_wrapper.py}{rpc\_wrapper.py}
+├──~\href{../../../../../../rpc_wrapper/rpc_wrapper.py}{rpc\_wrapper.py}
 -- A függvények, amiket a kliens is elér\\
 │~~
-└──~\href{../../../../../../../../rpc_wrapper/web_method.py}{web\_method.py}
+└──~\href{../../../../../../rpc_wrapper/web_method.py}{web\_method.py}
 -- Jelzi az prc\_wrapperben, ha egy függvény elérhető a kliens oldalon
 is\\
-├──~\href{../../../../../../../../server/}{server} -- Tornado webserver,
-mind a statikus adatok kiszolgálásáért, mind az RPC ``alsó rétegéért
+├──~\href{../../../../../../server/}{server} -- Tornado webserver, mind
+a statikus adatok kiszolgálásáért, mind az RPC ``alsó rétegéért
 felel''\\
 │~~
-├──~\href{../../../../../../../../server/data_request_handler.py}{data\_request\_handler.py}
+├──~\href{../../../../../../server/data_request_handler.py}{data\_request\_handler.py}
 -- A generált adatokért: felel
 \href{https://localhost:9443/generated/data.js}{generated/data.js}\\
+│~~ ├──~\href{../../../../../../server/__init__.py}{\_\_init\_\_.py} --
+A csomag inicializálása\\
 │~~
-├──~\href{../../../../../../../../server/__init__.py}{\_\_init\_\_.py}
--- A csomag inicializálása\\
-│~~
-├──~\href{../../../../../../../../server/redirector_request_handler_factory.py}{redirector\_request\_handler\_factory.py}
+├──~\href{../../../../../../server/redirector_request_handler_factory.py}{redirector\_request\_handler\_factory.py}
 -- HTTP szerver, ami átirányít a titkosított szerverre\\
 │~~
-├──~\href{../../../../../../../../server/rpc_request_post_handler_factory.py}{rpc\_request\_post\_handler\_factory.py}
+├──~\href{../../../../../../server/rpc_request_post_handler_factory.py}{rpc\_request\_post\_handler\_factory.py}
 -- JSON RPC hívások POST protokollon keresztül\\
 │~~
-├──~\href{../../../../../../../../server/rpc_request_ws_handler_factory.py}{rpc\_request\_ws\_handler\_factory.py}
+├──~\href{../../../../../../server/rpc_request_ws_handler_factory.py}{rpc\_request\_ws\_handler\_factory.py}
 -- JSON RPC hívások WebSocket protokollon keresztül\\
 │~~
-├──~\href{../../../../../../../../server/rpc_wrapper_factory.py}{rpc\_wrapper\_factory.py}
+├──~\href{../../../../../../server/rpc_wrapper_factory.py}{rpc\_wrapper\_factory.py}
 -- Az RPC szerver létrehozása\\
 │~~
-└──~\href{../../../../../../../../server/web_request_handler_factory.py}{web\_request\_handler\_factory.py}
+└──~\href{../../../../../../server/web_request_handler_factory.py}{web\_request\_handler\_factory.py}
 -- A statikus fájlok kiszolgálója\\
-├──~\href{../../../../../../../../sha256Salty/}{sha256Salty} -- Hashelés
+├──~\href{../../../../../../sha256Salty/}{sha256Salty} -- Hashelés
 SHA256 sózással csomagja\\
 │~~
-├──~\href{../../../../../../../../sha256Salty/__init__.py}{\_\_init\_\_.py}
--- Csomag inicializálása\\
+├──~\href{../../../../../../sha256Salty/__init__.py}{\_\_init\_\_.py} --
+Csomag inicializálása\\
 │~~
-├──~\href{../../../../../../../../sha256Salty/sha256Salty2.py}{sha256Salty2.py}
+├──~\href{../../../../../../sha256Salty/sha256Salty2.py}{sha256Salty2.py}
 -- Az egyik sózott hash algoritmus\\
 │~~
-└──~\href{../../../../../../../../sha256Salty/sha256Salty.py}{sha256Salty.py}
+└──~\href{../../../../../../sha256Salty/sha256Salty.py}{sha256Salty.py}
 -- A másik sózott hash algoritmus\\
-├──~\href{../../../../../../../../config.json}{config.json} -- Config
-fájl (nem verziókövetett)\\
-├──~\href{../../../../../../../../config.sample.json}{config.sample.json}
--- Config fájl példa verziókövetett\\
-├──~\href{../../../../../../../../config.test.json}{config.test.json} --
+├──~\href{../../../../../../config.json}{config.json} -- Config fájl
+(nem verziókövetett)\\
+├──~\href{../../../../../../config.sample.json}{config.sample.json} --
+Config fájl példa verziókövetett\\
+├──~\href{../../../../../../config.test.json}{config.test.json} --
 Config fájl, a config.*.json fájlok nem verziókövetettek kivétel a
 sample\\
-├──~\href{../../../../../../../../create_user.py}{create\_user.py} --
+├──~\href{../../../../../../create_user.py}{create\_user.py} --
 Felhasználó létrehozása\\
-├──~\href{../../../../../../../../run_server.py}{run\_server.py} --
-szerver inicializálása, és futtatása\\
-├──~\href{../../../../../../../../tools_create_config_csv.py}{tools\_create\_config\_csv.py}
+├──~\href{../../../../../../run_server.py}{run\_server.py} -- szerver
+inicializálása, és futtatása\\
+├──~\href{../../../../../../tools_create_config_csv.py}{tools\_create\_config\_csv.py}
 -- A configokból csinál csv-t\\
-├──~\href{../../../../../../../../tools_create_config_ods.py}{tools\_create\_config\_ods.py}
+├──~\href{../../../../../../tools_create_config_ods.py}{tools\_create\_config\_ods.py}
 -- A configokból csinál ods-t\\
-├──~\href{../../../../../../../../tools_create_html_file_dict.py}{tools\_create\_html\_file\_dict.py}
+├──~\href{../../../../../../tools_create_html_file_dict.py}{tools\_create\_html\_file\_dict.py}
 -- A statikus html fájlok nevéből csinál egy JSON-t\\
-└──~\href{../../../../../../../../tools_getclasses.py}{tools\_getclasses.py}
+└──~\href{../../../../../../tools_getclasses.py}{tools\_getclasses.py}
 -- Az összes html fájlból kinyeri a class mezőket\\
 
 \subsubsection[Kliens oldal mappa és fájl struktúrájának
@@ -1712,314 +1695,305 @@ oldal mappa és fájl struktúrájának
 áttekintése}{Kliens oldal mappa és fájl struktúrájának áttekintése}}\label{kliens-oldal-mappa-uxe9s-fuxe1jl-struktuxfaruxe1juxe1nak-uxe1ttekintuxe9se}
 
 src/web\\
-├──~\href{../../../../../../../../generated/}{generated} -- A generált
-fájlok mappája\\
-│~~ ├──~\href{../../../../../../../../generated/data.js}{data.js} --
-Adatok (theConfig, errorObjects,...)\\
+├──~\href{../../../../../../generated/}{generated} -- A generált fájlok
+mappája\\
+│~~ ├──~\href{../../../../../../generated/data.js}{data.js} -- Adatok
+(theConfig, errorObjects,...)\\
 │~~
-└──~\href{../../../../../../../../generated/theHtmlClasses.js}{theHtmlClasses.js}
+└──~\href{../../../../../../generated/theHtmlClasses.js}{theHtmlClasses.js}
 -- HTML Classes\\
-├──~\href{../../../../../../../../html/}{html} -- A statikus html
-fájlok\\
-│~~
-├──~\href{../../../../../../../../html/chgPassword.html}{chgPassword.html}
+├──~\href{../../../../../../html/}{html} -- A statikus html fájlok\\
+│~~ ├──~\href{../../../../../../html/chgPassword.html}{chgPassword.html}
 -- Jelszóváltoztatáshoz a html fájl\\
-│~~
-├──~\href{../../../../../../../../html/createUser.html}{createUser.html}
+│~~ ├──~\href{../../../../../../html/createUser.html}{createUser.html}
 -- Új felhasználó létrehozásához a html fájl\\
 │~~
-├──~\href{../../../../../../../../html/filePassword.html}{filePassword.html}
+├──~\href{../../../../../../html/filePassword.html}{filePassword.html}
 -- A fájl jelszavának megadásához a html fájl\\
-│~~ ├──~\href{../../../../../../../../html/login.html}{login.html} -- A
+│~~ ├──~\href{../../../../../../html/login.html}{login.html} -- A
 bejelentkezéshez szükséges HTML fájl\\
-│~~ ├──~\href{../../../../../../../../html/main.html}{main.html} -- A
-főoldal html fájlja\\
+│~~ ├──~\href{../../../../../../html/main.html}{main.html} -- A főoldal
+html fájlja\\
 │~~
-├──~\href{../../../../../../../../html/newFilePassword.html}{newFilePassword.html}
+├──~\href{../../../../../../html/newFilePassword.html}{newFilePassword.html}
 -- Az fájl jelszavának megadásához HTML fájl\\
 │~~
-├──~\href{../../../../../../../../html/phoneBookContact.html}{phoneBookContact.html}
+├──~\href{../../../../../../html/phoneBookContact.html}{phoneBookContact.html}
 - A Telefonkönyv kontaktjának HTML fájlja\\
 │~~
-├──~\href{../../../../../../../../html/phoneBookFile.html}{phoneBookFile.html}
+├──~\href{../../../../../../html/phoneBookFile.html}{phoneBookFile.html}
 -- A telefonkönyv HTML fájlja\\
 │~~
-├──~\href{../../../../../../../../html/phoneBookModifyContact.html}{phoneBookModifyContact.html}
+├──~\href{../../../../../../html/phoneBookModifyContact.html}{phoneBookModifyContact.html}
 -- A telefonkönyv kontakt módosításának HTML fájlja\\
-│~~ └──~\href{../../../../../../../../html/txtFile.html}{txtFile.html}
--- A txt fájl HTML fájlja\\
-├──~\href{../../../../../../../../js/}{js} -- Az összes JavaScript\\
-│~~ ├──~\href{../../../../../../../../js/common/}{common} -- A gyakran
+│~~ └──~\href{../../../../../../html/txtFile.html}{txtFile.html} -- A
+txt fájl HTML fájlja\\
+├──~\href{../../../../../../js/}{js} -- Az összes JavaScript\\
+│~~ ├──~\href{../../../../../../js/common/}{common} -- A gyakran
 használt JavaScript függvények, osztályok\\
-│~~ │~~ ├──~\href{../../../../../../../../js/common/js/}{js} -- Alap
+│~~ │~~ ├──~\href{../../../../../../js/common/js/}{js} -- Alap
 JavaScript függvények, osztályo\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/js/AbstractClass.js}{AbstractClass.js}
+├──~\href{../../../../../../js/common/js/AbstractClass.js}{AbstractClass.js}
 -- Absztrakt osztály hack JavaScriptben\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/js/BigInttoJSONHack.js}{BigInttoJSONHack.js}
+├──~\href{../../../../../../js/common/js/BigInttoJSONHack.js}{BigInttoJSONHack.js}
 -- Nagy számok tárolása JSON-ban, mert a JavaScript alapból nem
 támogatja\\
-│~~ │~~ │~~
-└──~\href{../../../../../../../../js/common/js/tools.js}{tools.js} --
-Pár hasznos függvény\\
-│~~ │~~
-└──~\href{../../../../../../../../js/common/thirdparty/}{thirdparty} --
-Külső könyvtárak.\\
+│~~ │~~ │~~ └──~\href{../../../../../../js/common/js/tools.js}{tools.js}
+-- Pár hasznos függvény\\
+│~~ │~~ └──~\href{../../../../../../js/common/thirdparty/}{thirdparty}
+-- Külső könyvtárak.\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/aes-js/}{aes-js}
--- AES titkosításhoz könyvtár\\
+├──~\href{../../../../../../js/common/thirdparty/aes-js/}{aes-js} -- AES
+titkosításhoz könyvtár\\
 │~~ │~~ ~~~ │~~
-└──~\href{../../../../../../../../js/common/thirdparty/aes-js/index.js}{index.js}\\
+└──~\href{../../../../../../js/common/thirdparty/aes-js/index.js}{index.js}\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/}{bootstrap-4.4.1-dist}
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/}{bootstrap-4.4.1-dist}
 -- A menühöz függvénykönyvtár\\
 │~~ │~~ ~~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/}{css}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/}{css}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.css}{bootstrap.css}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.css}{bootstrap.css}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.css.map}{bootstrap.css.map}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.css.map}{bootstrap.css.map}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.css}{bootstrap-grid.css}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.css}{bootstrap-grid.css}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.css.map}{bootstrap-grid.css.map}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.css.map}{bootstrap-grid.css.map}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.min.css}{bootstrap-grid.min.css}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.min.css}{bootstrap-grid.min.css}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.min.css.map}{bootstrap-grid.min.css.map}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-grid.min.css.map}{bootstrap-grid.min.css.map}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.min.css}{bootstrap.min.css}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.min.css}{bootstrap.min.css}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.min.css.map}{bootstrap.min.css.map}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap.min.css.map}{bootstrap.min.css.map}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.css}{bootstrap-reboot.css}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.css}{bootstrap-reboot.css}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.css.map}{bootstrap-reboot.css.map}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.css.map}{bootstrap-reboot.css.map}\\
 │~~ │~~ ~~~ │~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.min.css}{bootstrap-reboot.min.css}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.min.css}{bootstrap-reboot.min.css}\\
 │~~ │~~ ~~~ │~~ │~~
-└──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.min.css.map}{bootstrap-reboot.min.css.map}\\
+└──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/css/bootstrap-reboot.min.css.map}{bootstrap-reboot.min.css.map}\\
 │~~ │~~ ~~~ │~~
-└──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/}{js}\\
+└──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/}{js}\\
 │~~ │~~ ~~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.js}{bootstrap.bundle.js}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.js}{bootstrap.bundle.js}\\
 │~~ │~~ ~~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.js.map}{bootstrap.bundle.js.map}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.js.map}{bootstrap.bundle.js.map}\\
 │~~ │~~ ~~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js}{bootstrap.bundle.min.js}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js}{bootstrap.bundle.min.js}\\
 │~~ │~~ ~~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js.map}{bootstrap.bundle.min.js.map}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.bundle.min.js.map}{bootstrap.bundle.min.js.map}\\
 │~~ │~~ ~~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.js}{bootstrap.js}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.js}{bootstrap.js}\\
 │~~ │~~ ~~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.js.map}{bootstrap.js.map}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.js.map}{bootstrap.js.map}\\
 │~~ │~~ ~~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.min.js}{bootstrap.min.js}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.min.js}{bootstrap.min.js}\\
 │~~ │~~ ~~~ │~~ ~~~
-└──~\href{../../../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.min.js.map}{bootstrap.min.js.map}\\
+└──~\href{../../../../../../js/common/thirdparty/bootstrap-4.4.1-dist/js/bootstrap.min.js.map}{bootstrap.min.js.map}\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/js-sha256/}{js-sha256}
+├──~\href{../../../../../../js/common/thirdparty/js-sha256/}{js-sha256}
 -- A sha256-hoz függvénykönyvtár\\
 │~~ │~~ ~~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/js-sha256/sha256.js}{sha256.js}\\
+├──~\href{../../../../../../js/common/thirdparty/js-sha256/sha256.js}{sha256.js}\\
 │~~ │~~ ~~~ │~~
-└──~\href{../../../../../../../../js/common/thirdparty/js-sha256/sha256.min.js}{sha256.min.js}\\
+└──~\href{../../../../../../js/common/thirdparty/js-sha256/sha256.min.js}{sha256.min.js}\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/simple-jsonrpc-js/}{simple-jsonrpc-js}
+├──~\href{../../../../../../js/common/thirdparty/simple-jsonrpc-js/}{simple-jsonrpc-js}
 -- Az RPC-hez függvénykönyvtár\\
 │~~ │~~ ~~~ │~~
-├──~\href{../../../../../../../../js/common/thirdparty/simple-jsonrpc-js/simple-jsonrpc-js.js}{simple-jsonrpc-js.js}\\
+├──~\href{../../../../../../js/common/thirdparty/simple-jsonrpc-js/simple-jsonrpc-js.js}{simple-jsonrpc-js.js}\\
 │~~ │~~ ~~~ │~~
-└──~\href{../../../../../../../../js/common/thirdparty/simple-jsonrpc-js/simple-jsonrpc-js.min.js}{simple-jsonrpc-js.min.js}\\
+└──~\href{../../../../../../js/common/thirdparty/simple-jsonrpc-js/simple-jsonrpc-js.min.js}{simple-jsonrpc-js.min.js}\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap.min.js}{bootstrap.min.js}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap.min.js}{bootstrap.min.js}\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/bootstrap.min.js.map}{bootstrap.min.js.map}\\
+├──~\href{../../../../../../js/common/thirdparty/bootstrap.min.js.map}{bootstrap.min.js.map}\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/jquery-3.4.1.slim.min.js}{jquery-3.4.1.slim.min.js}
+├──~\href{../../../../../../js/common/thirdparty/jquery-3.4.1.slim.min.js}{jquery-3.4.1.slim.min.js}
 -- Jquery a bootstrap-hoz\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/common/thirdparty/popper.min.js}{popper.min.js}
+├──~\href{../../../../../../js/common/thirdparty/popper.min.js}{popper.min.js}
 -- Popper a bootstrap-hoz\\
 │~~ │~~ ~~~
-└──~\href{../../../../../../../../js/common/thirdparty/popper.min.js.map}{popper.min.js.map}
+└──~\href{../../../../../../js/common/thirdparty/popper.min.js.map}{popper.min.js.map}
 -- Popper a bootstrap-hoz\\
-│~~ ├──~\href{../../../../../../../../js/components/}{components} -- A
-kliens komponensei\\
+│~~ ├──~\href{../../../../../../js/components/}{components} -- A kliens
+komponensei\\
 │~~ │~~
-├──~\href{../../../../../../../../js/components/controller/}{controller}
--- Az oldalak kontrollerjei\\
+├──~\href{../../../../../../js/components/controller/}{controller} -- Az
+oldalak kontrollerjei\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/controller/ChgPasswordControllerService.js}{ChgPasswordControllerService.js}
+├──~\href{../../../../../../js/components/controller/ChgPasswordControllerService.js}{ChgPasswordControllerService.js}
 -- Jelszó módosítás kontrollere\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/controller/ControllerServiceBase.js}{ControllerServiceBase.js}
+├──~\href{../../../../../../js/components/controller/ControllerServiceBase.js}{ControllerServiceBase.js}
 -- A kontrollerek őse, pár alap szolgáltatás van benne\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/controller/CreateUserControllerService.js}{CreateUserControllerService.js}
+├──~\href{../../../../../../js/components/controller/CreateUserControllerService.js}{CreateUserControllerService.js}
 -- Új felhasználó létrehozásának a kontrollerje\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/controller/LoginControllerService.js}{LoginControllerService.js}
+├──~\href{../../../../../../js/components/controller/LoginControllerService.js}{LoginControllerService.js}
 -- A bejelentkezés kontrollere\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/controller/MainControllerService.js}{MainControllerService.js}
+├──~\href{../../../../../../js/components/controller/MainControllerService.js}{MainControllerService.js}
 -- A főoldal kontrollere\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/controller/PhoneBookFileControllerService.js}{PhoneBookFileControllerService.js}
+├──~\href{../../../../../../js/components/controller/PhoneBookFileControllerService.js}{PhoneBookFileControllerService.js}
 -- A telefonkönyvfájl kontrollere (a SecretFileController-ből
 származik\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/controller/SampleControllerService.js}{SampleControllerService.js}
+├──~\href{../../../../../../js/components/controller/SampleControllerService.js}{SampleControllerService.js}
 -- Egy példa kontroller\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/controller/SecretFileControllerService.js}{SecretFileControllerService.js}
+├──~\href{../../../../../../js/components/controller/SecretFileControllerService.js}{SecretFileControllerService.js}
 -- A titkos fájlok kontrollere\\
 │~~ │~~ │~~
-└──~\href{../../../../../../../../js/components/controller/TxtFileControllerService.js}{TxtFileControllerService.js}
+└──~\href{../../../../../../js/components/controller/TxtFileControllerService.js}{TxtFileControllerService.js}
 -- A txt fájlok kontrollere (a SecretFileController-ből származik)\\
-│~~ │~~ ├──~\href{../../../../../../../../js/components/file/}{file} --
-A fájlkezeléssel foglalkozó osztályok mappája\\
+│~~ │~~ ├──~\href{../../../../../../js/components/file/}{file} -- A
+fájlkezeléssel foglalkozó osztályok mappája\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/file/DirManagerService.js}{DirManagerService.js}
+├──~\href{../../../../../../js/components/file/DirManagerService.js}{DirManagerService.js}
 -- A mappakezeléssel foglalkozik\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/file/FileFactory.js}{FileFactory.js}
+├──~\href{../../../../../../js/components/file/FileFactory.js}{FileFactory.js}
 -- Fájl osztály létrehozása (.phb és .txt-is)\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/file/PhoneBookFile.js}{PhoneBookFile.js}
+├──~\href{../../../../../../js/components/file/PhoneBookFile.js}{PhoneBookFile.js}
 -- Telefonkönyv fájl osztály (ami SecretFile)\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/file/SecretFile.js}{SecretFile.js}
+├──~\href{../../../../../../js/components/file/SecretFile.js}{SecretFile.js}
 -- Titkos fájl osztály\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/file/SecretJson.js}{SecretJson.js}
+├──~\href{../../../../../../js/components/file/SecretJson.js}{SecretJson.js}
 -- Titkos Json osztály\\
 │~~ │~~ │~~
-└──~\href{../../../../../../../../js/components/file/TxtFile.js}{TxtFile.js}
+└──~\href{../../../../../../js/components/file/TxtFile.js}{TxtFile.js}
 -- Txt fájl osztály, ami SectretFile\\
 │~~ │~~
-├──~\href{../../../../../../../../js/components/pageloader/}{pageloader}
--- Az oldalak letöltésével, és betöltésével foglalkozik\\
+├──~\href{../../../../../../js/components/pageloader/}{pageloader} -- Az
+oldalak letöltésével, és betöltésével foglalkozik\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/components/pageloader/HtmlDownloader.js}{HtmlDownloader.js}
+├──~\href{../../../../../../js/components/pageloader/HtmlDownloader.js}{HtmlDownloader.js}
 -- A html oldalak letöltése\\
 │~~ │~~ │~~
-└──~\href{../../../../../../../../js/components/pageloader/PageLoaderService.js}{PageLoaderService.js}
+└──~\href{../../../../../../js/components/pageloader/PageLoaderService.js}{PageLoaderService.js}
 -- Az oldalak betöltése\\
 │~~ │~~
-└──~\href{../../../../../../../../js/components/UserManager/}{UserManager}
--- A felhasználókkal foglalkozik\\
+└──~\href{../../../../../../js/components/UserManager/}{UserManager} --
+A felhasználókkal foglalkozik\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/components/UserManager/UserManagerService.js}{UserManagerService.js}
+├──~\href{../../../../../../js/components/UserManager/UserManagerService.js}{UserManagerService.js}
 -- A felhasználók osztálya\\
 │~~ │~~ ~~~
-└──~\href{../../../../../../../../js/components/UserManager/UserManagerServiceMock.js}{UserManagerServiceMock.js}
+└──~\href{../../../../../../js/components/UserManager/UserManagerServiceMock.js}{UserManagerServiceMock.js}
 -- A felhasználók osztályának kimockolt verziója\\
-│~~ ├──~\href{../../../../../../../../js/interfaces/}{interfaces} --
+│~~ ├──~\href{../../../../../../js/interfaces/}{interfaces} --
 Interfészek\\
-│~~ │~~
-├──~\href{../../../../../../../../js/interfaces/encrypt/}{encrypt} -
+│~~ │~~ ├──~\href{../../../../../../js/interfaces/encrypt/}{encrypt} -
 Titkosítók\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/interfaces/encrypt/IEncryptor.js}{Iencryptor.js}
+├──~\href{../../../../../../js/interfaces/encrypt/IEncryptor.js}{Iencryptor.js}
 -- Kétirányú titkosító interface\\
 │~~ │~~ │~~
-└──~\href{../../../../../../../../js/interfaces/encrypt/IHash.js}{Ihash.js}
--- Egy irányú titkosító interface\\
-│~~ │~~ ├──~\href{../../../../../../../../js/interfaces/file/}{file} --
-Fájl interfészek\\
+└──~\href{../../../../../../js/interfaces/encrypt/IHash.js}{Ihash.js} --
+Egy irányú titkosító interface\\
+│~~ │~~ ├──~\href{../../../../../../js/interfaces/file/}{file} -- Fájl
+interfészek\\
 │~~ │~~ │~~
-└──~\href{../../../../../../../../js/interfaces/file/ISecretFile.js}{IsecretFile.js}
+└──~\href{../../../../../../js/interfaces/file/ISecretFile.js}{IsecretFile.js}
 -- Titkos fájl interfész\\
-│~~ │~~ ├──~\href{../../../../../../../../js/interfaces/RPC/}{RPC} --
-RPC interfészek\\
+│~~ │~~ ├──~\href{../../../../../../js/interfaces/RPC/}{RPC} -- RPC
+interfészek\\
 │~~ │~~ │~~
-└──~\href{../../../../../../../../js/interfaces/RPC/IRPCClient.js}{IRPCClient.js}
+└──~\href{../../../../../../js/interfaces/RPC/IRPCClient.js}{IRPCClient.js}
 - RPC kliens interfész\\
 │~~ │~~
-└──~\href{../../../../../../../../js/interfaces/UserManager/}{UserManager}
--- User manager interfészek\\
+└──~\href{../../../../../../js/interfaces/UserManager/}{UserManager} --
+User manager interfészek\\
 │~~ │~~ ~~~
-└──~\href{../../../../../../../../js/interfaces/UserManager/IUserManagerService.js}{IuserManagerService.js}
+└──~\href{../../../../../../js/interfaces/UserManager/IUserManagerService.js}{IuserManagerService.js}
 -- User manager interfész\\
-│~~ ├──~\href{../../../../../../../../js/lib/}{lib} - Könyvtárak\\
-│~~ │~~ ├──~\href{../../../../../../../../js/lib/encrypt/}{encrypt} --
+│~~ ├──~\href{../../../../../../js/lib/}{lib} - Könyvtárak\\
+│~~ │~~ ├──~\href{../../../../../../js/lib/encrypt/}{encrypt} --
 Titkosító könyvtárak\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/lib/encrypt/AESEncryptor.js}{AESEncryptor.js}
+├──~\href{../../../../../../js/lib/encrypt/AESEncryptor.js}{AESEncryptor.js}
 -- Kétirányú titkosító könyvtár AES-t használva\\
 │~~ │~~ │~~
-└──~\href{../../../../../../../../js/lib/encrypt/SHA256Salty.js}{SHA256Salty.js}
+└──~\href{../../../../../../js/lib/encrypt/SHA256Salty.js}{SHA256Salty.js}
 -- Egyirányú titkosító könyvtár SHA256-ot használva sózva\\
-│~~ │~~
-├──~\href{../../../../../../../../js/lib/ErrorObject/}{ErrorObject} --
+│~~ │~~ ├──~\href{../../../../../../js/lib/ErrorObject/}{ErrorObject} --
 Hiba objektum könyvtár\\
 │~~ │~~ │~~
-└──~\href{../../../../../../../../js/lib/ErrorObject/ErrorObject.js}{ErrorObject.js}
+└──~\href{../../../../../../js/lib/ErrorObject/ErrorObject.js}{ErrorObject.js}
 - Hiba objektum könyvtár\\
-│~~ │~~
-├──~\href{../../../../../../../../js/lib/RPCWrapper/}{RPCWrapper} -- RPC
-wrapper könyvtár\\
+│~~ │~~ ├──~\href{../../../../../../js/lib/RPCWrapper/}{RPCWrapper} --
+RPC wrapper könyvtár\\
 │~~ │~~ │~~
-├──~\href{../../../../../../../../js/lib/RPCWrapper/RpcClients.js}{RpcClients.js}
+├──~\href{../../../../../../js/lib/RPCWrapper/RpcClients.js}{RpcClients.js}
 -- Az elérhető RPC kliensek tárolója (window.theRpcClients)\\
 │~~ │~~ │~~
-└──~\href{../../../../../../../../js/lib/RPCWrapper/RPCWrapperService.js}{RPCWrapperService.js}
+└──~\href{../../../../../../js/lib/RPCWrapper/RPCWrapperService.js}{RPCWrapperService.js}
 -- Az összes elérhető RPC függvény\\
 │~~ │~~
-└──~\href{../../../../../../../../js/lib/SimpleJsonRpc/}{SimpleJsonRpc}
--- A SimpleJsonRpc osztályok az adatátvitelhez\\
+└──~\href{../../../../../../js/lib/SimpleJsonRpc/}{SimpleJsonRpc} -- A
+SimpleJsonRpc osztályok az adatátvitelhez\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/lib/SimpleJsonRpc/SimpleJsonRpcPOSTClientService.js}{SimpleJsonRpcPOSTClientService.js}
+├──~\href{../../../../../../js/lib/SimpleJsonRpc/SimpleJsonRpcPOSTClientService.js}{SimpleJsonRpcPOSTClientService.js}
 -- RPC adatátvitel HTTP POST protokollal\\
 │~~ │~~ ~~~
-└──~\href{../../../../../../../../js/lib/SimpleJsonRpc/SimpleJsonRpcWebSocketClientService.js}{SimpleJsonRpcWebSocketClientService.js}
+└──~\href{../../../../../../js/lib/SimpleJsonRpc/SimpleJsonRpcWebSocketClientService.js}{SimpleJsonRpcWebSocketClientService.js}
 -- RPC adatátvitel WS protokollal\\
-│~~ ├──~\href{../../../../../../../../js/test/}{test} - tesztek\\
-│~~ │~~ └──~\href{../../../../../../../../js/test/webtest/}{webtest} -
+│~~ ├──~\href{../../../../../../js/test/}{test} - tesztek\\
+│~~ │~~ └──~\href{../../../../../../js/test/webtest/}{webtest} -
 webtesztek\\
-│~~ │~~ ~~~ ├──~\href{../../../../../../../../js/test/webtest/lib/}{lib}
--- könyvtárak a webteszthez\\
+│~~ │~~ ~~~ ├──~\href{../../../../../../js/test/webtest/lib/}{lib} --
+könyvtárak a webteszthez\\
 │~~ │~~ ~~~ │~~
-├──~\href{../../../../../../../../js/test/webtest/lib/createFile.js}{createFile.js}
+├──~\href{../../../../../../js/test/webtest/lib/createFile.js}{createFile.js}
 -- robotkattintgatással fájl létrehozása\\
 │~~ │~~ ~~~ │~~
-├──~\href{../../../../../../../../js/test/webtest/lib/login.js}{login.js}
--- robotkattintgatással bejelentkezés\\
+├──~\href{../../../../../../js/test/webtest/lib/login.js}{login.js} --
+robotkattintgatással bejelentkezés\\
 │~~ │~~ ~~~ │~~
-├──~\href{../../../../../../../../js/test/webtest/lib/phonebook.js}{phonebook.js}
+├──~\href{../../../../../../js/test/webtest/lib/phonebook.js}{phonebook.js}
 -- robotkattintgatással telefonkönyv manipulációk\\
 │~~ │~~ ~~~ │~~
-└──~\href{../../../../../../../../js/test/webtest/lib/tools.js}{tools.js}
--- eszközök a web-teszthez\\
+└──~\href{../../../../../../js/test/webtest/lib/tools.js}{tools.js} --
+eszközök a web-teszthez\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/test/webtest/dataMedia.js}{dataMedia.js}
+├──~\href{../../../../../../js/test/webtest/dataMedia.js}{dataMedia.js}
 -- Telefonkönyv adatok az ELTE oldaláról\\
 │~~ │~~ ~~~
-├──~\href{../../../../../../../../js/test/webtest/getDataFromMedia.js}{getDataFromMedia.js}
+├──~\href{../../../../../../js/test/webtest/getDataFromMedia.js}{getDataFromMedia.js}
 -- adatok letöltéséhez segéd szkript az ELET oldaláról\\
 │~~ │~~ ~~~
-└──~\href{../../../../../../../../js/test/webtest/testPhoneBookAddContacts.js}{testPhoneBookAddContacts.js}
+└──~\href{../../../../../../js/test/webtest/testPhoneBookAddContacts.js}{testPhoneBookAddContacts.js}
 -- Egy teszt, ami létrehoz egy telefonkönyvet, és feltölti adatokkal\\
-│~~
-├──~\href{../../../../../../../../js/htmlFileDict.js}{htmlFileDict.js}
--- A htmlFájlok JSON-ja\\
-│~~ ├──~\href{../../../../../../../../js/main.js}{main.js} -- A main
+│~~ ├──~\href{../../../../../../js/htmlFileDict.js}{htmlFileDict.js} --
+A htmlFájlok JSON-ja\\
+│~~ ├──~\href{../../../../../../js/main.js}{main.js} -- A main
 JavaScript fájl\\
-├──~\href{../../../../../../../../style/}{style} -- Az oldal stílusa\\
+├──~\href{../../../../../../style/}{style} -- Az oldal stílusa\\
 │~~
-├──~\href{../../../../../../../../style/bootstrap.min.css}{bootstrap.min.css}
+├──~\href{../../../../../../style/bootstrap.min.css}{bootstrap.min.css}
 -- Bootstraphoz stílus lap\\
 │~~
-├──~\href{../../../../../../../../style/bootstrap.min.css.map}{bootstrap.min.css.map}
+├──~\href{../../../../../../style/bootstrap.min.css.map}{bootstrap.min.css.map}
 -- Bootstraphoz stílus lap\\
-│~~ └──~\href{../../../../../../../../style/style.css}{style.css} --
-saját stílus lap\\
-├──~\href{../../../../../../../../favicon.ico}{favicon.ico} - ikon\\
-├──~\href{../../../../../../../../index.html}{index.html} - főoldal\\
-└──~\href{../../../../../../../../testPhoneBook.html}{testPhoneBook.html}
--- A telefonkönyv teszt indítása
+│~~ └──~\href{../../../../../../style/style.css}{style.css} -- saját
+stílus lap\\
+├──~\href{../../../../../../favicon.ico}{favicon.ico} - ikon\\
+├──~\href{../../../../../../index.html}{index.html} - főoldal\\
+└──~\href{../../../../../../testPhoneBook.html}{testPhoneBook.html} -- A
+telefonkönyv teszt indítása
 
 \subsubsection[Fejlesztési
 lehetőségek]{\texorpdfstring{\protect\hypertarget{anchor-80}{}{}Fejlesztési
@@ -2209,8 +2183,7 @@ box)}{2. eset: Felhasználók létrehozása konzolból (black box)}}\label{eset-
 
 2 felhasználót fogok létrehozni
 
-\includegraphics[width=6.69290in,height=2.03190in]{Pictures/100002010000031D000000F2976BA035B3996C7B.png}\textbf{Felhasználónév}:
-test\_user1 \textbf{password:} password1\\
+\textbf{Felhasználónév}: test\_user1 \textbf{password:} password1\\
 \textbf{Felhasználónév}: test\_user2 \textbf{password: }password2
 
 \begin{figure}
@@ -2242,13 +2215,13 @@ Vagy a felhasználónevet, vagy a jelszó mezőt, vagy mindkettőt hagyjuk
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-88}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-2}
 
-\includegraphics[width=6.49800in,height=2.55980in]{Pictures/100002010000031D0000013A193006CF92705A40.png}\textbf{Username
-and/or password is empty} üzenet, a data dir változatlan hagyása
+\textbf{Username and/or password is empty} üzenet, a data dir
+változatlan hagyása
 
 \subsubsection[4. eset: jelszó és jelszó mégegyszer nem egyezik
-(CLI)]{\texorpdfstring{\protect\hypertarget{anchor-89}{}{}4. eset:
-jelszó és jelszó mégegyszer nem egyezik
-(CLI)}{4. eset: jelszó és jelszó mégegyszer nem egyezik (CLI)}}\label{eset-jelszuxf3-uxe9s-jelszuxf3-muxe9gegyszer-nem-egyezik-cli}
+(CLI)]{\texorpdfstring{\protect\includegraphics[width=6.49800in,height=2.55980in]{Pictures/100002010000031D0000013A193006CF92705A40.png}\protect\hypertarget{anchor-89}{}{}4.
+eset: jelszó és jelszó mégegyszer nem egyezik
+(CLI)}{ 28. ábra: Hibás felhasználó létrehozás (üres felhasználónév vagy jelszó, vagy jelszó mégegyszer mező)4. eset: jelszó és jelszó mégegyszer nem egyezik (CLI)}}\label{uxe1bra-hibuxe1s-felhasznuxe1luxf3-luxe9trehozuxe1s-uxfcres-felhasznuxe1luxf3nuxe9v-vagy-jelszuxf3-vagy-jelszuxf3-muxe9gegyszer-mezux1514.-eset-jelszuxf3-uxe9s-jelszuxf3-muxe9gegyszer-nem-egyezik-cli}
 
 \subsubsection{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D00000086F18BAFFF29656A89.png}}{ 29. ábra: A jelszó és a jelszó mégegyszer mező nem egyezik}}\label{uxe1bra-a-jelszuxf3-uxe9s-a-jelszuxf3-muxe9gegyszer-mezux151-nem-egyezik}
 
@@ -2331,7 +2304,7 @@ test\_user2 & dinnye\tabularnewline
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-96}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-5}
 
-\includegraphics[width=5.29170in,height=3.96890in]{Pictures/10000201000001FC0000017DFCC82713BC118645.png}Hibaüzenet
+Hibaüzenet
 
 \subsubsection[8. eset: Bejelentkezés valós felhasználókkal
 (GUI)]{\texorpdfstring{\protect\hypertarget{anchor-97}{}{}8. eset:
@@ -2350,6 +2323,8 @@ test\_user1 & password2\tabularnewline
 test\_user2 & password2\tabularnewline
 \bottomrule
 \end{longtable}
+
+\includegraphics[width=3.99800in,height=2.73820in]{Pictures/10000201000001FC0000017DFCC82713BC118645.png}
 
 \paragraph[Elvárt
 eredmény]{\texorpdfstring{\protect\hypertarget{anchor-98}{}{}Elvárt
@@ -2482,7 +2457,7 @@ Tanszék.phb & Media\tabularnewline
 \bottomrule
 \end{longtable}
 
-\section{}\label{section-1}
+\section{}\label{section-2}
 
 \section[Forrásjegyzet]{\texorpdfstring{\protect\hypertarget{anchor-109}{}{}Forrásjegyzet}{Forrásjegyzet}}\label{forruxe1sjegyzet}
 
