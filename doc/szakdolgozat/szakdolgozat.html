@@ -16,7 +16,7 @@
 <p></p>
 <p></p>
 <p>Kliens oldalon maximálisan titkosított adatbázis</p>
-<p>verzió 0.16</p>
+<p>verzió 0.17</p>
 <p></p>
 <p></p>
 <p></p>
@@ -985,7 +985,21 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 <p>textBytes = utf8ToBytes(data)</p>
 <p>encryptedBytes = AESencrypt(textBytes)</p>
 <p>return encryptedBytes</p>
-<h3 id="szerver-oldal-mappa-és-fájl-struktúrájának-áttekintése"><span id="anchor-74"></span>Szerver oldal mappa és fájl struktúrájának áttekintése</h3>
+<h3 id="döntések-a-fejlesztés-során"><span id="anchor-74"></span>Döntések a fejlesztés során</h3>
+<p>A szerver oldal programozási nyelveként négy jelöltem volt <strong>NodeJS</strong>, <strong>PHP</strong>, <strong>Python </strong>és<strong> </strong> <strong>Java</strong>.</p>
+<p>A <strong>Java</strong> mellett az szólt, hogy az egyetemen azt tanultam, nagy tudású, gyors, de azért nem döntöttem mellette, mert most egy prototípust csinálok, ahol jó, ha menet közben tudok könnyen változtatni, a Java nem egy szcript nyelv, mindig le kell fordítani, ez a fejlesztés közben idő, és ráadásul memória igényes is.</p>
+<p>A <strong>NodeJS</strong>, és a <strong>PHP</strong> mellett az szólt, hogy mindkettő elég elterjedt, szkript nyelv back end terén, és ezek is elég nagy tudásuak. Ellenük szólt, hogy egyikben sincs nagy tapasztalatom.</p>
+<p>Így maradt végül a <strong>Python</strong>, amit a MorganStanleynél sokat kellett használnom.</p>
+<p>Három esélyes könyvtáram volt a szerver megvalósígására: a <strong>tornado</strong>, a <strong>Django</strong> és a <strong>Flask</strong>, ezeket ajánlották ismerőseim, kinek melyik tetszett, de mivel a MorganStanleynél két évig kellett foglalkoznom a <strong>tornado</strong>val és nagyon meg voltam vele elégedve, ezért választottam. Ami még fontos volt a <strong>tornado</strong> mellett, hogy natívan támogatja a WebSocket protokollt és a HTTPS-t, ellentétben a másik kettővel, amikhez külön WebSocket kiegészítőket kell lilleszteni.</p>
+<p>Az RPC kommunikációra azért választottam a <strong>Simple JSON-RPC</strong>-t mert elterjedt és egyszerű, itt gondolkodtam még, hogy a <strong>Google Protobuf</strong>-ját használom, de végül két okból nem azt választottam.<br />
+Egyrészt bonyolultabb, megpróbáltam összekötni a tornadoval, és nem triviális, másfelől a debuggolás is nehezebb, mert binárisan küldi az adatokat, így nehéz látni menet közben, hogy épp titkos-e az adat, vagy nem.</p>
+<p>A <strong>Simple JSON-RPC</strong>nél ez sokkal egyszerűbb, mert JSON-okat küld, így nem kell bináris adatokat visszafejteni, de a <strong>protobuf</strong>-nak az az előnye, hogy sokkal kisebb forgalmat generál, így lehet, hogy hosszútávon ki lesz cserélve.</p>
+<p>Igyekeztem a szervert és a klienst minél inkább modulárisan megírni, hogy minden részét könnyen ki lehessen cserélni, továbbá egy RPC interface-t csinálni, hogy akár magát a szerver és a kliens nyelvét is ki lehessen cserélni. Erre azért is gondoltam, mert majd szeretnék csinálni egy klienst mobiltelefonokra is.</p>
+<p>A kliens oldalt először WEBre akartam megírni, hogy minél több eszközön lehessen futtatni. Itt három nyelv jött szóba: <strong>TypeScript</strong>, <strong>JavaScript</strong>, <strong>WebAssembly</strong>.</p>
+<p>TypeScripttel próbálkoztam, de a debuggolás még nehézkesebb, mint JavaScriptben, meg ott is kell fordítani, amivel kevésbé rugalmas, mint a JavaScript.</p>
+<p>A WebAssembly-nek két előnye van a másik kettőhöz képest. Egyfelől sokkal gyorsabb kódokat lehet vele generálni, másrészről a memória kezelése sokkal tisztább, abban a nyelvben nincs garbage collector, így biztos lehetek benne, hogy a felszabadított memória tényleg felszabadul, amivel jobban tudom garantálni a biztonságot.</p>
+<p>Végül azért maradtam a JavaScript mellett, mert ez egyszerű, jól debuggolható, és minden gyorsan tesztelhető vele. Kíváló nyelv prototípus készítésére.</p>
+<h3 id="szerver-oldal-mappa-és-fájl-struktúrájának-áttekintése"><span id="anchor-75"></span>Szerver oldal mappa és fájl struktúrájának áttekintése</h3>
 <p>src/web</p>
 <p>├── <a href="../../../../../../common/">common</a> – A gyakran használt egyszerű függvények, osztályok helye<br />
 │   ├── <a href="../../../../../../common/dictgenerator.py">dictgenerator.py</a> – JSON-t generál dictionaryból<br />
@@ -1046,7 +1060,7 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 ├── <a href="../../../../../../tools_create_html_file_dict.py">tools_create_html_file_dict.py</a> – A statikus html fájlok nevéből csinál egy JSON-t<br />
 └── <a href="../../../../../../tools_getclasses.py">tools_getclasses.py</a> – Az összes html fájlból kinyeri a class mezőket<br />
 </p>
-<h3 id="kliens-oldal-mappa-és-fájl-struktúrájának-áttekintése"><span id="anchor-75"></span>Kliens oldal mappa és fájl struktúrájának áttekintése</h3>
+<h3 id="kliens-oldal-mappa-és-fájl-struktúrájának-áttekintése"><span id="anchor-76"></span>Kliens oldal mappa és fájl struktúrájának áttekintése</h3>
 <p>src/web<br />
 ├── <a href="../../../../../../generated/">generated</a> – A generált fájlok mappája<br />
 │   ├── <a href="../../../../../../generated/data.js">data.js</a> – Adatok (theConfig, errorObjects,...)<br />
@@ -1170,7 +1184,7 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 ├── <a href="../../../../../../favicon.ico">favicon.ico</a> - ikon<br />
 ├── <a href="../../../../../../index.html">index.html</a> - főoldal<br />
 └── <a href="../../../../../../testPhoneBook.html">testPhoneBook.html</a> – A telefonkönyv teszt indítása</p>
-<h3 id="fejlesztési-lehetőségek"><span id="anchor-76"></span>Fejlesztési lehetőségek</h3>
+<h3 id="fejlesztési-lehetőségek"><span id="anchor-77"></span>Fejlesztési lehetőségek</h3>
 <p>A projekt még nagyon a kezdeti időszakában van, így rengeteg fejlesztési lehetőség van.</p>
 <ol style="list-style-type: decimal">
 <li>A kliens oldalt megvalósítani Android és PC alkalmazásként is.</li>
@@ -1185,7 +1199,7 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 <li>SSL helyett quantum safe kommunikáció</li>
 <li>Szerver windows support.</li>
 </ol>
-<h2 id="tesztelési-terv"><span id="anchor-77"></span>Tesztelési terv</h2>
+<h2 id="tesztelési-terv"><span id="anchor-78"></span>Tesztelési terv</h2>
 <p>A txt fájlok teszteléséhez Arany János összes költeményeit használom:</p>
 <p><a href="https://mek.oszk.hu/00500/00597/html/index.htm" class="uri">https://mek.oszk.hu/00500/00597/html/index.htm</a></p>
 <p>A telefonkönyvek teszteléséhez az ELTE honlapján elérhető telefonszámokat használom:</p>
@@ -1193,7 +1207,7 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 <li>ELTE IK Média- és Oktatásinformatikai Tanszék &gt; A Tanszékről &gt; Oktatók és munkatársak<br />
 <a href="https://mot.inf.elte.hu/munkatarsak" class="uri">https://mot.inf.elte.hu/munkatarsak</a></li>
 </ol>
-<h3 id="előkészületek-1"><span id="anchor-78"></span>Előkészületek</h3>
+<h3 id="előkészületek-1"><span id="anchor-79"></span>Előkészületek</h3>
 <p>Létrehozok egy üres adatbázist a projekt mellé, és megcsinálom a szükséges config fájlt:</p>
 <p>{</p>
 <p>&quot;host&quot;:&quot;localhost&quot;,</p>
@@ -1208,9 +1222,9 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 <p>&quot;web_root&quot;: &quot;[[dir_project]]/src/web&quot;,</p>
 <p>&quot;data_dir&quot;: &quot;[[dir_project]]/../test_data&quot;</p>
 <p>}</p>
-<h3 id="eset-1-a-szerver-elindítása-black-box"><span id="anchor-79"></span>Eset 1: A szerver elindítása (black box)</h3>
+<h3 id="eset-1-a-szerver-elindítása-black-box"><span id="anchor-80"></span>Eset 1: A szerver elindítása (black box)</h3>
 <p>./run_server --configFile config.test.json</p>
-<h4 id="elvárt-eredmény"><span id="anchor-80"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény"><span id="anchor-81"></span>Elvárt eredmény</h4>
 <p>1. <strong>Loggolja a konfigurált beállításokat:</strong></p>
 <p>[2020-04-08 12:25:01,276][INFO] Loglevel: INFO</p>
 <p>[2020-04-08 12:25:01,440][INFO] Runner command: ./run_server.py --configFile config.test.json</p>
@@ -1247,33 +1261,33 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 <p class="caption"><br />
 27. ábra: Bejelentkező oldal</p>
 </div>
-<h3 id="eset-2-felhasználók-létrehozása-konzolból-black-box"><span id="anchor-81"></span>Eset 2: Felhasználók létrehozása konzolból (black box)</h3>
+<h3 id="eset-2-felhasználók-létrehozása-konzolból-black-box"><span id="anchor-82"></span>Eset 2: Felhasználók létrehozása konzolból (black box)</h3>
 <p>2 felhasználót fogok létrehozni</p>
 <p><strong>Felhasználónév</strong>: test_user1 <strong>password:</strong> password1<br />
 <strong>Felhasználónév</strong>: test_user2 <strong>password: </strong>password2</p>
-<h4 id="ábra-felhasználó-létrehozása-cli-bőlelvárt-eredmény"><img src="Pictures/100002010000031D000000F2BF9FBD70D7DA8EBB.png" title="fig:" alt=" 28. ábra: Felhasználó létrehozása CLI-ből" width="642" height="195" /><span id="anchor-82"></span>Elvárt eredmény</h4>
+<h4 id="ábra-felhasználó-létrehozása-cli-bőlelvárt-eredmény"><img src="Pictures/100002010000031D000000F2BF9FBD70D7DA8EBB.png" title="fig:" alt=" 28. ábra: Felhasználó létrehozása CLI-ből" width="642" height="195" /><span id="anchor-83"></span>Elvárt eredmény</h4>
 <p>1. Hozzon létre két felhasználói mappát:</p>
 <p><img src="Pictures/100002010000024E00000062C41ABA5B68AD8CDB.png" title="fig:" alt=" 29. ábra: Titkos felhasználói mappák" width="589" height="98" />2. Be tudjak lépni a felhasználókkal, ezt lásd lejjebb a bejelentkezés tesztelésénél.</p>
 <h3 id="section-4"></h3>
-<h3 id="eset-3-üresen-hagyott-mezők-felhasználó-létrehozása-közben"><span id="anchor-83"></span><strong>Eset 3</strong>: Üresen hagyott mezők felhasználó létrehozása közben</h3>
+<h3 id="eset-3-üresen-hagyott-mezők-felhasználó-létrehozása-közben"><span id="anchor-84"></span><strong>Eset 3</strong>: Üresen hagyott mezők felhasználó létrehozása közben</h3>
 <p>Vagy a felhasználónevet, vagy a jelszó mezőt, vagy mindkettőt hagyjuk üresen</p>
-<h4 id="elvárt-eredmény-1"><span id="anchor-84"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-1"><span id="anchor-85"></span>Elvárt eredmény</h4>
 <p><img src="Pictures/100002010000031D0000013A878F1C9E5EB86C2F.png" title="fig:" alt=" 30. ábra: Hibás felhasználó létrehozás (üres felhasználónév vagy jelszó, vagy jelszó mégegyszer mező)" width="623" height="245" /><strong>Username and/or password is empty</strong> üzenet, a data dir változatlan hagyása</p>
-<h3 id="eset-4-jelszó-és-jelszó-mégegyszer-nem-egyezik-cli"><span id="anchor-85"></span><strong>Eset 4</strong>: Jelszó és jelszó mégegyszer nem egyezik (CLI)</h3>
-<h3 id="ábra-a-jelszó-és-a-jelszó-mégegyszer-mező-nem-egyezikelvárt-eredmény"><img src="Pictures/100002010000031D0000008629531C6782A9EA99.png" title="fig:" alt=" 31. ábra: A jelszó és a jelszó mégegyszer mező nem egyezik" width="642" height="108" /><span id="anchor-86"></span>Elvárt eredmény</h3>
+<h3 id="eset-4-jelszó-és-jelszó-mégegyszer-nem-egyezik-cli"><span id="anchor-86"></span><strong>Eset 4</strong>: Jelszó és jelszó mégegyszer nem egyezik (CLI)</h3>
+<h3 id="ábra-a-jelszó-és-a-jelszó-mégegyszer-mező-nem-egyezikelvárt-eredmény"><img src="Pictures/100002010000031D0000008629531C6782A9EA99.png" title="fig:" alt=" 31. ábra: A jelszó és a jelszó mégegyszer mező nem egyezik" width="642" height="108" /><span id="anchor-87"></span>Elvárt eredmény</h3>
 <p>Hibaüzenet, test_data dir ne változzon</p>
-<h3 id="eset-5-létező-felhasználó-hozzáadása-azonos-jelszóval"><span id="anchor-87"></span><strong>Eset 5:</strong> Létező felhasználó hozzáadása azonos jelszóval</h3>
+<h3 id="eset-5-létező-felhasználó-hozzáadása-azonos-jelszóval"><span id="anchor-88"></span><strong>Eset 5:</strong> Létező felhasználó hozzáadása azonos jelszóval</h3>
 <p>Meg kell jegyezzem, hogy itt a felhasználónév és a jelszó páros azonosít egy felhasználót, így például <strong>User1/password1</strong> és <strong>User1/password2</strong> nem ugyanaz a felhasználó.</p>
 <p>Gondolkodtam ennek javításán, de nem igazán lehetséges úgy, hogy ne adjon többlet információt a szerver üzemeltetőjének a felhasználóról.</p>
 <p>test_user1/password1</p>
-<h4 id="ábra-létező-felhasználó-hozzáadása-mégegyszerelvárt-eredmény"><img src="Pictures/100002010000031D00000086B9527EA15160B7E0.png" title="fig:" alt=" 32. ábra: Létező felhasználó hozzáadása mégegyszer" width="642" height="108" /><span id="anchor-88"></span>Elvárt eredmény</h4>
+<h4 id="ábra-létező-felhasználó-hozzáadása-mégegyszerelvárt-eredmény"><img src="Pictures/100002010000031D00000086B9527EA15160B7E0.png" title="fig:" alt=" 32. ábra: Létező felhasználó hozzáadása mégegyszer" width="642" height="108" /><span id="anchor-89"></span>Elvárt eredmény</h4>
 <p>Hibaüzenet, test_data dir ne változzon</p>
-<h3 id="eset-6-létező-felhasználó-hozzáadása-más-jelszóval-cli"><span id="anchor-89"></span><strong>Eset 6</strong>: Létező felhasználó hozzáadása más jelszóval (cli)</h3>
+<h3 id="eset-6-létező-felhasználó-hozzáadása-más-jelszóval-cli"><span id="anchor-90"></span><strong>Eset 6</strong>: Létező felhasználó hozzáadása más jelszóval (cli)</h3>
 <p><strong>test_user1/password2</strong> létrehozása</p>
-<h4 id="ábra-létező-felhasználó-hozzáadása-más-jelszóvalelvárt-eredmény"><img src="Pictures/100002010000031D00000086E91BE65CE54A4813.png" title="fig:" alt=" 33. ábra: Létező felhasználó hozzáadása más jelszóval" width="613" height="103" /><span id="anchor-90"></span>Elvárt eredmény</h4>
+<h4 id="ábra-létező-felhasználó-hozzáadása-más-jelszóvalelvárt-eredmény"><img src="Pictures/100002010000031D00000086E91BE65CE54A4813.png" title="fig:" alt=" 33. ábra: Létező felhasználó hozzáadása más jelszóval" width="613" height="103" /><span id="anchor-91"></span>Elvárt eredmény</h4>
 <p>1. Hozzon létre egy új felhasználói mappát</p>
 <p><img src="Pictures/100002010000024E0000007457C6EC67ED4C1665.png" title="fig:" alt=" 34. ábra: Új mappa létrejött a felhasználónak" width="589" height="115" />2. Be tudjak lépni az új felhasználóval, ezt lásd lejjebb a bejelentkezés tesztelésénél.</p>
-<h3 id="eset-7-belépés-hibás-jelszóval-gui"><span id="anchor-91"></span><strong>Eset 7</strong>: Belépés hibás jelszóval (GUI)</h3>
+<h3 id="eset-7-belépés-hibás-jelszóval-gui"><span id="anchor-92"></span><strong>Eset 7</strong>: Belépés hibás jelszóval (GUI)</h3>
 <p>Bejelentkezés<strong> </strong>a következő felhasználókkal</p>
 <table>
 <tbody>
@@ -1297,9 +1311,9 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 </table>
 <p></p>
 <p>(<strong>SimpleJsonRpcWebSocketClientService</strong> és <strong>SimpleJsonRpcPOSTClientService </strong>segítségével is)</p>
-<h4 id="elvárt-eredmény-2"><span id="anchor-92"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-2"><span id="anchor-93"></span>Elvárt eredmény</h4>
 <p>Hibaüzenet</p>
-<h3 id="eset-8-bejelentkezés-valós-felhasználókkal-gui"><span id="anchor-93"></span><strong>Eset 8</strong>: Bejelentkezés valós felhasználókkal (GUI)</h3>
+<h3 id="eset-8-bejelentkezés-valós-felhasználókkal-gui"><span id="anchor-94"></span><strong>Eset 8</strong>: Bejelentkezés valós felhasználókkal (GUI)</h3>
 <p>Bejelentkezés<strong> </strong>a következő felhasználókkal (<strong>SimpleJsonRpcWebSocketClientService</strong> és <strong>SimpleJsonRpcPOSTClientService </strong>segítségével is)</p>
 <table>
 <tbody>
@@ -1321,11 +1335,11 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 </tr>
 </tbody>
 </table>
-<h4 id="elvárt-eredmény-3"><span id="anchor-94"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-3"><span id="anchor-95"></span>Elvárt eredmény</h4>
 <p><img src="Pictures/10000201000001D900000140461E5FC6CA484895.png" title="fig:" alt=" 35. ábra: Főoldal (még nincs egy fájl sem)" width="473" height="320" />Bejelentkezés az oldalra, és a main oldalra irányítás.</p>
-<h3 id="eset-9-felhasználó-létrehozása-gui"><span id="anchor-95"></span><strong>Eset 9: </strong>Felhasználó létrehozása (GUI)</h3>
+<h3 id="eset-9-felhasználó-létrehozása-gui"><span id="anchor-96"></span><strong>Eset 9: </strong>Felhasználó létrehozása (GUI)</h3>
 <p><strong>test_user3/password3</strong> létrehozása</p>
-<h4 id="elvárt-eredmény-4"><span id="anchor-96"></span>Elvárt <strong>eredmény</strong></h4>
+<h4 id="elvárt-eredmény-4"><span id="anchor-97"></span>Elvárt <strong>eredmény</strong></h4>
 <p>1. sikeres létrehozás</p>
 <p>2. sikeres bejelntekzés az új felhasználóval (lásd <strong>8. eset: Bejelentkezés valós felhasználókkal (GUI) </strong>).</p>
 <div class="figure">
@@ -1344,7 +1358,7 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 <p></p>
 <p></p>
 <p></p>
-<h3 id="eset10-bejelentkezés-nem-létező-felhasználóval"><span id="anchor-97"></span>Eset10: Bejelentkezés nem létező felhasználóval</h3>
+<h3 id="eset10-bejelentkezés-nem-létező-felhasználóval"><span id="anchor-98"></span>Eset10: Bejelentkezés nem létező felhasználóval</h3>
 <p>Bejelentkezés „I am not exist” felhasználóval</p>
 <p>Elvárt eredmény:</p>
 <div class="figure">
@@ -1352,16 +1366,16 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 <p class="caption"><br />
 37. Ábra: Nem létező felhasználó</p>
 </div>
-<h3 id="eset11-txt-fájl-létrehozása"><span id="anchor-98"></span><strong>Eset11</strong>: Txt Fájl létrehozása</h3>
+<h3 id="eset11-txt-fájl-létrehozása"><span id="anchor-99"></span><strong>Eset11</strong>: Txt Fájl létrehozása</h3>
 <p>Hozzunk létre pár txt fájlt.</p>
-<h4 id="elvárt-eredmény-5"><span id="anchor-99"></span>Elvárt eredmény</h4>
+<h4 id="elvárt-eredmény-5"><span id="anchor-100"></span>Elvárt eredmény</h4>
 <p>A fájlok létrejönnek, és meg is tudjuk őket nyitni, lásd lejjebb</p>
 <div class="figure">
 <img src="Pictures/100002010000039700000391F8E8A4E831F704B7.png" alt=" 38. ábra: Új text fájl létrehozva" width="604" height="600" />
 <p class="caption"><br />
 38. ábra: Új text fájl létrehozva</p>
 </div>
-<h3 id="eset-12-telefonkönyv-fájl-létrehozása"><span id="anchor-100"></span><strong>Eset 12</strong>: Telefonkönyv fájl létrehozása</h3>
+<h3 id="eset-12-telefonkönyv-fájl-létrehozása"><span id="anchor-101"></span><strong>Eset 12</strong>: Telefonkönyv fájl létrehozása</h3>
 <p>Ehhez csináltam egy teszt robotot, ami létrehoz egy Telefonkönyv fájlt, és feltölti adatokkal.</p>
 <p><a href="https://localhost:11443/testPhoneBook.html" class="uri">https://localhost:11443/testPhoneBook.html</a></p>
 <p><strong>waitTime</strong>: Megmondja, hogy mennyit várjon a teszt két művelet között<br />
@@ -1369,9 +1383,9 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 <strong>password</strong>: Mi a felhasználó jelszava<br />
 <strong>fileName</strong>: Mi legyen a létrehozandó fájl neve<br />
 <strong>filePassword</strong>: Mi legyen a jelszava</p>
-<h4 id="ábra-telefonkönyv-létrehozása-robottalelvárt-eredmény"><img src="Pictures/10000201000001FC0000022B123ADC19F21E756E.png" title="fig:" alt=" 39. ábra: Telefonkönyv létrehozása robottal" width="508" height="554" /><span id="anchor-101"></span>Elvárt eredmény</h4>
+<h4 id="ábra-telefonkönyv-létrehozása-robottalelvárt-eredmény"><img src="Pictures/10000201000001FC0000022B123ADC19F21E756E.png" title="fig:" alt=" 39. ábra: Telefonkönyv létrehozása robottal" width="508" height="554" /><span id="anchor-102"></span>Elvárt eredmény</h4>
 <p>A fájl létrehozása, és a telefonkönyv adatok tárolása.</p>
-<h3 id="eset-13-ellenőrizzük-hogy-a-szerveren-tárolt-adatok-valóban-titkosak"><span id="anchor-102"></span><strong>Eset 13: Ellenőrizzük, hogy a szerveren tárolt adatok valóban titkosak! </strong></h3>
+<h3 id="eset-13-ellenőrizzük-hogy-a-szerveren-tárolt-adatok-valóban-titkosak"><span id="anchor-103"></span><strong>Eset 13: Ellenőrizzük, hogy a szerveren tárolt adatok valóban titkosak! </strong></h3>
 <ol style="list-style-type: decimal">
 <li>Kilistázzuk a mappákat tee paranccsal</li>
 <li>megnézzük a fájlokat cat paranccsal</li>
@@ -1379,8 +1393,8 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 </ol>
 <p><img src="Pictures/100002010000024E000002A2526E961A7FA72C7D.png" title="fig:" alt=" 40. ábra: Titkos felhasználónevek, és fájlnevek" width="589" height="674" />Itt látható, hogy mind a mappák (felhasználók nevei), és a benne lévő fájlok nevei is titkosítottak.</p>
 <p><img src="Pictures/100002010000024E000002B4727ED56B77D529FE.png" title="fig:" alt=" 41. ábra: Titkos fájl tartalma cat parancssal megjelenítve " width="589" height="691" />Itt látható, hogy a fájl cat-tal megjelenítve is értelmetlen</p>
-<h3 id="a-teszt-közben-létrejött-felhasználók-és-fájlok"><span id="anchor-103"></span>A teszt közben létrejött felhasználók és fájlok</h3>
-<h4 id="felhasználók"><span id="anchor-104"></span>Felhasználók</h4>
+<h3 id="a-teszt-közben-létrejött-felhasználók-és-fájlok"><span id="anchor-104"></span>A teszt közben létrejött felhasználók és fájlok</h3>
+<h4 id="felhasználók"><span id="anchor-105"></span>Felhasználók</h4>
 <table>
 <tbody>
 <tr class="odd">
@@ -1401,7 +1415,7 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 </tr>
 </tbody>
 </table>
-<h4 id="fájlok"><span id="anchor-105"></span>Fájlok</h4>
+<h4 id="fájlok"><span id="anchor-106"></span>Fájlok</h4>
 <table>
 <tbody>
 <tr class="odd">
@@ -1444,7 +1458,7 @@ Ez is cserélhető, De jelenleg csak egy verzió érhető el, de lehetne csinál
 <p></p>
 <h1 id="section-5"></h1>
 <p></p>
-<h1 id="forrásjegyzet"><span id="anchor-106"></span>Forrásjegyzet</h1>
+<h1 id="forrásjegyzet"><span id="anchor-107"></span>Forrásjegyzet</h1>
 <p>[1] tornado hivatalos oldala: <a href="https://www.tornadoweb.org/en/stable/" class="uri">https://www.tornadoweb.org/en/stable/</a> [Hozzáférés dátuma: 28 04 2020]</p>
 <p>[2] tornado GitHub oldala: <a href="https://github.com/tornadoweb/tornado/" class="uri">https://github.com/tornadoweb/tornado/</a> [Hozzáférés dátuma: 28 04 2020]</p>
 <p>[3] tornado PyPi oldala: <a href="https://pypi.org/project/tornado/" class="uri">https://pypi.org/project/tornado/</a> [Hozzáférés dátuma: 28 04 2020]</p>

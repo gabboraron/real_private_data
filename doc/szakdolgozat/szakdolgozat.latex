@@ -78,7 +78,7 @@ Programozási Nyelvek és Fordítóprogramok Tanszék
 
 Kliens oldalon maximálisan titkosított adatbázis
 
-verzió 0.16
+verzió 0.17
 
 \section[Bevezetés]{\texorpdfstring{\protect\hypertarget{anchor}{}{}Bevezetés}{Bevezetés}}\label{bevezetuxe9s}
 
@@ -1652,8 +1652,76 @@ encryptedBytes = AESencrypt(textBytes)
 
 return encryptedBytes
 
+\subsubsection[Döntések a fejlesztés
+során]{\texorpdfstring{\protect\hypertarget{anchor-74}{}{}Döntések a
+fejlesztés
+során}{Döntések a fejlesztés során}}\label{duxf6ntuxe9sek-a-fejlesztuxe9s-soruxe1n}
+
+A szerver oldal programozási nyelveként négy jelöltem volt
+\textbf{NodeJS}, \textbf{PHP}, \textbf{Python }és\textbf{ }
+\textbf{Java}.
+
+A \textbf{Java} mellett az szólt, hogy az egyetemen azt tanultam, nagy
+tudású, gyors, de azért nem döntöttem mellette, mert most egy
+prototípust csinálok, ahol jó, ha menet közben tudok könnyen
+változtatni, a Java nem egy szcript nyelv, mindig le kell fordítani, ez
+a fejlesztés közben idő, és ráadásul memória igényes is.
+
+A \textbf{NodeJS}, és a \textbf{PHP} mellett az szólt, hogy mindkettő
+elég elterjedt, szkript nyelv back end terén, és ezek is elég nagy
+tudásuak. Ellenük szólt, hogy egyikben sincs nagy tapasztalatom.
+
+Így maradt végül a \textbf{Python}, amit a MorganStanleynél sokat
+kellett használnom.
+
+Három esélyes könyvtáram volt a szerver megvalósígására: a
+\textbf{tornado}, a \textbf{Django} és a \textbf{Flask}, ezeket
+ajánlották ismerőseim, kinek melyik tetszett, de mivel a
+MorganStanleynél két évig kellett foglalkoznom a \textbf{tornado}val és
+nagyon meg voltam vele elégedve, ezért választottam. Ami még fontos volt
+a \textbf{tornado} mellett, hogy natívan támogatja a WebSocket
+protokollt és a HTTPS-t, ellentétben a másik kettővel, amikhez külön
+WebSocket kiegészítőket kell lilleszteni.
+
+Az RPC kommunikációra azért választottam a \textbf{Simple JSON-RPC}-t
+mert elterjedt és egyszerű, itt gondolkodtam még, hogy a \textbf{Google
+Protobuf}-ját használom, de végül két okból nem azt választottam.\\
+Egyrészt bonyolultabb, megpróbáltam összekötni a tornadoval, és nem
+triviális, másfelől a debuggolás is nehezebb, mert binárisan küldi az
+adatokat, így nehéz látni menet közben, hogy épp titkos-e az adat, vagy
+nem.
+
+A \textbf{Simple JSON-RPC}nél ez sokkal egyszerűbb, mert JSON-okat küld,
+így nem kell bináris adatokat visszafejteni, de a \textbf{protobuf}-nak
+az az előnye, hogy sokkal kisebb forgalmat generál, így lehet, hogy
+hosszútávon ki lesz cserélve.
+
+Igyekeztem a szervert és a klienst minél inkább modulárisan megírni,
+hogy minden részét könnyen ki lehessen cserélni, továbbá egy RPC
+interface-t csinálni, hogy akár magát a szerver és a kliens nyelvét is
+ki lehessen cserélni. Erre azért is gondoltam, mert majd szeretnék
+csinálni egy klienst mobiltelefonokra is.
+
+A kliens oldalt először WEBre akartam megírni, hogy minél több eszközön
+lehessen futtatni. Itt három nyelv jött szóba: \textbf{TypeScript},
+\textbf{JavaScript}, \textbf{WebAssembly}.
+
+TypeScripttel próbálkoztam, de a debuggolás még nehézkesebb, mint
+JavaScriptben, meg ott is kell fordítani, amivel kevésbé rugalmas, mint
+a JavaScript.
+
+A WebAssembly-nek két előnye van a másik kettőhöz képest. Egyfelől
+sokkal gyorsabb kódokat lehet vele generálni, másrészről a memória
+kezelése sokkal tisztább, abban a nyelvben nincs garbage collector, így
+biztos lehetek benne, hogy a felszabadított memória tényleg felszabadul,
+amivel jobban tudom garantálni a biztonságot.
+
+Végül azért maradtam a JavaScript mellett, mert ez egyszerű, jól
+debuggolható, és minden gyorsan tesztelhető vele. Kíváló nyelv
+prototípus készítésére.
+
 \subsubsection[Szerver oldal mappa és fájl struktúrájának
-áttekintése]{\texorpdfstring{\protect\hypertarget{anchor-74}{}{}Szerver
+áttekintése]{\texorpdfstring{\protect\hypertarget{anchor-75}{}{}Szerver
 oldal mappa és fájl struktúrájának
 áttekintése}{Szerver oldal mappa és fájl struktúrájának áttekintése}}\label{szerver-oldal-mappa-uxe9s-fuxe1jl-struktuxfaruxe1juxe1nak-uxe1ttekintuxe9se}
 
@@ -1811,7 +1879,7 @@ inicializálása, és futtatása\\
 -- Az összes html fájlból kinyeri a class mezőket\\
 
 \subsubsection[Kliens oldal mappa és fájl struktúrájának
-áttekintése]{\texorpdfstring{\protect\hypertarget{anchor-75}{}{}Kliens
+áttekintése]{\texorpdfstring{\protect\hypertarget{anchor-76}{}{}Kliens
 oldal mappa és fájl struktúrájának
 áttekintése}{Kliens oldal mappa és fájl struktúrájának áttekintése}}\label{kliens-oldal-mappa-uxe9s-fuxe1jl-struktuxfaruxe1juxe1nak-uxe1ttekintuxe9se}
 
@@ -2117,7 +2185,7 @@ stílus lap\\
 telefonkönyv teszt indítása
 
 \subsubsection[Fejlesztési
-lehetőségek]{\texorpdfstring{\protect\hypertarget{anchor-76}{}{}Fejlesztési
+lehetőségek]{\texorpdfstring{\protect\hypertarget{anchor-77}{}{}Fejlesztési
 lehetőségek}{Fejlesztési lehetőségek}}\label{fejlesztuxe9si-lehetux151suxe9gek}
 
 A projekt még nagyon a kezdeti időszakában van, így rengeteg fejlesztési
@@ -2151,7 +2219,7 @@ lehetőség van.
 \end{enumerate}
 
 \subsection[Tesztelési
-terv]{\texorpdfstring{\protect\hypertarget{anchor-77}{}{}Tesztelési
+terv]{\texorpdfstring{\protect\hypertarget{anchor-78}{}{}Tesztelési
 terv}{Tesztelési terv}}\label{teszteluxe9si-terv}
 
 A txt fájlok teszteléséhez Arany János összes költeményeit használom:
@@ -2170,7 +2238,7 @@ telefonszámokat használom:
   \url{https://mot.inf.elte.hu/munkatarsak}
 \end{enumerate}
 
-\subsubsection[Előkészületek]{\texorpdfstring{\protect\hypertarget{anchor-78}{}{}Előkészületek}{Előkészületek}}\label{elux151kuxe9szuxfcletek-1}
+\subsubsection[Előkészületek]{\texorpdfstring{\protect\hypertarget{anchor-79}{}{}Előkészületek}{Előkészületek}}\label{elux151kuxe9szuxfcletek-1}
 
 Létrehozok egy üres adatbázist a projekt mellé, és megcsinálom a
 szükséges config fájlt:
@@ -2201,14 +2269,14 @@ szükséges config fájlt:
 \}
 
 \subsubsection[Eset 1: A szerver elindítása (black
-box)]{\texorpdfstring{\protect\hypertarget{anchor-79}{}{}Eset 1: A
+box)]{\texorpdfstring{\protect\hypertarget{anchor-80}{}{}Eset 1: A
 szerver elindítása (black
 box)}{Eset 1: A szerver elindítása (black box)}}\label{eset-1-a-szerver-elinduxedtuxe1sa-black-box}
 
 ./run\_server -\/-configFile config.test.json
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-80}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-81}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny}
 
 1. \textbf{Loggolja a konfigurált beállításokat:}
@@ -2297,7 +2365,7 @@ múlva
 \end{figure}
 
 \subsubsection[Eset 2: Felhasználók létrehozása konzolból (black
-box)]{\texorpdfstring{\protect\hypertarget{anchor-81}{}{}Eset 2:
+box)]{\texorpdfstring{\protect\hypertarget{anchor-82}{}{}Eset 2:
 Felhasználók létrehozása konzolból (black
 box)}{Eset 2: Felhasználók létrehozása konzolból (black box)}}\label{eset-2-felhasznuxe1luxf3k-luxe9trehozuxe1sa-konzolbuxf3l-black-box}
 
@@ -2307,7 +2375,7 @@ box)}{Eset 2: Felhasználók létrehozása konzolból (black box)}}\label{eset-2
 \textbf{Felhasználónév}: test\_user2 \textbf{password: }password2
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=2.03190in]{Pictures/100002010000031D000000F2BF9FBD70D7DA8EBB.png}\protect\hypertarget{anchor-82}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=2.03190in]{Pictures/100002010000031D000000F2BF9FBD70D7DA8EBB.png}\protect\hypertarget{anchor-83}{}{}Elvárt
 eredmény}{ 28. ábra: Felhasználó létrehozása CLI-bőlElvárt eredmény}}\label{uxe1bra-felhasznuxe1luxf3-luxe9trehozuxe1sa-cli-bux151lelvuxe1rt-eredmuxe9ny}
 
 1. Hozzon létre két felhasználói mappát:
@@ -2320,7 +2388,7 @@ tesztelésénél.
 
 \subsubsection[\textbf{Eset 3}: Üresen hagyott mezők felhasználó
 létrehozása
-közben]{\texorpdfstring{\protect\hypertarget{anchor-83}{}{}\textbf{Eset
+közben]{\texorpdfstring{\protect\hypertarget{anchor-84}{}{}\textbf{Eset
 3}: Üresen hagyott mezők felhasználó létrehozása
 közben}{Eset 3: Üresen hagyott mezők felhasználó létrehozása közben}}\label{eset-3-uxfcresen-hagyott-mezux151k-felhasznuxe1luxf3-luxe9trehozuxe1sa-kuxf6zben}
 
@@ -2328,25 +2396,25 @@ Vagy a felhasználónevet, vagy a jelszó mezőt, vagy mindkettőt hagyjuk
 üresen
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-84}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-85}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-1}
 
 \includegraphics[width=6.49800in,height=2.55980in]{Pictures/100002010000031D0000013A878F1C9E5EB86C2F.png}\textbf{Username
 and/or password is empty} üzenet, a data dir változatlan hagyása
 
 \subsubsection[\textbf{Eset 4}: Jelszó és jelszó mégegyszer nem egyezik
-(CLI)]{\texorpdfstring{\protect\hypertarget{anchor-85}{}{}\textbf{Eset
+(CLI)]{\texorpdfstring{\protect\hypertarget{anchor-86}{}{}\textbf{Eset
 4}: Jelszó és jelszó mégegyszer nem egyezik
 (CLI)}{Eset 4: Jelszó és jelszó mégegyszer nem egyezik (CLI)}}\label{eset-4-jelszuxf3-uxe9s-jelszuxf3-muxe9gegyszer-nem-egyezik-cli}
 
 \subsubsection[Elvárt
-eredmény]{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D0000008629531C6782A9EA99.png}\protect\hypertarget{anchor-86}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D0000008629531C6782A9EA99.png}\protect\hypertarget{anchor-87}{}{}Elvárt
 eredmény}{ 31. ábra: A jelszó és a jelszó mégegyszer mező nem egyezikElvárt eredmény}}\label{uxe1bra-a-jelszuxf3-uxe9s-a-jelszuxf3-muxe9gegyszer-mezux151-nem-egyezikelvuxe1rt-eredmuxe9ny}
 
 Hibaüzenet, test\_data dir ne változzon
 
 \subsubsection[\textbf{Eset 5:} Létező felhasználó hozzáadása azonos
-jelszóval]{\texorpdfstring{\protect\hypertarget{anchor-87}{}{}\textbf{Eset
+jelszóval]{\texorpdfstring{\protect\hypertarget{anchor-88}{}{}\textbf{Eset
 5:} Létező felhasználó hozzáadása azonos
 jelszóval}{Eset 5: Létező felhasználó hozzáadása azonos jelszóval}}\label{eset-5-luxe9tezux151-felhasznuxe1luxf3-hozzuxe1aduxe1sa-azonos-jelszuxf3val}
 
@@ -2360,21 +2428,21 @@ adjon többlet információt a szerver üzemeltetőjének a felhasználóról.
 test\_user1/password1
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D00000086B9527EA15160B7E0.png}\protect\hypertarget{anchor-88}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\includegraphics[width=6.69290in,height=1.12520in]{Pictures/100002010000031D00000086B9527EA15160B7E0.png}\protect\hypertarget{anchor-89}{}{}Elvárt
 eredmény}{ 32. ábra: Létező felhasználó hozzáadása mégegyszerElvárt eredmény}}\label{uxe1bra-luxe9tezux151-felhasznuxe1luxf3-hozzuxe1aduxe1sa-muxe9gegyszerelvuxe1rt-eredmuxe9ny}
 
 Hibaüzenet, test\_data dir ne változzon
 
 \subsubsection[\textbf{Eset 6}: Létező felhasználó hozzáadása más
 jelszóval
-(cli)]{\texorpdfstring{\protect\hypertarget{anchor-89}{}{}\textbf{Eset
+(cli)]{\texorpdfstring{\protect\hypertarget{anchor-90}{}{}\textbf{Eset
 6}: Létező felhasználó hozzáadása más jelszóval
 (cli)}{Eset 6: Létező felhasználó hozzáadása más jelszóval (cli)}}\label{eset-6-luxe9tezux151-felhasznuxe1luxf3-hozzuxe1aduxe1sa-muxe1s-jelszuxf3val-cli}
 
 \textbf{test\_user1/password2} létrehozása
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\includegraphics[width=6.39370in,height=1.07520in]{Pictures/100002010000031D00000086E91BE65CE54A4813.png}\protect\hypertarget{anchor-90}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\includegraphics[width=6.39370in,height=1.07520in]{Pictures/100002010000031D00000086E91BE65CE54A4813.png}\protect\hypertarget{anchor-91}{}{}Elvárt
 eredmény}{ 33. ábra: Létező felhasználó hozzáadása más jelszóvalElvárt eredmény}}\label{uxe1bra-luxe9tezux151-felhasznuxe1luxf3-hozzuxe1aduxe1sa-muxe1s-jelszuxf3valelvuxe1rt-eredmuxe9ny}
 
 1. Hozzon létre egy új felhasználói mappát
@@ -2384,7 +2452,7 @@ Be tudjak lépni az új felhasználóval, ezt lásd lejjebb a bejelentkezés
 tesztelésénél.
 
 \subsubsection[\textbf{Eset 7}: Belépés hibás jelszóval
-(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-91}{}{}\textbf{Eset
+(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-92}{}{}\textbf{Eset
 7}: Belépés hibás jelszóval
 (GUI)}{Eset 7: Belépés hibás jelszóval (GUI)}}\label{eset-7-beluxe9puxe9s-hibuxe1s-jelszuxf3val-gui}
 
@@ -2403,13 +2471,13 @@ test\_user2 & dinnye\tabularnewline
 \textbf{SimpleJsonRpcPOSTClientService }segítségével is)
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-92}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-93}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-2}
 
 Hibaüzenet
 
 \subsubsection[\textbf{Eset 8}: Bejelentkezés valós felhasználókkal
-(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-93}{}{}\textbf{Eset
+(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-94}{}{}\textbf{Eset
 8}: Bejelentkezés valós felhasználókkal
 (GUI)}{Eset 8: Bejelentkezés valós felhasználókkal (GUI)}}\label{eset-8-bejelentkezuxe9s-valuxf3s-felhasznuxe1luxf3kkal-gui}
 
@@ -2427,21 +2495,21 @@ test\_user2 & password2\tabularnewline
 \end{longtable}
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-94}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-95}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-3}
 
 \includegraphics[width=4.92720in,height=3.33350in]{Pictures/10000201000001D900000140461E5FC6CA484895.png}Bejelentkezés
 az oldalra, és a main oldalra irányítás.
 
 \subsubsection[\textbf{Eset 9: }Felhasználó létrehozása
-(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-95}{}{}\textbf{Eset
+(GUI)]{\texorpdfstring{\protect\hypertarget{anchor-96}{}{}\textbf{Eset
 9: }Felhasználó létrehozása
 (GUI)}{Eset 9: Felhasználó létrehozása (GUI)}}\label{eset-9-felhasznuxe1luxf3-luxe9trehozuxe1sa-gui}
 
 \textbf{test\_user3/password3} létrehozása
 
 \paragraph[Elvárt
-\textbf{eredmény}]{\texorpdfstring{\protect\hypertarget{anchor-96}{}{}Elvárt
+\textbf{eredmény}]{\texorpdfstring{\protect\hypertarget{anchor-97}{}{}Elvárt
 \textbf{eredmény}}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-4}
 
 1. sikeres létrehozás
@@ -2457,7 +2525,7 @@ Bejelentkezés valós felhasználókkal (GUI) }).
 \end{figure}
 
 \subsubsection[Eset10: Bejelentkezés nem létező
-felhasználóval]{\texorpdfstring{\protect\hypertarget{anchor-97}{}{}Eset10:
+felhasználóval]{\texorpdfstring{\protect\hypertarget{anchor-98}{}{}Eset10:
 Bejelentkezés nem létező
 felhasználóval}{Eset10: Bejelentkezés nem létező felhasználóval}}\label{eset10-bejelentkezuxe9s-nem-luxe9tezux151-felhasznuxe1luxf3val}
 
@@ -2473,14 +2541,14 @@ Elvárt eredmény:
 \end{figure}
 
 \subsubsection[\textbf{Eset11}: Txt Fájl
-létrehozása]{\texorpdfstring{\protect\hypertarget{anchor-98}{}{}\textbf{Eset11}:
+létrehozása]{\texorpdfstring{\protect\hypertarget{anchor-99}{}{}\textbf{Eset11}:
 Txt Fájl
 létrehozása}{Eset11: Txt Fájl létrehozása}}\label{eset11-txt-fuxe1jl-luxe9trehozuxe1sa}
 
 Hozzunk létre pár txt fájlt.
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\hypertarget{anchor-99}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\hypertarget{anchor-100}{}{}Elvárt
 eredmény}{Elvárt eredmény}}\label{elvuxe1rt-eredmuxe9ny-5}
 
 A fájlok létrejönnek, és meg is tudjuk őket nyitni, lásd lejjebb
@@ -2493,7 +2561,7 @@ A fájlok létrejönnek, és meg is tudjuk őket nyitni, lásd lejjebb
 \end{figure}
 
 \subsubsection[\textbf{Eset 12}: Telefonkönyv fájl
-létrehozása]{\texorpdfstring{\protect\hypertarget{anchor-100}{}{}\textbf{Eset
+létrehozása]{\texorpdfstring{\protect\hypertarget{anchor-101}{}{}\textbf{Eset
 12}: Telefonkönyv fájl
 létrehozása}{Eset 12: Telefonkönyv fájl létrehozása}}\label{eset-12-telefonkuxf6nyv-fuxe1jl-luxe9trehozuxe1sa}
 
@@ -2510,14 +2578,14 @@ között\\
 \textbf{filePassword}: Mi legyen a jelszava
 
 \paragraph[Elvárt
-eredmény]{\texorpdfstring{\protect\includegraphics[width=5.29170in,height=5.78110in]{Pictures/10000201000001FC0000022B123ADC19F21E756E.png}\protect\hypertarget{anchor-101}{}{}Elvárt
+eredmény]{\texorpdfstring{\protect\includegraphics[width=5.29170in,height=5.78110in]{Pictures/10000201000001FC0000022B123ADC19F21E756E.png}\protect\hypertarget{anchor-102}{}{}Elvárt
 eredmény}{ 39. ábra: Telefonkönyv létrehozása robottalElvárt eredmény}}\label{uxe1bra-telefonkuxf6nyv-luxe9trehozuxe1sa-robottalelvuxe1rt-eredmuxe9ny}
 
 A fájl létrehozása, és a telefonkönyv adatok tárolása.
 
 \subsubsection[\textbf{Eset 13: Ellenőrizzük, hogy a szerveren tárolt
 adatok valóban titkosak!
-}]{\texorpdfstring{\protect\hypertarget{anchor-102}{}{}\textbf{Eset 13:
+}]{\texorpdfstring{\protect\hypertarget{anchor-103}{}{}\textbf{Eset 13:
 Ellenőrizzük, hogy a szerveren tárolt adatok valóban titkosak!
 }}{Eset 13: Ellenőrizzük, hogy a szerveren tárolt adatok valóban titkosak! }}\label{eset-13-ellenux151rizzuxfck-hogy-a-szerveren-tuxe1rolt-adatok-valuxf3ban-titkosak}
 
@@ -2540,11 +2608,11 @@ nevei is titkosítottak.
 látható, hogy a fájl cat-tal megjelenítve is értelmetlen
 
 \subsubsection[A teszt közben létrejött felhasználók és
-fájlok]{\texorpdfstring{\protect\hypertarget{anchor-103}{}{}A teszt
+fájlok]{\texorpdfstring{\protect\hypertarget{anchor-104}{}{}A teszt
 közben létrejött felhasználók és
 fájlok}{A teszt közben létrejött felhasználók és fájlok}}\label{a-teszt-kuxf6zben-luxe9trejuxf6tt-felhasznuxe1luxf3k-uxe9s-fuxe1jlok}
 
-\paragraph[Felhasználók]{\texorpdfstring{\protect\hypertarget{anchor-104}{}{}Felhasználók}{Felhasználók}}\label{felhasznuxe1luxf3k}
+\paragraph[Felhasználók]{\texorpdfstring{\protect\hypertarget{anchor-105}{}{}Felhasználók}{Felhasználók}}\label{felhasznuxe1luxf3k}
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
@@ -2555,7 +2623,7 @@ test\_user3 & password3\tabularnewline
 \bottomrule
 \end{longtable}
 
-\paragraph[Fájlok]{\texorpdfstring{\protect\hypertarget{anchor-105}{}{}Fájlok}{Fájlok}}\label{fuxe1jlok}
+\paragraph[Fájlok]{\texorpdfstring{\protect\hypertarget{anchor-106}{}{}Fájlok}{Fájlok}}\label{fuxe1jlok}
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
@@ -2573,7 +2641,7 @@ Tanszék.phb & Media\tabularnewline
 
 \section{}\label{section-5}
 
-\section[Forrásjegyzet]{\texorpdfstring{\protect\hypertarget{anchor-106}{}{}Forrásjegyzet}{Forrásjegyzet}}\label{forruxe1sjegyzet}
+\section[Forrásjegyzet]{\texorpdfstring{\protect\hypertarget{anchor-107}{}{}Forrásjegyzet}{Forrásjegyzet}}\label{forruxe1sjegyzet}
 
 {[}1{]} tornado hivatalos oldala:
 \url{https://www.tornadoweb.org/en/stable/} {[}Hozzáférés dátuma: 28 04
