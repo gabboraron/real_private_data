@@ -1,6 +1,5 @@
 'use strict';
 
-//TODO: Better name
 function isInheritedFrom(variable, ancestor, enableUndef) {
     if(!theConfig.debug)
         return true;

@@ -6,7 +6,6 @@ class IRPCClient extends AbstractClass {
     ]
     constructor(timer) {
         super();
-        console.warn("TODO: Implement");
     }
 }
 

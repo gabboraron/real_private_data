@@ -11,7 +11,6 @@ class UserManagerService extends IUserManagerService {
     }
 
     start() {
-        console.debug("TODO:Implement");
     }
 
     stop() {

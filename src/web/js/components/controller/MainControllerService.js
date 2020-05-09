@@ -26,7 +26,6 @@ class MainControllerService extends ControllerServiceBase {
     }
     
     stop(){
-        console.debug("TODO: Implement...");
         super.stop();
     }
     
