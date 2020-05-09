@@ -10,7 +10,6 @@ window.htmlFileDict = {
     "filePassword"           : "filePassword.html",
     "chgPassword"            : "chgPassword.html",
     "newFilePassword"        : "newFilePassword.html",
-    "MyWindow"               : "MyWindow.html",
     "phoneBookContact"       : "phoneBookContact.html",
     "phoneBookFile"          : "phoneBookFile.html",
     "main"                   : "main.html",
